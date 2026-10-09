@@ -1,18 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion, useScroll, useTransform, type Variants } from "motion/react";
-import { useRef } from "react";
-import {
-  BracesIcon,
-  CalendarIcon,
-  ChildIcon,
-  ChipIcon,
-  HeartIcon,
-  ShieldIcon,
-  WhatsappIcon,
-} from "@/components/icons";
-import { Ribbons } from "@/components/decor/Ribbons";
+import { motion, type Variants } from "motion/react";
+import { IsotypeWatermark } from "@/components/brand/IsotypeWatermark";
+import { BracesIcon, CalendarIcon, ChildIcon, ChipIcon, HeartIcon, ShieldIcon, WhatsappIcon } from "@/components/icons";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { bracesWhatsappMessage, site, whatsappUrl } from "@/lib/site";
 
@@ -36,50 +27,12 @@ const trust = [
 ];
 
 export function Hero() {
-  const ref = useRef<HTMLElement>(null);
-  const reduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", reduceMotion ? "0%" : "12%"]);
-
   return (
-    <section ref={ref} id="top" aria-labelledby="hero-title" className="relative isolate overflow-hidden bg-sky-50">
-      {/* Background photo: top banner on mobile, right-side full-bleed on desktop */}
-      <motion.div
-        aria-hidden="true"
-        style={{ y: bgY }}
-        className="absolute inset-x-0 top-0 -z-20 h-[24rem] sm:h-[30rem] lg:inset-y-0 lg:-right-[18%] lg:h-auto"
-      >
-        <motion.div
-          initial={{ scale: 1.08, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.4, ease }}
-          className="relative size-full"
-        >
-          <Image
-            src="/images/hero.png"
-            alt=""
-            fill
-            preload
-            sizes="100vw"
-            className="object-cover object-[74%_40%] lg:object-[100%_35%]"
-          />
-        </motion.div>
-      </motion.div>
-
-      {/* Brand wash that blends the photo into the page */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(243_250_253/0)_0%,rgb(243_250_253/0)_9rem,var(--color-sky-50)_23rem)] sm:bg-[linear-gradient(180deg,rgb(243_250_253/0)_0%,rgb(243_250_253/0)_13rem,var(--color-sky-50)_29rem)] lg:bg-[linear-gradient(90deg,var(--color-sky-50)_0%,rgb(243_250_253/0.92)_30%,rgb(243_250_253/0.6)_44%,rgb(243_250_253/0)_58%)]"
-      />
-      <Ribbons side="left" delay={0.3} className="absolute -left-4 -top-10 -z-10 hidden h-[125%] w-[38rem] lg:block" />
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 -z-10 hidden h-56 bg-gradient-to-t from-white via-white/70 to-transparent lg:block"
-      />
-
-      <div className="container-page relative pb-10 pt-[15rem] sm:pt-[19rem] lg:flex lg:items-center lg:pb-32 lg:pt-16">
-        <motion.div variants={container} initial="hidden" animate="show" className="max-w-xl lg:max-w-[34rem]">
-          <motion.p variants={item} className="pill bg-white/90 shadow-soft backdrop-blur">
+    <section id="top" aria-labelledby="hero-title" className="relative isolate overflow-hidden bg-sky-50">
+      <div className="container-page grid items-center gap-12 pb-14 pt-10 sm:pt-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-20 lg:pt-16">
+        {/* Copy */}
+        <motion.div variants={container} initial="hidden" animate="show">
+          <motion.p variants={item} className="pill bg-white shadow-soft">
             <BracesIcon />
             Ortodoncia en Tarapoto
           </motion.p>
@@ -87,10 +40,10 @@ export function Hero() {
           <motion.h1
             variants={item}
             id="hero-title"
-            className="mt-5 font-display text-[2.6rem] font-extrabold leading-[1.02] tracking-[-0.03em] text-navy-700 sm:text-6xl lg:text-[4.25rem]"
+            className="mt-6 font-display text-[2.75rem] font-normal leading-[0.98] tracking-[-0.035em] text-navy-700 sm:text-6xl lg:text-[4.5rem]"
           >
             Alinea tu sonrisa
-            <span className="relative mt-1 block w-fit text-cyan-600">
+            <span className="relative mt-1 block w-fit font-extrabold">
               con brackets
               <svg
                 aria-hidden="true"
@@ -112,12 +65,12 @@ export function Hero() {
             </span>
           </motion.h1>
 
-          <motion.p variants={item} className="mt-7 text-lg leading-relaxed text-ink-600">
-            Tecnología, confianza y atención cercana para tu sonrisa. Agenda tu evaluación y descubre
-            el tratamiento ideal para ti.
+          <motion.p variants={item} className="mt-8 max-w-lg text-pretty text-lg leading-relaxed text-ink-600">
+            Atención cercana, tecnología actual y un equipo que te explica cada paso del tratamiento.
+            Agenda tu evaluación en Tarapoto.
           </motion.p>
 
-          <motion.div variants={item} className="mt-7 flex flex-col gap-3 sm:flex-row">
+          <motion.div variants={item} className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Magnetic className="w-full sm:w-auto">
               <a
                 href={whatsappUrl(bracesWhatsappMessage)}
@@ -146,40 +99,74 @@ export function Hero() {
               {site.phoneDisplay}
             </a>
           </motion.p>
-
         </motion.div>
 
-        {/* Floating accent over the photo (desktop) */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ type: "spring", stiffness: 220, damping: 22, delay: 1.25 }}
-          className="absolute bottom-40 right-[6%] hidden items-center gap-3 rounded-2xl border border-white/70 bg-white/80 px-4 py-3 shadow-lift backdrop-blur-md lg:flex"
-        >
-          <span className="grid size-10 place-items-center rounded-xl bg-sky-100 text-cyan-700">
-            <ShieldIcon className="size-5" />
-          </span>
-          <span className="text-sm leading-tight text-ink-600">
-            <strong className="block font-semibold text-navy-700">Evaluación personalizada</strong>
-            Plan claro antes de empezar
-          </span>
-        </motion.div>
+        {/* Photo in an arched frame over an Azul profundo block, like the manual's stationery */}
+        <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+          <motion.div
+            aria-hidden="true"
+            initial={{ opacity: 0, x: 24, y: 24 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            transition={{ duration: 0.9, ease, delay: 0.2 }}
+            className="absolute -bottom-5 -right-3 top-16 w-3/4 overflow-hidden rounded-[2rem] bg-navy-700 sm:-right-5"
+          >
+            <IsotypeWatermark tone="dark" className="-bottom-10 -right-12 w-72 !opacity-[0.12]" />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.9, ease }}
+            className="relative aspect-[4/5] overflow-hidden rounded-b-[2rem] rounded-t-[12rem] shadow-lift sm:rounded-t-[15rem]"
+          >
+            {/* 4:5 photo (1122×1402) provided by Lumayo, served as the original file (no compression or resizing) */}
+            <Image
+              src="/images/exec-9298b590-8370-4560-8d85-3d42dc6fb6fb.png"
+              alt="Niña sonriendo con brackets"
+              width={1122}
+              height={1402}
+              preload
+              unoptimized
+              className="absolute inset-0 size-full object-cover object-[50%_35%]"
+            />
+            <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-navy-900/25 via-transparent to-transparent" />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: "spring", stiffness: 220, damping: 22, delay: 1 }}
+            className="absolute -left-3 bottom-10 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-lift sm:-left-8"
+          >
+            <span className="grid size-10 place-items-center rounded-xl bg-sky-100 text-navy-700">
+              <ShieldIcon className="size-5" />
+            </span>
+            <span className="text-sm leading-tight text-ink-600">
+              <strong className="block font-semibold text-navy-700">Evaluación personalizada</strong>
+              Plan claro antes de empezar
+            </span>
+          </motion.div>
+        </div>
       </div>
 
-      {/* Trust strip overlapping the hero's lower edge */}
-      <div className="relative bg-white pb-4 lg:-mt-16 lg:bg-transparent">
-        <div className="container-page">
+      {/* Trust row: hairline-divided, like the manual's index */}
+      <div className="border-t border-navy-700/10 bg-white">
         <motion.ul
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease, delay: 0.5 }}
           aria-label="Lo que nos distingue"
-          className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-sky-100 bg-sky-100 shadow-[0_12px_32px_-18px_rgb(7_42_76/0.28)] lg:grid-cols-4"
+          className="container-page grid grid-cols-2 lg:grid-cols-4"
         >
-          {trust.map(({ icon: Icon, title, text }) => (
-            <li key={title} className="flex items-center gap-3 bg-white/95 p-4 backdrop-blur sm:p-5">
-              <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-sky-100 text-cyan-700">
-                <Icon className="size-[1.35rem]" />
+          {trust.map(({ icon: Icon, title, text }, i) => (
+            <li
+              key={title}
+              className={`flex items-center gap-3 py-5 sm:py-6 ${i % 2 === 1 ? "pl-4 sm:pl-6" : ""} ${
+                i % 2 === 0 ? "border-r border-navy-700/10 pr-4" : ""
+              } ${i < 2 ? "border-b border-navy-700/10 lg:border-b-0" : ""} lg:border-r lg:px-6 lg:first:pl-0 lg:last:border-r-0`}
+            >
+              <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-sky-100 text-navy-700">
+                <Icon className="size-5" />
               </span>
               <span className="leading-tight">
                 <strong className="block text-sm font-semibold text-navy-700 sm:text-base">{title}</strong>
@@ -188,7 +175,6 @@ export function Hero() {
             </li>
           ))}
         </motion.ul>
-        </div>
       </div>
     </section>
   );

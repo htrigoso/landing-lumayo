@@ -64,7 +64,7 @@ function MobileDrawer({ open, onClose, returnFocusTo }: { open: boolean; onClose
             className="absolute inset-y-0 right-0 flex w-[min(21rem,86vw)] flex-col overflow-y-auto bg-white shadow-[-20px_0_60px_-20px_rgb(7_42_76/0.45)]"
           >
             <div className="flex items-center justify-between border-b border-line px-5 py-4">
-              <Image src="/brand/lumayo-logo-small.svg" alt="Lumayo Centro Odontológico" width={1380} height={450} unoptimized className="h-11 w-auto" />
+              <Image src="/brand/lumayo-logo.svg" alt="Lumayo Centro Odontológico" width={997} height={200} unoptimized className="h-6 w-auto" />
               <button
                 ref={closeRef}
                 type="button"
@@ -152,13 +152,13 @@ export function Header() {
       <div className="container-page flex h-16 items-center justify-between gap-4 md:h-[4.5rem]">
         <a href="#top" className="shrink-0 rounded-lg" aria-label="Lumayo Centro Odontológico, ir al inicio">
           <Image
-            src="/brand/lumayo-logo-small.svg"
+            src="/brand/lumayo-logo.svg"
             alt="Lumayo Centro Odontológico"
-            width={1380}
-            height={450}
+            width={997}
+            height={200}
             preload
             unoptimized
-            className="h-12 w-auto md:h-14"
+            className="h-7 w-auto md:h-8"
           />
         </a>
 

@@ -1,3 +1,4 @@
+import { SectionHeading } from "@/components/brand/SectionHeading";
 import { BracesIcon, WhatsappIcon } from "@/components/icons";
 import { Reveal } from "@/components/motion/Reveal";
 import { bracesWhatsappMessage, whatsappUrl } from "@/lib/site";
@@ -42,50 +43,41 @@ const faqs = [
 
 export function Orthodontics() {
   return (
-    <section
-      id="ortodoncia"
-      aria-labelledby="ortodoncia-title"
-      className="relative overflow-hidden bg-navy-700 py-20 text-white lg:py-28"
-    >
-      <div aria-hidden="true" className="absolute -left-32 top-10 size-96 rounded-full bg-cyan-500/20 blur-3xl" />
-      <div aria-hidden="true" className="absolute -bottom-40 right-0 size-[28rem] rounded-full bg-cyan-400/10 blur-3xl" />
+    <section id="ortodoncia" aria-labelledby="ortodoncia-title" className="bg-sky-50 py-20 lg:py-28">
+      <div className="container-page">
+        <SectionHeading
+          number="02"
+          label="Ortodoncia con brackets"
+          id="ortodoncia-title"
+          title={
+            <>
+              Tu tratamiento de <strong>brackets, paso a paso</strong>
+            </>
+          }
+          description="Te acompañamos desde la primera consulta hasta el último control, con explicaciones claras en cada etapa."
+        />
 
-      <div className="container-page relative grid gap-14 lg:grid-cols-2 lg:gap-16">
-        <div>
-          <Reveal>
-            <p className="pill !bg-white/10 !text-cyan-300">
-              <BracesIcon />
-              Ortodoncia con brackets
-            </p>
-            <h2 id="ortodoncia-title" className="section-title mt-4 !text-white">
-              Tu tratamiento de brackets, paso a paso
-            </h2>
-            <p className="mt-4 text-lg leading-relaxed text-sky-100">
-              Te acompañamos desde la primera consulta hasta el último control, con explicaciones claras
-              en cada etapa.
-            </p>
-          </Reveal>
-
-          <ol className="relative mt-10 space-y-6 before:absolute before:bottom-6 before:left-[1.375rem] before:top-6 before:w-px before:bg-white/20">
+        <div className="mt-14 grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+          {/* Steps as an index list with hairline rules, like the manual */}
+          <ol className="border-t border-navy-700/15">
             {steps.map((s, i) => (
-              <li key={s.title}>
-                <Reveal delay={i * 0.08} className="relative flex gap-5">
-                  <span className="relative z-10 grid size-11 shrink-0 place-items-center rounded-full bg-cyan-400 font-display text-lg font-extrabold text-navy-900">
-                    {i + 1}
+              <li key={s.title} className="border-b border-navy-700/15">
+                <Reveal delay={i * 0.06} className="group grid grid-cols-[3.5rem_1fr] gap-x-4 py-6 sm:grid-cols-[4.5rem_1fr_1.2fr] sm:items-baseline sm:gap-x-8">
+                  <span className="font-display text-2xl font-normal tabular-nums text-cyan-700 sm:text-3xl">
+                    {String(i + 1).padStart(2, "0")}.
                   </span>
-                  <div className="pt-1.5">
-                    <h3 className="font-display text-lg font-bold">{s.title}</h3>
-                    <p className="mt-1 leading-relaxed text-sky-100">{s.text}</p>
-                  </div>
+                  <h3 className="font-display text-lg font-bold text-navy-700 sm:text-xl">{s.title}</h3>
+                  <p className="col-start-2 mt-1 leading-relaxed text-ink-600 sm:col-start-3 sm:mt-0">{s.text}</p>
                 </Reveal>
               </li>
             ))}
           </ol>
-        </div>
 
-        <div className="lg:pt-6">
-          <Reveal className="rounded-[2rem] bg-white p-6 text-ink-900 shadow-lift sm:p-8">
-            <h3 className="font-display text-xl font-extrabold text-navy-700">Preguntas frecuentes</h3>
+          <Reveal className="h-fit rounded-[2rem] bg-white p-6 shadow-soft sm:p-8">
+            <p className="pill">
+              <BracesIcon />
+              Preguntas frecuentes
+            </p>
             <div className="mt-4 divide-y divide-line">
               {faqs.map((f) => (
                 <details key={f.q} className="group py-1">
@@ -93,7 +85,7 @@ export function Orthodontics() {
                     {f.q}
                     <span
                       aria-hidden="true"
-                      className="grid size-8 shrink-0 place-items-center rounded-full bg-sky-100 text-cyan-700 transition-transform duration-200 group-open:rotate-45"
+                      className="grid size-8 shrink-0 place-items-center rounded-full bg-sky-100 text-navy-700 transition-transform duration-200 group-open:rotate-45"
                     >
                       <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
                         <path d="M12 5v14M5 12h14" />
@@ -105,12 +97,7 @@ export function Orthodontics() {
               ))}
             </div>
 
-            <a
-              href={whatsappUrl(bracesWhatsappMessage)}
-              target="_blank"
-              rel="noopener"
-              className="btn btn-wa mt-6 w-full text-base"
-            >
+            <a href={whatsappUrl(bracesWhatsappMessage)} target="_blank" rel="noopener" className="btn btn-wa mt-6 w-full text-base">
               <WhatsappIcon />
               Tengo otra pregunta
             </a>

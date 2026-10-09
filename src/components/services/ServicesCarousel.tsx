@@ -110,6 +110,30 @@ function CarouselCard({ slide, position, radius, isActive, reduceMotion, onSelec
           className="pointer-events-none absolute inset-0 rounded-[inherit] bg-gradient-to-b from-navy-700 to-navy-900 shadow-[0_30px_60px_-20px_rgb(7_42_76/0.55)]"
         />
 
+        {/* Isotype watermark (as in the footer): soft blue on idle cards, white on the active one */}
+        <motion.div
+          aria-hidden="true"
+          initial={false}
+          animate={isActive ? { x: 0, y: 0, rotate: -8, scale: 1 } : { x: 16, y: 16, rotate: 0, scale: 0.92 }}
+          transition={reduceMotion ? { duration: 0 } : { duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="pointer-events-none absolute -bottom-6 -right-8 w-48 sm:w-52"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element -- decorative brand SVG */}
+          <img
+            src="/brand/lumayo-isotipo.svg"
+            alt=""
+            draggable={false}
+            className={`w-full transition-opacity duration-500 ${isActive ? "opacity-0" : "opacity-[0.1]"}`}
+          />
+          {/* eslint-disable-next-line @next/next/no-img-element -- decorative brand SVG */}
+          <img
+            src="/brand/lumayo-isotipo-white.svg"
+            alt=""
+            draggable={false}
+            className={`absolute inset-0 w-full transition-opacity duration-500 ${isActive ? "opacity-[0.2]" : "opacity-0"}`}
+          />
+        </motion.div>
+
         {/* Photo */}
         <div className="relative h-40 shrink-0 overflow-hidden sm:h-44">
           <motion.div
@@ -305,7 +329,7 @@ export function ServicesCarousel() {
               className="grid h-6 cursor-pointer place-items-center"
             >
               <motion.span
-                animate={{ width: i === activeIndex ? 28 : 8, backgroundColor: i === activeIndex ? "#0a7699" : "#c8e9f5" }}
+                animate={{ width: i === activeIndex ? 28 : 8, backgroundColor: i === activeIndex ? "#0e5ca4" : "#c3e6f6" }}
                 transition={{ type: "spring", stiffness: 300, damping: 26 }}
                 className="block h-2 rounded-full"
               />

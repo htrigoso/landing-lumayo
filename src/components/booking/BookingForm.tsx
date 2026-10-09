@@ -235,7 +235,7 @@ export function BookingForm({
                 exit={{ opacity: 0 }}
                 className="flex items-start gap-2 rounded-xl bg-sky-50 px-3 py-2 text-sm text-navy-700"
               >
-                <CheckIcon className="mt-0.5 size-4 shrink-0 text-wa-600" />
+                <CheckIcon className="mt-0.5 size-4 shrink-0 text-cyan-500" />
                 Abrimos WhatsApp con tu solicitud. Solo presiona enviar y te responderemos pronto.
               </motion.p>
             )}

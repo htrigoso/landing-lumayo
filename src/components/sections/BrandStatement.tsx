@@ -52,12 +52,12 @@ function FloatingChip({ chip }: { chip: Chip }) {
       <motion.div
         animate={{ y: [0, -12, 0], rotate: [-1.5, 1.5, -1.5] }}
         transition={{ duration: chip.float, repeat: Infinity, ease: "easeInOut" }}
-        className="flex items-center gap-2.5 rounded-2xl border border-white/80 bg-white/70 py-2 pl-2 pr-4 shadow-lift backdrop-blur-md"
+        className="flex items-center gap-2.5 rounded-2xl border border-white/15 bg-white/10 py-2 pl-2 pr-4 shadow-lift backdrop-blur-md"
       >
-        <span className="grid size-9 place-items-center rounded-xl bg-sky-100 text-cyan-700">
+        <span className="grid size-9 place-items-center rounded-xl bg-cyan-400 text-navy-900">
           <Icon className="size-5" />
         </span>
-        <span className="text-sm font-semibold text-navy-700">{chip.label}</span>
+        <span className="text-sm font-semibold text-white">{chip.label}</span>
       </motion.div>
     </motion.div>
   );
@@ -65,11 +65,11 @@ function FloatingChip({ chip }: { chip: Chip }) {
 
 export function BrandStatement() {
   return (
-    <section aria-labelledby="statement-title" className="relative isolate overflow-hidden py-28 lg:py-36">
-      <LiveLines className="-z-20" />
+    <section aria-labelledby="statement-title" className="relative isolate overflow-hidden bg-navy-700 py-28 lg:py-36">
+      <LiveLines tone="dark" className="-z-20" />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_45%_50%_at_50%_50%,rgb(255_255_255/0.95)_0%,rgb(255_255_255/0.6)_55%,transparent_82%),linear-gradient(180deg,#fff_0%,transparent_14%,transparent_86%,#fff_100%)]"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_45%_50%_at_50%_50%,rgb(2_68_116/0.92)_0%,rgb(2_68_116/0.55)_55%,transparent_82%)]"
       />
 
       {chips.map((c) => (
@@ -83,7 +83,7 @@ export function BrandStatement() {
         viewport={{ once: true, margin: "-100px" }}
         className="container-page relative text-center"
       >
-        <motion.p variants={fadeUp} className="pill mx-auto bg-white/80 shadow-soft backdrop-blur">
+        <motion.p variants={fadeUp} className="pill mx-auto !bg-white/10 !text-white backdrop-blur">
           <span className="relative flex size-2">
             <span className="absolute inline-flex size-full animate-ping rounded-full bg-cyan-400 opacity-70" />
             <span className="relative inline-flex size-2 rounded-full bg-cyan-500" />
@@ -91,7 +91,7 @@ export function BrandStatement() {
           Lumayo · Tarapoto
         </motion.p>
 
-        <h2 id="statement-title" className="mt-6 font-display text-[2.5rem] leading-[1.05] tracking-[-0.03em] text-navy-700 sm:text-6xl lg:text-[4.75rem]">
+        <h2 id="statement-title" className="mt-6 font-display text-[2.5rem] leading-[0.98] tracking-[-0.035em] text-white sm:text-6xl lg:text-[4.75rem]">
           <span className="block font-light">
             <motion.span variants={word} className="inline-block">Aquí</motion.span>{" "}
             <motion.span variants={word} className="inline-block">comienza</motion.span>
@@ -100,7 +100,7 @@ export function BrandStatement() {
             <motion.span variants={word} className="inline-block font-light">tu</motion.span>{" "}
             <motion.span variants={word} className="inline-block font-light">nueva</motion.span>{" "}
             <span className="relative inline-block">
-              <motion.span variants={word} className="text-shimmer inline-block font-extrabold">
+              <motion.span variants={word} className="text-shimmer-light inline-block font-extrabold">
                 sonrisa
               </motion.span>
               <svg aria-hidden="true" viewBox="0 0 300 30" preserveAspectRatio="none" className="absolute -bottom-3 left-0 h-4 w-full text-cyan-400 sm:h-5">
@@ -117,19 +117,19 @@ export function BrandStatement() {
           </span>
         </h2>
 
-        <motion.p variants={fadeUp} className="mx-auto mt-8 max-w-lg text-balance text-lg leading-relaxed text-ink-600">
+        <motion.p variants={fadeUp} className="mx-auto mt-8 max-w-lg text-balance text-lg leading-relaxed text-sky-100/85">
           Tu sonrisa nos inspira a dar el primer paso. Agenda tu evaluación y descubre el tratamiento ideal para ti.
         </motion.p>
 
         <motion.div variants={fadeUp} className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Magnetic>
-            <a href={whatsappUrl(defaultWhatsappMessage)} target="_blank" rel="noopener" className="btn btn-wa btn-pulse px-7 text-base sm:min-h-14">
+            <a href={whatsappUrl(defaultWhatsappMessage)} target="_blank" rel="noopener" className="btn btn-light btn-pulse px-7 text-base sm:min-h-14">
               <WhatsappIcon />
               Escríbenos por WhatsApp
             </a>
           </Magnetic>
           <Magnetic>
-            <a href="#reservar" className="btn btn-outline bg-white/80 px-7 text-base backdrop-blur sm:min-h-14">
+            <a href="#reservar" className="btn btn-ghost-light px-7 text-base sm:min-h-14">
               <CalendarIcon />
               Reservar cita
             </a>
@@ -139,8 +139,8 @@ export function BrandStatement() {
         {/* On phones the service chips sit in a row under the CTAs instead of floating */}
         <motion.ul variants={fadeUp} className="mt-10 flex flex-wrap justify-center gap-2 lg:hidden" aria-label="Algunos de nuestros servicios">
           {chips.map(({ label, icon: Icon }) => (
-            <li key={label} className="flex items-center gap-2 rounded-full border border-white/80 bg-white/75 py-1.5 pl-1.5 pr-3.5 text-sm font-semibold text-navy-700 shadow-soft backdrop-blur">
-              <span className="grid size-7 place-items-center rounded-full bg-sky-100 text-cyan-700">
+            <li key={label} className="flex items-center gap-2 rounded-full border border-white/15 bg-white/10 py-1.5 pl-1.5 pr-3.5 text-sm font-semibold text-white backdrop-blur">
+              <span className="grid size-7 place-items-center rounded-full bg-cyan-400 text-navy-900">
                 <Icon className="size-4" />
               </span>
               {label}

@@ -61,7 +61,7 @@ function ReelCard({ t, onPlay }: { t: Testimonial; onPlay: (t: Testimonial) => v
         {t.rating ? <Stars rating={t.rating} /> : null}
         <blockquote className="mt-2 line-clamp-4 text-sm leading-relaxed text-white/95">“{t.quote}”</blockquote>
         <p className="mt-3 flex items-center gap-2 text-sm font-semibold text-white">
-          <span aria-hidden="true" className="h-px w-5 bg-cyan-300" />
+          <span aria-hidden="true" className="h-px w-5 bg-cyan-500" />
           {t.name}
           {t.source && <span className="font-normal text-white/70">· Vía {t.source}</span>}
         </p>

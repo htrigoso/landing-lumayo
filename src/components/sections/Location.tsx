@@ -2,14 +2,18 @@ import { ArrowRightIcon, CalendarIcon, PinIcon, WhatsappIcon } from "@/component
 import { Reveal } from "@/components/motion/Reveal";
 import { fullAddress, site } from "@/lib/site";
 
-export function Location() {
+export function Location({ number }: { number: string }) {
   return (
     <section id="ubicacion" aria-labelledby="ubicacion-title" className="relative isolate overflow-hidden bg-white py-20 lg:py-28">
       <div className="container-page grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-14">
         <Reveal>
-          <p className="pill">Ubicación</p>
+          <p className="flex items-center gap-3 text-sm font-medium tabular-nums text-navy-700">
+            {number}
+            <span aria-hidden="true" className="h-px w-8 bg-navy-700/40" />
+            Ubicación
+          </p>
           <h2 id="ubicacion-title" className="section-title mt-4">
-            Visítanos en Tarapoto
+            Visítanos <strong>en Tarapoto</strong>
           </h2>
 
           <ul className="mt-8 space-y-6">

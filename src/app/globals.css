@@ -1,41 +1,35 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-figtree);
+  /* Brand manual: Montserrat is the only typeface */
+  --font-sans: var(--font-montserrat);
   --font-display: var(--font-montserrat);
-  --font-hand: var(--font-caveat);
 }
 
 @theme {
   /* Brand — taken from the Lumayo flyer */
-  --color-navy-950: #051f3a;
-  --color-navy-900: #072a4c;
-  --color-navy-700: #0b3a66;
-  --color-navy-500: #2b5a86;
+  /* Lumayo brand manual palette (V1, 2026) */
+  --color-navy-950: #012a48;
+  --color-navy-900: #013559;
+  --color-navy-700: #024474; /* Azul profundo — primary */
+  --color-navy-500: #0e5ca4; /* Azul clínico */
 
-  --color-cyan-300: #7fd6ec;
-  --color-cyan-400: #3fc1e0;
-  --color-cyan-500: #19b2d6;
-  --color-cyan-600: #0f95ba;
-  --color-cyan-700: #0a7699; /* accessible cyan for text on white */
+  --color-cyan-300: #85cedf; /* Agua */
+  --color-cyan-400: #2ac8e1; /* Azul */
+  --color-cyan-500: #02acb5; /* Esmeralda */
+  --color-cyan-600: #0e5ca4; /* Azul clínico */
+  --color-cyan-700: #0e5ca4; /* Azul clínico: accessible accent for text on white */
 
-  --color-sky-50: #f3fafd;
-  --color-sky-100: #e4f4fa;
-  --color-sky-200: #c8e9f5;
+  --color-sky-50: #f3f8fc; /* manual light panel */
+  --color-sky-100: #dbf1fe; /* Bruma */
+  --color-sky-200: #c3e6f6;
 
-  /* Warmth accents */
-  --color-cream-50: #fffaf4;
-  --color-cream-100: #fdf1e3;
-  --color-peach-400: #f6b98f;
 
-  --color-ink-900: #0f2237;
+  --color-ink-900: #0c2a45;
   --color-ink-600: #475b6e;
   --color-ink-400: #7a8a99;
-  --color-line: #d9e8ef;
+  --color-line: #d6e6f0;
 
-  /* WhatsApp CTA — darkened for 4.5:1 with white text */
-  --color-wa-600: #0e8a43;
-  --color-wa-700: #0b7338;
 
   --shadow-soft: 0 1px 2px rgb(7 42 76 / 0.04), 0 8px 24px -8px rgb(7 42 76 / 0.12);
   --shadow-lift: 0 2px 4px rgb(7 42 76 / 0.05), 0 18px 40px -12px rgb(7 42 76 / 0.22);
@@ -54,6 +48,9 @@ html {
 }
 
 body {
+  /* Decorative elements may bleed past the edges; never let them cause sideways scrolling.
+     `clip` (unlike `hidden`) keeps position: sticky working. */
+  overflow-x: clip;
   background: #ffffff;
   color: var(--color-ink-900);
   font-family: var(--font-sans), system-ui, sans-serif;
@@ -199,13 +196,13 @@ select {
   }
   @keyframes wa-pulse {
     0% {
-      box-shadow: 0 10px 24px -10px rgb(14 138 67 / 0.6), 0 0 0 0 rgb(14 138 67 / 0.45);
+      box-shadow: 0 10px 24px -10px rgb(2 68 116 / 0.55), 0 0 0 0 rgb(42 200 225 / 0.5);
     }
     70% {
-      box-shadow: 0 10px 24px -10px rgb(14 138 67 / 0.6), 0 0 0 14px rgb(14 138 67 / 0);
+      box-shadow: 0 10px 24px -10px rgb(2 68 116 / 0.55), 0 0 0 14px rgb(42 200 225 / 0);
     }
     100% {
-      box-shadow: 0 10px 24px -10px rgb(14 138 67 / 0.6), 0 0 0 0 rgb(14 138 67 / 0);
+      box-shadow: 0 10px 24px -10px rgb(2 68 116 / 0.55), 0 0 0 0 rgb(42 200 225 / 0);
     }
   }
   .btn svg {
@@ -213,16 +210,33 @@ select {
     height: 1.25rem;
     flex: none;
   }
+  /* Primary CTA (WhatsApp / booking) in Azul profundo — the brand manual has no green */
   .btn-wa {
-    --wave-front: var(--color-wa-700);
-    --wave-back: rgb(255 255 255 / 0.22);
-    background: var(--color-wa-600);
+    --wave-front: var(--color-navy-900);
+    --wave-back: rgb(42 200 225 / 0.45);
+    background: var(--color-navy-700);
     color: #fff;
-    box-shadow: 0 10px 24px -10px rgb(14 138 67 / 0.6);
+    box-shadow: 0 10px 24px -10px rgb(2 68 116 / 0.55);
+  }
+  /* Primary CTA variant for Azul profundo / Azul clínico backgrounds */
+  .btn-light {
+    --wave-front: var(--color-sky-100);
+    --wave-back: rgb(133 206 223 / 0.5);
+    background: #fff;
+    color: var(--color-navy-700);
+    box-shadow: 0 10px 24px -10px rgb(1 42 72 / 0.6);
+  }
+  /* Secondary CTA on dark backgrounds */
+  .btn-ghost-light {
+    --wave-front: rgb(255 255 255 / 0.14);
+    --wave-back: rgb(42 200 225 / 0.25);
+    background: transparent;
+    color: #fff;
+    border: 1.5px solid rgb(255 255 255 / 0.45);
   }
   .btn-navy {
     --wave-front: var(--color-navy-900);
-    --wave-back: rgb(25 178 214 / 0.4);
+    --wave-back: rgb(42 200 225 / 0.4);
     background: var(--color-navy-700);
     color: #fff;
   }
@@ -239,17 +253,18 @@ select {
     border-color: var(--color-cyan-500);
   }
 
+  /* Manual "Etiqueta": Montserrat Medium, uppercase, +24% tracking */
   .pill {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.35rem 0.8rem;
+    gap: 0.45rem;
+    padding: 0.4rem 0.85rem;
     border-radius: 999px;
     background: var(--color-sky-100);
-    color: var(--color-cyan-700);
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    color: var(--color-navy-700);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
   }
   .pill svg {
@@ -257,13 +272,17 @@ select {
     height: 0.9rem;
   }
 
+  /* Manual "Titular": Montserrat 400 + 800 (wrap the emphasis in <strong>), tight leading, -3.5% tracking */
   .section-title {
     font-family: var(--font-display), sans-serif;
-    font-weight: 800;
+    font-weight: 400;
     color: var(--color-navy-700);
-    font-size: clamp(1.75rem, 1.2rem + 2.4vw, 2.6rem);
-    line-height: 1.12;
-    letter-spacing: -0.02em;
+    font-size: clamp(1.85rem, 1.25rem + 2.5vw, 2.75rem);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+  }
+  .section-title strong {
+    font-weight: 800;
   }
   .section-sub {
     color: var(--color-ink-600);
@@ -290,7 +309,7 @@ select {
   .field-input:focus {
     outline: none;
     border-color: var(--color-cyan-500);
-    box-shadow: 0 0 0 4px rgb(25 178 214 / 0.18);
+    box-shadow: 0 0 0 4px rgb(42 200 225 / 0.18);
   }
   .field-input[aria-invalid="true"] {
     border-color: #c2410c;
@@ -321,4 +340,14 @@ select {
   to {
     transform: translateX(calc(-50% - 0.625rem));
   }
+}
+
+/* Shimmer for gradient text on Azul profundo */
+.text-shimmer-light {
+  background-image: linear-gradient(100deg, #ffffff 0%, #ffffff 35%, var(--color-cyan-400) 50%, #ffffff 65%, #ffffff 100%);
+  background-size: 250% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: text-shimmer 5s ease-in-out infinite;
 }

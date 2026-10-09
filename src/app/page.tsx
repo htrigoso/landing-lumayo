@@ -10,6 +10,7 @@ import { Location } from "@/components/sections/Location";
 import { Orthodontics } from "@/components/sections/Orthodontics";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Services } from "@/components/sections/Services";
+import { getDisplayedTestimonials } from "@/lib/results";
 import { site } from "@/lib/site";
 
 const jsonLd = {
@@ -28,6 +29,11 @@ const jsonLd = {
 };
 
 export default function Home() {
+  // Section numbers follow the manual's "01 — Label" style and must stay consecutive
+  // even when the testimonials block is hidden (no real reviews yet).
+  const hasTestimonials = getDisplayedTestimonials().length > 0;
+  const n = (i: number) => String(hasTestimonials ? i : i - 1).padStart(2, "0");
+
   return (
     <>
       <a
@@ -40,15 +46,16 @@ export default function Home() {
       <main id="main">
         <Hero />
         <Services />
-        <BrandStatement />
         <WaveDivider from="bg-white" to="var(--color-navy-700)" />
-        <Orthodontics />
+        <BrandStatement />
         <WaveDivider from="bg-navy-700" to="var(--color-sky-50)" flip />
+        <Orthodontics />
         <About />
         <Testimonials />
-        <Location />
-        <BookingSection />
-        <WaveDivider from="bg-sky-50" to="var(--color-navy-900)" />
+        <Location number={n(5)} />
+        <WaveDivider from="bg-white" to="var(--color-navy-500)" />
+        <BookingSection number={n(6)} />
+        <WaveDivider from="bg-navy-500" to="var(--color-navy-900)" flip />
       </main>
       <Footer />
       <MobileCtaBar />

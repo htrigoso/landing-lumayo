@@ -1,3 +1,4 @@
+import { SectionHeading } from "@/components/brand/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 import { TestimonialsMarquee } from "@/components/testimonials/TestimonialsMarquee";
 import { getDisplayedTestimonials } from "@/lib/results";
@@ -7,20 +8,26 @@ export function Testimonials() {
   if (items.length === 0) return null;
 
   return (
-    <section id="testimonios" aria-labelledby="testimonios-title" className="relative isolate overflow-hidden bg-gradient-to-b from-sky-50 via-sky-100/70 to-white py-20 lg:py-24">
-      <div className="container-page">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="pill">Testimonios</p>
-          <h2 id="testimonios-title" className="section-title mt-4">
-            Lo que dicen nuestros pacientes
-          </h2>
-          <p className="section-sub mt-4">Opiniones de quienes ya confiaron su sonrisa a Lumayo.</p>
+    <section id="testimonios" aria-labelledby="testimonios-title" className="overflow-hidden bg-sky-50 py-20 lg:py-24">
+      <div>
+        <div className="container-page">
+          <SectionHeading
+            number="04"
+            label="Testimonios"
+            id="testimonios-title"
+            title={
+              <>
+                Lo que dicen <strong>nuestros pacientes</strong>
+              </>
+            }
+            description="Opiniones de quienes ya confiaron su sonrisa a Lumayo."
+          />
+        </div>
+
+        <Reveal delay={0.1} className="mt-12">
+          <TestimonialsMarquee items={items} />
         </Reveal>
       </div>
-
-      <Reveal delay={0.1} className="mt-10">
-        <TestimonialsMarquee items={items} />
-      </Reveal>
     </section>
   );
 }

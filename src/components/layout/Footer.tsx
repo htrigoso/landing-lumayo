@@ -1,15 +1,15 @@
 import Image from "next/image";
-import { FlowLines } from "@/components/decor/FlowLines";
+import { IsotypeWatermark } from "@/components/brand/IsotypeWatermark";
 import { CalendarIcon, PinIcon, WhatsappIcon } from "@/components/icons";
 import { defaultWhatsappMessage, fullAddress, site, whatsappUrl } from "@/lib/site";
 
 export function Footer() {
   return (
     <footer className="relative isolate overflow-hidden bg-navy-900 pb-28 pt-10 text-sky-100 lg:pb-12">
-      <FlowLines tone="dark" flip className="absolute inset-x-0 bottom-0 -z-10 h-10 w-full opacity-70 sm:h-14" />
+      <IsotypeWatermark tone="dark" className="-bottom-24 -right-16 -z-10 w-[26rem]" />
       <div className="container-page grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1fr]">
         <div>
-          <Image src="/brand/lumayo-logo-small-white.svg" alt="Lumayo Centro Odontológico" width={1380} height={450} unoptimized className="h-14 w-auto" />
+          <Image src="/brand/lumayo-logo-descriptor-white.svg" alt="Lumayo Centro Odontológico" width={534} height={180} unoptimized className="h-16 w-auto" />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-sky-100/80">
             Tecnología, confianza y atención cercana para tu sonrisa.
           </p>
@@ -25,7 +25,7 @@ export function Footer() {
                 rel="noopener"
                 className="inline-flex min-h-11 items-center gap-2 hover:text-white"
               >
-                <WhatsappIcon className="size-4 text-[#3ddc84]" />
+                <WhatsappIcon className="size-4 text-cyan-300" />
                 WhatsApp {site.phoneDisplay}
               </a>
             </li>

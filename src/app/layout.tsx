@@ -1,25 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Caveat, Figtree, Montserrat } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import "./globals.css";
 
-const figtree = Figtree({
-  variable: "--font-figtree",
-  subsets: ["latin"],
-  display: "swap",
-});
-
+// Brand manual: Montserrat only (variable font covers the 400 / 500 / 800 weights it specifies).
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
-  weight: ["300", "700", "800"],
-  display: "swap",
-});
-
-const caveat = Caveat({
-  variable: "--font-caveat",
-  subsets: ["latin"],
-  weight: ["600"],
   display: "swap",
 });
 
@@ -38,14 +25,14 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b3a66",
+  themeColor: "#024474",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="es"
-      className={`${figtree.variable} ${montserrat.variable} ${caveat.variable} antialiased`}
+      className={`${montserrat.variable} antialiased`}
     >
       <body className="min-h-dvh">
         <MotionProvider>{children}</MotionProvider>

@@ -58,7 +58,7 @@ export const services: Service[] = [
     description:
       "Alinea tus dientes y mejora tu mordida con un plan de tratamiento hecho a tu medida.",
     icon: "braces",
-    image: servicePhoto("photo-1656404256001-2ddddacd050f"),
+    image: servicePhoto("photo-1584434081454-2a898b8e33d5"),
     featured: true,
   },
   {
