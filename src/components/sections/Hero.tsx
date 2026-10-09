@@ -100,6 +100,23 @@ export function Hero() {
                   animate={{ pathLength: 1, opacity: 1 }}
                   transition={{ duration: 0.9, ease, delay: 0.75 }}
                 />
+                {/* "Light" glint: a short white dash that travels along the drawn line every few seconds */}
+                {!reduceMotion && (
+                  <motion.path
+                    d="M4 8 C 80 30, 220 30, 296 6"
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="6"
+                    strokeLinecap="round"
+                    strokeDasharray="46 400"
+                    initial={{ strokeDashoffset: 46, opacity: 0 }}
+                    animate={{ strokeDashoffset: [46, -320], opacity: [0, 0.95, 0.95, 0] }}
+                    transition={{
+                      strokeDashoffset: { duration: 1.4, ease: [0.45, 0, 0.25, 1], repeat: Infinity, repeatDelay: 3.4, delay: 1.9 },
+                      opacity: { duration: 1.4, times: [0, 0.15, 0.8, 1], repeat: Infinity, repeatDelay: 3.4, delay: 1.9 },
+                    }}
+                  />
+                )}
               </svg>
             </span>
           </motion.h1>
