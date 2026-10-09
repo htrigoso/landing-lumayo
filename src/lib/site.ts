@@ -3,6 +3,8 @@ export const site = {
   tagline: "Centro Odontológico",
   phoneDisplay: "946 788 123",
   phoneE164: "+51946788123",
+  /** Opening hours as shown to visitors. TODO: confirm with the clinic (copied from the design reference). */
+  hoursDisplay: "Lun. a sáb. 9:00 a. m. a 9:00 p. m.",
   whatsappNumber: "51946788123",
   address: {
     street: "Jr. Miraflores 230",

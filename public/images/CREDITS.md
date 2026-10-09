@@ -20,3 +20,9 @@ All under the [Unsplash License](https://unsplash.com/license): free for commerc
 | Endodoncia | photo-1657470179447-0f5aa16daa91 | Ozkan Guner |
 | Odontopediatría | photo-1733817336090-04082ff6ab4f | drtondons dentalclinic |
 | About section photo (remote) | https://unsplash.com/photos/BiknMFl7iOw | D Dental Office | Unsplash License |
+
+## Hero background video
+
+- `public/video/dentaire-video.mp4` (original, 20 MB, not served) and its compressed encodes `public/video/hero-1080.mp4` / `hero-720.mp4`, plus the poster frame `public/images/hero-poster.jpg`.
+- Source: demo video of the commercial "Dentaire" HTML template by Awaiken Themes, provided by the client.
+- **License pending:** confirm Lumayo holds a license for this footage before publishing, or replace it with a royalty-free clip (e.g. Pexels). To swap it, change the paths in `src/components/hero/HeroBackdrop.tsx` (`media`).

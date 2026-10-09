@@ -2,7 +2,8 @@
 
 import dynamic from "next/dynamic";
 import { useInView, useReducedMotion } from "motion/react";
-import { useRef, useSyncExternalStore } from "react";
+import { useRef } from "react";
+import { useCoarsePointer } from "@/lib/useMediaQuery";
 
 // three.js is only downloaded when a LiveLines block first scrolls near the viewport.
 const FloatingLines = dynamic(() => import("@/components/reactbits/FloatingLines"), { ssr: false });
@@ -14,15 +15,6 @@ const waves: Array<"top" | "middle" | "bottom"> = ["top", "middle", "bottom"];
 const counts = [4, 6, 4];
 const distances = [6, 4, 7];
 
-// Touch devices get static lines: a full-screen shader every frame makes phone scrolling stutter.
-const coarseQuery = "(pointer: coarse)";
-const subscribeCoarse = (onChange: () => void) => {
-  const mql = window.matchMedia(coarseQuery);
-  mql.addEventListener("change", onChange);
-  return () => mql.removeEventListener("change", onChange);
-};
-const useCoarsePointer = () =>
-  useSyncExternalStore(subscribeCoarse, () => window.matchMedia(coarseQuery).matches, () => false);
 
 /** Static stand-in for the animated lines, drawn once as SVG. */
 function StaticLines({ tone }: { tone: "light" | "dark" }) {
@@ -63,6 +55,7 @@ export function LiveLines({ className = "", tone = "light" }: { className?: stri
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { margin: "200px 0px" });
   const reduceMotion = useReducedMotion();
+  // Touch devices get static lines: a full-screen shader every frame makes phone scrolling stutter.
   const coarse = useCoarsePointer();
 
   return (

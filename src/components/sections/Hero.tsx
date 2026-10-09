@@ -1,59 +1,89 @@
 "use client";
 
-import Image from "next/image";
-import { motion, type Variants } from "motion/react";
-import { IsotypeWatermark } from "@/components/brand/IsotypeWatermark";
-import { BracesIcon, CalendarIcon, ChildIcon, ChipIcon, HeartIcon, ShieldIcon, WhatsappIcon } from "@/components/icons";
+import { motion, useReducedMotion, type Variants } from "motion/react";
+import { HeroBackdrop } from "@/components/hero/HeroBackdrop";
+import { ArrowRightIcon, BracesIcon, ClockIcon, PhoneIcon, WhatsappIcon } from "@/components/icons";
 import { bracesWhatsappMessage, site, whatsappUrl } from "@/lib/site";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
+// Copy enters after the title has spelled itself out
 const container: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.08, delayChildren: 0.15 } },
+  show: { transition: { staggerChildren: 0.1, delayChildren: 0.9 } },
 };
 
 const item: Variants = {
   hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
 };
 
-const trust = [
-  { icon: ShieldIcon, title: "Bioseguridad", text: "Protocolos estrictos" },
-  { icon: ChipIcon, title: "Tecnología moderna", text: "Tratamientos precisos" },
-  { icon: HeartIcon, title: "Trato cercano", text: "Te explicamos todo" },
-  { icon: ChildIcon, title: "Toda la familia", text: "Niños y adultos" },
+const letters: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.025, delayChildren: 0.2 } },
+};
+
+const letter: Variants = {
+  hidden: { opacity: 0, y: "0.45em" },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
+};
+
+const infoItems = [
+  { icon: PhoneIcon, title: "¿Necesitas atención dental?", text: `Llámanos: ${site.phoneDisplay}`, href: `tel:${site.phoneE164}` },
+  { icon: ClockIcon, title: "Horario de atención", text: site.hoursDisplay },
 ];
 
+/**
+ * Splits a phrase into animated letters. Each word stays in a no-wrap box so lines only
+ * break between words; screen readers get the plain text from the heading's aria-label.
+ */
+function SplitText({ text }: { text: string }) {
+  const words = text.split(" ");
+  return words.map((word, w) => (
+    <span key={w} aria-hidden="true" className="inline-block whitespace-nowrap">
+      {[...word].map((char, c) => (
+        <motion.span key={c} variants={letter} className="inline-block">
+          {char}
+        </motion.span>
+      ))}
+      {w < words.length - 1 && " "}
+    </span>
+  ));
+}
+
 export function Hero() {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <section id="top" aria-labelledby="hero-title" className="relative isolate overflow-hidden bg-sky-50">
-      {/* Brand pattern: large isotype cropped by the left edge, as on the manual's letterhead */}
-      <motion.div
-        aria-hidden="true"
-        initial={{ opacity: 0, x: -48, rotate: -8 }}
-        animate={{ opacity: 1, x: 0, rotate: 0 }}
-        transition={{ duration: 1.6, ease, delay: 0.3 }}
-        className="pointer-events-none absolute -left-44 top-1/2 -z-10 w-[34rem] -translate-y-1/2 sm:-left-52 sm:w-[44rem] lg:-left-64 lg:w-[54rem]"
-      >
-        <IsotypeWatermark className="!relative block w-full !opacity-[0.06]" />
-      </motion.div>
-      <div className="container-page grid items-center gap-12 pb-14 pt-10 sm:pt-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-20 lg:pt-16">
-        {/* Copy */}
-        <motion.div variants={container} initial="hidden" animate="show">
-          <motion.p variants={item} className="pill bg-white shadow-soft">
+    <section id="top" aria-labelledby="hero-title" className="relative isolate overflow-hidden bg-white">
+      {/* Full-bleed video stage: with the info bar below, it fills the first screen under the header */}
+      <div className="relative isolate flex min-h-[82svh] items-center py-20 sm:py-24 md:min-h-[calc(100svh-4.5rem-6rem)] lg:min-h-[max(44rem,calc(100svh-4.5rem-6rem))]">
+        <HeroBackdrop />
+
+        <div className="container-page text-center">
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease }}
+            className="pill mx-auto !bg-white/10 !text-white ring-1 ring-white/25"
+          >
             <BracesIcon />
             Ortodoncia en Tarapoto
           </motion.p>
 
           <motion.h1
-            variants={item}
             id="hero-title"
-            className="mt-6 font-display text-[2.75rem] font-normal leading-[0.98] tracking-[-0.035em] text-navy-700 sm:text-6xl lg:text-[4.5rem]"
+            aria-label="Alinea tu sonrisa con brackets"
+            variants={letters}
+            initial={reduceMotion ? "show" : "hidden"}
+            animate="show"
+            className="mx-auto mt-6 max-w-4xl font-display text-[2.6rem] font-normal leading-[1.02] tracking-[-0.035em] text-white sm:text-6xl lg:text-7xl"
           >
-            Alinea tu sonrisa
-            <span className="relative mt-1 block w-fit font-extrabold">
-              con brackets
+            <span className="block">
+              <SplitText text="Alinea tu sonrisa" />
+            </span>
+            <span className="relative mx-auto mt-1 block w-fit font-extrabold">
+              <SplitText text="con brackets" />
               <svg
                 aria-hidden="true"
                 viewBox="0 0 300 30"
@@ -68,118 +98,86 @@ export function Hero() {
                   strokeLinecap="round"
                   initial={{ pathLength: 0, opacity: 0 }}
                   animate={{ pathLength: 1, opacity: 1 }}
-                  transition={{ duration: 0.9, ease, delay: 0.7 }}
+                  transition={{ duration: 0.9, ease, delay: 0.75 }}
                 />
               </svg>
             </span>
           </motion.h1>
 
-          <motion.p variants={item} className="mt-8 max-w-lg text-pretty text-lg leading-relaxed text-ink-600">
-            Atención cercana, tecnología actual y un equipo que te explica cada paso del tratamiento.
-            Agenda tu evaluación en Tarapoto.
-          </motion.p>
+          <motion.div variants={container} initial="hidden" animate="show">
+            <motion.p variants={item} className="mx-auto mt-8 max-w-xl text-pretty text-base leading-relaxed text-sky-100 sm:text-lg">
+              Atención cercana, tecnología actual y un equipo que te explica cada paso del tratamiento. Agenda tu
+              evaluación en Tarapoto.
+            </motion.p>
 
-          <motion.div variants={item} className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <motion.div variants={item} className="mt-8 flex justify-center">
               <a
                 href={whatsappUrl(bracesWhatsappMessage)}
                 target="_blank"
                 rel="noopener"
-                className="btn btn-wa btn-pulse w-full px-6 text-base sm:w-auto sm:min-h-14"
+                className="btn btn-light btn-pulse w-full gap-3 !rounded-full !py-2 pl-6 pr-2 text-base sm:min-h-14 sm:w-auto"
               >
                 <WhatsappIcon />
                 Quiero mis brackets
+                <span className="btn-arrow grid size-10 place-items-center rounded-full bg-navy-700 text-white">
+                  <ArrowRightIcon className="size-4 -rotate-45" />
+                </span>
               </a>
-              <a href="#reservar" className="btn btn-outline w-full px-6 text-base sm:w-auto sm:min-h-14">
-                <CalendarIcon />
-                Reservar cita
+            </motion.div>
+
+            <motion.p variants={item} className="mt-5 text-sm text-sky-100">
+              <a href="#reservar" className="font-semibold text-white underline decoration-cyan-400 decoration-2 underline-offset-4">
+                Reserva tu cita
               </a>
-          </motion.div>
-
-          <motion.p variants={item} className="mt-4 text-sm text-ink-600">
-            ¿Prefieres llamar?{" "}
-            <a
-              href={`tel:${site.phoneE164}`}
-              className="font-semibold text-navy-700 underline decoration-cyan-400 decoration-2 underline-offset-4"
-            >
-              {site.phoneDisplay}
-            </a>
-          </motion.p>
-        </motion.div>
-
-        {/* Photo in an arched frame over an Azul profundo block, like the manual's stationery */}
-        <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-          <motion.div
-            aria-hidden="true"
-            initial={{ opacity: 0, x: 24, y: 24 }}
-            animate={{ opacity: 1, x: 0, y: 0 }}
-            transition={{ duration: 0.9, ease, delay: 0.2 }}
-            className="absolute -bottom-5 -right-3 top-16 w-3/4 overflow-hidden rounded-[2rem] bg-navy-700 sm:-right-5"
-          >
-            <IsotypeWatermark tone="dark" className="-bottom-10 -right-12 w-72 !opacity-[0.12]" />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 24, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.9, ease }}
-            className="relative aspect-[4/5] overflow-hidden rounded-b-[2rem] rounded-t-[12rem] shadow-lift sm:rounded-t-[15rem]"
-          >
-            {/* 4:5 photo (1122×1402) provided by Lumayo, served as the original file (no compression or resizing) */}
-            <Image
-              src="/images/exec-9298b590-8370-4560-8d85-3d42dc6fb6fb.png"
-              alt="Niña sonriendo con brackets"
-              width={1122}
-              height={1402}
-              preload
-              unoptimized
-              className="absolute inset-0 size-full object-cover object-[50%_35%]"
-            />
-            <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-navy-900/25 via-transparent to-transparent" />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ type: "spring", stiffness: 220, damping: 22, delay: 1 }}
-            className="absolute -left-3 bottom-10 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-lift sm:-left-8"
-          >
-            <span className="grid size-10 place-items-center rounded-xl bg-sky-100 text-navy-700">
-              <ShieldIcon className="size-5" />
-            </span>
-            <span className="text-sm leading-tight text-ink-600">
-              <strong className="block font-semibold text-navy-700">Evaluación personalizada</strong>
-              Plan claro antes de empezar
-            </span>
+              <span aria-hidden="true" className="mx-2 text-white/40">
+                ·
+              </span>
+              ¿Prefieres llamar?{" "}
+              <a
+                href={`tel:${site.phoneE164}`}
+                className="font-semibold text-white underline decoration-cyan-400 decoration-2 underline-offset-4"
+              >
+                {site.phoneDisplay}
+              </a>
+            </motion.p>
           </motion.div>
         </div>
       </div>
 
-      {/* Trust row: hairline-divided, like the manual's index */}
-      <div className="border-t border-navy-700/10 bg-white">
-        <motion.ul
+      {/* Info bar under the stage, as in the reference: phone, opening hours and the booking CTA */}
+      <div className="bg-navy-900 text-white">
+        <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease, delay: 0.5 }}
-          aria-label="Lo que nos distingue"
-          className="container-page grid grid-cols-2 lg:grid-cols-4"
+          transition={{ duration: 0.7, ease, delay: 1.2 }}
+          className="container-page flex flex-col gap-5 py-6 md:flex-row md:items-center md:justify-between md:gap-8"
         >
-          {trust.map(({ icon: Icon, title, text }, i) => (
-            <li
-              key={title}
-              className={`flex items-center gap-3 py-5 sm:py-6 ${i % 2 === 1 ? "pl-4 sm:pl-6" : ""} ${
-                i % 2 === 0 ? "border-r border-navy-700/10 pr-4" : ""
-              } ${i < 2 ? "border-b border-navy-700/10 lg:border-b-0" : ""} lg:border-r lg:px-6 lg:first:pl-0 lg:last:border-r-0`}
-            >
-              <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-sky-100 text-navy-700">
-                <Icon className="size-5" />
-              </span>
-              <span className="leading-tight">
-                <strong className="block text-sm font-semibold text-navy-700 sm:text-base">{title}</strong>
-                <span className="text-xs text-ink-600 sm:text-sm">{text}</span>
-              </span>
-            </li>
-          ))}
-        </motion.ul>
+          <ul aria-label="Contacto" className="grid grid-cols-1 gap-5 min-[420px]:grid-cols-2 md:flex md:gap-0">
+            {infoItems.map(({ icon: Icon, title, text, href }, i) => (
+              <li key={title} className={`flex items-center gap-3 ${i > 0 ? "md:ml-8 md:border-l md:border-white/15 md:pl-8" : ""}`}>
+                <span className="grid size-11 shrink-0 place-items-center rounded-full text-cyan-400 ring-1 ring-cyan-400/40">
+                  <Icon className="size-5" />
+                </span>
+                <span className="leading-tight">
+                  <strong className="block text-[0.95rem] font-semibold">{title}</strong>
+                  {href ? (
+                    <a href={href} className="text-sm text-sky-100/80 underline-offset-4 hover:text-white hover:underline">
+                      {text}
+                    </a>
+                  ) : (
+                    <span className="text-sm text-sky-100/80">{text}</span>
+                  )}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <a href="#reservar" className="btn btn-light w-full shrink-0 gap-3 !rounded-full !py-1.5 pl-5 pr-1.5 text-sm sm:w-fit sm:self-center md:self-auto">
+            Reservar cita
+            <span className="btn-arrow grid size-8 place-items-center rounded-full bg-navy-700 text-white">
+              <ArrowRightIcon className="size-3.5 -rotate-45" />
+            </span>
+          </a>
+        </motion.div>
       </div>
     </section>
   );
