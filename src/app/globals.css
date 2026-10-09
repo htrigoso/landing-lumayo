@@ -104,6 +104,9 @@ select {
   }
 
   .btn {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -115,86 +118,71 @@ select {
     line-height: 1.2;
     cursor: pointer;
     transition:
-      background-color 180ms ease,
-      color 180ms ease,
-      border-color 180ms ease,
-      box-shadow 180ms ease,
-      transform 180ms ease;
-  }
-  .btn {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
+      background-color 500ms ease,
+      color 500ms ease,
+      border-color 500ms ease,
+      box-shadow 500ms ease,
+      transform 160ms ease;
   }
   /*
-   * Liquid wave fill on hover: two wave layers rise from the bottom and drift in
-   * opposite directions. The wave crest is a tiling SVG mask, so each variant only
-   * sets its colors through --wave-front / --wave-back.
+   * Brand hover: the button stays still while a fill rises from the bottom. Its
+   * leading edge is the crown of the Lumayo tooth (two cusps with the soft middle
+   * dip of the isotype), so the motion itself is the "muelita". A lighter layer
+   * rises just ahead for depth. Variants set --fill and --fill-soft.
    */
   .btn::before,
   .btn::after {
     content: "";
     position: absolute;
-    left: 0;
-    right: 0;
+    left: -4%;
+    right: -4%;
     top: 0;
-    height: 140%;
+    height: 165%;
     pointer-events: none;
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100' preserveAspectRatio='none'%3E%3Cpath d='M0 10 C20 0 40 0 60 10 S100 20 120 10 V100 H0Z'/%3E%3C/svg%3E")
-      0 0 / 120px 100% repeat-x;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100' preserveAspectRatio='none'%3E%3Cpath d='M0 10 C20 0 40 0 60 10 S100 20 120 10 V100 H0Z'/%3E%3C/svg%3E")
-      0 0 / 120px 100% repeat-x;
-    transform: translateY(105%);
-    transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
-    animation: btn-wave 1.6s linear infinite paused;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 26 C4 8 18 4 30 9 C38 12 44 17 50 17 C56 17 62 12 70 9 C82 4 96 8 100 26 V100 H0 Z%22/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 26 C4 8 18 4 30 9 C38 12 44 17 50 17 C56 17 62 12 70 9 C82 4 96 8 100 26 V100 H0 Z%22/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
+    transform: translateY(101%);
+    /* Leaving: a calm drop back down */
+    transition: transform 700ms cubic-bezier(0.65, 0, 0.35, 1);
   }
-  /* Front wave */
   .btn::before {
     z-index: -1;
-    background: var(--wave-front, rgb(7 42 76 / 0.12));
-    transition-delay: 70ms;
+    background: var(--fill, rgb(2 68 116 / 0.1));
   }
-  /* Back wave: lighter, rises first and drifts the other way */
   .btn::after {
     z-index: -2;
-    background: var(--wave-back, rgb(255 255 255 / 0.2));
-    animation-direction: reverse;
-    animation-duration: 2.2s;
+    background: var(--fill-soft, rgb(42 200 225 / 0.2));
   }
+  /* Entering: a slow, even rise; the front layer trails the lighter one for depth */
   .btn:hover::before,
   .btn:focus-visible::before {
-    transform: translateY(-24%);
-    animation-play-state: running;
+    transform: translateY(-34%);
+    transition-duration: 1100ms;
+    transition-delay: 140ms;
   }
   .btn:hover::after,
   .btn:focus-visible::after {
-    transform: translateY(-30%);
-    animation-play-state: running;
-  }
-  @keyframes btn-wave {
-    to {
-      -webkit-mask-position: 120px 0;
-      mask-position: 120px 0;
-    }
-  }
-  .btn:hover {
-    transform: translateY(-2px);
+    transform: translateY(-38%);
+    transition-duration: 1100ms;
   }
   .btn:active {
-    transform: translateY(0) scale(0.97);
+    transform: scale(0.98);
   }
   .btn .btn-arrow {
-    transition: transform 220ms ease;
+    transition: transform 600ms cubic-bezier(0.65, 0, 0.35, 1);
   }
   .btn:hover .btn-arrow {
-    transform: translateX(4px);
+    transform: translateX(3px);
   }
-  /* Gentle "breathing" halo for the main WhatsApp CTAs */
-  /* The halo is the element's own box-shadow, so overflow: hidden does not clip it. */
-  .btn-pulse {
-    animation: wa-pulse 2.6s ease-out infinite;
+  /* Gentle "breathing" halo for the main CTAs (box-shadow, so overflow: hidden does not clip it) */
+  /* Only on devices with a real pointer: the box-shadow keyframes repaint every frame,
+     which competes with scrolling on phones */
+  @media (hover: hover) and (pointer: fine) {
+    .btn-pulse {
+      animation: cta-pulse 2.6s ease-out infinite;
+    }
   }
-  @keyframes wa-pulse {
+  @keyframes cta-pulse {
     0% {
       box-shadow: 0 10px 24px -10px rgb(2 68 116 / 0.55), 0 0 0 0 rgb(42 200 225 / 0.5);
     }
@@ -205,49 +193,80 @@ select {
       box-shadow: 0 10px 24px -10px rgb(2 68 116 / 0.55), 0 0 0 0 rgb(42 200 225 / 0);
     }
   }
+  /*
+   * Periodic light sweep across a CTA. It moves with transform only (composited, no repaint),
+   * and is a child element because ::before/::after already draw the hover fill.
+   */
+  .btn-shine {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  .btn-shine::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    left: 0;
+    width: 45%;
+    background: linear-gradient(105deg, transparent, rgb(255 255 255 / 0.45) 50%, transparent);
+    transform: translateX(-120%) skewX(-18deg);
+    animation: btn-shine 4.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+  .btn:hover .btn-shine::after {
+    animation-play-state: paused;
+    opacity: 0;
+  }
+  @keyframes btn-shine {
+    0%,
+    55% {
+      transform: translateX(-120%) skewX(-18deg);
+    }
+    85%,
+    100% {
+      transform: translateX(330%) skewX(-18deg);
+    }
+  }
   .btn svg {
     width: 1.25rem;
     height: 1.25rem;
     flex: none;
   }
   /* Primary CTA (WhatsApp / booking) in Azul profundo — the brand manual has no green */
-  .btn-wa {
-    --wave-front: var(--color-navy-900);
-    --wave-back: rgb(42 200 225 / 0.45);
+  .btn-wa,
+  .btn-navy {
+    --fill: var(--color-navy-500); /* Azul clínico */
+    --fill-soft: rgb(42 200 225 / 0.55); /* Azul */
     background: var(--color-navy-700);
     color: #fff;
     box-shadow: 0 10px 24px -10px rgb(2 68 116 / 0.55);
   }
   /* Primary CTA variant for Azul profundo / Azul clínico backgrounds */
   .btn-light {
-    --wave-front: var(--color-sky-100);
-    --wave-back: rgb(133 206 223 / 0.5);
+    --fill: var(--color-sky-100); /* Bruma */
+    --fill-soft: rgb(133 206 223 / 0.6); /* Agua */
     background: #fff;
     color: var(--color-navy-700);
     box-shadow: 0 10px 24px -10px rgb(1 42 72 / 0.6);
   }
   /* Secondary CTA on dark backgrounds */
   .btn-ghost-light {
-    --wave-front: rgb(255 255 255 / 0.14);
-    --wave-back: rgb(42 200 225 / 0.25);
+    --fill: rgb(255 255 255 / 0.14);
+    --fill-soft: rgb(42 200 225 / 0.25);
     background: transparent;
     color: #fff;
     border: 1.5px solid rgb(255 255 255 / 0.45);
   }
-  .btn-navy {
-    --wave-front: var(--color-navy-900);
-    --wave-back: rgb(42 200 225 / 0.4);
-    background: var(--color-navy-700);
-    color: #fff;
+  .btn-ghost-light:hover {
+    border-color: #fff;
   }
   .btn-outline {
+    --fill: var(--color-sky-100); /* Bruma */
+    --fill-soft: rgb(133 206 223 / 0.5); /* Agua */
     background: #fff;
     color: var(--color-navy-700);
     border: 1.5px solid var(--color-sky-200);
-  }
-  .btn-outline {
-    --wave-front: var(--color-sky-100);
-    --wave-back: rgb(127 214 236 / 0.45);
   }
   .btn-outline:hover {
     border-color: var(--color-cyan-500);
@@ -350,4 +369,30 @@ select {
   -webkit-background-clip: text;
   color: transparent;
   animation: text-shimmer 5s ease-in-out infinite;
+}
+
+/* Service detail dialog: rises as a sheet on phones, fades and lifts on larger screens */
+.service-dialog[open] {
+  animation: sheet-in 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.service-dialog[open]::backdrop {
+  animation: backdrop-in 300ms ease-out;
+}
+@keyframes sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+@media (min-width: 640px) {
+  @keyframes sheet-in {
+    from {
+      opacity: 0;
+      transform: translateY(24px) scale(0.97);
+    }
+  }
+}
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
 }

@@ -1,6 +1,6 @@
 import { SectionHeading } from "@/components/brand/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
-import { ServicesCarousel } from "@/components/services/ServicesCarousel";
+import { ServicesGrid } from "@/components/services/ServicesGrid";
 
 export function Services() {
   return (
@@ -15,11 +15,11 @@ export function Services() {
               Todo lo que tu sonrisa <strong>necesita, en un solo lugar</strong>
             </>
           }
-          description="Desliza para conocer cada tratamiento y consúltanos directamente por WhatsApp."
+          description="Elige una categoría y consúltanos cualquier tratamiento directamente por WhatsApp."
         />
 
-        <Reveal delay={0.1} className="mt-14">
-          <ServicesCarousel />
+        <Reveal delay={0.1} className="mt-12">
+          <ServicesGrid />
         </Reveal>
       </div>
     </section>

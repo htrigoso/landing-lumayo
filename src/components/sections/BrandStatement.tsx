@@ -4,7 +4,6 @@ import { motion, type Variants } from "motion/react";
 import type { ComponentType, SVGProps } from "react";
 import { LiveLines } from "@/components/decor/LiveLines";
 import { BracesIcon, CalendarIcon, ChildIcon, ImplantIcon, SparkleIcon, WhatsappIcon } from "@/components/icons";
-import { Magnetic } from "@/components/motion/Magnetic";
 import { defaultWhatsappMessage, whatsappUrl } from "@/lib/site";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -52,7 +51,7 @@ function FloatingChip({ chip }: { chip: Chip }) {
       <motion.div
         animate={{ y: [0, -12, 0], rotate: [-1.5, 1.5, -1.5] }}
         transition={{ duration: chip.float, repeat: Infinity, ease: "easeInOut" }}
-        className="flex items-center gap-2.5 rounded-2xl border border-white/15 bg-white/10 py-2 pl-2 pr-4 shadow-lift backdrop-blur-md"
+        className="flex items-center gap-2.5 rounded-2xl border border-white/15 bg-white/10 py-2 pl-2 pr-4 shadow-lift md:backdrop-blur-md"
       >
         <span className="grid size-9 place-items-center rounded-xl bg-cyan-400 text-navy-900">
           <Icon className="size-5" />
@@ -83,7 +82,7 @@ export function BrandStatement() {
         viewport={{ once: true, margin: "-100px" }}
         className="container-page relative text-center"
       >
-        <motion.p variants={fadeUp} className="pill mx-auto !bg-white/10 !text-white backdrop-blur">
+        <motion.p variants={fadeUp} className="pill mx-auto !bg-white/10 !text-white md:backdrop-blur">
           <span className="relative flex size-2">
             <span className="absolute inline-flex size-full animate-ping rounded-full bg-cyan-400 opacity-70" />
             <span className="relative inline-flex size-2 rounded-full bg-cyan-500" />
@@ -122,24 +121,20 @@ export function BrandStatement() {
         </motion.p>
 
         <motion.div variants={fadeUp} className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Magnetic>
             <a href={whatsappUrl(defaultWhatsappMessage)} target="_blank" rel="noopener" className="btn btn-light btn-pulse px-7 text-base sm:min-h-14">
               <WhatsappIcon />
               Escríbenos por WhatsApp
             </a>
-          </Magnetic>
-          <Magnetic>
             <a href="#reservar" className="btn btn-ghost-light px-7 text-base sm:min-h-14">
               <CalendarIcon />
               Reservar cita
             </a>
-          </Magnetic>
         </motion.div>
 
         {/* On phones the service chips sit in a row under the CTAs instead of floating */}
         <motion.ul variants={fadeUp} className="mt-10 flex flex-wrap justify-center gap-2 lg:hidden" aria-label="Algunos de nuestros servicios">
           {chips.map(({ label, icon: Icon }) => (
-            <li key={label} className="flex items-center gap-2 rounded-full border border-white/15 bg-white/10 py-1.5 pl-1.5 pr-3.5 text-sm font-semibold text-white backdrop-blur">
+            <li key={label} className="flex items-center gap-2 rounded-full border border-white/15 bg-white/10 py-1.5 pl-1.5 pr-3.5 text-sm font-semibold text-white md:backdrop-blur">
               <span className="grid size-7 place-items-center rounded-full bg-cyan-400 text-navy-900">
                 <Icon className="size-4" />
               </span>

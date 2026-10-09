@@ -20,7 +20,7 @@ function Stars({ rating }: { rating: number }) {
 
 function PlayBadge() {
   return (
-    <span className="grid size-16 place-items-center rounded-full bg-white/25 text-white ring-1 ring-white/50 backdrop-blur-md transition-transform duration-300 group-hover/card:scale-110">
+    <span className="grid size-16 place-items-center rounded-full bg-white/25 text-white ring-1 ring-white/50 md:backdrop-blur-md transition-transform duration-300 group-hover/card:scale-110">
       <svg viewBox="0 0 24 24" className="ml-1 size-7" fill="currentColor" aria-hidden="true">
         <path d="M8 5.5v13l11-6.5-11-6.5Z" />
       </svg>
@@ -46,7 +46,7 @@ function ReelCard({ t, onPlay }: { t: Testimonial; onPlay: (t: Testimonial) => v
       <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-900/35 to-transparent" />
 
       {t.treatment && (
-        <span className="absolute left-3 top-3 rounded-full bg-white/85 px-3 py-1 text-xs font-semibold text-navy-700 backdrop-blur">
+        <span className="absolute left-3 top-3 rounded-full bg-white/85 px-3 py-1 text-xs font-semibold text-navy-700 md:backdrop-blur">
           {t.treatment}
         </span>
       )}

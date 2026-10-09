@@ -4,7 +4,6 @@ import Image from "next/image";
 import { motion, type Variants } from "motion/react";
 import { IsotypeWatermark } from "@/components/brand/IsotypeWatermark";
 import { BracesIcon, CalendarIcon, ChildIcon, ChipIcon, HeartIcon, ShieldIcon, WhatsappIcon } from "@/components/icons";
-import { Magnetic } from "@/components/motion/Magnetic";
 import { bracesWhatsappMessage, site, whatsappUrl } from "@/lib/site";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -29,6 +28,16 @@ const trust = [
 export function Hero() {
   return (
     <section id="top" aria-labelledby="hero-title" className="relative isolate overflow-hidden bg-sky-50">
+      {/* Brand pattern: large isotype cropped by the left edge, as on the manual's letterhead */}
+      <motion.div
+        aria-hidden="true"
+        initial={{ opacity: 0, x: -48, rotate: -8 }}
+        animate={{ opacity: 1, x: 0, rotate: 0 }}
+        transition={{ duration: 1.6, ease, delay: 0.3 }}
+        className="pointer-events-none absolute -left-44 top-1/2 -z-10 w-[34rem] -translate-y-1/2 sm:-left-52 sm:w-[44rem] lg:-left-64 lg:w-[54rem]"
+      >
+        <IsotypeWatermark className="!relative block w-full !opacity-[0.06]" />
+      </motion.div>
       <div className="container-page grid items-center gap-12 pb-14 pt-10 sm:pt-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-20 lg:pt-16">
         {/* Copy */}
         <motion.div variants={container} initial="hidden" animate="show">
@@ -71,7 +80,6 @@ export function Hero() {
           </motion.p>
 
           <motion.div variants={item} className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Magnetic className="w-full sm:w-auto">
               <a
                 href={whatsappUrl(bracesWhatsappMessage)}
                 target="_blank"
@@ -81,13 +89,10 @@ export function Hero() {
                 <WhatsappIcon />
                 Quiero mis brackets
               </a>
-            </Magnetic>
-            <Magnetic className="w-full sm:w-auto">
               <a href="#reservar" className="btn btn-outline w-full px-6 text-base sm:w-auto sm:min-h-14">
                 <CalendarIcon />
                 Reservar cita
               </a>
-            </Magnetic>
           </motion.div>
 
           <motion.p variants={item} className="mt-4 text-sm text-ink-600">

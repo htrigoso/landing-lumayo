@@ -145,7 +145,7 @@ export function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-40 border-b bg-white/90 backdrop-blur-md transition-shadow duration-200 ${
+      className={`sticky top-0 z-40 border-b bg-white md:bg-white/90 md:backdrop-blur-md transition-shadow duration-200 ${
         scrolled ? "border-line shadow-[0_6px_20px_-12px_rgb(7_42_76/0.25)]" : "border-transparent"
       }`}
     >
@@ -193,6 +193,7 @@ export function Header() {
           >
             <WhatsappIcon />
             Agendar cita
+            <span aria-hidden="true" className="btn-shine" />
           </a>
           <button
             ref={menuButtonRef}

@@ -234,11 +234,114 @@ export function ArrowRightIcon(props: IconProps) {
   );
 }
 
+/** Smaller tooth outline, for icons that pair the tooth with a second mark. */
+function SmallTooth({ x = 0, y = 0 }: { x?: number; y?: number }) {
+  return <path d={toothPath} transform={`translate(${x} ${y}) scale(0.78)`} vectorEffect="non-scaling-stroke" />;
+}
+
+export function VeneerIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <g {...stroke}>
+        <path d={toothPath} />
+        <path d="M8 8.2c1.1-.9 2.4-1.3 4-1.3" />
+      </g>
+    </Svg>
+  );
+}
+
+export function SmileIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <g {...stroke}>
+        <path d="M3.5 9.5c2.6 1.3 14.4 1.3 17 0-1 5.6-4.4 9-8.5 9s-7.5-3.4-8.5-9Z" />
+        <path d="M8.5 10.6v2.6M12 10.9v2.8M15.5 10.6v2.6" />
+      </g>
+    </Svg>
+  );
+}
+
+export function CleanIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <g {...stroke}>
+        <SmallTooth y={5} />
+        <path d="M19 2.5v4M17 4.5h4M15 9v2M14 10h2" />
+      </g>
+    </Svg>
+  );
+}
+
+export function DropIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <g {...stroke}>
+        <path d="M12 3.2s-6 6.6-6 11a6 6 0 0 0 12 0c0-4.4-6-11-6-11Z" />
+        <path d="M9.2 14.6a2.9 2.9 0 0 0 2.6 2.8" />
+      </g>
+    </Svg>
+  );
+}
+
+export function TrayIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <g {...stroke}>
+        <path d="M3.5 7c0 7.2 3.8 12 8.5 12s8.5-4.8 8.5-12" />
+        <path d="M7.5 7c0 4.9 2 8 4.5 8s4.5-3.1 4.5-8M3.5 7h4M16.5 7h4" />
+      </g>
+    </Svg>
+  );
+}
+
+export function FillingIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <g {...stroke}>
+        <path d={toothPath} />
+        <path d="M10 9.2h4v2.6h-4z" />
+      </g>
+    </Svg>
+  );
+}
+
+export function ExtractIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <g {...stroke}>
+        <SmallTooth y={5.5} />
+        <path d="M18.5 9V2.5M16 5l2.5-2.5L21 5" />
+      </g>
+    </Svg>
+  );
+}
+
+export function WisdomIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <g {...stroke}>
+        <SmallTooth x={0.5} y={5} />
+        <path d="M16 3.5h4.5l-2.5 3a2 2 0 1 1-2 2.4" />
+      </g>
+    </Svg>
+  );
+}
+
 export const serviceIcons = {
   braces: BracesIcon,
   sparkle: SparkleIcon,
+  veneer: VeneerIcon,
+  smile: SmileIcon,
+  clean: CleanIcon,
+  drop: DropIcon,
+  tray: TrayIcon,
+  shield: ShieldIcon,
+  tooth: ToothIcon,
+  filling: FillingIcon,
+  root: RootIcon,
+  extract: ExtractIcon,
+  wisdom: WisdomIcon,
   implant: ImplantIcon,
   denture: DentureIcon,
-  root: RootIcon,
   child: ChildIcon,
 } as const;

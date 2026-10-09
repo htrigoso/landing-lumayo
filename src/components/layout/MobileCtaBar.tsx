@@ -26,7 +26,7 @@ export function MobileCtaBar() {
           animate={{ y: 0 }}
           exit={{ y: "110%", transition: { duration: 0.18 } }}
           transition={{ type: "spring", stiffness: 380, damping: 34 }}
-          className="fixed inset-x-0 bottom-0 z-50 border-t border-line bg-white/95 px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 backdrop-blur-md lg:hidden"
+          className="fixed inset-x-0 bottom-0 z-50 border-t border-line bg-white px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 lg:hidden"
         >
           <div className="mx-auto grid max-w-xl grid-cols-[auto_1fr] gap-2">
             <a href="#reservar" className="btn btn-outline px-4">
