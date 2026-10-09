@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
-import { useEffect, useState } from "react";
-import { CloseIcon, MenuIcon, PhoneIcon, WhatsappIcon } from "@/components/icons";
-import { defaultWhatsappMessage, site, whatsappUrl } from "@/lib/site";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type RefObject } from "react";
+import { createPortal } from "react-dom";
+import { ArrowRightIcon, CloseIcon, MenuIcon, PhoneIcon, PinIcon, WhatsappIcon } from "@/components/icons";
+import { defaultWhatsappMessage, fullAddress, site, whatsappUrl } from "@/lib/site";
 
 const links = [
   { href: "#ortodoncia", label: "Brackets" },
@@ -13,9 +14,126 @@ const links = [
   { href: "#ubicacion", label: "Ubicación" },
 ];
 
+const ease = [0.22, 1, 0.36, 1] as const;
+const noopSubscribe = () => () => {};
+
+/**
+ * Mobile navigation drawer that slides in from the right. Rendered in a portal because
+ * the header's backdrop-filter would otherwise make `position: fixed` relative to it.
+ */
+function MobileDrawer({ open, onClose, returnFocusTo }: { open: boolean; onClose: () => void; returnFocusTo: RefObject<HTMLButtonElement | null> }) {
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closeRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    const trigger = returnFocusTo.current;
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKey);
+      trigger?.focus();
+    };
+  }, [open, onClose, returnFocusTo]);
+
+  return createPortal(
+    <AnimatePresence>
+      {open && (
+        <div className="fixed inset-0 z-[80] lg:hidden">
+          <motion.div
+            aria-hidden="true"
+            onClick={onClose}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="absolute inset-0 bg-navy-950/45 backdrop-blur-sm"
+          />
+          <motion.div
+            id="mobile-nav"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menú"
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%", transition: { duration: 0.25, ease: [0.4, 0, 1, 1] } }}
+            transition={{ type: "spring", stiffness: 320, damping: 34 }}
+            className="absolute inset-y-0 right-0 flex w-[min(21rem,86vw)] flex-col overflow-y-auto bg-white shadow-[-20px_0_60px_-20px_rgb(7_42_76/0.45)]"
+          >
+            <div className="flex items-center justify-between border-b border-line px-5 py-4">
+              <Image src="/brand/lumayo-logo-small.svg" alt="Lumayo Centro Odontológico" width={1380} height={450} unoptimized className="h-11 w-auto" />
+              <button
+                ref={closeRef}
+                type="button"
+                onClick={onClose}
+                aria-label="Cerrar menú"
+                className="grid size-11 cursor-pointer place-items-center rounded-full bg-sky-50 text-navy-700 transition hover:bg-sky-100"
+              >
+                <CloseIcon className="size-5" />
+              </button>
+            </div>
+
+            <nav aria-label="Principal" className="px-3 py-4">
+              <motion.ul
+                initial="hidden"
+                animate="show"
+                variants={{ hidden: {}, show: { transition: { staggerChildren: 0.05, delayChildren: 0.12 } } }}
+              >
+                {[...links, { href: "#reservar", label: "Reservar cita" }].map((l) => (
+                  <motion.li
+                    key={l.href}
+                    variants={{ hidden: { opacity: 0, x: 24 }, show: { opacity: 1, x: 0, transition: { duration: 0.4, ease } } }}
+                  >
+                    <a
+                      href={l.href}
+                      onClick={onClose}
+                      className="group flex min-h-13 items-center justify-between rounded-2xl px-4 py-3 text-lg font-semibold text-navy-700 transition-colors hover:bg-sky-50"
+                    >
+                      {l.label}
+                      <ArrowRightIcon className="size-4 text-cyan-700 transition-transform group-hover:translate-x-1" />
+                    </a>
+                  </motion.li>
+                ))}
+              </motion.ul>
+            </nav>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, ease, delay: 0.35 }}
+              className="mt-auto space-y-3 border-t border-line bg-sky-50 px-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] pt-5"
+            >
+              <a href={whatsappUrl(defaultWhatsappMessage)} target="_blank" rel="noopener" className="btn btn-wa w-full text-base">
+                <WhatsappIcon />
+                Agendar por WhatsApp
+              </a>
+              <a href={`tel:${site.phoneE164}`} className="btn btn-outline w-full text-base">
+                <PhoneIcon />
+                Llamar al {site.phoneDisplay}
+              </a>
+              <p className="flex gap-2 pt-1 text-sm leading-snug text-ink-600">
+                <PinIcon className="mt-0.5 size-4 shrink-0 text-cyan-700" />
+                {fullAddress}
+              </p>
+            </motion.div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>,
+    document.body,
+  );
+}
+
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  // The drawer portals into <body>, which only exists on the client.
+  const mounted = useSyncExternalStore(noopSubscribe, () => true, () => false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const close = useCallback(() => setOpen(false), []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -24,12 +142,6 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open]);
 
   return (
     <header
@@ -83,54 +195,20 @@ export function Header() {
             Agendar cita
           </a>
           <button
+            ref={menuButtonRef}
             type="button"
-            onClick={() => setOpen((v) => !v)}
+            onClick={() => setOpen(true)}
             aria-expanded={open}
             aria-controls="mobile-nav"
-            aria-label={open ? "Cerrar menú" : "Abrir menú"}
+            aria-label="Abrir menú"
             className="inline-flex size-11 cursor-pointer items-center justify-center rounded-full text-navy-700 hover:bg-sky-50 lg:hidden"
           >
-            {open ? <CloseIcon className="size-6" /> : <MenuIcon className="size-6" />}
+            <MenuIcon className="size-6" />
           </button>
         </div>
       </div>
 
-      <AnimatePresence>
-        {open && (
-          <motion.nav
-            id="mobile-nav"
-            aria-label="Principal"
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8, transition: { duration: 0.15 } }}
-            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="border-t border-line bg-white lg:hidden"
-          >
-            <ul className="container-page flex flex-col py-3">
-              {links.map((l) => (
-                <li key={l.href}>
-                  <a
-                    href={l.href}
-                    onClick={() => setOpen(false)}
-                    className="flex min-h-12 items-center rounded-xl px-3 text-base font-semibold text-navy-700 hover:bg-sky-50"
-                  >
-                    {l.label}
-                  </a>
-                </li>
-              ))}
-              <li className="mt-2">
-                <a
-                  href={`tel:${site.phoneE164}`}
-                  className="flex min-h-12 items-center gap-2 rounded-xl px-3 text-base font-semibold text-navy-700 hover:bg-sky-50"
-                >
-                  <PhoneIcon className="size-5 text-cyan-700" />
-                  Llamar al {site.phoneDisplay}
-                </a>
-              </li>
-            </ul>
-          </motion.nav>
-        )}
-      </AnimatePresence>
+      {mounted && <MobileDrawer open={open} onClose={close} returnFocusTo={menuButtonRef} />}
     </header>
   );
 }
