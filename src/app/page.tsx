@@ -10,6 +10,7 @@ import { Location } from "@/components/sections/Location";
 import { Orthodontics } from "@/components/sections/Orthodontics";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Services } from "@/components/sections/Services";
+import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
 import { getDisplayedTestimonials } from "@/lib/results";
 import { site } from "@/lib/site";
 
@@ -46,7 +47,8 @@ export default function Home() {
       <main id="main">
         <Hero />
         <Services />
-        <WaveDivider from="bg-white" to="var(--color-navy-700)" />
+        <WhyChooseUs />
+        <WaveDivider from="bg-sky-50" to="var(--color-navy-700)" />
         <BrandStatement />
         <WaveDivider from="bg-navy-700" to="var(--color-sky-50)" flip />
         <Orthodontics />

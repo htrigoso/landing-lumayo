@@ -73,17 +73,17 @@ export function Hero() {
 
           <motion.h1
             id="hero-title"
-            aria-label="Alinea tu sonrisa con brackets"
+            aria-label="Tu sonrisa, tu mejor luz"
             variants={letters}
             initial={reduceMotion ? "show" : "hidden"}
             animate="show"
             className="mx-auto mt-6 max-w-4xl font-display text-[2.6rem] font-normal leading-[1.02] tracking-[-0.035em] text-white sm:text-6xl lg:text-7xl"
           >
             <span className="block">
-              <SplitText text="Alinea tu sonrisa" />
+              <SplitText text="Tu sonrisa," />
             </span>
             <span className="relative mx-auto mt-1 block w-fit font-extrabold">
-              <SplitText text="con brackets" />
+              <SplitText text="tu mejor luz" />
               <svg
                 aria-hidden="true"
                 viewBox="0 0 300 30"
