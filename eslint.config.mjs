@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Agent tooling and the static HTML draft are not part of the app.
+    ".claude/**",
+    "_draft/**",
   ]),
 ]);
 

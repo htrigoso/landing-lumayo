@@ -1,26 +1,324 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-figtree);
+  --font-display: var(--font-montserrat);
+  --font-hand: var(--font-caveat);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme {
+  /* Brand — taken from the Lumayo flyer */
+  --color-navy-950: #051f3a;
+  --color-navy-900: #072a4c;
+  --color-navy-700: #0b3a66;
+  --color-navy-500: #2b5a86;
+
+  --color-cyan-300: #7fd6ec;
+  --color-cyan-400: #3fc1e0;
+  --color-cyan-500: #19b2d6;
+  --color-cyan-600: #0f95ba;
+  --color-cyan-700: #0a7699; /* accessible cyan for text on white */
+
+  --color-sky-50: #f3fafd;
+  --color-sky-100: #e4f4fa;
+  --color-sky-200: #c8e9f5;
+
+  /* Warmth accents */
+  --color-cream-50: #fffaf4;
+  --color-cream-100: #fdf1e3;
+  --color-peach-400: #f6b98f;
+
+  --color-ink-900: #0f2237;
+  --color-ink-600: #475b6e;
+  --color-ink-400: #7a8a99;
+  --color-line: #d9e8ef;
+
+  /* WhatsApp CTA — darkened for 4.5:1 with white text */
+  --color-wa-600: #0e8a43;
+  --color-wa-700: #0b7338;
+
+  --shadow-soft: 0 1px 2px rgb(7 42 76 / 0.04), 0 8px 24px -8px rgb(7 42 76 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(7 42 76 / 0.05), 0 18px 40px -12px rgb(7 42 76 / 0.22);
+
+  --radius-blob: 2.5rem;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: var(--color-ink-900);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+a,
+button,
+summary,
+label[for],
+select {
+  touch-action: manipulation;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-cyan-500);
+  outline-offset: 3px;
+  border-radius: 0.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) {
+    .container-page {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.875rem;
+    font-weight: 600;
+    line-height: 1.2;
+    cursor: pointer;
+    transition:
+      background-color 180ms ease,
+      color 180ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+  .btn {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  /*
+   * Liquid wave fill on hover: two wave layers rise from the bottom and drift in
+   * opposite directions. The wave crest is a tiling SVG mask, so each variant only
+   * sets its colors through --wave-front / --wave-back.
+   */
+  .btn::before,
+  .btn::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 140%;
+    pointer-events: none;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100' preserveAspectRatio='none'%3E%3Cpath d='M0 10 C20 0 40 0 60 10 S100 20 120 10 V100 H0Z'/%3E%3C/svg%3E")
+      0 0 / 120px 100% repeat-x;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100' preserveAspectRatio='none'%3E%3Cpath d='M0 10 C20 0 40 0 60 10 S100 20 120 10 V100 H0Z'/%3E%3C/svg%3E")
+      0 0 / 120px 100% repeat-x;
+    transform: translateY(105%);
+    transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
+    animation: btn-wave 1.6s linear infinite paused;
+  }
+  /* Front wave */
+  .btn::before {
+    z-index: -1;
+    background: var(--wave-front, rgb(7 42 76 / 0.12));
+    transition-delay: 70ms;
+  }
+  /* Back wave: lighter, rises first and drifts the other way */
+  .btn::after {
+    z-index: -2;
+    background: var(--wave-back, rgb(255 255 255 / 0.2));
+    animation-direction: reverse;
+    animation-duration: 2.2s;
+  }
+  .btn:hover::before,
+  .btn:focus-visible::before {
+    transform: translateY(-24%);
+    animation-play-state: running;
+  }
+  .btn:hover::after,
+  .btn:focus-visible::after {
+    transform: translateY(-30%);
+    animation-play-state: running;
+  }
+  @keyframes btn-wave {
+    to {
+      -webkit-mask-position: 120px 0;
+      mask-position: 120px 0;
+    }
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn:active {
+    transform: translateY(0) scale(0.97);
+  }
+  .btn .btn-arrow {
+    transition: transform 220ms ease;
+  }
+  .btn:hover .btn-arrow {
+    transform: translateX(4px);
+  }
+  /* Gentle "breathing" halo for the main WhatsApp CTAs */
+  /* The halo is the element's own box-shadow, so overflow: hidden does not clip it. */
+  .btn-pulse {
+    animation: wa-pulse 2.6s ease-out infinite;
+  }
+  @keyframes wa-pulse {
+    0% {
+      box-shadow: 0 10px 24px -10px rgb(14 138 67 / 0.6), 0 0 0 0 rgb(14 138 67 / 0.45);
+    }
+    70% {
+      box-shadow: 0 10px 24px -10px rgb(14 138 67 / 0.6), 0 0 0 14px rgb(14 138 67 / 0);
+    }
+    100% {
+      box-shadow: 0 10px 24px -10px rgb(14 138 67 / 0.6), 0 0 0 0 rgb(14 138 67 / 0);
+    }
+  }
+  .btn svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex: none;
+  }
+  .btn-wa {
+    --wave-front: var(--color-wa-700);
+    --wave-back: rgb(255 255 255 / 0.22);
+    background: var(--color-wa-600);
+    color: #fff;
+    box-shadow: 0 10px 24px -10px rgb(14 138 67 / 0.6);
+  }
+  .btn-navy {
+    --wave-front: var(--color-navy-900);
+    --wave-back: rgb(25 178 214 / 0.4);
+    background: var(--color-navy-700);
+    color: #fff;
+  }
+  .btn-outline {
+    background: #fff;
+    color: var(--color-navy-700);
+    border: 1.5px solid var(--color-sky-200);
+  }
+  .btn-outline {
+    --wave-front: var(--color-sky-100);
+    --wave-back: rgb(127 214 236 / 0.45);
+  }
+  .btn-outline:hover {
+    border-color: var(--color-cyan-500);
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    background: var(--color-sky-100);
+    color: var(--color-cyan-700);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .pill svg {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display), sans-serif;
+    font-weight: 800;
+    color: var(--color-navy-700);
+    font-size: clamp(1.75rem, 1.2rem + 2.4vw, 2.6rem);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
+  .section-sub {
+    color: var(--color-ink-600);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+
+  .field-input {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.7rem 0.95rem;
+    border-radius: 0.875rem;
+    border: 1.5px solid var(--color-line);
+    background: #fff;
+    color: var(--color-ink-900);
+    font-size: 1rem;
+    transition:
+      border-color 160ms ease,
+      box-shadow 160ms ease;
+  }
+  .field-input:hover {
+    border-color: var(--color-sky-200);
+  }
+  .field-input:focus {
+    outline: none;
+    border-color: var(--color-cyan-500);
+    box-shadow: 0 0 0 4px rgb(25 178 214 / 0.18);
+  }
+  .field-input[aria-invalid="true"] {
+    border-color: #c2410c;
+  }
+}
+
+/* Slow light sweep through gradient text */
+.text-shimmer {
+  background-image: linear-gradient(100deg, var(--color-navy-900) 0%, var(--color-navy-900) 35%, var(--color-cyan-500) 50%, var(--color-navy-900) 65%, var(--color-navy-900) 100%);
+  background-size: 250% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: text-shimmer 5s ease-in-out infinite;
+}
+@keyframes text-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  60%,
+  100% {
+    background-position: 0% 0;
+  }
+}
+
+/* Testimonials marquee: the track holds two copies, so -50% lands exactly on the second */
+@keyframes marquee {
+  to {
+    transform: translateX(calc(-50% - 0.625rem));
+  }
 }
