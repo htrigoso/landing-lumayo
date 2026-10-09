@@ -1,6 +1,7 @@
 import { SectionHeading } from "@/components/brand/SectionHeading";
 import { BracesIcon, WhatsappIcon } from "@/components/icons";
 import { Reveal } from "@/components/motion/Reveal";
+import { FaqAccordion } from "@/components/orthodontics/FaqAccordion";
 import { bracesWhatsappMessage, whatsappUrl } from "@/lib/site";
 
 const steps = [
@@ -78,24 +79,7 @@ export function Orthodontics() {
               <BracesIcon />
               Preguntas frecuentes
             </p>
-            <div className="mt-4 divide-y divide-line">
-              {faqs.map((f) => (
-                <details key={f.q} className="group py-1">
-                  <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 rounded-lg font-semibold text-navy-700 [&::-webkit-details-marker]:hidden">
-                    {f.q}
-                    <span
-                      aria-hidden="true"
-                      className="grid size-8 shrink-0 place-items-center rounded-full bg-sky-100 text-navy-700 transition-transform duration-200 group-open:rotate-45"
-                    >
-                      <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
-                        <path d="M12 5v14M5 12h14" />
-                      </svg>
-                    </span>
-                  </summary>
-                  <p className="pb-4 pr-10 leading-relaxed text-ink-600">{f.a}</p>
-                </details>
-              ))}
-            </div>
+            <FaqAccordion items={faqs} />
 
             <a href={whatsappUrl(bracesWhatsappMessage)} target="_blank" rel="noopener" className="btn btn-wa mt-6 w-full text-base">
               <WhatsappIcon />
