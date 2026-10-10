@@ -375,40 +375,12 @@ select {
   }
 }
 
-/* Slow light sweep through gradient text */
-.text-shimmer {
-  background-image: linear-gradient(100deg, var(--color-navy-900) 0%, var(--color-navy-900) 35%, var(--color-cyan-500) 50%, var(--color-navy-900) 65%, var(--color-navy-900) 100%);
-  background-size: 250% 100%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  animation: text-shimmer 5s ease-in-out infinite;
-}
-@keyframes text-shimmer {
-  0% {
-    background-position: 100% 0;
-  }
-  60%,
-  100% {
-    background-position: 0% 0;
-  }
-}
 
 /* Testimonials marquee: the track holds two copies, so -50% lands exactly on the second */
 @keyframes marquee {
   to {
     transform: translateX(calc(-50% - 0.625rem));
   }
-}
-
-/* Shimmer for gradient text on Azul profundo */
-.text-shimmer-light {
-  background-image: linear-gradient(100deg, #ffffff 0%, #ffffff 35%, var(--color-cyan-400) 50%, #ffffff 65%, #ffffff 100%);
-  background-size: 250% 100%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  animation: text-shimmer 5s ease-in-out infinite;
 }
 
 /* Service detail dialog: rises as a sheet on phones, fades and lifts on larger screens */

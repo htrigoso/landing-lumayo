@@ -1,147 +1,74 @@
 "use client";
 
 import { motion, type Variants } from "motion/react";
-import type { ComponentType, SVGProps } from "react";
-import { LiveLines } from "@/components/decor/LiveLines";
-import { BracesIcon, CalendarIcon, ChildIcon, ImplantIcon, SparkleIcon, WhatsappIcon } from "@/components/icons";
+import { IsotypeWatermark } from "@/components/brand/IsotypeWatermark";
+import { ArrowRightIcon, WhatsappIcon } from "@/components/icons";
 import { defaultWhatsappMessage, whatsappUrl } from "@/lib/site";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const stagger: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.09, delayChildren: 0.1 } } };
-
-/** Word sharpens out of a blur and rises into place. */
-const word: Variants = {
-  hidden: { opacity: 0, y: "0.45em", filter: "blur(12px)" },
-  show: { opacity: 1, y: "0em", filter: "blur(0px)", transition: { duration: 0.9, ease } },
-};
+const stagger: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } } };
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease } },
 };
 
-type Chip = {
-  label: string;
-  icon: ComponentType<SVGProps<SVGSVGElement>>;
-  /** Desktop placement around the headline. */
-  position: string;
-  float: number;
-  delay: number;
-};
-
-const chips: Chip[] = [
-  { label: "Brackets", icon: BracesIcon, position: "left-[9%] top-[22%]", float: 7, delay: 0.9 },
-  { label: "Blanqueamiento", icon: SparkleIcon, position: "right-[8%] top-[28%]", float: 8.5, delay: 1.05 },
-  { label: "Implantes", icon: ImplantIcon, position: "left-[13%] bottom-[20%]", float: 9, delay: 1.2 },
-  { label: "Odontopediatría", icon: ChildIcon, position: "right-[12%] bottom-[18%]", float: 7.5, delay: 1.35 },
-];
-
-function FloatingChip({ chip }: { chip: Chip }) {
-  const Icon = chip.icon;
-  return (
-    <motion.div
-      aria-hidden="true"
-      initial={{ opacity: 0, scale: 0.8, y: 20 }}
-      whileInView={{ opacity: 1, scale: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ type: "spring", stiffness: 180, damping: 18, delay: chip.delay }}
-      className={`absolute hidden lg:block ${chip.position}`}
-    >
-      <motion.div
-        animate={{ y: [0, -12, 0], rotate: [-1.5, 1.5, -1.5] }}
-        transition={{ duration: chip.float, repeat: Infinity, ease: "easeInOut" }}
-        className="flex items-center gap-2.5 rounded-full border border-white/40 bg-navy-700 py-2 pl-2 pr-4"
-      >
-        <span className="grid size-9 place-items-center rounded-xl bg-cyan-400 text-navy-900">
-          <Icon className="size-5" />
-        </span>
-        <span className="text-sm font-semibold text-white">{chip.label}</span>
-      </motion.div>
-    </motion.div>
-  );
-}
-
+/**
+ * Brand statement, set like the brandbook's type pages: a white field in Azul profundo type,
+ * the Titular (400 + 800) on the left, Subtítulo + Texto + actions on the right, and the
+ * isotype cropped large in the corner as on the letterhead.
+ */
 export function BrandStatement() {
   return (
-    <section aria-labelledby="statement-title" className="relative isolate overflow-hidden bg-navy-700 py-28 lg:py-36">
-      <LiveLines tone="dark" className="-z-20" />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_45%_50%_at_50%_50%,rgb(2_68_116/0.92)_0%,rgb(2_68_116/0.55)_55%,transparent_82%)]"
-      />
-
-      {chips.map((c) => (
-        <FloatingChip key={c.label} chip={c} />
-      ))}
+    <section aria-labelledby="statement-title" className="relative isolate overflow-hidden bg-white py-24 text-navy-700 lg:py-32">
+      <IsotypeWatermark className="-bottom-24 -right-20 -z-10 w-[26rem] !opacity-[0.05] sm:w-[34rem] lg:-bottom-32 lg:-right-16 lg:w-[44rem]" />
 
       <motion.div
         variants={stagger}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, margin: "-100px" }}
-        className="container-page relative text-center"
+        viewport={{ once: true, margin: "-120px" }}
+        className="container-page grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-end lg:gap-12"
       >
-        <motion.p variants={fadeUp} className="pill pill-outline mx-auto">
-          <span className="relative flex size-2">
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-cyan-400 opacity-70" />
-            <span className="relative inline-flex size-2 rounded-full bg-cyan-500" />
-          </span>
-          Lumayo · Tarapoto
-        </motion.p>
+        <div>
+          {/* Brandbook "Etiqueta": Medium, uppercase, +12% */}
+          <motion.p variants={fadeUp} className="text-xs font-medium uppercase tracking-[0.12em] text-navy-500 sm:text-sm">
+            Centro odontológico · Tarapoto
+          </motion.p>
+          <motion.h2
+            variants={fadeUp}
+            id="statement-title"
+            className="mt-5 font-display text-[2.75rem] font-normal leading-[0.98] tracking-[-0.045em] sm:text-6xl lg:text-[3.75rem] xl:text-[4.25rem]"
+          >
+            Aquí comienza
+            <strong className="block font-extrabold">tu nueva sonrisa</strong>
+          </motion.h2>
+        </div>
 
-        <h2 id="statement-title" className="mt-6 font-display text-[2.5rem] leading-[0.98] tracking-[-0.045em] text-white sm:text-6xl lg:text-[4.75rem]">
-          <span className="block font-light">
-            <motion.span variants={word} className="inline-block">Aquí</motion.span>{" "}
-            <motion.span variants={word} className="inline-block">comienza</motion.span>
-          </span>
-          <span className="block">
-            <motion.span variants={word} className="inline-block font-light">tu</motion.span>{" "}
-            <motion.span variants={word} className="inline-block font-light">nueva</motion.span>{" "}
-            <span className="relative inline-block">
-              <motion.span variants={word} className="text-shimmer-light inline-block font-extrabold">
-                sonrisa
-              </motion.span>
-              <svg aria-hidden="true" viewBox="0 0 300 30" preserveAspectRatio="none" className="absolute -bottom-3 left-0 h-4 w-full text-cyan-400 sm:h-5">
-                <motion.path
-                  d="M4 8 C 80 30, 220 30, 296 6"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="6"
-                  strokeLinecap="round"
-                  variants={{ hidden: { pathLength: 0 }, show: { pathLength: 1, transition: { duration: 0.9, ease, delay: 0.25 } } }}
-                />
-              </svg>
-            </span>
-          </span>
-        </h2>
+        <div className="lg:pb-2">
+          {/* Brandbook "Subtítulo" (Medium) over "Texto" (Regular 26/40) */}
+          <motion.p variants={fadeUp} className="text-pretty text-xl font-medium leading-snug sm:text-2xl">
+            Tu sonrisa nos inspira a dar el primer paso.
+          </motion.p>
+          <motion.p variants={fadeUp} className="mt-3 max-w-md text-pretty leading-[1.54] text-ink-600">
+            Agenda tu evaluación y descubre el tratamiento ideal para ti, con un equipo que te explica cada paso.
+          </motion.p>
 
-        <motion.p variants={fadeUp} className="mx-auto mt-8 max-w-lg text-balance text-lg leading-relaxed text-sky-100/85">
-          Tu sonrisa nos inspira a dar el primer paso. Agenda tu evaluación y descubre el tratamiento ideal para ti.
-        </motion.p>
-
-        <motion.div variants={fadeUp} className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a href={whatsappUrl(defaultWhatsappMessage)} target="_blank" rel="noopener" className="btn btn-light btn-pulse px-7 text-base sm:min-h-14">
+          <motion.div variants={fadeUp} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-3">
+            <a href={whatsappUrl(defaultWhatsappMessage)} target="_blank" rel="noopener" className="btn btn-wa shrink-0 whitespace-nowrap px-7 text-base sm:min-h-14">
               <WhatsappIcon />
               Escríbenos por WhatsApp
             </a>
-            <a href="#reservar" className="btn btn-ghost-light px-7 text-base sm:min-h-14">
-              <CalendarIcon />
+            <a
+              href="#reservar"
+              className="group inline-flex min-h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap font-semibold text-navy-700 underline decoration-navy-700/30 decoration-2 underline-offset-[6px] transition-colors hover:decoration-navy-700"
+            >
               Reservar cita
+              <ArrowRightIcon className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
-        </motion.div>
-
-        {/* On phones the service chips sit in a row under the CTAs instead of floating */}
-        <motion.ul variants={fadeUp} className="mt-10 flex flex-wrap justify-center gap-2 lg:hidden" aria-label="Algunos de nuestros servicios">
-          {chips.map(({ label, icon: Icon }) => (
-            <li key={label} className="flex items-center gap-2 rounded-full border border-white/40 py-1.5 pl-1.5 pr-3.5 text-sm font-semibold text-white">
-              <span className="grid size-7 place-items-center rounded-full bg-cyan-400 text-navy-900">
-                <Icon className="size-4" />
-              </span>
-              {label}
-            </li>
-          ))}
-        </motion.ul>
+          </motion.div>
+        </div>
       </motion.div>
     </section>
   );

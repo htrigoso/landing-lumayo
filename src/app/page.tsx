@@ -48,9 +48,7 @@ export default function Home() {
         <Hero />
         <Services />
         <WhyChooseUs />
-        <WaveDivider from="bg-sky-50" to="var(--color-navy-700)" />
         <BrandStatement />
-        <WaveDivider from="bg-navy-700" to="var(--color-sky-50)" flip />
         <Orthodontics />
         <About />
         <Testimonials />
