@@ -20,10 +20,10 @@ type PageHeaderProps = {
  */
 export function PageHeader({ title, emphasis, description, crumbs }: PageHeaderProps) {
   return (
-    <section aria-labelledby="page-title" className="relative isolate overflow-hidden bg-sky-50 py-16 sm:py-20 lg:py-24">
+    <section aria-labelledby="page-title" className="relative isolate overflow-hidden bg-sky-50 py-14 sm:py-16 lg:py-12">
       <SectionBackdrop lines="tr" glow="bl" surface="mist" />
       {/* Crown stays whole; only the roots run off the bottom edge */}
-      <IsotypeWatermark className="-bottom-36 -left-10 -z-10 w-72 !opacity-[0.06] sm:w-96 lg:-bottom-44 lg:left-[6%] lg:w-[28rem]" />
+      <IsotypeWatermark className="-bottom-36 -left-10 -z-10 w-72 !opacity-[0.06] sm:w-96 lg:-bottom-40 lg:left-[6%] lg:w-[22rem]" />
 
       <Reveal className="container-page text-center">
         <nav aria-label="Ruta">
@@ -54,11 +54,11 @@ export function PageHeader({ title, emphasis, description, crumbs }: PageHeaderP
 
         <h1
           id="page-title"
-          className="mx-auto mt-5 max-w-3xl font-display text-[2.75rem] font-normal leading-[0.98] tracking-[-0.045em] text-navy-700 sm:text-6xl lg:text-7xl"
+          className="mx-auto mt-4 max-w-3xl font-display text-[2.75rem] font-normal leading-[0.98] tracking-[-0.045em] text-navy-700 sm:text-6xl lg:text-[3.5rem]"
         >
           {title} <strong className="font-extrabold">{emphasis}</strong>
         </h1>
-        {description && <p className="section-sub mx-auto mt-5 max-w-xl text-pretty">{description}</p>}
+        {description && <p className="section-sub mx-auto mt-3 max-w-xl text-pretty">{description}</p>}
       </Reveal>
     </section>
   );
