@@ -9,10 +9,9 @@ import { usePathname } from "next/navigation";
 import { ArrowRightIcon, CloseIcon, MenuIcon, PhoneIcon, PinIcon, WhatsappIcon } from "@/components/icons";
 import { defaultWhatsappMessage, fullAddress, site, whatsappUrl } from "@/lib/site";
 
-// Home anchors are prefixed with "/" so they also work from inner pages (e.g. /servicios);
-// on the home page they still scroll in place because the path is the same.
+// Every entry is a page route; "Inicio" is the home page itself (no section anchor).
 const links = [
-  { href: "/#ortodoncia", label: "Brackets" },
+  { href: "/", label: "Inicio" },
   { href: "/servicios", label: "Servicios" },
   { href: "/nosotros", label: "Nosotros" },
   { href: "/contacto", label: "Contacto" },

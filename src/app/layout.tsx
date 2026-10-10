@@ -30,8 +30,12 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
+    // data-scroll-behavior: globals.css sets `scroll-behavior: smooth` for in-page anchors; this tells
+    // Next.js 16 to turn it off during route changes, otherwise its scroll reset animates and the
+    // overlapping smooth scrolls drag the new page down to the footer.
     <html
       lang="es"
+      data-scroll-behavior="smooth"
       className={`${montserrat.variable} antialiased`}
     >
       <body className="min-h-dvh">
