@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowRightIcon, CalendarIcon, serviceIcons, WhatsappIcon } from "@/components/icons";
+import { IsotypeWatermark } from "@/components/brand/IsotypeWatermark";
 import { ServiceDialog } from "@/components/services/ServiceDialog";
 import {
   serviceCategories,
@@ -120,20 +121,29 @@ function cardMotion(reduceMotion: boolean) {
 
 type CardProps = { service: Service; onOpen: () => void; reduceMotion: boolean };
 
+// Brandbook ID-badge colour blocks: featured cards alternate Azul profundo and Turquesa.
+// Turquesa uses its 700 step: white body copy on the 600 base is only 4.2:1 (below AA).
+const featuredSkins = [
+  { block: "bg-navy-700", photoFade: "from-navy-700/60" },
+  { block: "bg-teal-700", photoFade: "from-teal-700/60" },
+];
+
 function FeaturedCard({ service: s, flip, onOpen, reduceMotion }: CardProps & { flip: boolean }) {
+  const skin = featuredSkins[flip ? 1 : 0];
   return (
     <motion.article
       {...cardMotion(reduceMotion)}
       // Zigzag on desktop: every second featured card sits on the right two columns
-      className={`group relative isolate overflow-hidden rounded-[1.75rem] bg-navy-700 text-white shadow-lift sm:col-span-2 sm:grid sm:grid-cols-2 ${
+      className={`group relative isolate overflow-hidden rounded-2xl text-white sm:col-span-2 sm:grid sm:grid-cols-2 ${skin.block} ${
         flip ? "lg:col-start-2" : ""
       }`}
     >
-      <Watermark tone="dark" className="-bottom-10 -left-10 w-64 opacity-[0.14] group-hover:opacity-[0.22]" />
+      {/* Large cropped isotype, as on the brandbook's ID badges */}
+      <IsotypeWatermark tone="dark" animated className="-bottom-16 -left-12 -z-10 w-80 !opacity-[0.14] group-hover:!opacity-[0.2]" />
       <div className="relative flex flex-col p-6 sm:p-8">
-        <span className="pill w-fit bg-cyan-400 !text-navy-950">Destacado</span>
-        <h3 className="mt-5 font-display text-2xl font-extrabold leading-tight tracking-[-0.02em] sm:text-3xl">{s.name}</h3>
-        <p className="mt-3 flex-1 text-pretty leading-relaxed text-sky-100">{s.description}</p>
+        <span className="pill pill-outline w-fit">Destacado</span>
+        <h3 className="mt-5 font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] sm:text-3xl">{s.name}</h3>
+        <p className="mt-3 flex-1 text-pretty leading-relaxed text-white/85">{s.description}</p>
         <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
           <a href={whatsappUrl(inquiryMessage(s))} target="_blank" rel="noopener" className="btn btn-light w-full sm:w-fit">
             <WhatsappIcon />
@@ -154,7 +164,7 @@ function FeaturedCard({ service: s, flip, onOpen, reduceMotion }: CardProps & { 
         />
         <div
           aria-hidden="true"
-          className={`absolute inset-0 bg-gradient-to-t from-navy-700/50 to-transparent ${flip ? "sm:bg-gradient-to-l" : "sm:bg-gradient-to-r"}`}
+          className={`absolute inset-0 bg-gradient-to-t ${skin.photoFade} to-transparent ${flip ? "sm:bg-gradient-to-l" : "sm:bg-gradient-to-r"}`}
         />
       </div>
     </motion.article>
@@ -166,9 +176,9 @@ function ServiceCard({ service: s, showCategory, onOpen, reduceMotion }: CardPro
   return (
     <motion.article
       {...cardMotion(reduceMotion)}
-      className="group relative isolate flex flex-col overflow-hidden rounded-[1.75rem] border border-sky-200 bg-white shadow-soft transition-[border-color,box-shadow] duration-500 hover:border-cyan-500 hover:shadow-lift"
+      className="group relative isolate flex flex-col overflow-hidden rounded-2xl border border-sky-200 bg-white transition-colors duration-500 hover:border-navy-500/50"
     >
-      <Watermark className="-bottom-8 -right-10 w-48 opacity-[0.09] group-hover:opacity-[0.16]" />
+      <IsotypeWatermark animated className="-bottom-8 -right-10 -z-10 w-48 !opacity-[0.08] group-hover:!opacity-[0.14]" />
 
       {/* Photo: zooms gently inside its frame while the card stays still */}
       <div className="relative h-44 shrink-0 overflow-hidden">
@@ -179,16 +189,15 @@ function ServiceCard({ service: s, showCategory, onOpen, reduceMotion }: CardPro
           sizes="(min-width: 1024px) 24rem, (min-width: 640px) 50vw, 100vw"
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-navy-950/45 via-transparent to-transparent" />
+        {/* Top and bottom shade so the outlined tag reads on any photo */}
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-navy-950/50 via-transparent to-navy-950/35" />
         {showCategory && (
-          <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-navy-700">
-            {categoryLabel[s.category]}
-          </span>
+          <span className="pill pill-outline absolute left-4 top-4 !px-3 !py-1 text-[0.62rem]">{categoryLabel[s.category]}</span>
         )}
       </div>
 
-      {/* Icon chip overlapping the photo edge */}
-      <span aria-hidden="true" className="relative -mt-7 ml-5 grid size-14 place-items-center rounded-2xl bg-white text-navy-700 shadow-soft ring-4 ring-white">
+      {/* Brandbook avatar: white icon in an Azul profundo circle, overlapping the photo edge */}
+      <span aria-hidden="true" className="relative -mt-7 ml-5 grid size-14 place-items-center rounded-full bg-navy-700 text-white ring-4 ring-white">
         <Icon className="size-7" />
       </span>
 
@@ -221,34 +230,16 @@ function ServiceCard({ service: s, showCategory, onOpen, reduceMotion }: CardPro
   );
 }
 
-/**
- * Lumayo isotype as a corner watermark; it turns and drifts slightly when the card is hovered.
- * Tailwind v4 rotate/translate utilities use the standalone `rotate` and `translate` properties,
- * so those (not `transform`) are the ones transitioned.
- */
-function Watermark({ tone = "light", className = "" }: { tone?: "light" | "dark"; className?: string }) {
-  return (
-    // eslint-disable-next-line @next/next/no-img-element -- decorative brand SVG
-    <img
-      src={tone === "dark" ? "/brand/lumayo-isotipo-white.svg" : "/brand/lumayo-isotipo.svg"}
-      alt=""
-      aria-hidden="true"
-      draggable={false}
-      className={`pointer-events-none absolute -z-10 select-none transition-[translate,rotate,opacity] duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-x-1.5 group-hover:-translate-y-1.5 group-hover:-rotate-6 ${className}`}
-    />
-  );
-}
-
 /** Fallback for visitors who do not know which treatment they need; it fills the grid's last row. */
 function EvaluationTile({ className, reduceMotion }: { className: string; reduceMotion: boolean }) {
   return (
     <motion.div
       {...cardMotion(reduceMotion)}
-      className={`group relative isolate flex flex-col justify-between gap-6 overflow-hidden rounded-[1.75rem] border border-sky-200 bg-sky-50 p-6 sm:p-8 ${className}`}
+      className={`card-panel group relative isolate flex flex-col justify-between gap-6 overflow-hidden p-6 sm:p-8 ${className}`}
     >
-      <Watermark className="-bottom-10 -right-10 w-56 opacity-[0.12] group-hover:opacity-[0.2]" />
+      <IsotypeWatermark animated className="-bottom-10 -right-10 -z-10 w-56 !opacity-[0.1] group-hover:!opacity-[0.16]" />
       <div className="max-w-md">
-        <span className="grid size-14 place-items-center rounded-2xl bg-white text-navy-700 shadow-soft">
+        <span className="grid size-14 place-items-center rounded-full bg-teal-600 text-white">
           <CalendarIcon className="size-7" />
         </span>
         <h3 className="mt-5 font-display text-xl font-bold leading-snug text-navy-700 sm:text-2xl">¿No sabes qué tratamiento necesitas?</h3>

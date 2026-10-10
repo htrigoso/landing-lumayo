@@ -18,7 +18,7 @@ export function Location({ number }: { number: string }) {
 
           <ul className="mt-8 space-y-6">
             <li className="flex gap-4">
-              <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-sky-100 text-cyan-700">
+              <span className="grid size-12 shrink-0 place-items-center rounded-full bg-navy-700 text-white">
                 <PinIcon className="size-6" />
               </span>
               <div>
@@ -35,7 +35,7 @@ export function Location({ number }: { number: string }) {
               </div>
             </li>
             <li className="flex gap-4">
-              <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-sky-100 text-cyan-700">
+              <span className="grid size-12 shrink-0 place-items-center rounded-full bg-navy-700 text-white">
                 <WhatsappIcon className="size-6" />
               </span>
               <div>
@@ -49,7 +49,7 @@ export function Location({ number }: { number: string }) {
               </div>
             </li>
             <li className="flex gap-4">
-              <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-sky-100 text-cyan-700">
+              <span className="grid size-12 shrink-0 place-items-center rounded-full bg-navy-700 text-white">
                 <CalendarIcon className="size-6" />
               </span>
               <div>
@@ -60,7 +60,7 @@ export function Location({ number }: { number: string }) {
           </ul>
         </Reveal>
 
-        <Reveal delay={0.1} className="overflow-hidden rounded-[2rem] rounded-tr-[5rem] border border-line shadow-soft">
+        <Reveal delay={0.1} className="overflow-hidden rounded-2xl border border-line">
           <iframe
             title={`Mapa de Lumayo: ${fullAddress}`}
             src={site.mapsEmbedUrl}

@@ -101,11 +101,11 @@ export function BookingForm({
       noValidate
       onSubmit={onSubmit}
       aria-labelledby={headingId ?? ids.title}
-      className={`rounded-[1.75rem] border border-white/70 bg-white/95 p-5 shadow-lift backdrop-blur-md sm:p-6 ${className}`}
+      className={`rounded-2xl bg-white p-5 sm:p-6 ${className}`}
     >
       {!headingId && (
         <div className="mb-5 flex items-start gap-3">
-          <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-sky-100 text-cyan-700">
+          <span className="grid size-11 shrink-0 place-items-center rounded-full bg-navy-700 text-white">
             <CalendarIcon className="size-6" />
           </span>
           <div>

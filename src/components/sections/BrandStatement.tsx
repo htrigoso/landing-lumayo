@@ -51,7 +51,7 @@ function FloatingChip({ chip }: { chip: Chip }) {
       <motion.div
         animate={{ y: [0, -12, 0], rotate: [-1.5, 1.5, -1.5] }}
         transition={{ duration: chip.float, repeat: Infinity, ease: "easeInOut" }}
-        className="flex items-center gap-2.5 rounded-2xl border border-white/15 bg-white/10 py-2 pl-2 pr-4 shadow-lift md:backdrop-blur-md"
+        className="flex items-center gap-2.5 rounded-full border border-white/40 bg-navy-700 py-2 pl-2 pr-4"
       >
         <span className="grid size-9 place-items-center rounded-xl bg-cyan-400 text-navy-900">
           <Icon className="size-5" />
@@ -82,7 +82,7 @@ export function BrandStatement() {
         viewport={{ once: true, margin: "-100px" }}
         className="container-page relative text-center"
       >
-        <motion.p variants={fadeUp} className="pill mx-auto !bg-white/10 !text-white md:backdrop-blur">
+        <motion.p variants={fadeUp} className="pill pill-outline mx-auto">
           <span className="relative flex size-2">
             <span className="absolute inline-flex size-full animate-ping rounded-full bg-cyan-400 opacity-70" />
             <span className="relative inline-flex size-2 rounded-full bg-cyan-500" />
@@ -90,7 +90,7 @@ export function BrandStatement() {
           Lumayo · Tarapoto
         </motion.p>
 
-        <h2 id="statement-title" className="mt-6 font-display text-[2.5rem] leading-[0.98] tracking-[-0.035em] text-white sm:text-6xl lg:text-[4.75rem]">
+        <h2 id="statement-title" className="mt-6 font-display text-[2.5rem] leading-[0.98] tracking-[-0.045em] text-white sm:text-6xl lg:text-[4.75rem]">
           <span className="block font-light">
             <motion.span variants={word} className="inline-block">Aquí</motion.span>{" "}
             <motion.span variants={word} className="inline-block">comienza</motion.span>
@@ -134,7 +134,7 @@ export function BrandStatement() {
         {/* On phones the service chips sit in a row under the CTAs instead of floating */}
         <motion.ul variants={fadeUp} className="mt-10 flex flex-wrap justify-center gap-2 lg:hidden" aria-label="Algunos de nuestros servicios">
           {chips.map(({ label, icon: Icon }) => (
-            <li key={label} className="flex items-center gap-2 rounded-full border border-white/15 bg-white/10 py-1.5 pl-1.5 pr-3.5 text-sm font-semibold text-white md:backdrop-blur">
+            <li key={label} className="flex items-center gap-2 rounded-full border border-white/40 py-1.5 pl-1.5 pr-3.5 text-sm font-semibold text-white">
               <span className="grid size-7 place-items-center rounded-full bg-cyan-400 text-navy-900">
                 <Icon className="size-4" />
               </span>

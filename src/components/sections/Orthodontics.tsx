@@ -74,8 +74,8 @@ export function Orthodontics() {
             ))}
           </ol>
 
-          <Reveal className="h-fit rounded-[2rem] bg-white p-6 shadow-soft sm:p-8">
-            <p className="pill">
+          <Reveal className="h-fit rounded-2xl border border-sky-200 bg-white p-6 sm:p-8">
+            <p className="pill pill-solid">
               <BracesIcon />
               Preguntas frecuentes
             </p>

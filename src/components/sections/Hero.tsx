@@ -65,7 +65,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease }}
-            className="pill mx-auto !bg-white/10 !text-white ring-1 ring-white/25"
+            className="pill pill-outline mx-auto"
           >
             <BracesIcon />
             Ortodoncia en Tarapoto
@@ -77,7 +77,7 @@ export function Hero() {
             variants={letters}
             initial={reduceMotion ? "show" : "hidden"}
             animate="show"
-            className="mx-auto mt-6 max-w-4xl font-display text-[2.6rem] font-normal leading-[1.02] tracking-[-0.035em] text-white sm:text-6xl lg:text-7xl"
+            className="mx-auto mt-6 max-w-4xl font-display text-[2.6rem] font-normal leading-[0.98] tracking-[-0.045em] text-white sm:text-6xl lg:text-7xl"
           >
             <span className="block">
               <SplitText text="Tu sonrisa," />
@@ -132,7 +132,7 @@ export function Hero() {
                 href={whatsappUrl(bracesWhatsappMessage)}
                 target="_blank"
                 rel="noopener"
-                className="btn btn-light btn-pulse w-full gap-3 !rounded-full !py-2 pl-6 pr-2 text-base sm:min-h-14 sm:w-auto"
+                className="btn btn-light btn-pulse w-full gap-3 !py-2 pl-6 pr-2 text-base sm:min-h-14 sm:w-auto"
               >
                 <WhatsappIcon />
                 Quiero mis brackets
@@ -162,7 +162,7 @@ export function Hero() {
       </div>
 
       {/* Info bar under the stage, as in the reference: phone, opening hours and the booking CTA */}
-      <div className="bg-navy-900 text-white">
+      <div className="bg-teal-700 text-white">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -172,23 +172,23 @@ export function Hero() {
           <ul aria-label="Contacto" className="grid grid-cols-1 gap-5 min-[420px]:grid-cols-2 md:flex md:gap-0">
             {infoItems.map(({ icon: Icon, title, text, href }, i) => (
               <li key={title} className={`flex items-center gap-3 ${i > 0 ? "md:ml-8 md:border-l md:border-white/15 md:pl-8" : ""}`}>
-                <span className="grid size-11 shrink-0 place-items-center rounded-full text-cyan-400 ring-1 ring-cyan-400/40">
+                <span className="grid size-11 shrink-0 place-items-center rounded-full text-white ring-1 ring-white/50">
                   <Icon className="size-5" />
                 </span>
                 <span className="leading-tight">
                   <strong className="block text-[0.95rem] font-semibold">{title}</strong>
                   {href ? (
-                    <a href={href} className="text-sm text-sky-100/80 underline-offset-4 hover:text-white hover:underline">
+                    <a href={href} className="text-sm text-white/85 underline-offset-4 hover:text-white hover:underline">
                       {text}
                     </a>
                   ) : (
-                    <span className="text-sm text-sky-100/80">{text}</span>
+                    <span className="text-sm text-white/85">{text}</span>
                   )}
                 </span>
               </li>
             ))}
           </ul>
-          <a href="#reservar" className="btn btn-light w-full shrink-0 gap-3 !rounded-full !py-1.5 pl-5 pr-1.5 text-sm sm:w-fit sm:self-center md:self-auto">
+          <a href="#reservar" className="btn btn-light w-full shrink-0 gap-3 !py-1.5 pl-5 pr-1.5 text-sm sm:w-fit sm:self-center md:self-auto">
             Reservar cita
             <span className="btn-arrow grid size-8 place-items-center rounded-full bg-navy-700 text-white">
               <ArrowRightIcon className="size-3.5 -rotate-45" />

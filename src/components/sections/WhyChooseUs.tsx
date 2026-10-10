@@ -43,11 +43,14 @@ const right: Reason[] = [
 ];
 
 /** One reason. On large screens the left column mirrors (text right-aligned, icon on the inside edge). */
-function ReasonItem({ reason, side }: { reason: Reason; side: "left" | "right" }) {
+// Brandbook highlight avatars: soft palette tints behind the two-tone icons
+const avatarTones = ["bg-sky-100", "bg-celeste-100", "bg-teal-100"];
+
+function ReasonItem({ reason, side, index }: { reason: Reason; side: "left" | "right"; index: number }) {
   const mirrored = side === "left";
   return (
     <li className={`flex items-start gap-4 ${mirrored ? "lg:flex-row-reverse lg:text-right" : ""}`}>
-      <span className="grid size-14 shrink-0 place-items-center rounded-2xl bg-white shadow-soft">
+      <span className={`grid size-14 shrink-0 place-items-center rounded-full ring-1 ring-navy-700/10 ${avatarTones[index % avatarTones.length]}`}>
         {/* eslint-disable-next-line @next/next/no-img-element -- small decorative SVG icon */}
         <img src={reason.icon} alt="" aria-hidden="true" width={30} height={30} className="size-[1.875rem]" />
       </span>
@@ -67,7 +70,7 @@ export function WhyChooseUs() {
     <section id="por-que-elegirnos" aria-labelledby="por-que-title" className="relative overflow-hidden bg-sky-50 py-20 lg:py-28">
       <div className="container-page">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="pill mx-auto bg-white shadow-soft">Por qué elegirnos</p>
+          <p className="pill pill-solid mx-auto">Por qué elegirnos</p>
           <h2 id="por-que-title" className="section-title mt-5">
             Tu salud dental, <strong>en buenas manos</strong>
           </h2>
@@ -94,16 +97,16 @@ export function WhyChooseUs() {
 
           <Reveal delay={0.1} className="lg:order-first">
             <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-1 lg:gap-10">
-              {left.map((r) => (
-                <ReasonItem key={r.title} reason={r} side="left" />
+              {left.map((r, i) => (
+                <ReasonItem key={r.title} reason={r} side="left" index={i} />
               ))}
             </ul>
           </Reveal>
 
           <Reveal delay={0.2}>
             <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-1 lg:gap-10">
-              {right.map((r) => (
-                <ReasonItem key={r.title} reason={r} side="right" />
+              {right.map((r, i) => (
+                <ReasonItem key={r.title} reason={r} side="right" index={i + 1} />
               ))}
             </ul>
           </Reveal>

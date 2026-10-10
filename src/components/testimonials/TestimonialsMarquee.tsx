@@ -20,7 +20,7 @@ function Stars({ rating }: { rating: number }) {
 
 function PlayBadge() {
   return (
-    <span className="grid size-16 place-items-center rounded-full bg-white/25 text-white ring-1 ring-white/50 md:backdrop-blur-md transition-transform duration-300 group-hover/card:scale-110">
+    <span className="grid size-16 place-items-center rounded-full bg-navy-700/70 text-white ring-1 ring-white/60 transition-transform duration-300 group-hover/card:scale-110">
       <svg viewBox="0 0 24 24" className="ml-1 size-7" fill="currentColor" aria-hidden="true">
         <path d="M8 5.5v13l11-6.5-11-6.5Z" />
       </svg>
@@ -46,7 +46,7 @@ function ReelCard({ t, onPlay }: { t: Testimonial; onPlay: (t: Testimonial) => v
       <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-900/35 to-transparent" />
 
       {t.treatment && (
-        <span className="absolute left-3 top-3 rounded-full bg-white/85 px-3 py-1 text-xs font-semibold text-navy-700 md:backdrop-blur">
+        <span className="pill pill-outline absolute left-3 top-3 !px-3 !py-1 text-[0.62rem]">
           {t.treatment}
         </span>
       )}
@@ -70,7 +70,7 @@ function ReelCard({ t, onPlay }: { t: Testimonial; onPlay: (t: Testimonial) => v
   );
 
   const shell =
-    "group/card relative block aspect-[9/16] w-[15rem] shrink-0 overflow-hidden rounded-[1.75rem] bg-navy-900 shadow-soft transition-shadow duration-300 hover:shadow-lift sm:w-[17rem]";
+    "group/card relative block aspect-[9/16] w-[15rem] shrink-0 overflow-hidden rounded-2xl bg-navy-900 sm:w-[17rem]";
 
   return t.video ? (
     <button type="button" onClick={() => onPlay(t)} aria-label={`Ver el testimonio en video de ${t.name}`} className={`${shell} cursor-pointer`}>
@@ -112,7 +112,7 @@ function VideoLightbox({ item, onClose }: { item: Testimonial | null; onClose: (
             exit={{ scale: 0.95, y: 10 }}
             transition={{ type: "spring", stiffness: 260, damping: 26 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative aspect-[9/16] h-[min(85dvh,46rem)] overflow-hidden rounded-[1.75rem] bg-black shadow-lift"
+            className="relative aspect-[9/16] h-[min(85dvh,46rem)] overflow-hidden rounded-2xl bg-black shadow-lift"
           >
             <video src={item.video} poster={item.image} controls autoPlay playsInline className="size-full object-cover" />
             <button
@@ -120,7 +120,7 @@ function VideoLightbox({ item, onClose }: { item: Testimonial | null; onClose: (
               type="button"
               onClick={onClose}
               aria-label="Cerrar video"
-              className="absolute right-3 top-3 grid size-11 cursor-pointer place-items-center rounded-full bg-black/50 text-white backdrop-blur hover:bg-black/70"
+              className="absolute right-3 top-3 grid size-11 cursor-pointer place-items-center rounded-full bg-black/60 text-white hover:bg-black/80"
             >
               <CloseIcon className="size-5" />
             </button>
@@ -185,7 +185,7 @@ export function TestimonialsMarquee({ items }: { items: Testimonial[] }) {
           type="button"
           onClick={() => setPaused((p) => !p)}
           aria-pressed={paused}
-          className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-sky-200 bg-white px-4 text-sm font-semibold text-navy-700 shadow-soft transition hover:border-cyan-500"
+          className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-sky-200 bg-white px-4 text-sm font-semibold text-navy-700 transition hover:border-navy-500"
         >
           {paused ? (
             <svg viewBox="0 0 24 24" className="size-4" fill="currentColor" aria-hidden="true">
