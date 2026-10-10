@@ -4,6 +4,7 @@ import { motion, type Variants } from "motion/react";
 import { IsotypeWatermark } from "@/components/brand/IsotypeWatermark";
 import { ArrowRightIcon, WhatsappIcon } from "@/components/icons";
 import { defaultWhatsappMessage, whatsappUrl } from "@/lib/site";
+import { SectionBackdrop } from "@/components/decor/SectionBackdrop";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -22,6 +23,7 @@ const fadeUp: Variants = {
 export function BrandStatement() {
   return (
     <section aria-labelledby="statement-title" className="relative isolate overflow-hidden bg-white py-24 text-navy-700 lg:py-32">
+      <SectionBackdrop lines="tl" glow="bl" />
       <IsotypeWatermark className="-bottom-24 -right-20 -z-10 w-[26rem] !opacity-[0.05] sm:w-[34rem] lg:-bottom-32 lg:-right-16 lg:w-[44rem]" />
 
       <motion.div

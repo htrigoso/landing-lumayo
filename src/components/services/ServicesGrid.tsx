@@ -178,7 +178,8 @@ function ServiceCard({ service: s, showCategory, onOpen, reduceMotion }: CardPro
       {...cardMotion(reduceMotion)}
       className="group relative isolate flex flex-col overflow-hidden rounded-2xl border border-sky-200 bg-white transition-colors duration-500 hover:border-navy-500/50"
     >
-      <IsotypeWatermark animated className="-bottom-8 -right-10 -z-10 w-48 !opacity-[0.08] group-hover:!opacity-[0.14]" />
+      {/* Isotype only appears on hover, so the grid stays light at rest */}
+      <IsotypeWatermark animated className="-bottom-8 -right-10 -z-10 w-48 !opacity-0 group-hover:!opacity-[0.12]" />
 
       {/* Photo: zooms gently inside its frame while the card stays still */}
       <div className="relative h-44 shrink-0 overflow-hidden">

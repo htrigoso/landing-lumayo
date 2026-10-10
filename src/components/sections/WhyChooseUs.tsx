@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { Reveal } from "@/components/motion/Reveal";
+import { SectionBackdrop } from "@/components/decor/SectionBackdrop";
 
 type Reason = { icon: string; title: string; text: string };
 
@@ -67,7 +68,8 @@ export function WhyChooseUs() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section id="por-que-elegirnos" aria-labelledby="por-que-title" className="relative overflow-hidden bg-sky-50 py-20 lg:py-28">
+    <section id="por-que-elegirnos" aria-labelledby="por-que-title" className="relative isolate overflow-hidden bg-sky-50 py-20 lg:py-28">
+      <SectionBackdrop lines="tr" glow="bl" surface="mist" />
       <div className="container-page">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="pill pill-solid mx-auto">Por qué elegirnos</p>

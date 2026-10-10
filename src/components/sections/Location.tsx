@@ -1,10 +1,12 @@
 import { ArrowRightIcon, CalendarIcon, PinIcon, WhatsappIcon } from "@/components/icons";
 import { Reveal } from "@/components/motion/Reveal";
 import { fullAddress, site } from "@/lib/site";
+import { SectionBackdrop } from "@/components/decor/SectionBackdrop";
 
 export function Location({ number }: { number: string }) {
   return (
     <section id="ubicacion" aria-labelledby="ubicacion-title" className="relative isolate overflow-hidden bg-white py-20 lg:py-28">
+      <SectionBackdrop lines="bl" glow="tr" />
       <div className="container-page grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-14">
         <Reveal>
           <p className="flex items-center gap-3 text-sm font-medium tabular-nums text-navy-700">

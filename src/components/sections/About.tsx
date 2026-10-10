@@ -2,6 +2,7 @@ import Image from "next/image";
 import { IsotypeWatermark } from "@/components/brand/IsotypeWatermark";
 import { CheckIcon } from "@/components/icons";
 import { Reveal } from "@/components/motion/Reveal";
+import { SectionBackdrop } from "@/components/decor/SectionBackdrop";
 
 const reasons = [
   "Te explicamos tu diagnóstico y tus opciones antes de empezar.",
@@ -16,7 +17,8 @@ const reasons = [
  */
 export function About() {
   return (
-    <section id="nosotros" aria-labelledby="nosotros-title" className="overflow-x-clip bg-white py-20 lg:py-28">
+    <section id="nosotros" aria-labelledby="nosotros-title" className="relative isolate overflow-hidden bg-white py-20 lg:py-28">
+      <SectionBackdrop glow="br" />
       <div className="container-page relative lg:flex lg:min-h-[36rem] lg:items-center lg:justify-end">
         {/* Blue block with the photo */}
         <Reveal className="relative overflow-hidden rounded-2xl bg-navy-700 p-3 sm:p-4 lg:absolute lg:inset-y-0 lg:left-6 lg:w-[58%]">

@@ -1,17 +1,21 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type RefObject } from "react";
 import { createPortal } from "react-dom";
+import { usePathname } from "next/navigation";
 import { ArrowRightIcon, CloseIcon, MenuIcon, PhoneIcon, PinIcon, WhatsappIcon } from "@/components/icons";
 import { defaultWhatsappMessage, fullAddress, site, whatsappUrl } from "@/lib/site";
 
+// Home anchors are prefixed with "/" so they also work from inner pages (e.g. /servicios);
+// on the home page they still scroll in place because the path is the same.
 const links = [
-  { href: "#ortodoncia", label: "Brackets" },
-  { href: "#servicios", label: "Servicios" },
-  { href: "#nosotros", label: "Nosotros" },
-  { href: "#ubicacion", label: "Ubicación" },
+  { href: "/#ortodoncia", label: "Brackets" },
+  { href: "/servicios", label: "Servicios" },
+  { href: "/nosotros", label: "Nosotros" },
+  { href: "/contacto", label: "Contacto" },
 ];
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -23,6 +27,7 @@ const noopSubscribe = () => () => {};
  */
 function MobileDrawer({ open, onClose, returnFocusTo }: { open: boolean; onClose: () => void; returnFocusTo: RefObject<HTMLButtonElement | null> }) {
   const closeRef = useRef<HTMLButtonElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!open) return;
@@ -87,14 +92,15 @@ function MobileDrawer({ open, onClose, returnFocusTo }: { open: boolean; onClose
                     key={l.href}
                     variants={{ hidden: { opacity: 0, x: 24 }, show: { opacity: 1, x: 0, transition: { duration: 0.4, ease } } }}
                   >
-                    <a
+                    <Link
                       href={l.href}
                       onClick={onClose}
-                      className="group flex min-h-13 items-center justify-between rounded-2xl px-4 py-3 text-lg font-semibold text-navy-700 transition-colors hover:bg-sky-50"
+                      aria-current={l.href === pathname ? "page" : undefined}
+                      className="group flex min-h-13 items-center justify-between rounded-2xl px-4 py-3 text-lg font-semibold text-navy-700 transition-colors hover:bg-sky-50 aria-[current=page]:bg-sky-50"
                     >
                       {l.label}
                       <ArrowRightIcon className="size-4 text-cyan-700 transition-transform group-hover:translate-x-1" />
-                    </a>
+                    </Link>
                   </motion.li>
                 ))}
               </motion.ul>
@@ -128,6 +134,7 @@ function MobileDrawer({ open, onClose, returnFocusTo }: { open: boolean; onClose
 }
 
 export function Header() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   // The drawer portals into <body>, which only exists on the client.
@@ -150,7 +157,7 @@ export function Header() {
       }`}
     >
       <div className="container-page flex h-16 items-center justify-between gap-4 md:h-[4.5rem]">
-        <a href="#top" className="shrink-0 rounded-lg" aria-label="Lumayo Centro Odontológico, ir al inicio">
+        <Link href="/" className="shrink-0 rounded-lg" aria-label="Lumayo Centro Odontológico, ir al inicio">
           <Image
             src="/brand/lumayo-logo.svg"
             alt="Lumayo Centro Odontológico"
@@ -160,18 +167,19 @@ export function Header() {
             unoptimized
             className="h-7 w-auto md:h-8"
           />
-        </a>
+        </Link>
 
         <nav aria-label="Principal" className="hidden lg:block">
           <ul className="flex items-center gap-1">
             {links.map((l) => (
               <li key={l.href}>
-                <a
+                <Link
                   href={l.href}
-                  className="rounded-full px-4 py-2 text-[0.95rem] font-medium text-ink-600 transition-colors hover:bg-sky-50 hover:text-navy-700"
+                  aria-current={l.href === pathname ? "page" : undefined}
+                  className="rounded-full px-4 py-2 text-[0.95rem] font-medium text-ink-600 transition-colors hover:bg-sky-50 hover:text-navy-700 aria-[current=page]:bg-sky-100 aria-[current=page]:text-navy-700"
                 >
                   {l.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

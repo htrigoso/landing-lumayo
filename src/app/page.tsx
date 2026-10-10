@@ -2,6 +2,7 @@ import { WaveDivider } from "@/components/decor/WaveDivider";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { MobileCtaBar } from "@/components/layout/MobileCtaBar";
+import { FloatingWhatsapp } from "@/components/layout/FloatingWhatsapp";
 import { About } from "@/components/sections/About";
 import { BookingSection } from "@/components/sections/BookingSection";
 import { BrandStatement } from "@/components/sections/BrandStatement";
@@ -59,6 +60,7 @@ export default function Home() {
       </main>
       <Footer />
       <MobileCtaBar />
+      <FloatingWhatsapp />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}

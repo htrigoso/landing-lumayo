@@ -3,6 +3,7 @@ import { BracesIcon, WhatsappIcon } from "@/components/icons";
 import { Reveal } from "@/components/motion/Reveal";
 import { FaqAccordion } from "@/components/orthodontics/FaqAccordion";
 import { bracesWhatsappMessage, whatsappUrl } from "@/lib/site";
+import { SectionBackdrop } from "@/components/decor/SectionBackdrop";
 
 const steps = [
   {
@@ -44,7 +45,8 @@ const faqs = [
 
 export function Orthodontics() {
   return (
-    <section id="ortodoncia" aria-labelledby="ortodoncia-title" className="bg-sky-50 py-20 lg:py-28">
+    <section id="ortodoncia" aria-labelledby="ortodoncia-title" className="relative isolate overflow-hidden bg-sky-50 py-20 lg:py-28">
+      <SectionBackdrop lines="br" glow="tl" surface="mist" />
       <div className="container-page">
         <SectionHeading
           number="02"

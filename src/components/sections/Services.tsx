@@ -1,10 +1,12 @@
 import { SectionHeading } from "@/components/brand/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 import { ServicesGrid } from "@/components/services/ServicesGrid";
+import { SectionBackdrop } from "@/components/decor/SectionBackdrop";
 
 export function Services() {
   return (
     <section id="servicios" aria-labelledby="servicios-title" className="relative isolate overflow-hidden bg-white py-20 lg:py-28">
+      <SectionBackdrop lines="bl" glow="tr" />
       <div className="container-page">
         <SectionHeading
           number="01"
