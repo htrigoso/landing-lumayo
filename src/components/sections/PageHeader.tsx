@@ -20,7 +20,7 @@ type PageHeaderProps = {
  */
 export function PageHeader({ title, emphasis, description, crumbs }: PageHeaderProps) {
   return (
-    <section aria-labelledby="page-title" className="relative isolate overflow-hidden bg-sky-50 py-14 sm:py-16 lg:py-12">
+    <section aria-labelledby="page-title" className="relative isolate overflow-hidden bg-[linear-gradient(to_bottom,#ffffff_0%,var(--color-sky-50)_16%,var(--color-sky-50)_84%,#ffffff_100%)] py-14 sm:py-16 lg:py-12">
       <SectionBackdrop lines="tr" glow="bl" surface="mist" />
       {/* Crown stays whole; only the roots run off the bottom edge */}
       <IsotypeWatermark className="-bottom-36 -left-10 -z-10 w-72 !opacity-[0.06] sm:w-96 lg:-bottom-40 lg:left-[6%] lg:w-[22rem]" />

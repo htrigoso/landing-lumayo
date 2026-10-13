@@ -4,13 +4,20 @@ import { TestimonialsMarquee } from "@/components/testimonials/TestimonialsMarqu
 import { getDisplayedTestimonials } from "@/lib/results";
 import { SectionBackdrop } from "@/components/decor/SectionBackdrop";
 
-/** `surface` lets a page keep backgrounds alternating when the section above shares its colour. */
-export function Testimonials({ number = "04", surface = "mist" }: { number?: string; surface?: "mist" | "white" }) {
+/**
+ * `surface` lets a page keep backgrounds alternating when the section above shares its colour.
+ * `flatBottom` keeps the sky bottom edge when a wave divider that paints sky follows directly.
+ */
+export function Testimonials({ number = "04", surface = "mist", flatBottom = false }: { number?: string; surface?: "mist" | "white"; flatBottom?: boolean }) {
   const items = getDisplayedTestimonials();
   if (items.length === 0) return null;
 
+  const skyBackground = flatBottom
+    ? "bg-[linear-gradient(to_bottom,#ffffff_0%,var(--color-sky-50)_16%,var(--color-sky-50)_100%)]"
+    : "bg-[linear-gradient(to_bottom,#ffffff_0%,var(--color-sky-50)_16%,var(--color-sky-50)_84%,#ffffff_100%)]";
+
   return (
-    <section id="testimonios" aria-labelledby="testimonios-title" className={`relative isolate overflow-hidden py-20 lg:py-24 ${surface === "mist" ? "bg-sky-50" : "bg-white"}`}>
+    <section id="testimonios" aria-labelledby="testimonios-title" className={`relative isolate overflow-hidden py-20 lg:py-24 ${surface === "mist" ? skyBackground : "bg-white"}`}>
       <SectionBackdrop lines="tr" surface={surface === "mist" ? "mist" : "white"} />
       <div>
         <div className="container-page">

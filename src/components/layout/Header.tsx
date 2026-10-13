@@ -6,16 +6,31 @@ import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type RefObject } from "react";
 import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
-import { ArrowRightIcon, CloseIcon, MenuIcon, PhoneIcon, PinIcon, WhatsappIcon } from "@/components/icons";
+import { ArrowRightIcon, ChevronDownIcon, CloseIcon, MenuIcon, PhoneIcon, PinIcon, WhatsappIcon } from "@/components/icons";
 import { defaultWhatsappMessage, fullAddress, site, whatsappUrl } from "@/lib/site";
 
+type SubLink = { href: string; label: string };
+type NavLink = { href: string; label: string; children?: SubLink[] };
+
 // Every entry is a page route; "Inicio" is the home page itself (no section anchor).
-const links = [
+const links: NavLink[] = [
   { href: "/", label: "Inicio" },
-  { href: "/servicios", label: "Servicios" },
+  {
+    href: "/servicios",
+    label: "Servicios",
+    children: [
+      { href: "/servicios", label: "Todos los servicios" },
+      { href: "/servicios/lumayo-card", label: "Lumayo Card" },
+      { href: "/servicios/lumayo-novias", label: "Lumayo Novias" },
+      { href: "/servicios/lumayo-kids", label: "Lumayo Kids" },
+    ],
+  },
   { href: "/nosotros", label: "Nosotros" },
   { href: "/contacto", label: "Contacto" },
 ];
+
+const isActivePath = (pathname: string | null, href: string) =>
+  href === "/" ? pathname === "/" : pathname === href || (pathname?.startsWith(`${href}/`) ?? false);
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const noopSubscribe = () => () => {};
@@ -94,12 +109,28 @@ function MobileDrawer({ open, onClose, returnFocusTo }: { open: boolean; onClose
                     <Link
                       href={l.href}
                       onClick={onClose}
-                      aria-current={l.href === pathname ? "page" : undefined}
+                      aria-current={isActivePath(pathname, l.href) ? "page" : undefined}
                       className="group flex min-h-13 items-center justify-between rounded-2xl px-4 py-3 text-lg font-semibold text-navy-700 transition-colors hover:bg-sky-50 aria-[current=page]:bg-sky-50"
                     >
                       {l.label}
                       <ArrowRightIcon className="size-4 text-cyan-700 transition-transform group-hover:translate-x-1" />
                     </Link>
+                    {"children" in l && l.children && (
+                      <ul className="mb-1 ml-6 border-l border-line pl-3">
+                        {l.children.map((c) => (
+                          <li key={c.href}>
+                            <Link
+                              href={c.href}
+                              onClick={onClose}
+                              aria-current={pathname === c.href ? "page" : undefined}
+                              className="flex min-h-11 items-center rounded-xl px-3 py-2 text-base font-medium text-ink-600 transition-colors hover:bg-sky-50 hover:text-navy-700 aria-[current=page]:text-navy-700"
+                            >
+                              {c.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </motion.li>
                 ))}
               </motion.ul>
@@ -132,6 +163,65 @@ function MobileDrawer({ open, onClose, returnFocusTo }: { open: boolean; onClose
   );
 }
 
+function DesktopDropdown({ link, pathname }: { link: NavLink & { children: SubLink[] }; pathname: string | null }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLLIElement>(null);
+  const active = isActivePath(pathname, link.href);
+
+  useEffect(() => {
+    if (!open) return;
+    const onPointerDown = (e: PointerEvent) => {
+      if (!ref.current?.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  return (
+    <li
+      ref={ref}
+      className="relative"
+      onPointerEnter={(e) => e.pointerType === "mouse" && setOpen(true)}
+      onPointerLeave={(e) => e.pointerType === "mouse" && setOpen(false)}
+    >
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-haspopup="true"
+        aria-current={active ? "page" : undefined}
+        className="inline-flex cursor-pointer items-center gap-1.5 rounded-full px-4 py-2 text-[0.95rem] font-medium text-ink-600 transition-colors hover:bg-sky-50 hover:text-navy-700 aria-[current=page]:bg-sky-100 aria-[current=page]:text-navy-700"
+      >
+        {link.label}
+        <ChevronDownIcon className={`size-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+      </button>
+      {open && (
+        <div className="absolute left-0 top-full z-50 w-64 pt-2">
+          <ul className="rounded-2xl border border-line bg-white p-2 shadow-[0_18px_40px_-16px_rgb(7_42_76/0.35)]">
+            {link.children.map((c) => (
+              <li key={c.href}>
+                <Link
+                  href={c.href}
+                  onClick={() => setOpen(false)}
+                  aria-current={pathname === c.href ? "page" : undefined}
+                  className="block rounded-xl px-3 py-2.5 text-[0.95rem] font-medium text-ink-600 transition-colors hover:bg-sky-50 hover:text-navy-700 aria-[current=page]:bg-sky-100 aria-[current=page]:text-navy-700"
+                >
+                  {c.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </li>
+  );
+}
+
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -151,7 +241,7 @@ export function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-40 border-b bg-white md:bg-white/90 md:backdrop-blur-md transition-shadow duration-200 ${
+      className={`sticky top-0 z-40 border-b bg-white shadow-[0_4px_16px_-8px_rgb(7_42_76/0.2)] md:bg-white/90 md:backdrop-blur-md transition-shadow duration-200 ${
         scrolled ? "border-line shadow-[0_6px_20px_-12px_rgb(7_42_76/0.25)]" : "border-transparent"
       }`}
     >
@@ -170,17 +260,21 @@ export function Header() {
 
         <nav aria-label="Principal" className="hidden lg:block">
           <ul className="flex items-center gap-1">
-            {links.map((l) => (
-              <li key={l.href}>
-                <Link
-                  href={l.href}
-                  aria-current={l.href === pathname ? "page" : undefined}
-                  className="rounded-full px-4 py-2 text-[0.95rem] font-medium text-ink-600 transition-colors hover:bg-sky-50 hover:text-navy-700 aria-[current=page]:bg-sky-100 aria-[current=page]:text-navy-700"
-                >
-                  {l.label}
-                </Link>
-              </li>
-            ))}
+            {links.map((l) =>
+              l.children ? (
+                <DesktopDropdown key={l.href} link={{ ...l, children: l.children }} pathname={pathname} />
+              ) : (
+                <li key={l.href}>
+                  <Link
+                    href={l.href}
+                    aria-current={isActivePath(pathname, l.href) ? "page" : undefined}
+                    className="rounded-full px-4 py-2 text-[0.95rem] font-medium text-ink-600 transition-colors hover:bg-sky-50 hover:text-navy-700 aria-[current=page]:bg-sky-100 aria-[current=page]:text-navy-700"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ),
+            )}
           </ul>
         </nav>
 

@@ -51,7 +51,7 @@ export default function NosotrosPage() {
         <CareProcess />
         <WhyChooseUs />
         <TeamSection />
-        <Testimonials number="01" surface={testimonialsSurface} />
+        <Testimonials number="01" surface={testimonialsSurface} flatBottom />
         <WaveDivider from={lastBg} to="var(--color-navy-500)" />
         <BookingSection number={hasTestimonials ? "02" : "01"} />
         <WaveDivider from="bg-navy-500" to="var(--color-navy-900)" flip />

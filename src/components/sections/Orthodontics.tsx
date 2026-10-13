@@ -45,7 +45,7 @@ const faqs = [
 
 export function Orthodontics() {
   return (
-    <section id="ortodoncia" aria-labelledby="ortodoncia-title" className="relative isolate overflow-hidden bg-sky-50 py-20 lg:py-28">
+    <section id="ortodoncia" aria-labelledby="ortodoncia-title" className="relative isolate overflow-hidden bg-[linear-gradient(to_bottom,#ffffff_0%,var(--color-sky-50)_16%,var(--color-sky-50)_84%,#ffffff_100%)] py-20 lg:py-28">
       <SectionBackdrop lines="br" glow="tl" surface="mist" />
       <div className="container-page">
         <SectionHeading

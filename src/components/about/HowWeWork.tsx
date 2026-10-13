@@ -27,7 +27,7 @@ const avatarTones = ["bg-sky-100", "bg-celeste-100", "bg-teal-100"];
 /** "How it works", after the reference: HD photo on the left, three illustrated steps on the right. */
 export function HowWeWork() {
   return (
-    <section aria-labelledby="how-title" className="relative isolate overflow-hidden bg-sky-50 py-20 lg:py-28">
+    <section aria-labelledby="how-title" className="relative isolate overflow-hidden bg-[linear-gradient(to_bottom,#ffffff_0%,var(--color-sky-50)_16%,var(--color-sky-50)_84%,#ffffff_100%)] py-20 lg:py-28">
       <SectionBackdrop lines="tr" glow="bl" surface="mist" />
       <div className="container-page grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
         <Reveal className="relative mx-auto w-full max-w-lg lg:max-w-none">

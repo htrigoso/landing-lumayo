@@ -64,11 +64,15 @@ function ReasonItem({ reason, side, index }: { reason: Reason; side: "left" | "r
 }
 
 /** "Why choose us": six reasons around a floating tooth, as in the clinic's reference design. */
-export function WhyChooseUs() {
+/** `flatBottom` keeps the sky bottom edge when a wave divider that paints sky follows directly. */
+export function WhyChooseUs({ flatBottom = false }: { flatBottom?: boolean } = {}) {
   const reduceMotion = useReducedMotion();
+  const skyBackground = flatBottom
+    ? "bg-[linear-gradient(to_bottom,#ffffff_0%,var(--color-sky-50)_16%,var(--color-sky-50)_100%)]"
+    : "bg-[linear-gradient(to_bottom,#ffffff_0%,var(--color-sky-50)_16%,var(--color-sky-50)_84%,#ffffff_100%)]";
 
   return (
-    <section id="por-que-elegirnos" aria-labelledby="por-que-title" className="relative isolate overflow-hidden bg-sky-50 py-20 lg:py-28">
+    <section id="por-que-elegirnos" aria-labelledby="por-que-title" className={`relative isolate overflow-hidden py-20 lg:py-28 ${skyBackground}`}>
       <SectionBackdrop lines="tr" glow="bl" surface="mist" />
       <div className="container-page">
         <Reveal className="mx-auto max-w-2xl text-center">

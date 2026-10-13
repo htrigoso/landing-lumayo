@@ -1,3 +1,5 @@
+import type { TreatmentKey } from "@/lib/novias";
+
 export const site = {
   name: "Lumayo",
   tagline: "Centro Odontológico",
@@ -28,6 +30,351 @@ export function whatsappUrl(message: string): string {
 export const defaultWhatsappMessage = "Hola Lumayo, quisiera agendar una cita.";
 export const bracesWhatsappMessage =
   "Hola Lumayo, quisiera información sobre ortodoncia con brackets.";
+export const lumayoCardWhatsappMessage =
+  "Hola Lumayo, quisiera solicitar información sobre la Lumayo Card.";
+export const noviasWhatsappMessage = "Hola Lumayo, quisiera información sobre el plan Lumayo Novias.";
+export const kidsWhatsappMessage = "Hola Lumayo, quisiera reservar una primera visita para mi hijo o hija.";
+
+// TODO: confirmar cifras, descuentos y beneficios con la clínica antes de publicar.
+export const lumayoCard = {
+  title: "Lumayo Card",
+  description:
+    "Es nuestra tarjeta de protección odontológica con descuentos preferenciales para el titular y hasta 6 adicionales.",
+  // TODO: confirmar cobertura con la clínica
+  heroHighlight: "Hasta 50% de descuento en tus tratamientos",
+  annualFee: "S/ 125.00",
+  reaffiliationFee: "S/ 100.00",
+  /** Nombre de ejemplo solo para el diseño visual de la tarjeta. */
+  sampleHolder: "Silkiens Urbina Rivera",
+  perks: [
+    "Una consulta anual sin costo",
+    "Emergencias dentales las 24 horas", // TODO: confirmar sede y horario de emergencias
+  ],
+  tiers: [
+    {
+      percent: "50%",
+      title: "Odontología básica",
+      items: ["Profilaxis y detartraje", "Flúor gel", "Radiografías periapicales"],
+    },
+    {
+      percent: "20%",
+      title: "Odontología general",
+      items: ["Odontología general y preventiva", "Radiografías panorámicas", "Blanqueamiento dental"],
+    },
+    {
+      percent: "10%",
+      title: "Especialidades",
+      items: ["Odontología cosmética y ortodoncia", "Rehabilitación oral e implantes"],
+    },
+  ],
+  steps: [
+    {
+      title: "Escríbenos o visítanos",
+      description: "Consulta por WhatsApp o acércate a nuestro centro en Tarapoto.",
+    },
+    // TODO: confirmar proceso y documentos de afiliación
+    {
+      title: "Afíliate en el centro",
+      description: "Te registramos y recibes tu Lumayo Card.",
+    },
+    {
+      title: "Úsala desde el primer día",
+      description: "Presenta tu tarjeta en cada visita y empieza a ahorrar.",
+    },
+  ],
+  family: {
+    title: "Titular y 6 adicionales",
+    countLabel: "1 + 6",
+    countCaption: "7 personas, una sola tarjeta",
+    // TODO: confirmar con la clínica (quiénes pueden ser adicionales, si comparten los mismos descuentos y cómo se registran)
+    perks: [
+      "Un solo costo anual para toda la familia",
+      "Descuentos preferenciales para el titular y los adicionales",
+      "Tú eliges a quiénes registrar",
+    ],
+    cta: "Registrar a mi familia",
+  },
+  faqs: [
+    {
+      q: "¿Quién puede usarla?",
+      a: "El titular y hasta 6 adicionales registrados en la misma tarjeta.",
+    },
+    {
+      q: "¿Cuánto dura la tarjeta?",
+      // TODO: confirmar vigencia exacta
+      a: "Tiene vigencia anual desde su afiliación.",
+    },
+    {
+      q: "¿Cómo la renuevo?",
+      // TODO: confirmar condiciones de re-afiliación
+      a: "Con la re-afiliación anual de S/ 100.00 al vencer tu vigencia.",
+    },
+    {
+      q: "¿Se puede usar en todos los tratamientos?",
+      // TODO: confirmar cobertura por tratamiento
+      a: "Aplica descuentos en odontología básica, general y especialidades, según el nivel de cada tratamiento.",
+    },
+    {
+      q: "¿Cómo la solicito?",
+      a: `Escríbenos por WhatsApp al ${site.phoneDisplay} o visítanos en ${site.address.street}, ${site.address.district}.`,
+    },
+  ],
+} as const;
+
+// TODO: confirmar tratamientos, tiempos y condiciones del plan con la clínica antes de publicar.
+export const lumayoNovias = {
+  /** Must match ids in `services`. */
+  treatmentIds: ["limpieza", "blanqueamiento", "carillas-porcelana", "ortodoncia", "diseno-de-sonrisa"],
+  headline: "Sonríe sin pensar en la cámara",
+  subheadline:
+    "Un plan por etapas, hecho a tu medida, para que llegues a tu boda con la sonrisa que imaginaste.",
+  // TODO: confirmar evaluación de cortesía vigente
+  trustChips: ["Evaluación de cortesía para parejas", "Plan por etapas", "Atención en Tarapoto"],
+  moments: [
+    { title: "Ceremonia", description: "Sonríe con calma al decir el sí." },
+    { title: "Fotos", description: "Una sonrisa que luce en cada retrato." },
+    { title: "Brindis", description: "Celebra sin esconder la sonrisa." },
+    { title: "Primer baile", description: "Disfruta cada instante con confianza." },
+  ],
+  personas: [
+    {
+      id: "novia",
+      title: "Para la novia",
+      description: "Un plan para llegar radiante a las fotos.",
+      treatments: ["limpieza", "blanqueamiento", "diseno"] satisfies readonly TreatmentKey[],
+    },
+    {
+      id: "novio",
+      title: "Para el novio",
+      description: "Una sonrisa sana y natural, sin complicaciones.",
+      treatments: ["limpieza", "blanqueamiento", "ortodoncia"] satisfies readonly TreatmentKey[],
+    },
+    {
+      id: "pareja",
+      title: "Para la pareja",
+      description: "Se evalúan juntos y se coordinan los tiempos.",
+      treatments: ["limpieza", "blanqueamiento", "carillas"] satisfies readonly TreatmentKey[],
+    },
+  ],
+  treatmentMeta: {
+    blanqueamiento: {
+      when: "Empieza 2 a 4 semanas antes",
+      achieves: "Un tono más luminoso y parejo.",
+    },
+    "carillas-porcelana": {
+      when: "Empieza 2 a 3 meses antes",
+      achieves: "Forma, color y alineación en pocas citas.",
+    },
+    ortodoncia: {
+      when: "Empieza 6 a 12 meses antes o más",
+      achieves: "Dientes alineados y una mordida estable.",
+    },
+    "diseno-de-sonrisa": {
+      when: "Empieza 2 a 3 meses antes",
+      achieves: "Una sonrisa en armonía con tu rostro.",
+    },
+    limpieza: {
+      when: "Empieza 1 a 2 meses antes",
+      achieves: "Encías sanas y dientes libres de sarro.",
+    },
+  },
+  // TODO: confirmar tiempos con la clínica
+  whiteningNote: "Si el blanqueamiento no alcanza el tono que buscas, las carillas son la alternativa.",
+  // TODO: confirmar proceso con la clínica
+  process: [
+    {
+      title: "Evaluación de cortesía",
+      description: "Revisamos tu sonrisa y escuchamos lo que imaginas.",
+    },
+    {
+      title: "Diagnóstico y presupuesto",
+      description: "El especialista te entrega un plan y un presupuesto a tu medida.",
+    },
+    {
+      title: "Tratamiento por etapas",
+      description: "Avanzamos según tu cronograma, sin apuros.",
+    },
+    {
+      title: "Retoque final",
+      description: "Afinamos los detalles antes de tu boda.",
+    },
+  ],
+  weekBefore: {
+    title: "La semana antes de tu boda",
+    // TODO: validar con el odontólogo
+    tips: [
+      "Evita alimentos y bebidas que manchan, como café, vino tinto y salsas oscuras, si te hiciste un blanqueamiento.",
+      "Mantén un cepillado suave y constante, y usa hilo dental.",
+      "Hidrata tus labios para sonreír con comodidad.",
+      "Pregunta si conviene un retoque unos 3 o 4 días antes.",
+    ],
+  },
+  // TODO: confirmar respuestas con la clínica
+  faqs: [
+    {
+      q: "¿Cuánto cuestan los tratamientos?",
+      a: "Primero hacemos un diagnóstico y luego el especialista te entrega un presupuesto a tu medida. Pregunta por la evaluación de cortesía para parejas.",
+    },
+    {
+      q: "¿Con cuánta anticipación debo empezar?",
+      a: "Lo ideal es consultar entre 6 y 12 meses antes, sobre todo si necesitas ortodoncia. Para blanqueamiento y limpieza bastan unas semanas.",
+    },
+    {
+      q: "¿El blanqueamiento causa sensibilidad?",
+      a: "Puede haber sensibilidad pasajera. Lo realizamos con productos profesionales y bajo control del odontólogo.",
+    },
+    {
+      q: "¿El plan también es para novios?",
+      a: "Sí. Puedes venir solo, sola o en pareja; armamos el plan según lo que necesite cada uno.",
+    },
+    {
+      q: "¿Qué pasa si el blanqueamiento no alcanza el tono que busco?",
+      a: "Si el tono que buscas no se logra con blanqueamiento, evaluamos carillas como alternativa.",
+    },
+    {
+      q: "¿En qué orden se hacen los tratamientos?",
+      a: "Primero la salud de las encías y la limpieza, luego ortodoncia, carillas y, al final, el blanqueamiento. En la evaluación ajustamos el orden a tu caso.",
+    },
+    {
+      q: "¿Cómo reservo mi evaluación?",
+      a: `Escríbenos por WhatsApp al ${site.phoneDisplay} o visítanos en ${fullAddress}.`,
+    },
+  ],
+} as const;
+
+// TODO: confirmar contenido de Lumayo Kids con la clínica y el odontopediatra antes de publicar.
+export const lumayoKids = {
+  /** Must match ids in `services`. */
+  treatmentIds: ["odontopediatria", "sellantes", "fluor-barniz", "limpieza", "ortodoncia"],
+  headline: "Sonrisas que empiezan bien",
+  subheadline:
+    "Una visita tranquila, con paciencia y juego, para que tu hijo o hija aprenda a cuidar su sonrisa desde bebé hasta la adolescencia.",
+  // TODO: confirmar con la clínica
+  trustChips: ["Primera visita sin apuros", "Atención con paciencia", "Papás acompañan la consulta"],
+  // TODO: validar con el odontopediatra
+  stages: [
+    {
+      age: "0 a 2 años",
+      serviceId: "odontopediatria",
+      title: "Primer diente y primera visita",
+      tips: [
+        "Limpia las encías con una gasa húmeda antes de que salga el primer diente.",
+        "Cepilla el primer diente con una cantidad de pasta del tamaño de un grano de arroz.",
+        "Agenda la primera visita cuando salga el primer diente o, a más tardar, al año de edad.",
+      ],
+    },
+    {
+      age: "3 a 5 años",
+      serviceId: "fluor-barniz",
+      title: "Dientes de leche y hábitos",
+      tips: [
+        "Supervisa el cepillado y ayuda a tu hijo a usar hilo dental cuando los dientes se tocan.",
+        "Ofrece agua en lugar de jugos y bebidas azucaradas.",
+        "Observa si chupa el dedo o el chupón y comenta el tema con el dentista.",
+      ],
+    },
+    {
+      age: "6 a 12 años",
+      serviceId: "sellantes",
+      title: "Muelas permanentes y sellantes",
+      tips: [
+        "Revisa la salida de las muelas permanentes, que suelen aparecer hacia los 6 años.",
+        "Pregunta por sellantes para proteger los surcos de las muelas.",
+        "Mantén las visitas periódicas para detectar caries a tiempo.",
+      ],
+    },
+    {
+      age: "13 a 17 años",
+      serviceId: "ortodoncia",
+      title: "Ortodoncia y cuidado en adolescentes",
+      tips: [
+        "Evalúa con el dentista si conviene iniciar ortodoncia.",
+        "Cuida la higiene con brackets o alineadores, usando cepillo interdental.",
+        "Mantén hábitos saludables frente a snacks y bebidas azucaradas.",
+      ],
+    },
+  ],
+  // TODO: confirmar proceso de la primera visita con la clínica
+  firstVisit: {
+    title: "Tu primera visita, paso a paso",
+    steps: [
+      {
+        title: "Bienvenida y juego",
+        description: "Conocemos a tu hijo con calma y le presentamos el consultorio de forma divertida.",
+        icon: "smile" as const,
+      },
+      {
+        title: "Revisión",
+        description: "Miramos sus dientes y encías, y te explicamos lo que observamos.",
+        icon: "tooth" as const,
+      },
+      {
+        title: "Limpieza y flúor",
+        description: "Limpiamos sus dientes y, si corresponde, aplicamos flúor para protegerlos.",
+        icon: "clean" as const,
+      },
+      {
+        title: "Consejos a los padres",
+        description: "Te damos pautas sencillas de higiene y alimentación para hacer en casa.",
+        icon: "chat" as const,
+        forParents: true,
+      },
+    ],
+  },
+  // TODO: validar con el odontopediatra
+  comfort: {
+    title: "Una consulta sin miedo",
+    points: [
+      "Usamos el método decir-mostrar-hacer: explicamos, mostramos el instrumento y luego lo usamos.",
+      "Elegimos palabras positivas en lugar de \"duele\" o \"inyección\".",
+      "Los papás pueden acompañar a su hijo durante la consulta.",
+      "El ritmo lo marca el niño: avanzamos cuando se siente listo.",
+    ],
+  },
+  // TODO: validar con el odontopediatra
+  homeCare: {
+    title: "Cuidados en casa",
+    // Neutral supporting line for parents. No figures.
+    intro: "Pequeños hábitos de cada día protegen su sonrisa entre visitas.",
+    tips: [
+      { title: "Cepillado diario", text: "Cepilla los dientes dos veces al día, con supervisión en los más pequeños.", icon: "brush" },
+      { title: "Hilo dental", text: "Usa hilo dental desde que dos dientes se tocan.", icon: "floss" },
+      { title: "Menos azúcar", text: "Limita los dulces, snacks y bebidas azucaradas entre comidas.", icon: "sugar" },
+      { title: "Biberón y descanso", text: "Evita dormir al niño con un biberón de leche o de jugo.", icon: "bottle" },
+    ] as const,
+  },
+  // TODO: confirmar respuestas con la clínica
+  faqs: [
+    {
+      q: "¿Cuándo debe ir mi hijo por primera vez al dentista?",
+      a: "Lo recomendable es la primera visita cuando sale el primer diente, y a más tardar al año de edad.",
+    },
+    {
+      q: "¿Qué pasa en la primera visita?",
+      a: "Es una consulta tranquila: conocemos a tu hijo, revisamos sus dientes y encías, hacemos una limpieza y te damos consejos para casa.",
+    },
+    {
+      q: "¿Puedo quedarme con mi hijo durante la consulta?",
+      a: "Sí. Los papás pueden acompañar a sus hijos, según lo que el niño necesite en cada momento.",
+    },
+    {
+      q: "Mi hijo tiene miedo al dentista, ¿qué hago?",
+      a: "Cuéntanos antes de la visita. Trabajamos con paciencia, explicamos cada paso con palabras sencillas y dejamos que el niño marque el ritmo.",
+    },
+    {
+      q: "¿Qué son los sellantes y el flúor?",
+      a: "El flúor fortalece el esmalte y ayuda a prevenir la caries. Los sellantes cubren los surcos de las muelas, donde suele empezar la caries.",
+    },
+    {
+      q: "¿Es normal que se caigan los dientes de leche antes de tiempo?",
+      a: "No siempre es motivo de preocupación, pero si un diente de leche se cae antes de lo esperado, consulta con el dentista para revisarlo.",
+    },
+    {
+      q: "¿Cómo reservo la primera visita?",
+      a: `Escríbenos por WhatsApp al ${site.phoneDisplay} o visítanos en ${fullAddress}.`,
+    },
+  ],
+} as const;
 
 export type ServiceIcon =
   | "braces"

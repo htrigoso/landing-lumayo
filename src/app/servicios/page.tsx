@@ -50,7 +50,7 @@ export default function ServiciosPage() {
 
         <WhyChooseUs />
         <BrandStatement />
-        <Testimonials number="01" />
+        <Testimonials number="01" flatBottom />
         <WaveDivider from={hasTestimonials ? "bg-sky-50" : "bg-white"} to="var(--color-navy-500)" />
         <BookingSection number={hasTestimonials ? "02" : "01"} />
         <WaveDivider from="bg-navy-500" to="var(--color-navy-900)" flip />

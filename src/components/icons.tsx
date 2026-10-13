@@ -245,6 +245,13 @@ export function ArrowRightIcon(props: IconProps) {
   );
 }
 
+export function ChevronDownIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path {...stroke} strokeWidth={2.2} d="m6 9 6 6 6-6" />
+    </Svg>
+  );
+}
 /** Smaller tooth outline, for icons that pair the tooth with a second mark. */
 function SmallTooth({ x = 0, y = 0 }: { x?: number; y?: number }) {
   return <path d={toothPath} transform={`translate(${x} ${y}) scale(0.78)`} vectorEffect="non-scaling-stroke" />;
