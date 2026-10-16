@@ -1,11 +1,11 @@
 "use client";
 
 import Image, { getImageProps } from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowRightIcon, CalendarIcon, serviceIcons, WhatsappIcon } from "@/components/icons";
 import { IsotypeWatermark } from "@/components/brand/IsotypeWatermark";
-import { ServiceDialog } from "@/components/services/ServiceDialog";
 import {
   serviceCategories,
   services,
@@ -64,8 +64,6 @@ function centerChip(chip: HTMLElement, behavior: ScrollBehavior) {
  */
 export function ServicesGrid() {
   const [filter, setFilter] = useState<Filter>("todos");
-  const [openId, setOpenId] = useState<string | null>(null);
-  const openService = services.find((s) => s.id === openId) ?? null;
   const reduceMotion = useReducedMotion();
 
   const shownFeatured = featured.filter((s) => filter === "todos" || s.category === filter);
@@ -115,7 +113,7 @@ export function ServicesGrid() {
       <motion.div layout={!reduceMotion} className="mt-8 grid grid-flow-row-dense gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
         <AnimatePresence mode="popLayout" initial={false}>
           {shownFeatured.map((s, i) => (
-            <FeaturedCard key={s.id} service={s} flip={i % 2 === 1} index={i} onOpen={() => setOpenId(s.id)} reduceMotion={!!reduceMotion} />
+            <FeaturedCard key={s.id} service={s} flip={i % 2 === 1} index={i} reduceMotion={!!reduceMotion} />
           ))}
           {visible.map((s, i) => (
             <ServiceCard
@@ -123,15 +121,12 @@ export function ServicesGrid() {
               index={shownFeatured.length + i}
               service={s}
               showCategory={filter === "todos"}
-              onOpen={() => setOpenId(s.id)}
               reduceMotion={!!reduceMotion}
             />
           ))}
           <EvaluationTile key="evaluacion" index={shownFeatured.length + visible.length} className={ctaSpan} reduceMotion={!!reduceMotion} />
         </AnimatePresence>
       </motion.div>
-
-      <ServiceDialog service={openService} onClose={() => setOpenId(null)} />
     </div>
   );
 }
@@ -158,7 +153,7 @@ function cardMotion(reduceMotion: boolean, index = 0) {
       };
 }
 
-type CardProps = { service: Service; onOpen: () => void; reduceMotion: boolean; index: number };
+type CardProps = { service: Service; reduceMotion: boolean; index: number };
 
 // Brandbook ID-badge colour blocks: featured cards alternate Azul profundo and Turquesa.
 // Turquesa uses its 700 step: white body copy on the 600 base is only 4.2:1 (below AA).
@@ -167,7 +162,7 @@ const featuredSkins = [
   { block: "bg-teal-700", photoFade: "from-teal-700/60" },
 ];
 
-function FeaturedCard({ service: s, flip, onOpen, reduceMotion, index }: CardProps & { flip: boolean }) {
+function FeaturedCard({ service: s, flip, reduceMotion, index }: CardProps & { flip: boolean }) {
   const skin = featuredSkins[flip ? 1 : 0];
   return (
     <motion.article
@@ -188,9 +183,9 @@ function FeaturedCard({ service: s, flip, onOpen, reduceMotion, index }: CardPro
             <WhatsappIcon />
             {s.cta ?? "Consultar por WhatsApp"}
           </a>
-          <button type="button" onClick={onOpen} aria-haspopup="dialog" className="btn btn-ghost-light w-full sm:w-fit">
+          <Link href={`/servicios/${s.id}`} className="btn btn-ghost-light w-full sm:w-fit">
             Ver más información
-          </button>
+          </Link>
         </div>
       </div>
       <div className={`relative h-56 overflow-hidden bg-white/10 sm:h-auto sm:min-h-72 ${flip ? "sm:order-first" : ""}`}>
@@ -210,7 +205,7 @@ function FeaturedCard({ service: s, flip, onOpen, reduceMotion, index }: CardPro
   );
 }
 
-function ServiceCard({ service: s, showCategory, onOpen, reduceMotion, index }: CardProps & { showCategory: boolean }) {
+function ServiceCard({ service: s, showCategory, reduceMotion, index }: CardProps & { showCategory: boolean }) {
   const Icon = serviceIcons[s.icon];
   return (
     <motion.article
@@ -245,16 +240,14 @@ function ServiceCard({ service: s, showCategory, onOpen, reduceMotion, index }: 
         <h3 className="font-display text-lg font-bold leading-snug text-navy-700 sm:text-xl">{s.name}</h3>
         <p className="mt-2 flex-1 text-pretty text-[0.93rem] leading-relaxed text-ink-600">{s.description}</p>
         <div className="mt-4 flex items-center justify-between gap-3">
-          {/* Stretched button: the whole card opens the detail dialog */}
-          <button
-            type="button"
-            onClick={onOpen}
-            aria-haspopup="dialog"
+          {/* Stretched link: the whole card opens the service detail page */}
+          <Link
+            href={`/servicios/${s.id}`}
             className="inline-flex cursor-pointer items-center gap-1.5 rounded-md text-sm font-semibold text-cyan-700 after:absolute after:inset-0 after:content-['']"
           >
             Ver más información
             <ArrowRightIcon className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </button>
+          </Link>
           <a
             href={whatsappUrl(inquiryMessage(s))}
             target="_blank"

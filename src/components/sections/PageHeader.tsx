@@ -56,7 +56,8 @@ export function PageHeader({ title, emphasis, description, crumbs }: PageHeaderP
           id="page-title"
           className="mx-auto mt-4 max-w-3xl font-display text-[2.75rem] font-normal leading-[0.98] tracking-[-0.045em] text-navy-700 sm:text-6xl lg:text-[3.5rem]"
         >
-          {title} <strong className="font-extrabold">{emphasis}</strong>
+          {title}
+          {emphasis ? <> <strong className="font-extrabold">{emphasis}</strong></> : null}
         </h1>
         {description && <p className="section-sub mx-auto mt-3 max-w-xl text-pretty">{description}</p>}
       </Reveal>
