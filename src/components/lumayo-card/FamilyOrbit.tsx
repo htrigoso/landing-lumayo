@@ -4,16 +4,26 @@ type Variant = "holder" | "woman" | "man" | "senior" | "teen" | "girl" | "boy";
 type AvatarSize = "sm" | "md" | "lg";
 
 const ORBIT_RADIUS = 38;
-const ORBIT_ANGLES = [-90, -30, 30, 90, 150, 210];
+type OrbitCount = 3 | 6;
 
-/** Precomputed once at module load: position of each member in percent of the square wrapper. */
-const ORBIT_POSITIONS = ORBIT_ANGLES.map((deg) => {
+const ORBIT_ANGLES: Record<OrbitCount, number[]> = {
+  3: [-90, 30, 150],
+  6: [-90, -30, 30, 90, 150, 210],
+};
+
+/** Precomputed once at module load: position of each member in percent of the square wrapper, per member count. */
+const ORBIT_POSITIONS: Record<OrbitCount, { x: number; y: number }[]> = {
+  3: ORBIT_ANGLES[3].map(toPosition),
+  6: ORBIT_ANGLES[6].map(toPosition),
+};
+
+function toPosition(deg: number) {
   const rad = (deg * Math.PI) / 180;
   return {
     x: Number((50 + ORBIT_RADIUS * Math.cos(rad)).toFixed(2)),
     y: Number((50 + ORBIT_RADIUS * Math.sin(rad)).toFixed(2)),
   };
-});
+}
 
 const MEMBERS: { variant: Variant; size: AvatarSize; duration: number }[] = [
   { variant: "woman", size: "md", duration: 3.6 },
@@ -74,10 +84,13 @@ function Avatar({ variant, size, className = "" }: { variant: Variant; size: Ava
   );
 }
 
-/** Decorative orbit: the holder in the centre, six additional members around. Server-safe. */
-export function FamilyOrbit() {
+/** Decorative orbit: the holder in the centre, up to six additional members around. Server-safe. */
+export function FamilyOrbit({ count = 6 }: { count?: OrbitCount }) {
+  const positions = ORBIT_POSITIONS[count];
+  const members = MEMBERS.slice(0, count);
+
   return (
-    <div role="group" aria-label="Titular y 6 adicionales" className="relative mx-auto aspect-square w-full max-w-md">
+    <div role="group" aria-label={`Titular y ${count} adicionales`} className="relative mx-auto aspect-square w-full max-w-md">
       <style>{`
         @keyframes fam-float { 0%, 100% { transform: translateY(-4px); } 50% { transform: translateY(4px); } }
         .fam-float { animation: fam-float 4.2s ease-in-out infinite; }
@@ -86,7 +99,7 @@ export function FamilyOrbit() {
 
       <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="pointer-events-none absolute inset-0 size-full" aria-hidden="true">
         <circle cx="50" cy="50" r={ORBIT_RADIUS} fill="none" stroke="#c4ebef" strokeWidth="1" strokeDasharray="1 2" vectorEffect="non-scaling-stroke" />
-        {ORBIT_POSITIONS.map((pos, i) => (
+        {positions.map((pos, i) => (
           <line key={i} x1="50" y1="50" x2={pos.x} y2={pos.y} stroke="#93d9e0" strokeWidth="1" vectorEffect="non-scaling-stroke" />
         ))}
       </svg>
@@ -104,8 +117,8 @@ export function FamilyOrbit() {
       </div>
 
       <ul className="absolute inset-0 m-0 list-none p-0">
-        {MEMBERS.map((member, i) => {
-          const pos = ORBIT_POSITIONS[i];
+        {members.map((member, i) => {
+          const pos = positions[i];
           return (
             <li
               key={member.variant}

@@ -43,3 +43,4 @@ _draft
 .claude
 package-lock.json
 AGENTS.md
+.atl/

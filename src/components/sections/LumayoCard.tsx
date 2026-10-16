@@ -1,10 +1,11 @@
-import Image from "next/image";
 import { FaqAccordion } from "@/components/orthodontics/FaqAccordion";
 import { IsotypeWatermark } from "@/components/brand/IsotypeWatermark";
 import { SectionHeading } from "@/components/brand/SectionHeading";
 import { SectionAtmosphere } from "@/components/decor/SectionAtmosphere";
-import { FamilyOrbit } from "@/components/lumayo-card/FamilyOrbit";
-import { CardQr } from "@/components/lumayo-card/CardQr";
+import { CardBack, CardFront } from "@/components/lumayo-card/CardFaces";
+import { CardPlanProvider } from "@/components/lumayo-card/CardPlanContext";
+import { CardShowcase } from "@/components/lumayo-card/CardShowcase";
+import { PlanFamilyCopy, PlanFamilyOrbit, PlanFees } from "@/components/lumayo-card/PlanDetails";
 import { SavingsCalculator } from "@/components/lumayo-card/SavingsCalculator";
 import {
   ChatIcon,
@@ -22,102 +23,19 @@ import { lumayoCard, lumayoCardWhatsappMessage, whatsappUrl } from "@/lib/site";
 const tierIcons = [ToothIcon, SparkleIcon, ImplantIcon];
 const stepIcons = [ChatIcon, PinIcon, SmileIcon];
 
-function PeopleIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="size-4 text-white/90 sm:size-5" aria-hidden="true">
-      <circle cx="9" cy="8" r="3.2" />
-      <path d="M3.5 19.5c.6-3 2.8-4.8 5.5-4.8s4.9 1.8 5.5 4.8" />
-      <circle cx="17" cy="9" r="2.4" />
-      <path d="M16 14.4c2.3.1 4 1.6 4.5 4.1" />
-    </svg>
-  );
-}
-
-function RenewIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="size-4 text-white/90 sm:size-5" aria-hidden="true">
-      <path d="M4 12a8 8 0 0 1 14-5.2M20 12a8 8 0 0 1-14 5.2" />
-      <path d="M18.5 3.5v4h-4M5.5 20.5v-4h4" />
-    </svg>
-  );
-}
-
-function CardFront() {
-  return (
-    <div
-      role="img"
-      aria-label="Lumayo Card: membresía anual de protección odontológica, sin datos personales y con código QR único por cliente (ilustrativo)"
-      className="group relative aspect-[1.586] w-full overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-navy-950 via-navy-700 to-teal-600 p-6 text-white shadow-[0_40px_80px_-30px_rgb(1_42_72/0.7)] transition-transform duration-500 ease-out [transform-style:preserve-3d] hover:[transform:rotateX(4deg)_rotateY(-6deg)] motion-reduce:transition-none motion-reduce:hover:[transform:none] sm:p-9"
-    >
-      <IsotypeWatermark tone="dark" className="-bottom-16 -right-14 w-72 !opacity-[0.1]" />
-      <svg viewBox="0 0 400 240" className="pointer-events-none absolute inset-0 size-full text-white/10" aria-hidden="true" preserveAspectRatio="xMaxYMid slice">
-        <circle cx="400" cy="120" r="90" fill="none" stroke="currentColor" strokeWidth="1.2" />
-        <circle cx="400" cy="120" r="140" fill="none" stroke="currentColor" strokeWidth="1.2" />
-        <circle cx="400" cy="120" r="190" fill="none" stroke="currentColor" strokeWidth="1.2" />
-      </svg>
-      <div className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-1000 ease-out group-hover:translate-x-full motion-reduce:hidden" aria-hidden="true" />
-
-      <div className="relative flex h-full flex-col justify-between">
-        <div className="flex items-start justify-between gap-3">
-          <Image src="/brand/lumayo-logo-white.svg" alt="" width={534} height={180} unoptimized className="h-6 w-auto sm:h-7" />
-          <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-white/25 bg-white/10 px-2.5 py-1 text-[0.55rem] font-semibold uppercase tracking-[0.16em] text-sky-100/90 backdrop-blur-sm sm:text-[0.6rem]">
-            <span className="size-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_1px_rgb(42_200_225/0.8)]" aria-hidden="true" />
-            Activa
-          </span>
-        </div>
-
-        <div className="flex min-h-0 flex-1 items-center justify-between gap-3">
-          <div className="min-w-0">
-            <p className="text-[0.6rem] font-medium uppercase tracking-[0.3em] text-sky-100/80 sm:text-xs">Membresía familiar · Anual</p>
-            <p className="mt-1 text-[clamp(1rem,4.6vw,1.6rem)] font-extrabold uppercase tracking-[0.14em] text-white [text-shadow:0_2px_12px_rgb(1_42_72/0.5)]">
-              LUMAYO CARD
-            </p>
-            <span className="mt-3 inline-block max-w-full truncate rounded-full border border-white/30 bg-white/5 px-3 py-1.5 text-[0.5rem] font-medium uppercase tracking-[0.2em] text-sky-100/90 sm:text-[0.65rem]">
-              Tu sonrisa, cuidada todo el año
-            </span>
-          </div>
-          <div className="aspect-square w-[28%] shrink-0 rounded-2xl bg-white p-[0.4rem] text-navy-900 shadow-[0_10px_24px_-10px_rgb(1_42_72/0.6)]">
-            <CardQr className="size-full" />
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between gap-2 border-t border-white/15 pt-3 text-[0.6rem] font-medium uppercase tracking-[0.2em] text-sky-100/85 sm:text-xs">
-          <span className="flex items-center gap-2">
-            <PeopleIcon />
-            1 titular + 6 beneficiarios
-          </span>
-          <span className="flex items-center gap-2">
-            <RenewIcon />
-            Vigencia 12 meses
-          </span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function CardStack() {
-  return (
-    <div className="relative mx-auto w-full min-w-0 max-w-xl pb-6 pt-4 [perspective:1400px]">
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-6 top-0 aspect-[1.586] rotate-[-7deg] rounded-[1.75rem] bg-gradient-to-br from-navy-900 to-navy-500 opacity-70 shadow-[0_30px_60px_-30px_rgb(1_42_72/0.6)] sm:inset-x-10"
-      />
-      <CardFront />
-    </div>
-  );
-}
-
 /** Lumayo Card section, adapted from the Multident Card reference layout. */
 export function LumayoCard() {
   return (
-    <>
-      <section aria-labelledby="lumayo-card-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
+    <CardPlanProvider>
+      <section aria-labelledby="lumayo-card-title" className="relative isolate overflow-hidden bg-white pt-12 pb-16 lg:pt-16 lg:pb-20">
         <SectionAtmosphere lines="bl" glow="tr" washTop="mist" isotype="br" />
 
-        <div className="container-page grid grid-cols-[minmax(0,1fr)] gap-14 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-20">
+        <div className="container-page grid grid-cols-[minmax(0,1fr)] gap-14 lg:grid-cols-[1.15fr_1fr] lg:items-start lg:gap-20">
           <Reveal>
-            <CardStack />
+            <CardShowcase
+              classic={{ front: <CardFront />, back: <CardBack /> }}
+              gold={{ front: <CardFront variant="gold" />, back: <CardBack variant="gold" /> }}
+            />
           </Reveal>
 
           <Reveal>
@@ -142,18 +60,9 @@ export function LumayoCard() {
               ))}
             </ul>
 
-            <dl className="mt-8 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-2xl border border-line bg-white p-5 shadow-[0_12px_30px_-20px_rgb(7_42_76/0.35)]">
-                <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-600">Costo único anual</dt>
-                <dd className="mt-2 font-display text-3xl font-extrabold text-navy-700">{lumayoCard.annualFee}</dd>
-              </div>
-              <div className="rounded-2xl border border-line bg-white p-5 shadow-[0_12px_30px_-20px_rgb(7_42_76/0.35)]">
-                <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-600">Re-afiliación</dt>
-                <dd className="mt-2 font-display text-3xl font-extrabold text-navy-700">{lumayoCard.reaffiliationFee}</dd>
-              </div>
-            </dl>
+            <PlanFees />
 
-            <ul className="mt-6 flex flex-wrap gap-3">
+            <ul className="mt-3 flex flex-wrap gap-3">
               {lumayoCard.perks.map((perk) => (
                 <li key={perk} className="inline-flex items-center gap-2 rounded-full bg-cyan-100/70 px-4 py-2 text-sm font-semibold text-navy-700">
                   <CheckIcon className="size-4 text-cyan-700" />
@@ -270,16 +179,7 @@ export function LumayoCard() {
           <div className="rounded-3xl border border-line bg-white p-8 shadow-[0_18px_40px_-28px_rgb(7_42_76/0.4)] sm:p-12">
             <div className="grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
               <div>
-                <SectionHeading
-                  number="04"
-                  label="Para toda la familia"
-                  id="familia-title"
-                  layout="stack"
-                  title={<>Titular y <strong>6 adicionales</strong></>}
-                  description="Una sola tarjeta para tu familia: protege a quienes más quieres con un solo plan."
-                />
-                <p className="mt-8 font-display text-6xl font-extrabold leading-none text-navy-700">{lumayoCard.family.countLabel}</p>
-                <p className="mt-2 text-sm font-semibold uppercase tracking-[0.14em] text-cyan-700">{lumayoCard.family.countCaption}</p>
+                <PlanFamilyCopy />
                 <ul className="mt-6 space-y-3">
                   {lumayoCard.family.perks.map((perk) => (
                     <li key={perk} className="flex items-start gap-3 text-base leading-relaxed text-ink-600">
@@ -295,7 +195,7 @@ export function LumayoCard() {
                   {lumayoCard.family.cta}
                 </a>
               </div>
-              <FamilyOrbit />
+              <PlanFamilyOrbit />
             </div>
           </div>
         </div>
@@ -335,6 +235,6 @@ export function LumayoCard() {
           </Reveal>
         </div>
       </div>
-    </>
+    </CardPlanProvider>
   );
 }

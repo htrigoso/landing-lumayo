@@ -1,76 +1,107 @@
-const SIZE = 23;
-const FINDER = 7;
-const CENTER = (SIZE - 1) / 2;
-const LOGO_HALF = 3;
+import { useId } from "react";
 
-// TODO: the real QR is generated per client by the clinic's system; this is illustrative and encodes nothing.
+// TODO: el QR real lo genera el sistema de la clínica por cliente; este SVG es ilustrativo, no codifica nada y no es escaneable.
 
-/** True when (x, y) falls inside one of the three 7x7 finder "eyes". */
-function isInFinder(x: number, y: number): boolean {
+const SIZE = 25;
+const FINDER = 8; // 7x7 finder plus 1 module of separation
+const CENTER = 12; // middle module of a 25x25 grid
+const CENTER_HALF = 3; // reserved 7x7 square around the centre (CENTER +/- 3)
+const DENSITY = 0.48;
+const SEED = 0x1a2b3c;
+
+/** Deterministic PRNG (mulberry32). Same seed, same sequence, on server and client. */
+function mulberry32(seed: number): () => number {
+  let state = seed >>> 0;
+  return () => {
+    state = (state + 0x6d2b79f5) >>> 0;
+    let t = state;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+/** True when (x, y) sits inside one of the three finder zones, separation included. */
+function isInFinderZone(x: number, y: number): boolean {
   const inTopLeft = x < FINDER && y < FINDER;
   const inTopRight = x >= SIZE - FINDER && y < FINDER;
   const inBottomLeft = x < FINDER && y >= SIZE - FINDER;
   return inTopLeft || inTopRight || inBottomLeft;
 }
 
-/** True when (x, y) falls inside the reserved center zone behind the brand mark. */
-function isInLogoZone(x: number, y: number): boolean {
-  return Math.abs(x - CENTER) <= LOGO_HALF && Math.abs(y - CENTER) <= LOGO_HALF;
+/** True when (x, y) sits inside the reserved square behind the brand badge. */
+function isInCenterZone(x: number, y: number): boolean {
+  return Math.abs(x - CENTER) <= CENTER_HALF && Math.abs(y - CENTER) <= CENTER_HALF;
+}
+
+const random = mulberry32(SEED);
+const dots: Array<{ x: number; y: number }> = [];
+for (let y = 0; y < SIZE; y++) {
+  for (let x = 0; x < SIZE; x++) {
+    if (isInFinderZone(x, y) || isInCenterZone(x, y)) continue;
+    if (random() < DENSITY) dots.push({ x, y });
+  }
 }
 
 const finderOrigins = [
   { x: 0, y: 0 },
-  { x: SIZE - FINDER, y: 0 },
-  { x: 0, y: SIZE - FINDER },
+  { x: SIZE - FINDER + 1, y: 0 },
+  { x: 0, y: SIZE - FINDER + 1 },
 ];
 
-const dots: Array<{ x: number; y: number }> = [];
-for (let y = 0; y < SIZE; y++) {
-  for (let x = 0; x < SIZE; x++) {
-    if (isInFinder(x, y) || isInLogoZone(x, y)) continue;
-    if ((x * 7 + y * 13 + x * y) % 5 < 2) dots.push({ x, y });
-  }
-}
+const BADGE_SIZE = 6;
+const BADGE_X = SIZE / 2 - BADGE_SIZE / 2;
+const BADGE_PAD = 1.2;
+const LOGO_SIZE = BADGE_SIZE - BADGE_PAD * 2;
 
-const logoInset = LOGO_HALF * 2 - 1.6;
-const logoZoneSize = LOGO_HALF * 2 + 1.4;
+const DEFAULT_STOPS: [string, string] = ["#024474", "#02acb5"];
 
-export function CardQr({ className }: { className?: string }) {
+export function CardQr({ className, stops = DEFAULT_STOPS }: { className?: string; stops?: [string, string] }) {
+  // useId output can contain characters that are unsafe inside url(#...); keep only the safe ones.
+  const gradientId = `qr-grad-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
+  const fill = `url(#${gradientId})`;
+
   return (
-    <svg viewBox={`0 0 ${SIZE} ${SIZE}`} className={className} aria-hidden="true">
+    <svg
+      viewBox={`0 0 ${SIZE} ${SIZE}`}
+      className={className}
+      aria-hidden="true"
+      shapeRendering="geometricPrecision"
+    >
       <defs>
-        <linearGradient id="lumayoCardQrGradient" x1="0" y1="0" x2={SIZE} y2={SIZE} gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#02acb5" />
-          <stop offset="1" stopColor="#024474" />
+        <linearGradient id={gradientId} x1="0" y1="0" x2={SIZE} y2={SIZE} gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor={stops[0]} />
+          <stop offset="1" stopColor={stops[1]} />
         </linearGradient>
       </defs>
 
       {dots.map(({ x, y }) => (
-        <circle key={`${x}-${y}`} cx={x + 0.5} cy={y + 0.5} r={0.4} fill="url(#lumayoCardQrGradient)" />
+        <circle key={`${x}-${y}`} cx={x + 0.5} cy={y + 0.5} r={0.42} fill={fill} />
       ))}
 
       {finderOrigins.map(({ x, y }) => (
         <g key={`${x}-${y}`}>
-          <rect x={x + 0.4} y={y + 0.4} width={FINDER - 0.8} height={FINDER - 0.8} rx={2.1} fill="url(#lumayoCardQrGradient)" />
-          <rect x={x + 1.5} y={y + 1.5} width={FINDER - 3} height={FINDER - 3} rx={1.4} fill="#fff" />
-          <rect x={x + 2.6} y={y + 2.6} width={FINDER - 5.2} height={FINDER - 5.2} rx={0.9} fill="url(#lumayoCardQrGradient)" />
+          <rect x={x + 0.5} y={y + 0.5} width="6" height="6" rx="2" fill="none" stroke={fill} strokeWidth="1" />
+          <rect x={x + 2} y={y + 2} width="3" height="3" rx="1" fill={fill} />
         </g>
       ))}
 
       <rect
-        x={CENTER - LOGO_HALF - 0.2}
-        y={CENTER - LOGO_HALF - 0.2}
-        width={logoZoneSize}
-        height={logoZoneSize}
+        x={BADGE_X}
+        y={BADGE_X}
+        width={BADGE_SIZE}
+        height={BADGE_SIZE}
         rx={1.8}
         fill="#fff"
+        stroke="#c3e6f6"
+        strokeWidth={0.1}
       />
       <image
         href="/brand/lumayo-isotipo.svg"
-        x={CENTER - logoInset / 2}
-        y={CENTER - logoInset / 2}
-        width={logoInset}
-        height={logoInset}
+        x={BADGE_X + BADGE_PAD}
+        y={BADGE_X + BADGE_PAD}
+        width={LOGO_SIZE}
+        height={LOGO_SIZE}
         preserveAspectRatio="xMidYMid meet"
       />
     </svg>

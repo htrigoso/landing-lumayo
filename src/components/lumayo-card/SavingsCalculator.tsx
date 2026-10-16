@@ -5,6 +5,7 @@ import Image from "next/image";
 import { animate, motion, useMotionValue, useReducedMotion, useTransform } from "motion/react";
 import { IsotypeWatermark } from "@/components/brand/IsotypeWatermark";
 import { CheckIcon, ImplantIcon, SparkleIcon, ToothIcon } from "@/components/icons";
+import { useCardPlan } from "@/components/lumayo-card/CardPlanContext";
 import { lumayoCard } from "@/lib/site";
 
 const DEFAULT_AMOUNT = "500";
@@ -30,8 +31,6 @@ function parseAmount(value: string): number {
   const n = parseFloat(value);
   return Number.isFinite(n) && n > 0 ? n : 0;
 }
-
-const annualFee = parseNumber(lumayoCard.annualFee);
 
 /** Count-up for a money value. Animates through a motion value; no setState involved. */
 function AnimatedNumber({ value }: { value: number }) {
@@ -81,6 +80,8 @@ function SavingsRing({ rate }: { rate: number }) {
 
 export function SavingsCalculator() {
   const id = useId();
+  const { plan } = useCardPlan();
+  const annualFee = parseNumber(plan.annualFee);
   const [amountInput, setAmountInput] = useState(DEFAULT_AMOUNT);
   const [tierIndex, setTierIndex] = useState(0);
 

@@ -11,7 +11,7 @@ import { PageHeader } from "@/components/sections/PageHeader";
 export const metadata: Metadata = {
   title: "Lumayo Card · Lumayo Centro Odontológico",
   description:
-    "Tarjeta de protección odontológica de Lumayo con descuentos preferenciales para el titular y hasta 6 adicionales. Consulta por WhatsApp al 946 788 123.",
+    "Tarjeta de protección odontológica de Lumayo con descuentos preferenciales para el titular y sus adicionales (hasta 3 en la Clásica y 6 en la Dorada). Consulta por WhatsApp al 946 788 123.",
 };
 
 export default function LumayoCardPage() {

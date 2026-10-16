@@ -35,35 +35,61 @@ export const lumayoCardWhatsappMessage =
 export const noviasWhatsappMessage = "Hola Lumayo, quisiera información sobre el plan Lumayo Novias.";
 export const kidsWhatsappMessage = "Hola Lumayo, quisiera reservar una primera visita para mi hijo o hija.";
 
+/** Fees and limits per Lumayo Card plan. `maxAdditional` counts additional members (titular not included). */
+const plans = {
+  classic: {
+    label: "Clásica",
+    annualFee: "S/ 125.00",
+    reaffiliationFee: "S/ 100.00",
+    maxAdditional: 3,
+  },
+  gold: {
+    label: "Dorada",
+    annualFee: "S/ 150.00",
+    reaffiliationFee: "S/ 50.00",
+    maxAdditional: 6,
+  },
+} as const;
+
+export type CardPlanKey = keyof typeof plans;
+
 // TODO: confirmar cifras, descuentos y beneficios con la clínica antes de publicar.
 export const lumayoCard = {
   title: "Lumayo Card",
-  description:
-    "Es nuestra tarjeta de protección odontológica con descuentos preferenciales para el titular y hasta 6 adicionales.",
+  description: `Es nuestra tarjeta de protección odontológica con descuentos preferenciales para el titular y sus adicionales: hasta ${plans.classic.maxAdditional} en la Clásica y ${plans.gold.maxAdditional} en la Dorada.`,
   // TODO: confirmar cobertura con la clínica
-  heroHighlight: "Hasta 50% de descuento en tus tratamientos",
-  annualFee: "S/ 125.00",
-  reaffiliationFee: "S/ 100.00",
+  heroHighlight: "Hasta 30% de descuento en tus tratamientos",
+  plans,
+  card: {
+    whatsappDisplay: "975 225 531", // TODO: confirmar (difiere de site.phoneDisplay)
+    domain: "lumayo.pe", // TODO: confirmar dominio
+  },
   perks: [
     "Una consulta anual sin costo",
-    "Emergencias dentales las 24 horas", // TODO: confirmar sede y horario de emergencias
   ],
   formats: ["Tarjeta física en PVC", "Versión virtual", "Código QR único por cliente"],
+  // TODO: confirmar que descuentos y beneficios sean iguales en ambos planes
   tiers: [
     {
-      percent: "50%",
-      title: "Odontología básica",
-      items: ["Profilaxis y detartraje", "Flúor gel", "Radiografías periapicales"],
+      percent: "30%",
+      title: "Cuidado esencial",
+      items: ["Limpieza dental", "Blanqueamiento dental", "Curaciones simples"],
     },
     {
       percent: "20%",
-      title: "Odontología general",
-      items: ["Odontología general y preventiva", "Radiografías panorámicas", "Blanqueamiento dental"],
+      title: "Cirugía y especialidades",
+      items: ["Cirugía de terceras molares", "Endodoncia", "Brackets (ortodoncia)", "Ortopedia"],
     },
     {
       percent: "10%",
-      title: "Especialidades",
-      items: ["Odontología cosmética y ortodoncia", "Rehabilitación oral e implantes"],
+      title: "Restauración y prótesis",
+      items: [
+        "Extracciones simples y complejas",
+        "Carillas de resina",
+        "Coronas",
+        "Prótesis removibles",
+        "Puente fijo",
+      ],
     },
   ],
   steps: [
@@ -83,9 +109,6 @@ export const lumayoCard = {
     },
   ],
   family: {
-    title: "Titular y 6 adicionales",
-    countLabel: "1 + 6",
-    countCaption: "7 personas, una sola tarjeta",
     // TODO: confirmar con la clínica (quiénes pueden ser adicionales, si comparten los mismos descuentos y cómo se registran)
     perks: [
       "Un solo costo anual para toda la familia",
@@ -97,7 +120,7 @@ export const lumayoCard = {
   faqs: [
     {
       q: "¿Quién puede usarla?",
-      a: "El titular y hasta 6 adicionales registrados en la misma tarjeta.",
+      a: `El titular y los adicionales registrados en la misma tarjeta: hasta ${plans.classic.maxAdditional} en la Clásica y hasta ${plans.gold.maxAdditional} en la Dorada.`,
     },
     {
       q: "¿La tarjeta lleva mis datos y cómo funciona el código QR?",
@@ -112,12 +135,12 @@ export const lumayoCard = {
     {
       q: "¿Cómo la renuevo?",
       // TODO: confirmar condiciones de re-afiliación
-      a: "Con la re-afiliación anual de S/ 100.00 al vencer tu vigencia.",
+      a: `Con la re-afiliación anual al vencer tu vigencia: ${plans.classic.reaffiliationFee} en la Clásica y ${plans.gold.reaffiliationFee} en la Dorada.`,
     },
     {
       q: "¿Se puede usar en todos los tratamientos?",
       // TODO: confirmar cobertura por tratamiento
-      a: "Aplica descuentos en odontología básica, general y especialidades, según el nivel de cada tratamiento.",
+      a: "Sí, con tres niveles de descuento: 30% en limpieza dental, blanqueamiento y curaciones simples; 20% en cirugía de terceras molares, endodoncia, brackets y ortopedia; y 10% en extracciones, carillas de resina, coronas, prótesis removibles y puentes fijos.",
     },
     {
       q: "¿Cómo la solicito?",
