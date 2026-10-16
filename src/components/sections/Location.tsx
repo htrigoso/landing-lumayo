@@ -5,7 +5,7 @@ import { SectionBackdrop } from "@/components/decor/SectionBackdrop";
 
 export function Location({ number }: { number: string }) {
   return (
-    <section id="ubicacion" aria-labelledby="ubicacion-title" className="relative isolate overflow-hidden bg-white py-20 lg:py-28">
+    <section id="ubicacion" aria-labelledby="ubicacion-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
       <SectionBackdrop lines="bl" glow="tr" />
       <div className="container-page grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-14">
         <Reveal>

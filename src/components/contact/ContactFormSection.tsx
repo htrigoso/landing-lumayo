@@ -10,7 +10,7 @@ import { Reveal } from "@/components/motion/Reveal";
  */
 export function ContactFormSection() {
   return (
-    <section id="reservar" aria-labelledby="contact-form-title" className="relative isolate overflow-hidden bg-[linear-gradient(to_bottom,#ffffff_0%,var(--color-sky-50)_16%,var(--color-sky-50)_100%)] py-20 lg:py-28">
+    <section id="reservar" aria-labelledby="contact-form-title" className="relative isolate overflow-hidden bg-[linear-gradient(to_bottom,#ffffff_0%,var(--color-sky-50)_16%,var(--color-sky-50)_100%)] pb-16 lg:pb-20">
       <SectionBackdrop lines="tr" glow="bl" surface="mist" />
       <div className="container-page grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         <Reveal className="relative mx-auto w-full max-w-md lg:max-w-none">

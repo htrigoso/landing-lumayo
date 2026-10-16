@@ -8,7 +8,7 @@ import { defaultWhatsappMessage, site, whatsappUrl } from "@/lib/site";
 /** Booking band on Azul clínico (one of the manual's official background combinations). */
 export function BookingSection({ number }: { number: string }) {
   return (
-    <section id="reservar" aria-labelledby="reservar-title" className="relative isolate overflow-hidden bg-navy-500 py-20 text-white lg:py-24">
+    <section id="reservar" aria-labelledby="reservar-title" className="relative isolate overflow-hidden bg-navy-500 py-16 text-white lg:py-20">
       <SectionBackdrop lines="tr" glow="bl" surface="deep" />
       {/* Isotype as on the brandbook ID badges: the crown stays whole, only the roots run off the bottom edge */}
       <IsotypeWatermark tone="dark" className="-bottom-44 left-[4%] -z-10 w-[24rem] !opacity-[0.1] sm:w-[30rem] lg:-bottom-52 lg:left-[6%] lg:w-[34rem]" />

@@ -44,12 +44,11 @@ export const lumayoCard = {
   heroHighlight: "Hasta 50% de descuento en tus tratamientos",
   annualFee: "S/ 125.00",
   reaffiliationFee: "S/ 100.00",
-  /** Nombre de ejemplo solo para el diseño visual de la tarjeta. */
-  sampleHolder: "Silkiens Urbina Rivera",
   perks: [
     "Una consulta anual sin costo",
     "Emergencias dentales las 24 horas", // TODO: confirmar sede y horario de emergencias
   ],
+  formats: ["Tarjeta física en PVC", "Versión virtual", "Código QR único por cliente"],
   tiers: [
     {
       percent: "50%",
@@ -73,9 +72,10 @@ export const lumayoCard = {
       description: "Consulta por WhatsApp o acércate a nuestro centro en Tarapoto.",
     },
     // TODO: confirmar proceso y documentos de afiliación
+    // TODO: confirmar cómo se entrega la versión virtual (WhatsApp, correo u otro medio)
     {
-      title: "Afíliate en el centro",
-      description: "Te registramos y recibes tu Lumayo Card.",
+      title: "Afíliate y recibe tu tarjeta",
+      description: "Te registramos y recibes tu Lumayo Card en PVC o en versión virtual, con tu código QR único.",
     },
     {
       title: "Úsala desde el primer día",
@@ -98,6 +98,11 @@ export const lumayoCard = {
     {
       q: "¿Quién puede usarla?",
       a: "El titular y hasta 6 adicionales registrados en la misma tarjeta.",
+    },
+    {
+      q: "¿La tarjeta lleva mis datos y cómo funciona el código QR?",
+      // TODO: confirmar para qué se usa el QR y cómo se entrega la versión virtual
+      a: "No. La tarjeta no lleva datos personales impresos. Cada cliente recibe un código QR único, ya sea en su tarjeta física de PVC o en su versión virtual.",
     },
     {
       q: "¿Cuánto dura la tarjeta?",

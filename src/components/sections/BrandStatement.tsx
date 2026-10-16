@@ -22,7 +22,7 @@ const fadeUp: Variants = {
  */
 export function BrandStatement() {
   return (
-    <section aria-labelledby="statement-title" className="relative isolate overflow-hidden bg-white py-24 text-navy-700 lg:py-32">
+    <section aria-labelledby="statement-title" className="relative isolate overflow-hidden bg-white pb-16 text-navy-700 lg:pb-20">
       <SectionBackdrop lines="tl" glow="bl" />
       <IsotypeWatermark className="-bottom-24 -right-20 -z-10 w-[26rem] !opacity-[0.05] sm:w-[34rem] lg:-bottom-32 lg:-right-16 lg:w-[44rem]" />
 

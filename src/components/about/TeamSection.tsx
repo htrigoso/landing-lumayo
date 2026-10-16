@@ -9,7 +9,7 @@ export function TeamSection() {
   if (team.length === 0) return null;
 
   return (
-    <section aria-labelledby="team-title" className="relative isolate overflow-hidden bg-white py-20 lg:py-28">
+    <section aria-labelledby="team-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
       <SectionBackdrop lines="tr" glow="bl" />
       <div className="container-page">
         <Reveal className="mx-auto max-w-2xl text-center">

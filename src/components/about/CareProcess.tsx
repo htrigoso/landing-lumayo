@@ -29,7 +29,7 @@ const steps = [
 /** Care process in four illustrated steps (the reference's "dental process" block, told in general). */
 export function CareProcess() {
   return (
-    <section aria-labelledby="process-title" className="relative isolate overflow-hidden bg-white py-20 lg:py-28">
+    <section aria-labelledby="process-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
       <SectionBackdrop lines="tl" glow="br" />
       <div className="container-page">
         <Reveal className="mx-auto max-w-2xl text-center">

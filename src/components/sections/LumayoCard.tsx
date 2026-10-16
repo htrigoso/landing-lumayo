@@ -4,6 +4,7 @@ import { IsotypeWatermark } from "@/components/brand/IsotypeWatermark";
 import { SectionHeading } from "@/components/brand/SectionHeading";
 import { SectionAtmosphere } from "@/components/decor/SectionAtmosphere";
 import { FamilyOrbit } from "@/components/lumayo-card/FamilyOrbit";
+import { CardQr } from "@/components/lumayo-card/CardQr";
 import { SavingsCalculator } from "@/components/lumayo-card/SavingsCalculator";
 import {
   ChatIcon,
@@ -21,21 +22,23 @@ import { lumayoCard, lumayoCardWhatsappMessage, whatsappUrl } from "@/lib/site";
 const tierIcons = [ToothIcon, SparkleIcon, ImplantIcon];
 const stepIcons = [ChatIcon, PinIcon, SmileIcon];
 
-function ContactlessIcon() {
+function PeopleIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" className="size-7 text-sky-100/80" aria-hidden="true">
-      <path d="M8.5 9.5a4 4 0 0 1 0 5M11.5 7a7.5 7.5 0 0 1 0 10M14.5 4.5a11 11 0 0 1 0 15" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="size-4 text-white/90 sm:size-5" aria-hidden="true">
+      <circle cx="9" cy="8" r="3.2" />
+      <path d="M3.5 19.5c.6-3 2.8-4.8 5.5-4.8s4.9 1.8 5.5 4.8" />
+      <circle cx="17" cy="9" r="2.4" />
+      <path d="M16 14.4c2.3.1 4 1.6 4.5 4.1" />
     </svg>
   );
 }
 
-function CardChip() {
+function RenewIcon() {
   return (
-    <div className="relative h-9 w-12 overflow-hidden rounded-md bg-gradient-to-br from-sky-100 via-cyan-300 to-sky-200 shadow-inner" aria-hidden="true">
-      <div className="absolute inset-x-0 top-1/2 h-px bg-navy-900/35" />
-      <div className="absolute inset-y-0 left-1/2 w-px bg-navy-900/35" />
-      <div className="absolute inset-1.5 rounded-sm border border-navy-900/25" />
-    </div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="size-4 text-white/90 sm:size-5" aria-hidden="true">
+      <path d="M4 12a8 8 0 0 1 14-5.2M20 12a8 8 0 0 1-14 5.2" />
+      <path d="M18.5 3.5v4h-4M5.5 20.5v-4h4" />
+    </svg>
   );
 }
 
@@ -43,7 +46,7 @@ function CardFront() {
   return (
     <div
       role="img"
-      aria-label={`Tarjeta Lumayo Card de ejemplo a nombre de ${lumayoCard.sampleHolder}`}
+      aria-label="Lumayo Card: membresía anual de protección odontológica, sin datos personales y con código QR único por cliente (ilustrativo)"
       className="group relative aspect-[1.586] w-full overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-navy-950 via-navy-700 to-teal-600 p-6 text-white shadow-[0_40px_80px_-30px_rgb(1_42_72/0.7)] transition-transform duration-500 ease-out [transform-style:preserve-3d] hover:[transform:rotateX(4deg)_rotateY(-6deg)] motion-reduce:transition-none motion-reduce:hover:[transform:none] sm:p-9"
     >
       <IsotypeWatermark tone="dark" className="-bottom-16 -right-14 w-72 !opacity-[0.1]" />
@@ -55,29 +58,38 @@ function CardFront() {
       <div className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-1000 ease-out group-hover:translate-x-full motion-reduce:hidden" aria-hidden="true" />
 
       <div className="relative flex h-full flex-col justify-between">
-        <div className="flex items-start justify-between">
+        <div className="flex items-start justify-between gap-3">
           <Image src="/brand/lumayo-logo-white.svg" alt="" width={534} height={180} unoptimized className="h-6 w-auto sm:h-7" />
-          <ContactlessIcon />
+          <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-white/25 bg-white/10 px-2.5 py-1 text-[0.55rem] font-semibold uppercase tracking-[0.16em] text-sky-100/90 backdrop-blur-sm sm:text-[0.6rem]">
+            <span className="size-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_1px_rgb(42_200_225/0.8)]" aria-hidden="true" />
+            Activa
+          </span>
         </div>
 
-        <div className="flex items-center gap-4">
-          <CardChip />
-          <p className="font-mono text-sm tabular-nums tracking-[0.22em] text-sky-100/90 sm:text-base">LMY 4721 0096 1385</p>
-        </div>
-
-        <div className="flex items-end justify-between gap-4">
+        <div className="flex min-h-0 flex-1 items-center justify-between gap-3">
           <div className="min-w-0">
-            <p className="text-[0.6rem] font-semibold uppercase tracking-[0.28em] text-sky-100/70">Titular</p>
-            <p className="mt-1 truncate text-[clamp(0.85rem,3.6vw,1.25rem)] font-bold uppercase tracking-[0.08em] text-white [text-shadow:0_2px_12px_rgb(1_42_72/0.5)]">
-              {lumayoCard.sampleHolder}
+            <p className="text-[0.6rem] font-medium uppercase tracking-[0.3em] text-sky-100/80 sm:text-xs">Membresía familiar · Anual</p>
+            <p className="mt-1 text-[clamp(1rem,4.6vw,1.6rem)] font-extrabold uppercase tracking-[0.14em] text-white [text-shadow:0_2px_12px_rgb(1_42_72/0.5)]">
+              LUMAYO CARD
             </p>
-          </div>
-          <div className="shrink-0 text-right">
-            <span className="inline-block rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.14em] backdrop-blur-sm">
-              +6 adicionales
+            <span className="mt-3 inline-block max-w-full truncate rounded-full border border-white/30 bg-white/5 px-3 py-1.5 text-[0.5rem] font-medium uppercase tracking-[0.2em] text-sky-100/90 sm:text-[0.65rem]">
+              Tu sonrisa, cuidada todo el año
             </span>
-            <p className="mt-2 text-[0.6rem] font-medium tabular-nums tracking-[0.18em] text-sky-100/75">VÁLIDA HASTA 12/27</p>
           </div>
+          <div className="aspect-square w-[28%] shrink-0 rounded-2xl bg-white p-[0.4rem] text-navy-900 shadow-[0_10px_24px_-10px_rgb(1_42_72/0.6)]">
+            <CardQr className="size-full" />
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between gap-2 border-t border-white/15 pt-3 text-[0.6rem] font-medium uppercase tracking-[0.2em] text-sky-100/85 sm:text-xs">
+          <span className="flex items-center gap-2">
+            <PeopleIcon />
+            1 titular + 6 beneficiarios
+          </span>
+          <span className="flex items-center gap-2">
+            <RenewIcon />
+            Vigencia 12 meses
+          </span>
         </div>
       </div>
     </div>
@@ -100,7 +112,7 @@ function CardStack() {
 export function LumayoCard() {
   return (
     <>
-      <section aria-labelledby="lumayo-card-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="lumayo-card-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere lines="bl" glow="tr" washTop="mist" isotype="br" />
 
         <div className="container-page grid grid-cols-[minmax(0,1fr)] gap-14 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-20">
@@ -120,6 +132,15 @@ export function LumayoCard() {
               {lumayoCard.heroHighlight}
             </p>
             <p className="mt-5 max-w-lg text-pretty text-lg leading-relaxed text-ink-600">{lumayoCard.description}</p>
+
+            <ul className="mt-5 flex flex-wrap gap-2">
+              {lumayoCard.formats.map((f) => (
+                <li key={f} className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-3 py-1.5 text-xs font-semibold text-navy-700 sm:text-sm">
+                  <CheckIcon className="size-4 text-cyan-700" />
+                  {f}
+                </li>
+              ))}
+            </ul>
 
             <dl className="mt-8 grid gap-4 sm:grid-cols-2">
               <div className="rounded-2xl border border-line bg-white p-5 shadow-[0_12px_30px_-20px_rgb(7_42_76/0.35)]">
@@ -154,7 +175,7 @@ export function LumayoCard() {
         </div>
       </section>
 
-      <section id="beneficios" aria-labelledby="beneficios-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section id="beneficios" aria-labelledby="beneficios-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere />
 
         <div className="container-page">
@@ -199,7 +220,7 @@ export function LumayoCard() {
         </div>
       </section>
 
-      <section aria-labelledby="calculadora-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="calculadora-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere tone="mist" glow="bl" />
 
         <div className="container-page">
@@ -210,7 +231,7 @@ export function LumayoCard() {
         </div>
       </section>
 
-      <section aria-labelledby="como-obtenerla-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="como-obtenerla-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere lines="tl" />
 
         <div className="container-page">
@@ -242,7 +263,7 @@ export function LumayoCard() {
         </div>
       </section>
 
-      <section aria-labelledby="familia-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="familia-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere tone="mist" isotype="br" />
 
         <div className="container-page">
@@ -280,7 +301,7 @@ export function LumayoCard() {
         </div>
       </section>
 
-      <section aria-labelledby="faq-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="faq-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere />
 
         <div className="container-page">
@@ -291,7 +312,7 @@ export function LumayoCard() {
         </div>
       </section>
 
-      <div className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <div className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere tone="mist" glow="tr" washBottom="mist" />
 
         <div className="container-page">

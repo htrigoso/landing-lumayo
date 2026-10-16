@@ -78,7 +78,7 @@ function ReserveButton({ className = "" }: { className?: string }) {
 export function LumayoKids() {
   return (
     <>
-      <section aria-labelledby="kids-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="kids-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere lines="bl" glow="tr" washTop="mist" isotype="br" />
 
         <div className="container-page grid grid-cols-[minmax(0,1fr)] gap-14 lg:grid-cols-2 lg:items-center lg:gap-20">
@@ -116,7 +116,7 @@ export function LumayoKids() {
         </div>
       </section>
 
-      <section aria-labelledby="etapas-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="etapas-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere tone="mist" glow="bl" />
 
         <div className="container-page">
@@ -134,7 +134,7 @@ export function LumayoKids() {
       </section>
 
       <WaveDivider from="bg-white" to="var(--color-navy-700)" />
-      <section id="primera-visita" aria-labelledby="primera-title" className="relative isolate overflow-hidden bg-navy-700 py-16 text-white lg:py-24">
+      <section id="primera-visita" aria-labelledby="primera-title" className="relative isolate overflow-hidden bg-navy-700 py-16 text-white lg:py-20">
         <div aria-hidden="true" className="absolute inset-0 -z-10 opacity-60">
           <SectionBackdrop lines="tr" glow="bl" surface="deep" />
         </div>
@@ -157,7 +157,7 @@ export function LumayoKids() {
       </section>
       <WaveDivider from="bg-navy-700" to="#ffffff" flip />
 
-      <section aria-labelledby="comodidad-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="comodidad-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere lines="tr" />
 
         <div className="container-page">
@@ -181,7 +181,7 @@ export function LumayoKids() {
         </div>
       </section>
 
-      <section aria-labelledby="casa-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="casa-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere tone="mist" glow="tr" />
 
         <div className="container-page">
@@ -198,7 +198,7 @@ export function LumayoKids() {
         </div>
       </section>
 
-      <section aria-labelledby="tratamientos-kids-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="tratamientos-kids-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere />
 
         <div className="container-page">
@@ -242,7 +242,7 @@ export function LumayoKids() {
         </div>
       </section>
 
-      <section aria-labelledby="inversion-kids-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="inversion-kids-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere />
 
         <div className="container-page">
@@ -262,7 +262,7 @@ export function LumayoKids() {
         </div>
       </section>
 
-      <section aria-labelledby="faq-kids-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="faq-kids-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere tone="mist" lines="tr" />
 
         <div className="container-page">
@@ -279,7 +279,7 @@ export function LumayoKids() {
         </div>
       </section>
 
-      <section aria-labelledby="cta-kids-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="cta-kids-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere washBottom="mist" />
 
         <div className="container-page">

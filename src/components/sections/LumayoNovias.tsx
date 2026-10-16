@@ -54,7 +54,7 @@ function ReserveButton({ className = "" }: { className?: string }) {
 export function LumayoNovias() {
   return (
     <>
-      <section aria-labelledby="novias-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="novias-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere lines="bl" glow="tr" washTop="mist" isotype="br" />
 
         <div className="container-page grid grid-cols-[minmax(0,1fr)] gap-14 lg:grid-cols-2 lg:items-center lg:gap-20">
@@ -95,7 +95,7 @@ export function LumayoNovias() {
       </section>
 
 
-      <section aria-labelledby="momentos-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="momentos-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere />
 
         <div className="container-page">
@@ -122,7 +122,7 @@ export function LumayoNovias() {
         </div>
       </section>
 
-      <section aria-labelledby="persona-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="persona-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere tone="mist" glow="bl" />
 
         <div className="container-page">
@@ -139,7 +139,7 @@ export function LumayoNovias() {
         </div>
       </section>
 
-      <section id="tratamientos" aria-labelledby="tratamientos-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section id="tratamientos" aria-labelledby="tratamientos-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere />
 
         <div className="container-page">
@@ -159,7 +159,7 @@ export function LumayoNovias() {
         </div>
       </section>
 
-      <section id="cronograma" aria-labelledby="cronograma-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section id="cronograma" aria-labelledby="cronograma-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere tone="mist" glow="tl" />
 
         <div className="container-page">
@@ -177,7 +177,7 @@ export function LumayoNovias() {
         </div>
       </section>
 
-      <section aria-labelledby="proceso-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="proceso-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere lines="tr" />
 
         <div className="container-page">
@@ -207,7 +207,7 @@ export function LumayoNovias() {
         </div>
       </section>
 
-      <section aria-labelledby="preparacion-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="preparacion-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere tone="mist" isotype="br" />
 
         <div className="container-page">
@@ -236,7 +236,7 @@ export function LumayoNovias() {
         </div>
       </section>
 
-      <section aria-labelledby="inversion-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="inversion-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere />
 
         <div className="container-page">
@@ -257,7 +257,7 @@ export function LumayoNovias() {
         </div>
       </section>
 
-      <section aria-labelledby="faq-novias-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="faq-novias-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere tone="mist" lines="tr" />
 
         <div className="container-page">
@@ -274,7 +274,7 @@ export function LumayoNovias() {
         </div>
       </section>
 
-      <section aria-labelledby="cta-novias-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="cta-novias-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere washBottom="mist" />
 
         <div className="container-page">

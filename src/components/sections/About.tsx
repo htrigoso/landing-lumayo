@@ -17,7 +17,7 @@ const reasons = [
  */
 export function About() {
   return (
-    <section id="nosotros" aria-labelledby="nosotros-title" className="relative isolate overflow-hidden bg-white py-20 lg:py-28">
+    <section id="nosotros" aria-labelledby="nosotros-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
       <SectionBackdrop glow="br" />
       <div className="container-page relative lg:flex lg:min-h-[36rem] lg:items-center lg:justify-end">
         {/* Blue block with the photo */}

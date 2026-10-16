@@ -17,7 +17,7 @@ export function Testimonials({ number = "04", surface = "mist", flatBottom = fal
     : "bg-[linear-gradient(to_bottom,#ffffff_0%,var(--color-sky-50)_16%,var(--color-sky-50)_84%,#ffffff_100%)]";
 
   return (
-    <section id="testimonios" aria-labelledby="testimonios-title" className={`relative isolate overflow-hidden py-20 lg:py-24 ${surface === "mist" ? skyBackground : "bg-white"}`}>
+    <section id="testimonios" aria-labelledby="testimonios-title" className={`relative isolate overflow-hidden pb-16 lg:pb-20 ${surface === "mist" ? skyBackground : "bg-white"}`}>
       <SectionBackdrop lines="tr" surface={surface === "mist" ? "mist" : "white"} />
       <div>
         <div className="container-page">

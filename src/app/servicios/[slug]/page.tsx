@@ -109,7 +109,7 @@ async function ServiceContent({ params }: PageProps) {
         crumbs={[{ label: "Inicio", href: "/" }, { label: "Servicios", href: "/servicios" }, { label: service.name }]}
       />
 
-      <section aria-label="Resumen del servicio" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-label="Resumen del servicio" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere washTop="mist" isotype="br" />
 
         <div className="container-page grid grid-cols-[minmax(0,1fr)] gap-12 lg:grid-cols-2 lg:items-center">
@@ -152,7 +152,7 @@ async function ServiceContent({ params }: PageProps) {
         </div>
       </section>
 
-      <section aria-labelledby="cuando-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="cuando-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere tone="mist" glow="bl" />
 
         <div className="container-page">
@@ -190,7 +190,7 @@ async function ServiceContent({ params }: PageProps) {
         </div>
       </section>
 
-      <section aria-labelledby="proceso-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="proceso-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere />
 
         <div className="container-page">
@@ -216,7 +216,7 @@ async function ServiceContent({ params }: PageProps) {
         </div>
       </section>
 
-      <section aria-labelledby="detalles-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="detalles-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere tone="mist" lines="tr" />
 
         <div className="container-page">
@@ -254,7 +254,7 @@ async function ServiceContent({ params }: PageProps) {
         </div>
       </section>
 
-      <section aria-labelledby="cuidados-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="cuidados-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere lines="tr" />
 
         <div className="container-page">
@@ -282,7 +282,7 @@ async function ServiceContent({ params }: PageProps) {
         </div>
       </section>
 
-      <section aria-labelledby="faq-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="faq-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere tone="mist" lines="tr" />
 
         <div className="container-page">
@@ -303,7 +303,7 @@ async function ServiceContent({ params }: PageProps) {
       </section>
 
       {program && (
-        <section aria-label={program.label} className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+        <section aria-label={program.label} className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
           <SectionAtmosphere />
 
           <div className="container-page">
@@ -326,7 +326,7 @@ async function ServiceContent({ params }: PageProps) {
         </section>
       )}
 
-      <section aria-labelledby="relacionados-title" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+      <section aria-labelledby="relacionados-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere tone="mist" glow="tr" />
 
         <div className="container-page">

@@ -72,7 +72,7 @@ export function WhyChooseUs({ flatBottom = false }: { flatBottom?: boolean } = {
     : "bg-[linear-gradient(to_bottom,#ffffff_0%,var(--color-sky-50)_16%,var(--color-sky-50)_84%,#ffffff_100%)]";
 
   return (
-    <section id="por-que-elegirnos" aria-labelledby="por-que-title" className={`relative isolate overflow-hidden py-20 lg:py-28 ${skyBackground}`}>
+    <section id="por-que-elegirnos" aria-labelledby="por-que-title" className={`relative isolate overflow-hidden pb-16 lg:pb-20 ${skyBackground}`}>
       <SectionBackdrop lines="tr" glow="bl" surface="mist" />
       <div className="container-page">
         <Reveal className="mx-auto max-w-2xl text-center">

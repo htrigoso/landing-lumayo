@@ -41,7 +41,7 @@ export default function ServiciosPage() {
           crumbs={[{ label: "Inicio", href: "/" }, { label: "Servicios" }]}
         />
 
-        <section id="servicios" aria-label="Lista de servicios" className="relative isolate overflow-hidden bg-white py-16 lg:py-24">
+        <section id="servicios" aria-label="Lista de servicios" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
           <SectionBackdrop lines="bl" glow="tr" />
           <div className="container-page">
             <ServicesGrid />
