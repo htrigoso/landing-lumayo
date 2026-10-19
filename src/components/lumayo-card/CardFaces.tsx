@@ -41,7 +41,7 @@ const frontThemes: Record<CardVariant, FrontTheme> = {
       "bg-azul-700 text-white",
     weight: "font-medium",
     glow: "bg-[radial-gradient(circle_at_100%_100%,color-mix(in_srgb,var(--color-aqua-400)_22%,transparent),transparent_35%)]",
-    logoSrc: "/brand/lumayo-logo-descriptor-white.svg",
+    logoSrc: "/lumayo+centro-white.svg",
     isotipoSrc: "/brand/lumayo-isotipo-white.svg",
     isotipoClass:
       "pointer-events-none absolute -right-[6cqw] top-1/2 h-auto w-[46cqw] -translate-y-1/2 opacity-[0.22]",
@@ -64,7 +64,7 @@ const frontThemes: Record<CardVariant, FrontTheme> = {
       "bg-[linear-gradient(118deg,#c39c48_0%,#d4b25c_30%,#dcc070_52%,#d2ae55_76%,#c09744_100%)] text-white [text-shadow:0_0.15cqw_0.35cqw_rgb(60_40_5/0.55)]",
     weight: "font-semibold",
     glow: "bg-[linear-gradient(105deg,transparent_35%,rgb(255_255_255/0.07)_50%,transparent_65%)]",
-    logoSrc: "/brand/lumayo-logo-descriptor-white.svg",
+    logoSrc: "/lumayo+centro-white.svg",
     isotipoSrc: "/brand/lumayo-isotipo-white.svg",
     isotipoClass:
       "pointer-events-none absolute -right-[6cqw] top-1/2 h-auto w-[46cqw] -translate-y-1/2 opacity-[0.10]",
@@ -305,7 +305,7 @@ export function CardBack({ variant = "classic" }: { variant?: CardVariant }) {
         <div className="grid grid-cols-[minmax(0,1fr)_23cqw] gap-x-[5cqw]">
           <div className="min-w-0">
             <Image
-              src="/brand/lumayo-logo-descriptor.svg"
+              src="/lumayo+centro.svg"
               alt="Lumayo, centro odontológico"
               width={534}
               height={180}
