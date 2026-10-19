@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types";
+import { serviceHref } from "@/lib/site";
 
 export const post: BlogPost = {
   slug: "sonrisa-perfecta-para-tu-boda",
@@ -123,8 +124,8 @@ export const post: BlogPost = {
   ],
   related: [
     { label: "Lumayo Novias", href: "/servicios/lumayo-novias" },
-    { label: "Blanqueamiento", href: "/servicios/blanqueamiento" },
-    { label: "Diseño de sonrisa", href: "/servicios/diseno-de-sonrisa" },
+    { label: "Blanqueamiento", href: serviceHref("blanqueamiento") },
+    { label: "Diseño de sonrisa", href: serviceHref("diseno-de-sonrisa") },
   ],
   coverServiceId: "diseno-de-sonrisa",
   sources: [

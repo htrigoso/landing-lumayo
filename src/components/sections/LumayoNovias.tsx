@@ -59,8 +59,8 @@ export function LumayoNovias() {
 
         <div className="container-page grid grid-cols-[minmax(0,1fr)] gap-14 lg:grid-cols-2 lg:items-center lg:gap-20">
           <Reveal>
-            <p className="flex items-center gap-3 text-sm font-medium text-navy-700">
-              <span aria-hidden="true" className="h-px w-8 bg-navy-700/40" />
+            <p className="flex items-center gap-3 text-sm font-medium text-azul-700">
+              <span aria-hidden="true" className="h-px w-8 bg-azul-700/40" />
               Tu día, tu sonrisa
             </p>
             <h2 id="novias-title" className="section-title mt-4">
@@ -71,9 +71,9 @@ export function LumayoNovias() {
               {lumayoNovias.trustChips.map((chip) => (
                 <li
                   key={chip}
-                  className="inline-flex items-center gap-2 rounded-full bg-cyan-100/70 px-4 py-2 text-sm font-semibold text-navy-700"
+                  className="inline-flex items-center gap-2 rounded-full bg-aqua-100 px-4 py-2 text-sm font-semibold text-azul-800"
                 >
-                  <CheckIcon className="size-4 text-cyan-700" />
+                  <CheckIcon className="size-4 text-aqua-600" />
                   {chip}
                 </li>
               ))}
@@ -110,10 +110,10 @@ export function LumayoNovias() {
             {lumayoNovias.moments.map((moment, i) => (
               <Reveal key={moment.title} className="h-full" delay={i * 0.06}>
                 <article className="flex h-full flex-col rounded-3xl border border-line bg-white p-7 transition duration-300 hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
-                  <span aria-hidden="true" className="font-display text-5xl font-extrabold leading-none text-cyan-700/30">
+                  <span aria-hidden="true" className="font-display text-5xl font-extrabold leading-none text-aqua-300">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-6 text-lg font-bold text-navy-700">{moment.title}</h3>
+                  <h3 className="mt-6 text-lg font-bold text-azul-700">{moment.title}</h3>
                   <p className="mt-2 text-base leading-relaxed text-ink-600">{moment.description}</p>
                 </article>
               </Reveal>
@@ -154,7 +154,7 @@ export function LumayoNovias() {
             <TreatmentsCarousel items={treatmentItems} />
           </Reveal>
           <Reveal className="mt-10">
-            <p className="rounded-3xl bg-sky-50 p-6 text-base leading-relaxed text-ink-600">{lumayoNovias.whiteningNote}</p>
+            <p className="rounded-3xl bg-azul-50 p-6 text-base leading-relaxed text-ink-600">{lumayoNovias.whiteningNote}</p>
           </Reveal>
         </div>
       </section>
@@ -189,15 +189,15 @@ export function LumayoNovias() {
             title={<>Así <strong>trabajamos</strong></>}
           />
           <div className="relative mt-12">
-            <div aria-hidden="true" className="absolute left-[12.5%] right-[12.5%] top-6 hidden h-px bg-navy-700/25 md:block" />
-            <ol className="relative grid grid-cols-[minmax(0,1fr)] gap-10 border-l border-navy-700/25 pl-6 md:grid-cols-4 md:gap-8 md:border-l-0 md:pl-0">
+            <div aria-hidden="true" className="absolute left-[12.5%] right-[12.5%] top-6 hidden h-px bg-azul-300 md:block" />
+            <ol className="relative grid grid-cols-[minmax(0,1fr)] gap-10 border-l border-azul-300 pl-6 md:grid-cols-4 md:gap-8 md:border-l-0 md:pl-0">
               {lumayoNovias.process.map((step, i) => (
                 <li key={step.title}>
-                  <span className="-ml-12 mb-4 grid size-12 place-items-center rounded-full bg-navy-700 font-display text-lg font-bold text-white md:relative md:z-10 md:mx-auto">
+                  <span className="-ml-12 mb-4 grid size-12 place-items-center rounded-full bg-azul-700 font-display text-lg font-bold text-white md:relative md:z-10 md:mx-auto">
                     {i + 1}
                   </span>
                   <div className="md:text-center">
-                    <h3 className="text-lg font-bold text-navy-700">{step.title}</h3>
+                    <h3 className="text-lg font-bold text-azul-700">{step.title}</h3>
                     <p className="mt-2 text-base leading-relaxed text-ink-600">{step.description}</p>
                   </div>
                 </li>
@@ -219,13 +219,13 @@ export function LumayoNovias() {
             title={<>Cuida tu sonrisa <strong>antes del gran día</strong></>}
           />
           <Reveal className="mt-10">
-            <div className="rounded-[2rem] border border-navy-700/20 p-2">
-              <div className="rounded-[1.5rem] border border-navy-700/10 bg-white p-6 sm:p-10">
-                <h3 className="font-display text-2xl font-extrabold text-navy-700">{lumayoNovias.weekBefore.title}</h3>
+            <div className="rounded-[2rem] border border-azul-200 p-2">
+              <div className="rounded-[1.5rem] border border-azul-100 bg-white p-6 sm:p-10">
+                <h3 className="font-display text-2xl font-extrabold text-azul-700">{lumayoNovias.weekBefore.title}</h3>
                 <ul className="mt-8 grid grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-2">
                   {lumayoNovias.weekBefore.tips.map((tip) => (
                     <li key={tip} className="flex gap-3 text-base leading-relaxed text-ink-600">
-                      <CheckIcon className="mt-1 size-5 shrink-0 text-cyan-700" />
+                      <CheckIcon className="mt-1 size-5 shrink-0 text-aqua-600" />
                       {tip}
                     </li>
                   ))}
@@ -279,16 +279,16 @@ export function LumayoNovias() {
 
         <div className="container-page">
           <Reveal>
-            <div className="relative isolate overflow-hidden rounded-3xl bg-navy-900 p-8 text-white sm:p-12">
+            <div className="relative isolate overflow-hidden rounded-3xl bg-azul-700 p-8 text-white sm:p-12">
               <IsotypeWatermark tone="dark" className="-bottom-20 -right-16 w-80" />
               <div className="relative max-w-2xl">
                 <h2 id="cta-novias-title" className="section-title !text-white">
                   Tu sonrisa, <strong>lista para el gran día</strong>
                 </h2>
-                <p className="mt-5 text-pretty text-base leading-relaxed text-sky-100/85 sm:text-lg">
+                <p className="mt-5 text-pretty text-base leading-relaxed text-azul-100 sm:text-lg">
                   Escríbenos por WhatsApp y te explicamos cómo empezar tu plan Lumayo Novias.
                 </p>
-                <a href={whatsappUrl(noviasWhatsappMessage)} target="_blank" rel="noopener" className="btn btn-wa mt-8 text-base">
+                <a href={whatsappUrl(noviasWhatsappMessage)} target="_blank" rel="noopener" className="btn btn-light mt-8 text-base">
                   <WhatsappIcon />
                   Reservar evaluación
                 </a>

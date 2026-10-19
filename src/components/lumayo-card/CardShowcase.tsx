@@ -1,6 +1,7 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useId, type ReactNode } from "react";
+import { motion } from "motion/react";
 import { CardFlip } from "@/components/lumayo-card/CardFlip";
 import { useCardPlan } from "@/components/lumayo-card/CardPlanContext";
 import type { CardPlanKey } from "@/lib/site";
@@ -15,6 +16,7 @@ const variants: { value: CardPlanKey; label: string }[] = [
 /** Switches between the classic and gold Lumayo Card. Faces are rendered by the server and passed in. */
 export function CardShowcase({ classic, gold }: { classic: Faces; gold: Faces }) {
   const { variant, setVariant } = useCardPlan();
+  const uid = useId();
   const faces = variant === "gold" ? gold : classic;
   const isGold = variant === "gold";
 
@@ -37,11 +39,18 @@ export function CardShowcase({ classic, gold }: { classic: Faces; gold: Faces })
                 type="button"
                 aria-pressed={active}
                 onClick={() => setVariant(option.value)}
-                className={`min-h-11 rounded-full px-5 text-sm font-semibold transition-colors duration-300 motion-reduce:transition-none focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-cyan-500 ${
-                  active ? "bg-navy-700 text-white" : "text-navy-700 hover:bg-cyan-100/70"
+                className={`relative min-h-11 rounded-full px-5 text-sm font-semibold transition-colors duration-300 motion-reduce:transition-none focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-cyan-500 ${
+                  active ? "text-white" : "text-navy-700 hover:bg-cyan-100/70"
                 }`}
               >
-                {option.label}
+                {active && (
+                  <motion.span
+                    layoutId={`${uid}-variant-pill`}
+                    className="absolute inset-0 rounded-full bg-navy-700"
+                    transition={{ type: "spring", stiffness: 500, damping: 38 }}
+                  />
+                )}
+                <span className="relative">{option.label}</span>
               </button>
             );
           })}

@@ -6,14 +6,14 @@ const palette = {
   water: "var(--color-aqua-300)",
   celeste: "var(--color-azul-100)",
   ground: "var(--color-azul-200)",
-  leaf: "#2f9e8f",
-  skinBride: "#f1c9a5",
-  skinGroom: "#d9a37c",
-  hairBride: "#2b2330",
-  hairGroom: "#3a2a24",
-  ink: "#2b2330",
-  blush: "#f6c4b3",
-  white: "#ffffff",
+  leaf: "var(--color-aqua-600)",
+  skinBride: "var(--illus-skin-bride)",
+  skinGroom: "var(--illus-skin-groom)",
+  hairBride: "var(--illus-hair-bride)",
+  hairGroom: "var(--illus-hair-groom)",
+  ink: "var(--color-azul-950)",
+  blush: "var(--illus-blush)",
+  white: "white",
 } as const;
 
 const HEART_PATH = "M0 3 C-5 -1 -3 -5 0 -2 C3 -5 5 -1 0 3 Z";
@@ -122,7 +122,7 @@ function Bride() {
           />
         </g>
 
-        <path d="M-19 38 L-31 94" stroke={palette.skinBride} strokeWidth={8} strokeLinecap="round" />
+        <path d="M-19 38 L-31 94" style={{ stroke: palette.skinBride }} strokeWidth={8} strokeLinecap="round" />
 
         <path
           d="M-21 34 Q0 26 21 34 L17 72 L35 150 Q0 158 -37 150 L-17 72 Z"
@@ -134,26 +134,26 @@ function Bride() {
 
         <g className="novias-anim novias-bouquet">
           <path d="M-31 94 L-37 120" style={{ stroke: palette.water }} strokeWidth={2} />
-          <path d="M-43 122 Q-36 131 -29 125 Q-36 116 -43 122 Z" fill={palette.leaf} />
+          <path d="M-43 122 Q-36 131 -29 125 Q-36 116 -43 122 Z" style={{ fill: palette.leaf }} />
           <circle cx={-48} cy={110} r={7.5} style={{ fill: palette.turquoise }} />
           <circle cx={-35} cy={106} r={7.5} fill={palette.white} style={{ stroke: palette.water }} strokeWidth={1} />
           <circle cx={-41} cy={117} r={7} fill={palette.white} style={{ stroke: palette.water }} strokeWidth={1} />
           <circle cx={-43} cy={101} r={5} style={{ fill: palette.turquoise }} />
-          <circle cx={-31} cy={94} r={6} fill={palette.skinBride} />
+          <circle cx={-31} cy={94} r={6} style={{ fill: palette.skinBride }} />
         </g>
 
         <path d="M-19 38 L-23 56" stroke={palette.white} strokeWidth={11} strokeLinecap="round" />
-        <path d="M17 40 L38 78" stroke={palette.skinBride} strokeWidth={8} strokeLinecap="round" />
+        <path d="M17 40 L38 78" style={{ stroke: palette.skinBride }} strokeWidth={8} strokeLinecap="round" />
         <path d="M17 40 L23 58" stroke={palette.white} strokeWidth={11} strokeLinecap="round" />
-        <circle cx={38} cy={78} r={6.5} fill={palette.skinBride} style={{ stroke: palette.water }} strokeWidth={0.8} />
+        <circle cx={38} cy={78} r={6.5} style={{ fill: palette.skinBride, stroke: palette.water }} strokeWidth={0.8} />
 
-        <rect x={-7} y={16} width={14} height={18} fill={palette.skinBride} />
+        <rect x={-7} y={16} width={14} height={18} style={{ fill: palette.skinBride }} />
         <g className="novias-anim novias-head">
-          <circle cx={-19} cy={5} r={8.5} fill={palette.hairBride} />
-          <circle cx={0} cy={0} r={20} fill={palette.skinBride} />
+          <circle cx={-19} cy={5} r={8.5} style={{ fill: palette.hairBride }} />
+          <circle cx={0} cy={0} r={20} style={{ fill: palette.skinBride }} />
           <path
             d="M-20 0 Q-20 -24 0 -24 Q20 -24 20 0 Q13 -14 0 -15 Q-13 -14 -20 0 Z"
-            fill={palette.hairBride}
+            style={{ fill: palette.hairBride }}
           />
           <Face
             browY={-8}
@@ -176,12 +176,12 @@ function Groom() {
   return (
     <g transform="translate(245 128)">
       <g className="novias-anim novias-hop">
-        <path d="M-7 18 H7 V40 H-7 Z" fill={palette.skinGroom} />
+        <path d="M-7 18 H7 V40 H-7 Z" style={{ fill: palette.skinGroom }} />
 
         <rect x={-20} y={124} width={18} height={44} style={{ fill: palette.deepNavy }} />
         <rect x={2} y={124} width={18} height={44} style={{ fill: palette.deepNavy }} />
-        <ellipse cx={-11} cy={169} rx={10} ry={4} fill={palette.ink} />
-        <ellipse cx={11} cy={169} rx={10} ry={4} fill={palette.ink} />
+        <ellipse cx={-11} cy={169} rx={10} ry={4} style={{ fill: palette.ink }} />
+        <ellipse cx={11} cy={169} rx={10} ry={4} style={{ fill: palette.ink }} />
 
         <path d="M-32 56 Q0 44 32 56 L36 130 L-36 130 Z" style={{ fill: palette.navy }} />
         <path d="M-12 46 L0 80 L12 46 Z" fill={palette.white} />
@@ -199,19 +199,19 @@ function Groom() {
         <g transform="translate(27 58)">
           <g className="novias-anim novias-wave">
             <path d="M0 0 L6 64" style={{ stroke: palette.deepNavy }} strokeWidth={11} strokeLinecap="round" />
-            <circle cx={8} cy={68} r={6} fill={palette.skinGroom} />
+            <circle cx={8} cy={68} r={6} style={{ fill: palette.skinGroom }} />
           </g>
         </g>
         <path d="M-27 58 L-50 96" style={{ stroke: palette.deepNavy }} strokeWidth={11} strokeLinecap="round" />
-        <circle cx={-50} cy={96} r={7} fill={palette.skinGroom} />
+        <circle cx={-50} cy={96} r={7} style={{ fill: palette.skinGroom }} />
         <path d="M-48.5 88.5 L-43.5 91.5" stroke={palette.white} strokeWidth={3} strokeLinecap="round" />
 
         <g transform="translate(0 10)">
           <g className="novias-anim novias-head" style={{ animationDelay: "1.3s" }}>
-            <circle cx={0} cy={0} r={22} fill={palette.skinGroom} />
+            <circle cx={0} cy={0} r={22} style={{ fill: palette.skinGroom }} />
             <path
               d="M-22 0 Q-25 -26 0 -27 Q25 -26 22 0 Q17 -12 5 -16 Q-9 -12 -22 0 Z"
-              fill={palette.hairGroom}
+              style={{ fill: palette.hairGroom }}
             />
             <Face
               browY={-10}
@@ -250,13 +250,13 @@ function Face({ browY, eyeY, eyeOffset, blushY, blushX, mouthTop, mouthDepth, mo
   const mouthBottomControl = mouthTop + mouthDepth;
   return (
     <g>
-      <circle cx={-blushX} cy={blushY} r={3.5} fill={palette.blush} opacity={0.5} className="novias-anim novias-blush" />
-      <circle cx={blushX} cy={blushY} r={3.5} fill={palette.blush} opacity={0.5} className="novias-anim novias-blush" />
+      <circle cx={-blushX} cy={blushY} r={3.5} style={{ fill: palette.blush }} opacity={0.5} className="novias-anim novias-blush" />
+      <circle cx={blushX} cy={blushY} r={3.5} style={{ fill: palette.blush }} opacity={0.5} className="novias-anim novias-blush" />
 
       <path
         d={`M${-eyeOffset - eyeArc} ${eyeY} Q${-eyeOffset} ${eyeY - 5} ${-eyeOffset + eyeArc} ${eyeY} M${eyeOffset - eyeArc} ${eyeY} Q${eyeOffset} ${eyeY - 5} ${eyeOffset + eyeArc} ${eyeY}`}
         fill="none"
-        stroke={palette.ink}
+        style={{ stroke: palette.ink }}
         strokeWidth={2}
         strokeLinecap="round"
       />

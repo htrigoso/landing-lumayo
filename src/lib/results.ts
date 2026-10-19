@@ -9,6 +9,8 @@
  * in a production build. Delete them once real testimonials are added.
  */
 
+import { serviceName } from "@/lib/site";
+
 export type Testimonial = {
   name: string;
   /** What the patient said, quoted as they wrote it. */
@@ -33,7 +35,7 @@ export const sampleTestimonials: Testimonial[] = [
   {
     name: "Carla M.",
     image: sampleImage("photo-1660160628977-3ad376b8b73b"),
-    treatment: "Ortodoncia con brackets",
+    treatment: serviceName("ortodoncia"),
     rating: 5,
     quote: "Llevo seis meses con mis brackets y ya noto el cambio. En cada control me explican qué ajustan y siempre me atienden puntual.",
   },
@@ -68,14 +70,14 @@ export const sampleTestimonials: Testimonial[] = [
   {
     name: "Rosa P.",
     image: sampleImage("photo-1734764627105-b5ff03f02b2d"),
-    treatment: "Prótesis removibles",
+    treatment: serviceName("protesis"),
     rating: 5,
     quote: "Mi prótesis quedó muy bien ajustada. Me enseñaron a cuidarla y ahora me siento segura al hablar y sonreír.",
   },
   {
     name: "Diego A.",
     image: sampleImage("photo-1611695434369-a8f5d76ceb7b"),
-    treatment: "Ortodoncia con brackets",
+    treatment: serviceName("ortodoncia"),
     rating: 5,
     quote: "Reservé por WhatsApp y me respondieron enseguida. Te hacen sentir en confianza desde la primera visita.",
   },

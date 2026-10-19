@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types";
+import { serviceHref } from "@/lib/site";
 
 export const post: BlogPost = {
   slug: "endodoncia-duele",
@@ -119,9 +120,9 @@ export const post: BlogPost = {
     },
   ],
   related: [
-    { label: "Endodoncia", href: "/servicios/endodoncia" },
-    { label: "Operatoria", href: "/servicios/operatoria" },
-    { label: "Curaciones", href: "/servicios/curaciones" },
+    { label: "Endodoncia", href: serviceHref("endodoncia") },
+    { label: "Operatoria", href: serviceHref("operatoria") },
+    { label: "Curaciones dentales", href: serviceHref("curaciones") },
   ],
   coverServiceId: "endodoncia",
   sources: [

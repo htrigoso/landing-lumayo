@@ -2,7 +2,7 @@ import { SectionHeading } from "@/components/brand/SectionHeading";
 import { BracesIcon, WhatsappIcon } from "@/components/icons";
 import { Reveal } from "@/components/motion/Reveal";
 import { FaqAccordion } from "@/components/orthodontics/FaqAccordion";
-import { bracesWhatsappMessage, whatsappUrl } from "@/lib/site";
+import { bracesWhatsappMessage, serviceName, whatsappUrl } from "@/lib/site";
 import { SectionBackdrop } from "@/components/decor/SectionBackdrop";
 
 const steps = [
@@ -50,7 +50,7 @@ export function Orthodontics() {
       <div className="container-page">
         <SectionHeading
           number="02"
-          label="Ortodoncia con brackets"
+          label={serviceName("ortodoncia")}
           id="ortodoncia-title"
           title={
             <>

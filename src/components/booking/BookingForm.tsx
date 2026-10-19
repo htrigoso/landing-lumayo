@@ -43,7 +43,7 @@ function validate(name: string, service: string): Errors {
 }
 
 export function BookingForm({
-  defaultService = "Ortodoncia con brackets",
+  defaultService = "Brackets",
   title = "Reserva",
   titleEmphasis = "tu cita",
   subtitle = "Completa tus datos y te confirmamos el horario por WhatsApp.",

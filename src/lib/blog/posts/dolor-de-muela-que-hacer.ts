@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types";
+import { serviceHref } from "@/lib/site";
 
 export const post: BlogPost = {
   slug: "dolor-de-muela-que-hacer",
@@ -122,9 +123,9 @@ export const post: BlogPost = {
     },
   ],
   related: [
-    { label: "Curaciones", href: "/servicios/curaciones" },
-    { label: "Endodoncia", href: "/servicios/endodoncia" },
-    { label: "Extracciones", href: "/servicios/extracciones" },
+    { label: "Curaciones dentales", href: serviceHref("curaciones") },
+    { label: "Endodoncia", href: serviceHref("endodoncia") },
+    { label: "Extracción dental", href: serviceHref("extracciones") },
   ],
   coverServiceId: "curaciones",
   sources: [

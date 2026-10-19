@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Montserrat } from "next/font/google";
 import { MotionProvider } from "@/components/motion/MotionProvider";
+import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
 // Brand manual: Montserrat only (variable font covers the 400 / 500 / 800 weights it specifies).
@@ -11,6 +12,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
+  // Resolves relative canonical and og URLs on every page.
+  metadataBase: new URL(siteUrl),
   title: "Lumayo · Ortodoncia y centro odontológico en Tarapoto",
   description:
     "Brackets, blanqueamiento dental, implantes, endodoncia, prótesis y odontopediatría en Tarapoto. Agenda tu cita por WhatsApp al 946 788 123.",

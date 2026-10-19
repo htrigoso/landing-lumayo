@@ -1,3 +1,5 @@
+import { serviceName } from "@/lib/site";
+
 export type TreatmentKey = "limpieza" | "ortodoncia" | "carillas" | "diseno" | "blanqueamiento";
 export type PlanStatus = "ok" | "tight" | "short";
 export type TimeBucket = "12plus" | "6to12" | "3to6" | "1to3" | "lt1";
@@ -30,7 +32,7 @@ export const bucketWeeks: Record<TimeBucket, number> = {
 
 export const treatmentLabels: Record<TreatmentKey, string> = {
   limpieza: "Limpieza dental",
-  ortodoncia: "Ortodoncia con brackets",
+  ortodoncia: serviceName("ortodoncia"),
   carillas: "Carillas de porcelana",
   diseno: "Diseño de sonrisa",
   blanqueamiento: "Blanqueamiento dental",

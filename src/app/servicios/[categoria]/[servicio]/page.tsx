@@ -7,6 +7,7 @@ import { FloatingWhatsapp } from "@/components/layout/FloatingWhatsapp";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { MobileCtaBar } from "@/components/layout/MobileCtaBar";
+import { IsotypeWatermark } from "@/components/brand/IsotypeWatermark";
 import { SectionHeading } from "@/components/brand/SectionHeading";
 import { SectionAtmosphere } from "@/components/decor/SectionAtmosphere";
 import { ArrowRightIcon, CalendarIcon, CheckIcon, serviceIcons, WhatsappIcon } from "@/components/icons";
@@ -15,11 +16,16 @@ import { BookingSection } from "@/components/sections/BookingSection";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { FaqAccordion } from "@/components/orthodontics/FaqAccordion";
 import { getServiceContent } from "@/lib/service-content";
-import { serviceCategories, services, whatsappUrl, type Service } from "@/lib/site";
+import {
+  categoryOf,
+  categoryPath,
+  getServiceBySlugs,
+  servicePath,
+  services,
+  whatsappUrl,
+} from "@/lib/site";
 
-type PageProps = { params: Promise<{ slug: string }> };
-
-const categoryLabel = Object.fromEntries(serviceCategories.map((c) => [c.id, c.label]));
+type PageProps = { params: Promise<{ categoria: string; servicio: string }> };
 
 /** Program blocks linked from a service page; mirrors the Kids and Novias landing pages. */
 const programs = {
@@ -35,27 +41,27 @@ const programs = {
   },
 } as const;
 
-function findService(slug: string): Service | undefined {
-  return services.find((s) => s.id === slug);
-}
-
 // Blocking route: unknown slugs must answer 404, which streaming cannot do after the shell is sent.
 export const instant = false;
 
 /** Pre-renders one page per service; `dynamicParams` is unavailable with cacheComponents. */
 export function generateStaticParams() {
-  return services.map((s) => ({ slug: s.id }));
+  return services.map((s) => ({ categoria: categoryOf(s).slug, servicio: s.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const service = findService(slug);
+  const { categoria, servicio } = await params;
+  const service = getServiceBySlugs(categoria, servicio);
   if (!service) {
     return { title: "Servicio no encontrado · Lumayo Centro Odontológico" };
   }
+  const path = servicePath(service);
+  const title = `${service.name} · Lumayo Centro Odontológico`;
   return {
-    title: `${service.name} · Lumayo Centro Odontológico`,
+    title,
     description: service.details.summary,
+    alternates: { canonical: path },
+    openGraph: { type: "article", title, description: service.details.summary, url: path },
   };
 }
 
@@ -84,17 +90,18 @@ export default function ServicePage({ params }: PageProps) {
 }
 
 async function ServiceContent({ params }: PageProps) {
-  const { slug } = await params;
-  const service = findService(slug);
+  const { categoria, servicio } = await params;
+  const service = getServiceBySlugs(categoria, servicio);
   if (!service) notFound();
 
   const content = getServiceContent(service.id);
   // Content entries carry `todo` items that the dentist must confirm before publishing.
   if (!content) notFound();
 
+  const category = categoryOf(service);
   const Icon = serviceIcons[service.icon];
   const relatedServices = content.related.flatMap((id) => {
-    const related = findService(id);
+    const related = services.find((s) => s.id === id);
     return related ? [related] : [];
   });
   const program = content.program ? programs[content.program] : undefined;
@@ -106,7 +113,12 @@ async function ServiceContent({ params }: PageProps) {
         title={service.name}
         emphasis=""
         description={service.description}
-        crumbs={[{ label: "Inicio", href: "/" }, { label: "Servicios", href: "/servicios" }, { label: service.name }]}
+        crumbs={[
+          { label: "Inicio", href: "/" },
+          { label: "Servicios", href: "/servicios" },
+          { label: category.label, href: categoryPath(category) },
+          { label: service.name },
+        ]}
       />
 
       <section aria-label="Resumen del servicio" className="relative isolate overflow-hidden bg-white pt-12 pb-16 lg:pt-16 lg:pb-20">
@@ -114,7 +126,9 @@ async function ServiceContent({ params }: PageProps) {
 
         <div className="container-page grid grid-cols-[minmax(0,1fr)] gap-12 lg:grid-cols-2 lg:items-center">
           <Reveal className="min-w-0">
-            <span className="pill w-fit">{categoryLabel[service.category]}</span>
+            <Link href={categoryPath(category)} className="pill w-fit">
+              {category.label}
+            </Link>
             <p className="mt-6 text-pretty text-lg leading-relaxed text-ink-600 sm:text-xl">{service.details.summary}</p>
             <p className="mt-5 text-pretty leading-relaxed text-ink-900">
               <span className="font-semibold text-navy-700">Ideal para: </span>
@@ -308,12 +322,13 @@ async function ServiceContent({ params }: PageProps) {
 
           <div className="container-page">
             <Reveal>
-              <div className="relative isolate overflow-hidden rounded-3xl bg-navy-900 p-8 text-white sm:p-12">
+              <div className="relative isolate overflow-hidden rounded-3xl bg-azul-700 p-8 text-white sm:p-12">
+                <IsotypeWatermark tone="dark" className="-bottom-20 -right-16 w-80" />
                 <div className="relative flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
                   <div className="max-w-2xl">
-                    <p className="text-sm font-medium uppercase tracking-[0.12em] text-sky-100/85">Parte de un programa</p>
+                    <p className="text-sm font-medium uppercase tracking-[0.12em] text-azul-100">Parte de un programa</p>
                     <h2 className="mt-3 font-display text-2xl font-extrabold leading-tight text-white sm:text-3xl">{program.label}</h2>
-                    <p className="mt-3 text-pretty leading-relaxed text-sky-100/85">{program.text}</p>
+                    <p className="mt-3 text-pretty leading-relaxed text-azul-100">{program.text}</p>
                   </div>
                   <Link href={program.href} className="btn btn-light shrink-0 text-base">
                     Conocer el programa
@@ -342,11 +357,11 @@ async function ServiceContent({ params }: PageProps) {
               {relatedServices.map((related, i) => (
                 <Reveal key={related.id} delay={i * 0.06} className="min-w-0">
                   <Link
-                    href={`/servicios/${related.id}`}
+                    href={servicePath(related)}
                     className="group flex h-full flex-col rounded-3xl border border-line bg-white p-6 transition hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                   >
                     <span className="text-xs font-semibold uppercase tracking-[0.12em] text-cyan-700">
-                      {categoryLabel[related.category]}
+                      {categoryOf(related).label}
                     </span>
                     <span className="mt-3 flex flex-1 items-start justify-between gap-4 font-display text-lg font-bold leading-snug text-navy-700">
                       {related.name}

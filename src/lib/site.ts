@@ -23,6 +23,10 @@ export const site = {
 
 export const fullAddress = `${site.address.street}, ${site.address.district}, ${site.address.city}`;
 
+/** Canonical origin for metadata, canonical URLs and the sitemap. */
+// TODO(SEO): confirm production domain
+export const siteUrl = "https://lumayo.pe";
+
 export function whatsappUrl(message: string): string {
   return `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
@@ -422,19 +426,95 @@ export type ServiceIcon =
   | "denture"
   | "child";
 
+/**
+ * Category landing pages live at /servicios/<slug>. Slugs must not collide with the static
+ * folders under src/app/servicios (see `reservedServiceSlugs`).
+ */
 export const serviceCategories = [
-  { id: "estetica", label: "Ortodoncia y estética" },
-  { id: "carillas", label: "Carillas" },
-  { id: "prevencion", label: "Prevención" },
-  { id: "restauracion", label: "Restauración" },
-  { id: "cirugia", label: "Cirugía y prótesis" },
-  { id: "ninos", label: "Niños" },
+  {
+    id: "estetica",
+    slug: "ortodoncia-y-estetica",
+    label: "Ortodoncia y estética",
+    // TODO(SEO): confirm title/description/intro
+    seo: {
+      title: "Brackets y ortodoncia en Tarapoto",
+      description: "Brackets metálicos, de zafiro, invisibles y cerámicos en Tarapoto, con plan a tu medida. Consulta por WhatsApp.",
+      h1: "Brackets y ortodoncia",
+      intro: "Alinea tus dientes y diseña una sonrisa armónica con un plan de tratamiento hecho a tu medida.",
+    },
+  },
+  {
+    id: "carillas",
+    slug: "carillas-dentales",
+    label: "Carillas",
+    // TODO(SEO): confirm title/description/intro
+    seo: {
+      title: "Carillas dentales: precio y tipos en Tarapoto",
+      description: "Carillas dentales de resina, porcelana y zirconio en Tarapoto. Conoce el precio de cada tipo y consulta por WhatsApp.",
+      h1: "Carillas dentales",
+      intro: "Mejora el color, la forma y la alineación de tus dientes con carillas adaptadas a tu sonrisa.",
+    },
+  },
+  {
+    id: "prevencion",
+    slug: "prevencion-dental",
+    label: "Prevención",
+    // TODO(SEO): confirm title/description/intro
+    seo: {
+      title: "Limpieza dental y profilaxis en Tarapoto",
+      description: "Limpieza dental, profilaxis, destartraje y flúor dental en Tarapoto para cuidar tus dientes y prevenir caries.",
+      h1: "Limpieza dental y prevención",
+      intro: "Revisiones, limpieza y protección del esmalte para mantener tu boca sana durante todo el año.",
+    },
+  },
+  {
+    id: "restauracion",
+    slug: "restauracion-dental",
+    label: "Restauración",
+    // TODO(SEO): confirm title/description/intro
+    seo: {
+      title: "Endodoncia y curaciones dentales en Tarapoto",
+      description: "Endodoncia, curaciones dentales y operatoria dental en Tarapoto para recuperar dientes dañados por caries o fracturas.",
+      h1: "Endodoncia y curaciones dentales",
+      intro: "Recupera la función y la forma de tus dientes con tratamientos de operatoria, curaciones y endodoncia.",
+    },
+  },
+  {
+    id: "cirugia",
+    slug: "cirugia-y-protesis",
+    label: "Cirugía y prótesis",
+    // TODO(SEO): confirm title/description/intro
+    seo: {
+      title: "Extracción dental, implantes y prótesis dental en Tarapoto",
+      description: "Extracción dental, implantes dentales y prótesis dental en Tarapoto, con evaluación previa. Consulta por WhatsApp.",
+      h1: "Extracción dental, implantes y prótesis",
+      intro: "Extracciones, implantes y prótesis removibles para reemplazar o retirar piezas dentales con seguridad.",
+    },
+  },
+  {
+    id: "ninos",
+    slug: "odontopediatria",
+    label: "Niños",
+    // TODO(SEO): confirm title/description/intro
+    seo: {
+      title: "Odontopediatras en Tarapoto",
+      description: "Odontopediatras en Tarapoto: atención amable para bebés, niños y adolescentes en un ambiente tranquilo.",
+      h1: "Odontopediatras en Tarapoto",
+      intro: "Atención paciente y en un ambiente amable para que los más pequeños vivan una visita tranquila.",
+    },
+  },
 ] as const;
 
-export type ServiceCategoryId = (typeof serviceCategories)[number]["id"];
+export type ServiceCategory = (typeof serviceCategories)[number];
+export type ServiceCategoryId = ServiceCategory["id"];
+
+/** Static folders under src/app/servicios. No category or service may use these slugs. */
+export const reservedServiceSlugs = ["lumayo-card", "lumayo-kids", "lumayo-novias"] as const;
 
 export type Service = {
   id: string;
+  /** Kebab-case URL segment, unique within its category. */
+  slug: string;
   name: string;
   description: string;
   icon: ServiceIcon;
@@ -461,7 +541,8 @@ const servicePhoto = (id: string) => `https://images.unsplash.com/${id}?w=1200&h
 export const services: Service[] = [
   {
     id: "ortodoncia",
-    name: "Ortodoncia con brackets",
+    slug: "brackets",
+    name: "Brackets",
     description:
       "Alinea tus dientes y mejora tu mordida con un plan de tratamiento hecho a tu medida.",
     icon: "braces",
@@ -483,6 +564,7 @@ export const services: Service[] = [
   },
   {
     id: "diseno-de-sonrisa",
+    slug: "diseno-de-sonrisa",
     name: "Diseño de sonrisa",
     description: "Planificamos la forma, el color y la proporción de tus dientes para una sonrisa en armonía con tu rostro.",
     icon: "smile",
@@ -504,6 +586,7 @@ export const services: Service[] = [
   },
   {
     id: "carillas-resina",
+    slug: "carillas-de-resina",
     name: "Carillas de resina",
     description: "Una opción rápida y accesible para mejorar el color y la forma de tus dientes en pocas sesiones.",
     icon: "veneer",
@@ -523,6 +606,7 @@ export const services: Service[] = [
   },
   {
     id: "carillas-porcelana",
+    slug: "carillas-de-porcelana",
     name: "Carillas de porcelana",
     description: "Resistentes y de brillo natural, mantienen su color con el paso de los años.",
     icon: "veneer",
@@ -542,6 +626,7 @@ export const services: Service[] = [
   },
   {
     id: "carillas-zirconio",
+    slug: "carillas-de-zirconio",
     name: "Carillas de zirconio",
     description: "Gran resistencia para cubrir dientes oscuros, manchados o con desgaste.",
     icon: "veneer",
@@ -561,6 +646,7 @@ export const services: Service[] = [
   },
   {
     id: "carillas-disilicato",
+    slug: "carillas-de-disilicato-de-litio",
     name: "Carillas de disilicato de litio",
     description: "Estética y translucidez muy parecidas al esmalte natural, con excelente durabilidad.",
     icon: "veneer",
@@ -580,7 +666,8 @@ export const services: Service[] = [
   },
   {
     id: "carillas-ultrafinas",
-    name: "Carillas ultrafinas sin tallado",
+    slug: "carillas-ultrafinas",
+    name: "Carillas ultrafinas",
     description: "Láminas finas como lentes de contacto que se colocan sin desgastar tus dientes.",
     icon: "veneer",
     category: "carillas",
@@ -599,6 +686,7 @@ export const services: Service[] = [
   },
   {
     id: "blanqueamiento",
+    slug: "blanqueamiento-dental",
     name: "Blanqueamiento dental",
     description: "Aclara el tono de tus dientes de forma segura y luce una sonrisa más luminosa.",
     icon: "sparkle",
@@ -618,6 +706,7 @@ export const services: Service[] = [
   },
   {
     id: "limpieza",
+    slug: "limpieza-dental",
     name: "Limpieza dental",
     description: "Retiramos el sarro y las manchas para mantener tus encías sanas y tu boca fresca.",
     icon: "clean",
@@ -637,6 +726,7 @@ export const services: Service[] = [
   },
   {
     id: "fluor-barniz",
+    slug: "fluor-barniz",
     name: "Flúor barniz",
     description: "Una capa protectora que fortalece el esmalte y ayuda a prevenir la caries.",
     icon: "drop",
@@ -655,6 +745,7 @@ export const services: Service[] = [
   },
   {
     id: "fluor-gel",
+    slug: "fluor-en-gel",
     name: "Flúor en gel",
     description: "Aplicación con cubetas que refuerza el esmalte de niños y adultos.",
     icon: "tray",
@@ -673,6 +764,7 @@ export const services: Service[] = [
   },
   {
     id: "sellantes",
+    slug: "sellantes-de-fosas-y-fisuras",
     name: "Sellantes de fosas y fisuras",
     description: "Protegen las muelas sellando los surcos donde suele empezar la caries.",
     icon: "shield",
@@ -691,6 +783,7 @@ export const services: Service[] = [
   },
   {
     id: "operatoria",
+    slug: "operatoria-dental",
     name: "Operatoria dental",
     description: "Restauramos dientes con caries, desgaste o fracturas con resinas del color natural.",
     icon: "tooth",
@@ -710,7 +803,8 @@ export const services: Service[] = [
   },
   {
     id: "curaciones",
-    name: "Curaciones",
+    slug: "curaciones-dentales",
+    name: "Curaciones dentales",
     description: "Detenemos la caries a tiempo y devolvemos al diente su forma y su función.",
     icon: "filling",
     category: "restauracion",
@@ -729,6 +823,7 @@ export const services: Service[] = [
   },
   {
     id: "endodoncia",
+    slug: "endodoncia",
     name: "Endodoncia",
     description: "Tratamiento de conducto para aliviar el dolor y conservar tu diente natural.",
     icon: "root",
@@ -748,7 +843,8 @@ export const services: Service[] = [
   },
   {
     id: "extracciones",
-    name: "Extracciones simples",
+    slug: "extraccion-dental",
+    name: "Extracción dental",
     description: "Retiramos piezas dañadas de forma segura, con anestesia y cuidado en todo momento.",
     icon: "extract",
     category: "cirugia",
@@ -767,7 +863,8 @@ export const services: Service[] = [
   },
   {
     id: "muelas-del-juicio",
-    name: "Extracción de muelas del juicio",
+    slug: "extraccion-de-la-muela-del-juicio",
+    name: "Extracción de la muela del juicio",
     description: "Evaluamos y retiramos las muelas del juicio que causan dolor o molestias.",
     icon: "wisdom",
     category: "cirugia",
@@ -786,6 +883,7 @@ export const services: Service[] = [
   },
   {
     id: "implantes",
+    slug: "implantes-dentales",
     name: "Implantes dentales",
     description: "Reemplaza piezas perdidas con una solución fija, firme y de aspecto natural.",
     icon: "implant",
@@ -805,7 +903,8 @@ export const services: Service[] = [
   },
   {
     id: "protesis",
-    name: "Prótesis removibles",
+    slug: "protesis-dental",
+    name: "Prótesis dental",
     description: "Recupera la función y la estética de tu sonrisa con prótesis cómodas y bien ajustadas.",
     icon: "denture",
     category: "cirugia",
@@ -824,6 +923,7 @@ export const services: Service[] = [
   },
   {
     id: "odontopediatria",
+    slug: "odontopediatria",
     name: "Odontopediatría",
     description: "Atención amable y paciente para que los más pequeños vivan una visita tranquila.",
     icon: "child",
@@ -843,8 +943,47 @@ export const services: Service[] = [
   },
 ];
 
+/** Single source of truth for service URLs: /servicios/<category>/<service>. */
+export function getCategoryBySlug(slug: string): ServiceCategory | undefined {
+  return serviceCategories.find((c) => c.slug === slug);
+}
+
+export function categoryOf(service: Service): ServiceCategory {
+  const category = serviceCategories.find((c) => c.id === service.category);
+  if (!category) throw new Error(`Unknown service category: ${service.category}`);
+  return category;
+}
+
+export function getServiceBySlugs(categoriaSlug: string, servicioSlug: string): Service | undefined {
+  const category = getCategoryBySlug(categoriaSlug);
+  if (!category) return undefined;
+  return services.find((s) => s.category === category.id && s.slug === servicioSlug);
+}
+
+export function servicesInCategory(category: ServiceCategory): Service[] {
+  return services.filter((s) => s.category === category.id);
+}
+
+export const categoryPath = (category: ServiceCategory) => `/servicios/${category.slug}`;
+
+export const servicePath = (service: Service) => `/servicios/${categoryOf(service).slug}/${service.slug}`;
+
+/** Path for a service known only by its internal id (used in static blog and content data). */
+export function serviceHref(serviceId: string): string {
+  const service = services.find((s) => s.id === serviceId);
+  if (!service) throw new Error(`Unknown service id: ${serviceId}`);
+  return servicePath(service);
+}
+
+/** Visible name for a service known only by its internal id (used in static copy and data). */
+export function serviceName(serviceId: string): string {
+  const service = services.find((s) => s.id === serviceId);
+  if (!service) throw new Error(`Unknown service id: ${serviceId}`);
+  return service.name;
+}
+
 export const bookingServiceOptions = [
-  "Ortodoncia con brackets",
+  "Brackets",
   "Evaluación general",
   "Limpieza dental",
   "Carillas",
@@ -852,9 +991,9 @@ export const bookingServiceOptions = [
   "Blanqueamiento dental",
   "Curaciones / operatoria dental",
   "Endodoncia",
-  "Extracciones",
+  "Extracción dental",
   "Implantes dentales",
-  "Prótesis removibles",
+  "Prótesis dental",
   "Flúor y sellantes",
   "Odontopediatría",
   "Otro / no estoy seguro",

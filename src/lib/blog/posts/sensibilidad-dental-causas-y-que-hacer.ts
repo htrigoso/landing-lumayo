@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types";
+import { serviceHref } from "@/lib/site";
 
 export const post: BlogPost = {
   slug: "sensibilidad-dental-causas-y-que-hacer",
@@ -135,9 +136,9 @@ export const post: BlogPost = {
     },
   ],
   related: [
-    { label: "Flúor barniz", href: "/servicios/fluor-barniz" },
-    { label: "Curaciones", href: "/servicios/curaciones" },
-    { label: "Endodoncia", href: "/servicios/endodoncia" },
+    { label: "Flúor barniz", href: serviceHref("fluor-barniz") },
+    { label: "Curaciones dentales", href: serviceHref("curaciones") },
+    { label: "Endodoncia", href: serviceHref("endodoncia") },
   ],
   coverServiceId: "fluor-barniz",
   sources: [

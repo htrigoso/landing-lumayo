@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types";
+import { serviceHref } from "@/lib/site";
 
 export const post: BlogPost = {
   slug: "sellantes-y-fluor-prevenir-caries",
@@ -155,9 +156,9 @@ export const post: BlogPost = {
     },
   ],
   related: [
-    { label: "Sellantes", href: "/servicios/sellantes" },
-    { label: "Flúor barniz", href: "/servicios/fluor-barniz" },
-    { label: "Flúor en gel", href: "/servicios/fluor-gel" },
+    { label: "Sellantes", href: serviceHref("sellantes") },
+    { label: "Flúor barniz", href: serviceHref("fluor-barniz") },
+    { label: "Flúor en gel", href: serviceHref("fluor-gel") },
   ],
   coverServiceId: "sellantes",
   sources: [

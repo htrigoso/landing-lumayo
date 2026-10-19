@@ -7,8 +7,10 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowRightIcon, CalendarIcon, serviceIcons, WhatsappIcon } from "@/components/icons";
 import { IsotypeWatermark } from "@/components/brand/IsotypeWatermark";
 import {
+  categoryPath,
   serviceCategories,
   services,
+  servicePath,
   whatsappUrl,
   type Service,
   type ServiceCategoryId,
@@ -21,9 +23,14 @@ const categoryLabel = Object.fromEntries(serviceCategories.map((c) => [c.id, c.l
 const featured = services.filter((s) => s.featured);
 const regular = services.filter((s) => !s.featured);
 
-const filters: { id: Filter; label: string; count: number }[] = [
-  { id: "todos", label: "Todos", count: services.length },
-  ...serviceCategories.map((c) => ({ id: c.id, label: c.label, count: services.filter((s) => s.category === c.id).length })),
+const filters: { id: Filter; label: string; count: number; href: string }[] = [
+  { id: "todos", label: "Todos", count: services.length, href: "/servicios" },
+  ...serviceCategories.map((c) => ({
+    id: c.id,
+    label: c.label,
+    count: services.filter((s) => s.category === c.id).length,
+    href: categoryPath(c),
+  })),
 ];
 
 /**
@@ -58,12 +65,22 @@ function centerChip(chip: HTMLElement, behavior: ScrollBehavior) {
   row.scrollTo({ left: row.scrollLeft + offset - (row.clientWidth - chip.offsetWidth) / 2, behavior });
 }
 
+type ServicesGridProps = {
+  /**
+   * Route mode (/servicios and its category pages): chips are links to the category pages and
+   * `activeCategory` picks the shown category. Without it (home) chips filter locally.
+   */
+  linkMode?: boolean;
+  activeCategory?: ServiceCategoryId;
+};
+
 /**
  * All services at a glance: category filters, the featured treatments (braces, smile design) as wide
  * Azul profundo card, and a grid of compact cards that each open a WhatsApp inquiry.
  */
-export function ServicesGrid() {
-  const [filter, setFilter] = useState<Filter>("todos");
+export function ServicesGrid({ linkMode = false, activeCategory }: ServicesGridProps = {}) {
+  const [localFilter, setLocalFilter] = useState<Filter>("todos");
+  const filter: Filter = linkMode ? (activeCategory ?? "todos") : localFilter;
   const reduceMotion = useReducedMotion();
 
   const shownFeatured = featured.filter((s) => filter === "todos" || s.category === filter);
@@ -79,22 +96,16 @@ export function ServicesGrid() {
         <div role="group" aria-label="Filtrar servicios por categoría" className="flex w-max gap-2 sm:w-auto sm:flex-wrap">
           {filters.map((f) => {
             const active = f.id === filter;
-            return (
-              <button
-                key={f.id}
-                type="button"
-                aria-pressed={active}
-                onPointerEnter={() => preloadCategory(f.id)}
-                onFocus={() => preloadCategory(f.id)}
-                onTouchStart={() => preloadCategory(f.id)}
-                onClick={(e) => {
-                  setFilter(f.id);
-                  centerChip(e.currentTarget, reduceMotion ? "auto" : "smooth");
-                }}
-                className={`relative flex min-h-11 cursor-pointer items-center gap-2 whitespace-nowrap rounded-full border px-4 text-sm font-semibold transition-colors duration-300 ${
-                  active ? "border-navy-700 text-white" : "border-sky-200 bg-white text-navy-700 hover:border-cyan-500"
-                }`}
-              >
+            const className = `relative flex min-h-11 cursor-pointer items-center gap-2 whitespace-nowrap rounded-full border px-4 text-sm font-semibold transition-colors duration-300 ${
+              active ? "border-navy-700 text-white" : "border-sky-200 bg-white text-navy-700 hover:border-cyan-500"
+            }`;
+            const preload = {
+              onPointerEnter: () => preloadCategory(f.id),
+              onFocus: () => preloadCategory(f.id),
+              onTouchStart: () => preloadCategory(f.id),
+            };
+            const content = (
+              <>
                 {active && (
                   <motion.span
                     layoutId="service-filter"
@@ -104,6 +115,29 @@ export function ServicesGrid() {
                 )}
                 {f.label}
                 <span className={`text-xs tabular-nums ${active ? "text-sky-100/80" : "text-ink-400"}`}>{f.count}</span>
+              </>
+            );
+
+            if (linkMode) {
+              return (
+                <Link key={f.id} href={f.href} aria-current={active ? "page" : undefined} {...preload} className={className}>
+                  {content}
+                </Link>
+              );
+            }
+            return (
+              <button
+                key={f.id}
+                type="button"
+                aria-pressed={active}
+                {...preload}
+                onClick={(e) => {
+                  setLocalFilter(f.id);
+                  centerChip(e.currentTarget, reduceMotion ? "auto" : "smooth");
+                }}
+                className={className}
+              >
+                {content}
               </button>
             );
           })}
@@ -183,7 +217,7 @@ function FeaturedCard({ service: s, flip, reduceMotion, index }: CardProps & { f
             <WhatsappIcon />
             {s.cta ?? "Consultar por WhatsApp"}
           </a>
-          <Link href={`/servicios/${s.id}`} className="btn btn-ghost-light w-full sm:w-fit">
+          <Link href={servicePath(s)} className="btn btn-ghost-light w-full sm:w-fit">
             Ver más información
           </Link>
         </div>
@@ -242,7 +276,7 @@ function ServiceCard({ service: s, showCategory, reduceMotion, index }: CardProp
         <div className="mt-4 flex items-center justify-between gap-3">
           {/* Stretched link: the whole card opens the service detail page */}
           <Link
-            href={`/servicios/${s.id}`}
+            href={servicePath(s)}
             className="inline-flex cursor-pointer items-center gap-1.5 rounded-md text-sm font-semibold text-cyan-700 after:absolute after:inset-0 after:content-['']"
           >
             Ver más información

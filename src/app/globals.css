@@ -90,6 +90,13 @@
 
 :root {
   color-scheme: light;
+
+  /* Ilustración de novias: tonos de piel, pelo y rubor (no son tokens de tema) */
+  --illus-skin-bride: #f1c9a5;
+  --illus-skin-groom: #d9a37c;
+  --illus-hair-bride: #2b2330;
+  --illus-hair-groom: #3a2a24;
+  --illus-blush: #f6c4b3;
 }
 
 html {

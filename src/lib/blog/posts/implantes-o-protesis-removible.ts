@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types";
+import { serviceHref } from "@/lib/site";
 
 export const post: BlogPost = {
   slug: "implantes-o-protesis-removible",
@@ -60,7 +61,7 @@ export const post: BlogPost = {
       ],
     },
     {
-      id: "protesis-removibles",
+      id: "protesis-removible-seccion",
       title: "Prótesis removibles",
       blocks: [
         {
@@ -133,9 +134,9 @@ export const post: BlogPost = {
     },
   ],
   related: [
-    { label: "Implantes dentales", href: "/servicios/implantes" },
-    { label: "Prótesis removibles", href: "/servicios/protesis" },
-    { label: "Extracciones", href: "/servicios/extracciones" },
+    { label: "Implantes dentales", href: serviceHref("implantes") },
+    { label: "Prótesis dental", href: serviceHref("protesis") },
+    { label: "Extracción dental", href: serviceHref("extracciones") },
   ],
   coverServiceId: "implantes",
   sources: [

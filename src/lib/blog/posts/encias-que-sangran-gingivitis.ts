@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types";
+import { serviceHref } from "@/lib/site";
 
 export const post: BlogPost = {
   slug: "encias-que-sangran-gingivitis",
@@ -132,9 +133,9 @@ export const post: BlogPost = {
     },
   ],
   related: [
-    { label: "Limpieza dental", href: "/servicios/limpieza" },
-    { label: "Curaciones", href: "/servicios/curaciones" },
-    { label: "Prótesis removibles", href: "/servicios/protesis" },
+    { label: "Limpieza dental", href: serviceHref("limpieza") },
+    { label: "Curaciones dentales", href: serviceHref("curaciones") },
+    { label: "Prótesis dental", href: serviceHref("protesis") },
   ],
   coverServiceId: "limpieza",
   sources: [

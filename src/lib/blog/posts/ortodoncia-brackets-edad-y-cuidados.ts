@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types";
+import { serviceHref } from "@/lib/site";
 
 export const post: BlogPost = {
   slug: "ortodoncia-brackets-edad-y-cuidados",
@@ -154,9 +155,9 @@ export const post: BlogPost = {
     },
   ],
   related: [
-    { label: "Ortodoncia con brackets", href: "/servicios/ortodoncia" },
-    { label: "Odontopediatría", href: "/servicios/odontopediatria" },
-    { label: "Limpieza dental", href: "/servicios/limpieza" },
+    { label: "Brackets", href: serviceHref("ortodoncia") },
+    { label: "Odontopediatría", href: serviceHref("odontopediatria") },
+    { label: "Limpieza dental", href: serviceHref("limpieza") },
   ],
   coverServiceId: "ortodoncia",
   sources: [

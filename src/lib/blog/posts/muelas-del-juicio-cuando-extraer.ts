@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types";
+import { serviceHref } from "@/lib/site";
 
 export const post: BlogPost = {
   slug: "muelas-del-juicio-cuando-extraer",
@@ -121,9 +122,9 @@ export const post: BlogPost = {
     },
   ],
   related: [
-    { label: "Muelas del juicio", href: "/servicios/muelas-del-juicio" },
-    { label: "Extracciones", href: "/servicios/extracciones" },
-    { label: "Endodoncia", href: "/servicios/endodoncia" },
+    { label: "Muelas del juicio", href: serviceHref("muelas-del-juicio") },
+    { label: "Extracción dental", href: serviceHref("extracciones") },
+    { label: "Endodoncia", href: serviceHref("endodoncia") },
   ],
   coverServiceId: "muelas-del-juicio",
   sources: [

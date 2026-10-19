@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types";
+import { serviceHref } from "@/lib/site";
 
 export const post: BlogPost = {
   slug: "primera-consulta-dental-que-esperar",
@@ -175,9 +176,9 @@ export const post: BlogPost = {
     },
   ],
   related: [
-    { label: "Limpieza dental", href: "/servicios/limpieza" },
+    { label: "Limpieza dental", href: serviceHref("limpieza") },
     { label: "Lumayo Card", href: "/servicios/lumayo-card" },
-    { label: "Operatoria", href: "/servicios/operatoria" },
+    { label: "Operatoria", href: serviceHref("operatoria") },
   ],
   coverServiceId: "limpieza",
   sources: [

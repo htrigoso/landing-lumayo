@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types";
+import { serviceHref } from "@/lib/site";
 
 export const post: BlogPost = {
   slug: "tipos-de-carillas-dentales",
@@ -130,9 +131,9 @@ export const post: BlogPost = {
     },
   ],
   related: [
-    { label: "Carillas de porcelana", href: "/servicios/carillas-porcelana" },
-    { label: "Carillas de resina", href: "/servicios/carillas-resina" },
-    { label: "Diseño de sonrisa", href: "/servicios/diseno-de-sonrisa" },
+    { label: "Carillas de porcelana", href: serviceHref("carillas-porcelana") },
+    { label: "Carillas de resina", href: serviceHref("carillas-resina") },
+    { label: "Diseño de sonrisa", href: serviceHref("diseno-de-sonrisa") },
   ],
   coverServiceId: "carillas-porcelana",
   sources: [

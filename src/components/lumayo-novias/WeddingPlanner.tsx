@@ -30,15 +30,15 @@ const bucketOptions: { value: TimeBucket; label: string }[] = [
 ];
 
 const statusPill: Record<PlanStatus, { label: string; className: string }> = {
-  ok: { label: "Hay tiempo", className: "bg-cyan-100 text-navy-700" },
-  tight: { label: "Justo a tiempo", className: "border border-line bg-sky-100 text-navy-700" },
-  short: { label: "Poco tiempo", className: "bg-navy-900 text-white" },
+  ok: { label: "Hay tiempo", className: "bg-aqua-100 text-azul-800" },
+  tight: { label: "Justo a tiempo", className: "border border-line bg-azul-100 text-azul-800" },
+  short: { label: "Poco tiempo", className: "bg-azul-700 text-white" },
 };
 
 const DEFAULT_SELECTED: TreatmentKey[] = ["limpieza", "blanqueamiento"];
 
 const inputBase =
-  "min-h-11 rounded-xl border border-line bg-white px-4 text-base text-navy-700 outline-none focus-visible:ring-2 focus-visible:ring-cyan-700";
+  "min-h-11 rounded-xl border border-line bg-white px-4 text-base text-azul-700 outline-none focus-visible:ring-2 focus-visible:ring-azul-600";
 
 /** Parses a `YYYY-MM-DD` value as a local date, avoiding the UTC shift of `new Date(string)`. */
 function parseDateValue(value: string): Date | null {
@@ -108,12 +108,12 @@ export function WeddingPlanner({ defaultFor = "Ambos", defaultSelected = DEFAULT
   }
 
   return (
-    <div className="rounded-[2rem] border border-navy-700/20 p-2">
-      <div className="rounded-[1.5rem] border border-navy-700/10 bg-white p-6 sm:p-10">
+    <div className="rounded-[2rem] border border-azul-700/20 p-2">
+      <div className="rounded-[1.5rem] border border-azul-700/10 bg-white p-6 sm:p-10">
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="grid content-start gap-8">
             <div className="grid gap-2">
-              <label htmlFor={`${id}-date`} className="text-sm font-semibold text-navy-700">
+              <label htmlFor={`${id}-date`} className="text-sm font-semibold text-azul-700">
                 Fecha de tu boda
               </label>
               <input
@@ -127,15 +127,15 @@ export function WeddingPlanner({ defaultFor = "Ambos", defaultSelected = DEFAULT
             </div>
 
             <fieldset className="grid gap-3">
-              <legend className="mb-3 text-sm font-semibold text-navy-700">¿No tienes fecha? Cuánto falta</legend>
+              <legend className="mb-3 text-sm font-semibold text-azul-700">¿No tienes fecha? Cuánto falta</legend>
               <div className="flex flex-wrap gap-2">
                 {bucketOptions.map((option) => {
                   const checked = bucket === option.value;
                   return (
                     <label
                       key={option.value}
-                      className={`inline-flex min-h-11 cursor-pointer items-center rounded-full border px-4 text-sm font-semibold text-navy-700 transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-cyan-700 ${
-                        checked ? "border-cyan-500 bg-sky-50" : "border-line bg-white"
+                      className={`inline-flex min-h-11 cursor-pointer items-center rounded-full border px-4 text-sm font-semibold text-azul-700 transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-azul-600 ${
+                        checked ? "border-aqua-400 bg-aqua-50" : "border-line bg-white"
                       }`}
                     >
                       <input
@@ -154,15 +154,15 @@ export function WeddingPlanner({ defaultFor = "Ambos", defaultSelected = DEFAULT
             </fieldset>
 
             <fieldset className="grid gap-3">
-              <legend className="mb-3 text-sm font-semibold text-navy-700">Para</legend>
+              <legend className="mb-3 text-sm font-semibold text-azul-700">Para</legend>
               <div className="flex flex-wrap gap-3">
                 {whoOptions.map((option) => {
                   const checked = who === option;
                   return (
                     <label
                       key={option}
-                      className={`inline-flex min-h-11 cursor-pointer items-center gap-3 rounded-full border px-5 text-sm font-semibold text-navy-700 transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-cyan-700 ${
-                        checked ? "border-cyan-500 bg-sky-50" : "border-line bg-white"
+                      className={`inline-flex min-h-11 cursor-pointer items-center gap-3 rounded-full border px-5 text-sm font-semibold text-azul-700 transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-azul-600 ${
+                        checked ? "border-aqua-400 bg-aqua-50" : "border-line bg-white"
                       }`}
                     >
                       <input
@@ -171,7 +171,7 @@ export function WeddingPlanner({ defaultFor = "Ambos", defaultSelected = DEFAULT
                         value={option}
                         checked={checked}
                         onChange={() => setWho(option)}
-                        className="size-4 accent-cyan-700"
+                        className="size-4 accent-aqua-600"
                       />
                       {option}
                     </label>
@@ -181,14 +181,14 @@ export function WeddingPlanner({ defaultFor = "Ambos", defaultSelected = DEFAULT
             </fieldset>
 
             <fieldset className="grid gap-2">
-              <legend className="mb-3 text-sm font-semibold text-navy-700">Tratamientos</legend>
+              <legend className="mb-3 text-sm font-semibold text-azul-700">Tratamientos</legend>
               {treatmentOptions.map((key) => {
                 const checked = selected.includes(key);
                 return (
                   <label
                     key={key}
-                    className={`flex min-h-11 cursor-pointer items-center gap-4 rounded-2xl border p-3 text-base text-navy-700 transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-cyan-700 ${
-                      checked ? "border-cyan-500 bg-sky-50" : "border-line bg-white"
+                    className={`flex min-h-11 cursor-pointer items-center gap-4 rounded-2xl border p-3 text-base text-azul-700 transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-azul-600 ${
+                      checked ? "border-aqua-400 bg-aqua-50" : "border-line bg-white"
                     }`}
                   >
                     <input
@@ -196,7 +196,7 @@ export function WeddingPlanner({ defaultFor = "Ambos", defaultSelected = DEFAULT
                       value={key}
                       checked={checked}
                       onChange={() => toggleTreatment(key)}
-                      className="size-4 accent-cyan-700"
+                      className="size-4 accent-aqua-600"
                     />
                     {treatmentLabels[key]}
                   </label>
@@ -207,10 +207,10 @@ export function WeddingPlanner({ defaultFor = "Ambos", defaultSelected = DEFAULT
 
           <div aria-live="polite" className="flex flex-col gap-6">
             {!plan && (
-              <div className="flex min-h-full flex-col items-center gap-5 rounded-2xl bg-sky-50 p-6 text-center sm:p-8">
+              <div className="flex min-h-full flex-col items-center gap-5 rounded-2xl bg-azul-50 p-6 text-center sm:p-8">
                 <HappyCoupleIllustration />
                 <div className="grid gap-2">
-                  <h4 className="font-display text-xl font-extrabold text-navy-700">Tu cronograma aparecerá aquí</h4>
+                  <h4 className="font-display text-xl font-extrabold text-azul-700">Tu cronograma aparecerá aquí</h4>
                   <p className="text-pretty text-base text-ink-600">
                     Elige la fecha de tu boda y tus tratamientos para ver tu cronograma.
                   </p>
@@ -219,9 +219,9 @@ export function WeddingPlanner({ defaultFor = "Ambos", defaultSelected = DEFAULT
                   {["Fecha de boda", "Tratamientos", "Tu cronograma"].map((label, index) => (
                     <li
                       key={label}
-                      className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-3 py-1.5 text-sm font-semibold text-navy-700"
+                      className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-3 py-1.5 text-sm font-semibold text-azul-700"
                     >
-                      <span className="grid size-6 place-items-center rounded-full bg-navy-700 text-xs font-extrabold text-white">
+                      <span className="grid size-6 place-items-center rounded-full bg-azul-700 text-xs font-extrabold text-white">
                         {index + 1}
                       </span>
                       {label}
@@ -232,33 +232,33 @@ export function WeddingPlanner({ defaultFor = "Ambos", defaultSelected = DEFAULT
             )}
 
             {plan?.isPast && (
-              <p className="rounded-2xl bg-sky-50 p-6 text-pretty text-base text-ink-600">
+              <p className="rounded-2xl bg-azul-50 p-6 text-pretty text-base text-ink-600">
                 Esa fecha ya pasó. Elige una fecha futura.
               </p>
             )}
 
             {plan && !plan.isPast && (
               <ol className="relative grid gap-6 pl-2">
-                <span aria-hidden="true" className="absolute top-3 bottom-3 left-[1.1rem] w-px bg-navy-700/20" />
+                <span aria-hidden="true" className="absolute top-3 bottom-3 left-[1.1rem] w-px bg-azul-700/20" />
                 {plan.steps.map((step, index) => {
                   const pill = statusPill[step.status];
                   return (
                     <li key={step.key} className="relative grid grid-cols-[2.5rem_1fr] gap-4">
-                      <span className="z-10 grid size-9 place-items-center rounded-full border border-navy-700/20 bg-white font-display text-sm font-extrabold text-navy-700">
+                      <span className="z-10 grid size-9 place-items-center rounded-full border border-azul-700/20 bg-white font-display text-sm font-extrabold text-azul-700">
                         {index + 1}
                       </span>
                       <div className="grid gap-2">
                         <div className="flex flex-wrap items-center gap-3">
-                          <p className="text-base font-semibold text-navy-700">{step.label}</p>
+                          <p className="text-base font-semibold text-azul-700">{step.label}</p>
                           <span className={`rounded-full px-3 py-1 text-xs font-semibold ${pill.className}`}>{pill.label}</span>
                         </div>
                         {step.startDate && (
-                          <p className="text-sm font-semibold text-cyan-700">
+                          <p className="text-sm font-semibold text-aqua-700">
                             Empieza el {formatPlanDate(step.startDate)}
                           </p>
                         )}
                         {!step.startDate && step.status === "tight" && (
-                          <p className="text-sm font-semibold text-cyan-700">Empieza lo antes posible</p>
+                          <p className="text-sm font-semibold text-aqua-700">Empieza lo antes posible</p>
                         )}
                         <p className="text-sm leading-relaxed text-ink-600">{step.note}</p>
                       </div>
@@ -267,22 +267,22 @@ export function WeddingPlanner({ defaultFor = "Ambos", defaultSelected = DEFAULT
                 })}
 
                 <li className="relative grid grid-cols-[2.5rem_1fr] gap-4">
-                  <span className="z-10 grid size-9 place-items-center rounded-full bg-navy-700 text-white">
+                  <span className="z-10 grid size-9 place-items-center rounded-full bg-azul-700 text-white">
                     <CalendarIcon className="size-4" />
                   </span>
                   <div className="grid gap-1">
-                    <p className="text-base font-semibold text-navy-700">Tu boda</p>
+                    <p className="text-base font-semibold text-azul-700">Tu boda</p>
                     {dateText && <p className="text-sm text-ink-600">{dateText}</p>}
                   </div>
                 </li>
 
                 {plan.touchUpDate && (
                   <li className="relative grid grid-cols-[2.5rem_1fr] gap-4">
-                    <span className="z-10 grid size-9 place-items-center rounded-full border border-cyan-500 bg-cyan-100 text-navy-700">
-                      <span aria-hidden="true" className="size-2 rounded-full bg-navy-700" />
+                    <span className="z-10 grid size-9 place-items-center rounded-full border border-aqua-400 bg-aqua-100 text-azul-700">
+                      <span aria-hidden="true" className="size-2 rounded-full bg-azul-700" />
                     </span>
                     <div className="grid gap-1">
-                      <p className="text-base font-semibold text-navy-700">
+                      <p className="text-base font-semibold text-azul-700">
                         Retoque · {formatPlanDate(plan.touchUpDate)}
                       </p>
                       <p className="text-sm leading-relaxed text-ink-600">{plan.touchUpNote}</p>

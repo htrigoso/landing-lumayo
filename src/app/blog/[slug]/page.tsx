@@ -269,16 +269,16 @@ async function PostContent({ params }: PageProps) {
 
         <div className="container-page">
           <Reveal>
-            <div className="relative isolate overflow-hidden rounded-3xl bg-navy-900 p-8 text-white sm:p-12">
+            <div className="relative isolate overflow-hidden rounded-3xl bg-azul-700 p-8 text-white sm:p-12">
               <IsotypeWatermark tone="dark" className="-bottom-20 -right-16 w-80" />
               <div className="relative max-w-2xl">
                 <h2 id="cta-blog-title" className="section-title !text-white">
                   ¿Tienes dudas sobre tu sonrisa?
                 </h2>
-                <p className="mt-5 text-pretty text-base leading-relaxed text-sky-100/85 sm:text-lg">
+                <p className="mt-5 text-pretty text-base leading-relaxed text-azul-100 sm:text-lg">
                   Escríbenos por WhatsApp y coordinamos una evaluación según tu caso.
                 </p>
-                <a href={consult} target="_blank" rel="noopener" className="btn btn-wa mt-8 text-base">
+                <a href={consult} target="_blank" rel="noopener" className="btn btn-light mt-8 text-base">
                   <WhatsappIcon />
                   Consultar por WhatsApp
                 </a>

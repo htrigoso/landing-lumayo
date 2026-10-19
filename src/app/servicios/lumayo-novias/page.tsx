@@ -20,7 +20,7 @@ export default function LumayoNoviasPage() {
     <>
       <a
         href="#main"
-        className="sr-only z-[60] rounded-full bg-navy-700 px-4 py-2 font-semibold text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        className="sr-only z-[60] rounded-full bg-azul-700 px-4 py-2 font-semibold text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
       >
         Saltar al contenido
       </a>
@@ -34,9 +34,9 @@ export default function LumayoNoviasPage() {
         />
         <LumayoNovias />
         <WhyChooseUs flatBottom />
-        <WaveDivider from="bg-sky-50" to="var(--color-navy-500)" />
+        <WaveDivider from="bg-azul-50" to="var(--color-azul-800)" />
         <BookingSection number="01" />
-        <WaveDivider from="bg-navy-500" to="var(--color-navy-900)" flip />
+        <WaveDivider from="bg-azul-800" to="var(--color-azul-900)" flip />
       </main>
       <Footer />
       <MobileCtaBar />
