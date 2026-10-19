@@ -17,6 +17,8 @@ import { Header } from "@/components/layout/Header";
 import { MobileCtaBar } from "@/components/layout/MobileCtaBar";
 import { BookingSection } from "@/components/sections/BookingSection";
 import { FaqAccordion } from "@/components/orthodontics/FaqAccordion";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { blogPostJsonLd, faqJsonLd } from "@/lib/seo/jsonld";
 import { getPost, getRelatedPosts, blogCategoryOf, blogCategoryPath, posts, postPath } from "@/lib/blog";
 import { services, whatsappUrl } from "@/lib/site";
 
@@ -85,28 +87,10 @@ async function PostContent({ params }: PageProps) {
   const related = getRelatedPosts(post.slug, 3);
   const consult = whatsappUrl(`Hola Lumayo, leí el artículo "${post.title}" y quisiera una evaluación.`);
 
-  // The article title is the only h1 on the page. JSON-LD escapes "<" so content cannot close the script tag.
-  const articleLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: post.title,
-    description: post.excerpt,
-    datePublished: post.publishedAt,
-    dateModified: post.updatedAt,
-    author: { "@type": "Organization", name: "Lumayo Centro Odontológico" },
-  };
-  const faqLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: post.faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.q,
-      acceptedAnswer: { "@type": "Answer", text: faq.a },
-    })),
-  };
-
   return (
     <>
+      <JsonLd data={blogPostJsonLd(post)} />
+      <JsonLd data={faqJsonLd(post.faqs)} />
       <section aria-labelledby="post-title" className="relative isolate overflow-hidden bg-white pt-6 pb-10 lg:pt-8 lg:pb-12">
         <SectionAtmosphere tone="white" lines="tr" />
 
@@ -305,10 +289,6 @@ async function PostContent({ params }: PageProps) {
         </div>
       </section>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([articleLd, faqLd]).replace(/</g, "\\u003c") }}
-      />
     </>
   );
 }

@@ -9,7 +9,9 @@ import { Header } from "@/components/layout/Header";
 import { MobileCtaBar } from "@/components/layout/MobileCtaBar";
 import { BookingSection } from "@/components/sections/BookingSection";
 import { PageHeader } from "@/components/sections/PageHeader";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { blogCategories, blogCategoryPath, getBlogCategoryBySlug, posts, postsInCategory } from "@/lib/blog";
+import { blogCategoryJsonLd } from "@/lib/seo/jsonld";
 
 type PageProps = { params: Promise<{ categoria: string }> };
 
@@ -70,6 +72,7 @@ async function CategoryContent({ params }: PageProps) {
 
   return (
     <>
+      <JsonLd data={blogCategoryJsonLd(category)} />
       <PageHeader
         title={category.seo.h1}
         emphasis=""

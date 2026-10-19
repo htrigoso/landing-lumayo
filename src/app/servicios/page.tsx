@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { ServicesPageView } from "@/components/services/ServicesPageView";
+import { servicesIndexJsonLd } from "@/lib/seo/jsonld";
 
 export const metadata: Metadata = {
   title: "Servicios · Lumayo Centro Odontológico",
@@ -11,11 +13,14 @@ export const metadata: Metadata = {
 /** Full services list; each category has its own page under /servicios/<categoria>. */
 export default function ServiciosPage() {
   return (
-    <ServicesPageView
-      title="Nuestros"
-      emphasis="servicios"
-      description="Tratamientos para toda la familia en Tarapoto, con un plan claro desde la primera consulta."
-      crumbs={[{ label: "Inicio", href: "/" }, { label: "Servicios" }]}
-    />
+    <>
+      <JsonLd data={servicesIndexJsonLd()} />
+      <ServicesPageView
+        title="Nuestros"
+        emphasis="servicios"
+        description="Tratamientos para toda la familia en Tarapoto, con un plan claro desde la primera consulta."
+        crumbs={[{ label: "Inicio", href: "/" }, { label: "Servicios" }]}
+      />
+    </>
   );
 }

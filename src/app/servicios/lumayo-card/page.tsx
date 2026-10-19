@@ -7,6 +7,9 @@ import { MobileCtaBar } from "@/components/layout/MobileCtaBar";
 import { BookingSection } from "@/components/sections/BookingSection";
 import { LumayoCard } from "@/components/sections/LumayoCard";
 import { PageHeader } from "@/components/sections/PageHeader";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqJsonLd, lumayoCardHowToJsonLd, lumayoCardJsonLd } from "@/lib/seo/jsonld";
+import { lumayoCard } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Lumayo Card · Lumayo Centro Odontológico",
@@ -24,6 +27,9 @@ export default function LumayoCardPage() {
         Saltar al contenido
       </a>
       <Header />
+      <JsonLd data={lumayoCardJsonLd()} />
+      <JsonLd data={lumayoCardHowToJsonLd()} />
+      <JsonLd data={faqJsonLd(lumayoCard.faqs)} />
       <main id="main">
         <PageHeader
           title="Lumayo"

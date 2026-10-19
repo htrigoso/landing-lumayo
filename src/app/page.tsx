@@ -12,23 +12,10 @@ import { Orthodontics } from "@/components/sections/Orthodontics";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Services } from "@/components/sections/Services";
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
-import { getDisplayedTestimonials } from "@/lib/results";
-import { site } from "@/lib/site";
-
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Dentist",
-  name: "Lumayo Centro Odontológico",
-  telephone: site.phoneE164,
-  image: "/images/hero.webp",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: site.address.street,
-    addressLocality: `${site.address.district}, ${site.address.city}`,
-    addressRegion: site.address.region,
-    addressCountry: site.address.country,
-  },
-};
+import { JsonLd } from "@/components/seo/JsonLd";
+import { orthodonticsFaqs } from "@/lib/orthodontics";
+import { getDisplayedTestimonials, testimonials } from "@/lib/results";
+import { faqJsonLd, reviewJsonLd } from "@/lib/seo/jsonld";
 
 export default function Home() {
   // Section numbers follow the manual's "01 — Label" style and must stay consecutive
@@ -61,10 +48,11 @@ export default function Home() {
       <Footer />
       <MobileCtaBar />
       <FloatingWhatsapp />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
-      />
+      <JsonLd data={faqJsonLd(orthodonticsFaqs)} />
+      {/* Real testimonials only; renders nothing while src/lib/results.ts `testimonials` is empty. */}
+      {testimonials.map((testimonial, index) => (
+        <JsonLd key={`${testimonial.name}-${index}`} data={reviewJsonLd(testimonial)} />
+      ))}
     </>
   );
 }

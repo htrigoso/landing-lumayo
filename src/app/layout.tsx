@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Montserrat } from "next/font/google";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { MotionProvider } from "@/components/motion/MotionProvider";
+import { clinicJsonLd, websiteJsonLd } from "@/lib/seo/jsonld";
 import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
@@ -42,6 +44,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${montserrat.variable} antialiased`}
     >
       <body className="min-h-dvh">
+        {/* Site-wide entities: the clinic (declared once, referenced by @id) and the website. */}
+        <JsonLd data={clinicJsonLd()} />
+        <JsonLd data={websiteJsonLd()} />
         <MotionProvider>{children}</MotionProvider>
       </body>
     </html>

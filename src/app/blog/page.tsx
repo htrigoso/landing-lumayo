@@ -10,7 +10,9 @@ import { Header } from "@/components/layout/Header";
 import { MobileCtaBar } from "@/components/layout/MobileCtaBar";
 import { BookingSection } from "@/components/sections/BookingSection";
 import { PageHeader } from "@/components/sections/PageHeader";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { posts } from "@/lib/blog";
+import { blogIndexJsonLd } from "@/lib/seo/jsonld";
 
 export const metadata: Metadata = {
   title: "Blog · Lumayo Centro Odontológico",
@@ -30,6 +32,7 @@ export default function BlogPage() {
         Saltar al contenido
       </a>
       <Header />
+      <JsonLd data={blogIndexJsonLd()} />
       <main id="main">
         <PageHeader
           title="Nuestro"

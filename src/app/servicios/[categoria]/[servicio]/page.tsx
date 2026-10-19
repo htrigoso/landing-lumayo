@@ -15,6 +15,8 @@ import { Reveal } from "@/components/motion/Reveal";
 import { BookingSection } from "@/components/sections/BookingSection";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { FaqAccordion } from "@/components/orthodontics/FaqAccordion";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqJsonLd, serviceDetailJsonLd, serviceHowToJsonLd } from "@/lib/seo/jsonld";
 import { getServiceContent } from "@/lib/service-content";
 import {
   categoryOf,
@@ -109,6 +111,9 @@ async function ServiceContent({ params }: PageProps) {
 
   return (
     <>
+      <JsonLd data={serviceDetailJsonLd(service)} />
+      <JsonLd data={serviceHowToJsonLd(service, content.howItWorks)} />
+      {content.faqs.length > 0 && <JsonLd data={faqJsonLd(content.faqs)} />}
       <PageHeader
         title={service.name}
         emphasis=""

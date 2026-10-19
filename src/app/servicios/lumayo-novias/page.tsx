@@ -8,6 +8,9 @@ import { BookingSection } from "@/components/sections/BookingSection";
 import { LumayoNovias } from "@/components/sections/LumayoNovias";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqJsonLd, lumayoNoviasHowToJsonLd, lumayoNoviasJsonLd } from "@/lib/seo/jsonld";
+import { lumayoNovias } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Lumayo Novias · Lumayo Centro Odontológico",
@@ -25,6 +28,9 @@ export default function LumayoNoviasPage() {
         Saltar al contenido
       </a>
       <Header />
+      <JsonLd data={lumayoNoviasJsonLd()} />
+      <JsonLd data={lumayoNoviasHowToJsonLd()} />
+      <JsonLd data={faqJsonLd(lumayoNovias.faqs)} />
       <main id="main">
         <PageHeader
           title="Lumayo"

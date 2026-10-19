@@ -12,7 +12,10 @@ import { BookingSection } from "@/components/sections/BookingSection";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
-import { getDisplayedTestimonials } from "@/lib/results";
+import { careProcessSteps } from "@/components/about/CareProcess";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { getDisplayedTestimonials, testimonials } from "@/lib/results";
+import { aboutPageJsonLd, personJsonLd, reviewJsonLd } from "@/lib/seo/jsonld";
 import { team } from "@/lib/team";
 
 export const metadata: Metadata = {
@@ -39,6 +42,16 @@ export default function NosotrosPage() {
         Saltar al contenido
       </a>
       <Header />
+      <JsonLd
+        data={aboutPageJsonLd(careProcessSteps.map((step) => ({ src: step.img, title: step.title, text: step.text })))}
+      />
+      {/* Team and reviews render only when their lists have entries (both are empty today). */}
+      {team.map((member) => (
+        <JsonLd key={member.name} data={personJsonLd(member)} />
+      ))}
+      {testimonials.map((testimonial, index) => (
+        <JsonLd key={`${testimonial.name}-${index}`} data={reviewJsonLd(testimonial)} />
+      ))}
       <main id="main">
         <PageHeader
           title="Sobre"

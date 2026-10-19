@@ -2,6 +2,7 @@ import { SectionHeading } from "@/components/brand/SectionHeading";
 import { BracesIcon, WhatsappIcon } from "@/components/icons";
 import { Reveal } from "@/components/motion/Reveal";
 import { FaqAccordion } from "@/components/orthodontics/FaqAccordion";
+import { orthodonticsFaqs } from "@/lib/orthodontics";
 import { bracesWhatsappMessage, serviceName, whatsappUrl } from "@/lib/site";
 import { SectionBackdrop } from "@/components/decor/SectionBackdrop";
 
@@ -21,25 +22,6 @@ const steps = [
   {
     title: "Controles periódicos",
     text: "Hacemos los ajustes necesarios hasta que luzcas la sonrisa que buscas.",
-  },
-];
-
-const faqs = [
-  {
-    q: "¿Duele usar brackets?",
-    a: "Es normal sentir una leve molestia los primeros días y después de cada ajuste. Suele pasar en poco tiempo y te damos recomendaciones para sobrellevarla.",
-  },
-  {
-    q: "¿Cuánto dura el tratamiento?",
-    a: "Depende de cada caso. En tu evaluación te damos un tiempo estimado según lo que necesites corregir.",
-  },
-  {
-    q: "¿Puedo usar brackets si soy adulto?",
-    a: "Sí. La ortodoncia funciona a cualquier edad, siempre que tus dientes y encías estén sanos.",
-  },
-  {
-    q: "¿Cuánto cuesta?",
-    a: "El costo depende de tu caso y del tipo de tratamiento. Escríbenos por WhatsApp y te orientamos sin compromiso.",
   },
 ];
 
@@ -81,7 +63,7 @@ export function Orthodontics() {
               <BracesIcon />
               Preguntas frecuentes
             </p>
-            <FaqAccordion items={faqs} />
+            <FaqAccordion items={orthodonticsFaqs} />
 
             <a href={whatsappUrl(bracesWhatsappMessage)} target="_blank" rel="noopener" className="btn btn-wa mt-6 w-full text-base">
               <WhatsappIcon />

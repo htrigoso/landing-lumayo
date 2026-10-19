@@ -8,6 +8,9 @@ import { BookingSection } from "@/components/sections/BookingSection";
 import { LumayoKids } from "@/components/sections/LumayoKids";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqJsonLd, lumayoKidsHowToJsonLd, lumayoKidsJsonLd } from "@/lib/seo/jsonld";
+import { lumayoKids } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Lumayo Kids · Lumayo Centro Odontológico",
@@ -25,6 +28,9 @@ export default function LumayoKidsPage() {
         Saltar al contenido
       </a>
       <Header />
+      <JsonLd data={lumayoKidsJsonLd()} />
+      <JsonLd data={lumayoKidsHowToJsonLd()} />
+      <JsonLd data={faqJsonLd(lumayoKids.faqs)} />
       <main id="main">
         <PageHeader
           title="Lumayo"

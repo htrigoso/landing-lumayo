@@ -3,7 +3,7 @@ import { SectionBackdrop } from "@/components/decor/SectionBackdrop";
 import { IsotypeWatermark } from "@/components/brand/IsotypeWatermark";
 import { Reveal } from "@/components/motion/Reveal";
 
-const steps = [
+export const careProcessSteps = [
   {
     img: "/images/about/dental-process-img-1.jpg",
     title: "Evaluación inicial",
@@ -42,7 +42,7 @@ export function CareProcess() {
 
         <Reveal delay={0.1}>
           <ol className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map((s, i) => (
+            {careProcessSteps.map((s, i) => (
               <li
                 key={s.title}
                 className="group relative isolate flex h-full flex-col overflow-hidden rounded-2xl border border-sky-200 bg-white transition-colors duration-500 hover:border-navy-500/50"

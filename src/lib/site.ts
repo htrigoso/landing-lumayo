@@ -44,12 +44,16 @@ const plans = {
   classic: {
     label: "Clásica",
     annualFee: "S/ 125.00",
+    /** Numeric form of `annualFee` for structured data (PEN). */
+    annualFeeAmount: 125,
     reaffiliationFee: "S/ 100.00",
     maxAdditional: 3,
   },
   gold: {
     label: "Dorada",
     annualFee: "S/ 150.00",
+    /** Numeric form of `annualFee` for structured data (PEN). */
+    annualFeeAmount: 150,
     reaffiliationFee: "S/ 50.00",
     maxAdditional: 6,
   },

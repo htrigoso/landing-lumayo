@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { ServicesPageView } from "@/components/services/ServicesPageView";
+import { serviceCategoryJsonLd } from "@/lib/seo/jsonld";
 import { categoryPath, getCategoryBySlug, serviceCategories } from "@/lib/site";
 
 type PageProps = { params: Promise<{ categoria: string }> };
@@ -39,12 +41,15 @@ async function CategoryContent({ params }: PageProps) {
   if (!category) notFound();
 
   return (
-    <ServicesPageView
-      title={category.seo.h1}
-      emphasis=""
-      description={category.seo.intro}
-      crumbs={[{ label: "Inicio", href: "/" }, { label: "Servicios", href: "/servicios" }, { label: category.label }]}
-      activeCategory={category.id}
-    />
+    <>
+      <JsonLd data={serviceCategoryJsonLd(category)} />
+      <ServicesPageView
+        title={category.seo.h1}
+        emphasis=""
+        description={category.seo.intro}
+        crumbs={[{ label: "Inicio", href: "/" }, { label: "Servicios", href: "/servicios" }, { label: category.label }]}
+        activeCategory={category.id}
+      />
+    </>
   );
 }

@@ -7,6 +7,8 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { MobileCtaBar } from "@/components/layout/MobileCtaBar";
 import { PageHeader } from "@/components/sections/PageHeader";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { contactPageJsonLd } from "@/lib/seo/jsonld";
 import { fullAddress, site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -25,6 +27,7 @@ export default function ContactoPage() {
         Saltar al contenido
       </a>
       <Header />
+      <JsonLd data={contactPageJsonLd()} />
       <main id="main">
         <PageHeader
           title="Estamos para"
