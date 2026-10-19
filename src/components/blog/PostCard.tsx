@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { blogCategoryOf, blogCategoryPath, postPath } from "@/lib/blog";
 import type { BlogPost } from "@/lib/blog/types";
 import { services } from "@/lib/site";
 
@@ -10,6 +11,7 @@ type PostCardProps = {
 /** Article teaser. The title link stretches over the whole card. */
 export function PostCard({ post }: PostCardProps) {
   const cover = services.find((s) => s.id === post.coverServiceId)?.image;
+  const category = blogCategoryOf(post);
 
   return (
     <article
@@ -29,12 +31,14 @@ export function PostCard({ post }: PostCardProps) {
 
       <div className="flex flex-1 flex-col p-6 sm:p-8">
         <div className="flex flex-wrap items-center gap-3 text-sm text-ink-600">
-          <span className="pill w-fit">{post.category}</span>
+          <Link href={blogCategoryPath(category)} className="pill relative z-10 w-fit">
+            {post.category}
+          </Link>
           <span>{post.readingMinutes} min de lectura</span>
         </div>
         <h3 className="mt-4 font-display text-xl font-bold leading-snug text-navy-700 sm:text-2xl">
           <Link
-            href={`/blog/${post.slug}`}
+            href={postPath(post)}
             className="rounded-md after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
           >
             {post.title}

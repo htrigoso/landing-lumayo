@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightIcon } from "@/components/icons";
+import { blogCategoryOf, blogCategoryPath, postPath } from "@/lib/blog";
 import type { BlogPost } from "@/lib/blog/types";
 import { services } from "@/lib/site";
 
@@ -24,6 +25,7 @@ export function FeaturedPosts({ posts }: FeaturedPostsProps) {
 
 function FeatureTile({ post, size, className = "" }: { post: BlogPost; size: "lg" | "sm"; className?: string }) {
   const cover = services.find((s) => s.id === post.coverServiceId)?.image;
+  const category = blogCategoryOf(post);
   const isLarge = size === "lg";
 
   return (
@@ -46,7 +48,9 @@ function FeatureTile({ post, size, className = "" }: { post: BlogPost; size: "lg
 
       <div className={`relative z-10 w-full min-w-0 p-6 sm:p-8 ${isLarge ? "lg:p-10" : ""}`}>
         <div className="flex flex-wrap items-center gap-3">
-          <span className="pill !bg-white !text-navy-700">{post.category}</span>
+          <Link href={blogCategoryPath(category)} className="pill relative z-10 !bg-white !text-navy-700">
+            {post.category}
+          </Link>
           <span className="text-sm text-sky-100/90">{post.readingMinutes} min de lectura</span>
         </div>
         <h3
@@ -57,7 +61,7 @@ function FeatureTile({ post, size, className = "" }: { post: BlogPost; size: "lg
           }
         >
           <Link
-            href={`/blog/${post.slug}`}
+            href={postPath(post)}
             className="rounded-md after:absolute after:inset-0 after:content-[''] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
           >
             {post.title}

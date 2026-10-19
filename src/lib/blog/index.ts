@@ -10,7 +10,10 @@ import { post as muelasDelJuicioCuandoExtraer } from "@/lib/blog/posts/muelas-de
 import { post as implantesOProtesisRemovible } from "@/lib/blog/posts/implantes-o-protesis-removible";
 import { post as enciasQueSangranGingivitis } from "@/lib/blog/posts/encias-que-sangran-gingivitis";
 import { post as sensibilidadDentalCausasYQueHacer } from "@/lib/blog/posts/sensibilidad-dental-causas-y-que-hacer";
-import type { BlogCategory, BlogPost } from "@/lib/blog/types";
+import { blogCategories, type BlogCategoryInfo } from "@/lib/blog/categories";
+import type { BlogPost } from "@/lib/blog/types";
+
+export { blogCategories, getBlogCategoryBySlug, type BlogCategoryInfo } from "@/lib/blog/categories";
 
 const allPosts: BlogPost[] = [
   primeraVisitaDentistaNinos,
@@ -48,12 +51,18 @@ export function getRelatedPosts(slug: string, count: number): BlogPost[] {
   return [...sameCategory, ...otherCategories].slice(0, count);
 }
 
-export const blogCategories: BlogCategory[] = [
-  "Prevención",
-  "Niños",
-  "Estética",
-  "Ortodoncia",
-  "Urgencias",
-  "Tratamientos",
-  "Consejos",
-];
+/** Single source of truth for blog URLs. Use these helpers instead of building paths by hand. */
+export function blogCategoryOf(post: BlogPost): BlogCategoryInfo {
+  const category = blogCategories.find((c) => c.label === post.category);
+  if (!category) throw new Error(`Unknown blog category: ${post.category}`);
+  return category;
+}
+
+export const blogCategoryPath = (category: BlogCategoryInfo) => `/blog/${category.slug}`;
+
+export const postPath = (post: BlogPost) => `/blog/${blogCategoryOf(post).slug}/${post.slug}`;
+
+/** Posts in a category, newest first (same order as `posts`). */
+export function postsInCategory(category: BlogCategoryInfo): BlogPost[] {
+  return posts.filter((post) => post.category === category.label);
+}

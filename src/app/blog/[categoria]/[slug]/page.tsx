@@ -17,10 +17,10 @@ import { Header } from "@/components/layout/Header";
 import { MobileCtaBar } from "@/components/layout/MobileCtaBar";
 import { BookingSection } from "@/components/sections/BookingSection";
 import { FaqAccordion } from "@/components/orthodontics/FaqAccordion";
-import { getPost, getRelatedPosts, posts } from "@/lib/blog";
+import { getPost, getRelatedPosts, blogCategoryOf, blogCategoryPath, posts, postPath } from "@/lib/blog";
 import { services, whatsappUrl } from "@/lib/site";
 
-type PageProps = { params: Promise<{ slug: string }> };
+type PageProps = { params: Promise<{ categoria: string; slug: string }> };
 
 const dateFormat = new Intl.DateTimeFormat("es-PE", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 const formatDate = (iso: string) => dateFormat.format(new Date(iso));
@@ -31,20 +31,22 @@ export const instant = false;
 
 /** Pre-renders one page per article; `dynamicParams` is unavailable with cacheComponents. */
 export function generateStaticParams() {
-  return posts.map((post) => ({ slug: post.slug }));
+  return posts.map((post) => ({ categoria: blogCategoryOf(post).slug, slug: post.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { categoria, slug } = await params;
   const post = getPost(slug);
-  if (!post) {
+  if (!post || blogCategoryOf(post).slug !== categoria) {
     return { title: "Artículo no encontrado · Lumayo Centro Odontológico" };
   }
+  const path = postPath(post);
   const title = `${post.title} · Lumayo Centro Odontológico`;
   return {
     title,
     description: post.excerpt,
-    openGraph: { type: "article", title, description: post.excerpt },
+    alternates: { canonical: path },
+    openGraph: { type: "article", title, description: post.excerpt, url: path },
   };
 }
 
@@ -73,9 +75,11 @@ export default function BlogPostPage({ params }: PageProps) {
 }
 
 async function PostContent({ params }: PageProps) {
-  const { slug } = await params;
+  const { categoria, slug } = await params;
   const post = getPost(slug);
-  if (!post) notFound();
+  // A post only lives under its own category; any other category segment is not found.
+  if (!post || blogCategoryOf(post).slug !== categoria) notFound();
+  const category = blogCategoryOf(post);
 
   const cover = services.find((s) => s.id === post.coverServiceId)?.image;
   const related = getRelatedPosts(post.slug, 3);
@@ -125,6 +129,17 @@ async function PostContent({ params }: PageProps) {
               <li aria-hidden="true" className="text-navy-700/30">
                 /
               </li>
+              <li>
+                <Link
+                  href={blogCategoryPath(category)}
+                  className="rounded-sm underline-offset-4 hover:text-navy-700 hover:underline motion-reduce:transition-none"
+                >
+                  {category.label}
+                </Link>
+              </li>
+              <li aria-hidden="true" className="text-navy-700/30">
+                /
+              </li>
               <li className="min-w-0 max-w-full truncate">
                 <span aria-current="page" className="text-navy-700">
                   {post.title}
@@ -150,7 +165,9 @@ async function PostContent({ params }: PageProps) {
 
               <div className="relative z-10 w-full min-w-0 p-5 sm:p-8 lg:max-w-3xl lg:p-12">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="pill !bg-white !text-navy-700">{post.category}</span>
+                  <Link href={blogCategoryPath(category)} className="pill !bg-white !text-navy-700">
+                    {post.category}
+                  </Link>
                   <span className="pill pill-outline">{post.readingMinutes} min de lectura</span>
                 </div>
                 <h1 id="post-title" className="mt-4 font-display text-3xl font-extrabold leading-[1.05] tracking-[-0.03em] text-white text-balance sm:text-4xl lg:text-5xl">
