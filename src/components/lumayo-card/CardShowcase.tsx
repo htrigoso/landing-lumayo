@@ -28,7 +28,7 @@ export function CardShowcase({ classic, gold }: { classic: Faces; gold: Faces })
       />
 
       <div role="group" aria-label="Versión de la tarjeta" className="mb-6 flex justify-center">
-        <div className="inline-flex rounded-full border border-line bg-white p-1 shadow-[0_12px_30px_-20px_rgb(7_42_76/0.35)]">
+        <div className="inline-flex rounded-full border border-line bg-white p-1 shadow-[0_12px_30px_-20px_color-mix(in_srgb,var(--color-azul-950)_35%,transparent)]">
           {variants.map((option) => {
             const active = variant === option.value;
             return (

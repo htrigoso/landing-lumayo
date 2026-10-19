@@ -53,7 +53,7 @@ const cards: InfoCard[] = [
 /** Contact details (address, phone, hours, WhatsApp) and the embedded map, after the reference. */
 export function ContactInfo() {
   return (
-    <section aria-labelledby="contact-info-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
+    <section aria-labelledby="contact-info-title" className="relative isolate overflow-hidden bg-white pt-12 pb-16 lg:pt-16 lg:pb-20">
       <SectionBackdrop lines="bl" glow="tr" />
       <div className="container-page">
         <Reveal className="grid gap-5 lg:grid-cols-[1.2fr_1fr] lg:items-end lg:gap-16">

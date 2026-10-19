@@ -51,13 +51,13 @@ type Look = {
 };
 
 const LOOKS: Record<Variant, Look> = {
-  holder: { bg: "#024474", skin: "#d9a37c", hair: "#2b2330", shirt: "#02acb5", hairStyle: "short", scale: 1 },
-  woman: { bg: "#dbf1fe", skin: "#f1c9a5", hair: "#3a2a24", shirt: "#024474", hairStyle: "long", scale: 1 },
-  man: { bg: "#85cedf", skin: "#d9a37c", hair: "#2b2330", shirt: "#024474", hairStyle: "short", scale: 1 },
-  senior: { bg: "#85cedf", skin: "#f1c9a5", hair: "#e8edf2", shirt: "#02acb5", hairStyle: "short", scale: 1 },
-  teen: { bg: "#dbf1fe", skin: "#d9a37c", hair: "#2b2330", shirt: "#02acb5", hairStyle: "short", scale: 0.84 },
-  girl: { bg: "#02acb5", skin: "#f1c9a5", hair: "#3a2a24", shirt: "#ffffff", hairStyle: "long", scale: 0.78 },
-  boy: { bg: "#85cedf", skin: "#f1c9a5", hair: "#3a2a24", shirt: "#024474", hairStyle: "short", scale: 0.78 },
+  holder: { bg: "var(--color-azul-700)", skin: "#d9a37c", hair: "#2b2330", shirt: "var(--color-aqua-500)", hairStyle: "short", scale: 1 },
+  woman: { bg: "var(--color-azul-100)", skin: "#f1c9a5", hair: "#3a2a24", shirt: "var(--color-azul-700)", hairStyle: "long", scale: 1 },
+  man: { bg: "var(--color-aqua-300)", skin: "#d9a37c", hair: "#2b2330", shirt: "var(--color-azul-700)", hairStyle: "short", scale: 1 },
+  senior: { bg: "var(--color-aqua-300)", skin: "#f1c9a5", hair: "#e8edf2", shirt: "var(--color-aqua-500)", hairStyle: "short", scale: 1 },
+  teen: { bg: "var(--color-azul-100)", skin: "#d9a37c", hair: "#2b2330", shirt: "var(--color-aqua-500)", hairStyle: "short", scale: 0.84 },
+  girl: { bg: "var(--color-aqua-500)", skin: "#f1c9a5", hair: "#3a2a24", shirt: "#ffffff", hairStyle: "long", scale: 0.78 },
+  boy: { bg: "var(--color-aqua-300)", skin: "#f1c9a5", hair: "#3a2a24", shirt: "var(--color-azul-700)", hairStyle: "short", scale: 0.78 },
 };
 
 function Avatar({ variant, size, className = "" }: { variant: Variant; size: AvatarSize; className?: string }) {
@@ -71,13 +71,13 @@ function Avatar({ variant, size, className = "" }: { variant: Variant; size: Ava
       <svg viewBox="0 0 64 64" className="size-full" aria-hidden="true">
         <g transform={`translate(32 64) scale(${look.scale}) translate(-32 -64)`}>
           {look.hairStyle === "long" && <path d="M19 30 C17 15 25 11 32 11 C39 11 47 15 45 30 L45 44 L19 44 Z" fill={look.hair} />}
-          <path d="M11 64 C11 48 20 42 32 42 C44 42 53 48 53 64 Z" fill={look.shirt} />
+          <path d="M11 64 C11 48 20 42 32 42 C44 42 53 48 53 64 Z" style={{ fill: look.shirt }} />
           <circle cx="32" cy="27" r="11" fill={look.skin} />
           <path
             d={look.hairStyle === "long" ? "M21 26 C21 16 27 13 32 13 C38 13 43 16 43 26 C38 21 27 20 21 26 Z" : "M21 24 C21 14 27 11 32 11 C38 11 43 14 43 24 C39 19 26 19 21 24 Z"}
             fill={look.hair}
           />
-          <path d="M27.5 31.5 Q32 35.5 36.5 31.5" fill="none" stroke="#024474" strokeWidth={2} strokeLinecap="round" />
+          <path d="M27.5 31.5 Q32 35.5 36.5 31.5" fill="none" style={{ stroke: "var(--color-azul-700)" }} strokeWidth={2} strokeLinecap="round" />
         </g>
       </svg>
     </span>
@@ -98,9 +98,9 @@ export function FamilyOrbit({ count = 6 }: { count?: OrbitCount }) {
       `}</style>
 
       <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="pointer-events-none absolute inset-0 size-full" aria-hidden="true">
-        <circle cx="50" cy="50" r={ORBIT_RADIUS} fill="none" stroke="#c4ebef" strokeWidth="1" strokeDasharray="1 2" vectorEffect="non-scaling-stroke" />
+        <circle cx="50" cy="50" r={ORBIT_RADIUS} fill="none" style={{ stroke: "var(--color-aqua-200)" }} strokeWidth="1" strokeDasharray="1 2" vectorEffect="non-scaling-stroke" />
         {positions.map((pos, i) => (
-          <line key={i} x1="50" y1="50" x2={pos.x} y2={pos.y} stroke="#93d9e0" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+          <line key={i} x1="50" y1="50" x2={pos.x} y2={pos.y} style={{ stroke: "var(--color-aqua-300)" }} strokeWidth="1" vectorEffect="non-scaling-stroke" />
         ))}
       </svg>
 

@@ -30,7 +30,7 @@ export function FloatingWhatsapp() {
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={reduceMotion ? { opacity: 0 } : { opacity: 0, x: 12, scale: 0.96 }}
             transition={{ type: "spring", stiffness: 320, damping: 28 }}
-            className="relative rounded-2xl bg-white px-4 py-2.5 text-navy-700 shadow-[0_12px_32px_-12px_rgb(1_42_72/0.35)] ring-1 ring-navy-700/10"
+            className="relative rounded-2xl bg-white px-4 py-2.5 text-navy-700 shadow-[0_12px_32px_-12px_color-mix(in_srgb,var(--color-azul-950)_35%,transparent)] ring-1 ring-navy-700/10"
           >
             <a href={href} target="_blank" rel="noopener" className="text-sm leading-snug">
               <span className="block font-bold">¡Hola! ¿Tienes alguna duda?</span>
@@ -47,7 +47,7 @@ export function FloatingWhatsapp() {
         target="_blank"
         rel="noopener"
         aria-label="Escríbenos por WhatsApp"
-        className="relative grid size-14 shrink-0 place-items-center rounded-full bg-navy-700 text-white shadow-[0_12px_28px_-10px_rgb(1_42_72/0.6)] transition-colors hover:bg-navy-500"
+        className="relative grid size-14 shrink-0 place-items-center rounded-full bg-navy-700 text-white shadow-[0_12px_28px_-10px_color-mix(in_srgb,var(--color-azul-950)_60%,transparent)] transition-colors hover:bg-navy-500"
       >
         {/* Soft halo that breathes with transform/opacity only (no repaint) */}
         {!reduceMotion && (

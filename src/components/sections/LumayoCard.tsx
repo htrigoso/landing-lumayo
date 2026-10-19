@@ -96,7 +96,7 @@ export function LumayoCard() {
               return (
                 <Reveal key={tier.percent} className="h-full" delay={i * 0.08}>
                   <article
-                    className={`relative h-full overflow-hidden rounded-3xl bg-white p-7 shadow-[0_18px_40px_-28px_rgb(7_42_76/0.4)] transition duration-300 hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0 ${
+                    className={`relative h-full overflow-hidden rounded-3xl bg-white p-7 shadow-[0_18px_40px_-28px_color-mix(in_srgb,var(--color-azul-950)_40%,transparent)] transition duration-300 hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0 ${
                       featured ? "border-2 border-cyan-500" : "border border-line"
                     }`}
                   >
@@ -176,7 +176,7 @@ export function LumayoCard() {
         <SectionAtmosphere tone="mist" isotype="br" />
 
         <div className="container-page">
-          <div className="rounded-3xl border border-line bg-white p-8 shadow-[0_18px_40px_-28px_rgb(7_42_76/0.4)] sm:p-12">
+          <div className="rounded-3xl border border-line bg-white p-8 shadow-[0_18px_40px_-28px_color-mix(in_srgb,var(--color-azul-950)_40%,transparent)] sm:p-12">
             <div className="grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
               <div>
                 <PlanFamilyCopy />

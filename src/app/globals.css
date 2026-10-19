@@ -7,52 +7,80 @@
 }
 
 @theme {
-  /* Brand — taken from the Lumayo flyer */
-  /* Lumayo brand manual palette (V1, 2026) */
-  --color-navy-950: #012a48;
-  --color-navy-900: #013559;
-  --color-navy-700: #024474; /* Azul profundo — primary */
-  --color-navy-500: #0e5ca4; /* Azul clínico */
+  /* Brandbook Lumayo 2026 V2 — Azul Clínico (principal) y Aqua Vital (acento) */
+  --color-azul-950: #1a2f51;
+  --color-azul-900: #234b85;
+  --color-azul-800: #2557a8;
+  --color-azul-700: #2364c2;
+  --color-azul-600: #2e81e2;
+  --color-azul-500: #439dee;
+  --color-azul-400: #67baf3;
+  --color-azul-300: #98d3f8;
+  --color-azul-200: #c2e4fb;
+  --color-azul-100: #ddeffc;
+  --color-azul-50: #f0f8fe;
 
-  --color-cyan-300: #85cedf; /* Agua */
-  --color-cyan-400: #2ac8e1; /* Azul */
-  --color-cyan-500: #02acb5; /* Esmeralda */
-  --color-cyan-600: #0e5ca4; /* Azul clínico */
-  --color-cyan-700: #0e5ca4; /* Azul clínico: accessible accent for text on white */
+  --color-aqua-950: #133239;
+  --color-aqua-900: #244d55;
+  --color-aqua-800: #265c64;
+  --color-aqua-700: #257079;
+  --color-aqua-600: #268b94;
+  --color-aqua-500: #2baaaf;
+  --color-aqua-400: #46c7ca;
+  --color-aqua-300: #61d6d7;
+  --color-aqua-200: #b4eded;
+  --color-aqua-100: #d7f6f5;
+  --color-aqua-50: #effcfb;
 
-  --color-sky-50: #f3f8fc; /* manual light panel */
-  --color-sky-100: #dbf1fe; /* Bruma */
-  --color-sky-200: #c3e6f6;
+  /* Azul Clínico — primary (aliases de la escala V2; los nombres navy-* se mantienen) */
+  --color-navy-950: var(--color-azul-950);
+  --color-navy-900: var(--color-azul-900);
+  --color-navy-700: var(--color-azul-700);
+  --color-navy-500: var(--color-azul-800);
 
+  /* Aqua Vital — accent (aliases de la escala V2) */
+  --color-cyan-100: var(--color-aqua-100);
+  --color-cyan-300: var(--color-aqua-300);
+  --color-cyan-400: var(--color-aqua-400);
+  --color-cyan-500: var(--color-aqua-500);
+  --color-cyan-600: var(--color-aqua-600);
+  --color-cyan-700: var(--color-aqua-700);
 
-  /* Brandbook 2026 secondary scales: Turquesa (AA version of Esmeralda) and Celeste */
-  --color-teal-100: #e6f7f9;
-  --color-teal-200: #c4ebef;
-  --color-teal-300: #93d9e0;
-  --color-teal-400: #62c6d0;
-  --color-teal-500: #38aeba;
-  --color-teal-600: #2a8790; /* Turquesa */
-  --color-teal-700: #1e6d74;
-  --color-teal-800: #164e53;
-  --color-teal-900: #0c2b2e;
+  /* Bruma Azul y superficies */
+  --color-sky-50: var(--color-azul-50);
+  --color-sky-100: var(--color-azul-100);
+  --color-sky-200: var(--color-azul-200);
 
-  --color-celeste-100: #e2f6fb;
-  --color-celeste-200: #bae6f1;
-  --color-celeste-300: #8ed5e8;
-  --color-celeste-400: #62c5de; /* Celeste */
-  --color-celeste-500: #5cc2dc;
-  --color-celeste-600: #3ea7c0;
-  --color-celeste-700: #2f8397;
+  /* Aqua Vital — teal scale (aliases de la escala V2) */
+  --color-teal-100: var(--color-aqua-100);
+  --color-teal-200: var(--color-aqua-200);
+  --color-teal-300: var(--color-aqua-300);
+  --color-teal-400: var(--color-aqua-400);
+  --color-teal-500: var(--color-aqua-500);
+  --color-teal-600: var(--color-aqua-600);
+  --color-teal-700: var(--color-aqua-700);
+  --color-teal-800: var(--color-aqua-800);
+  --color-teal-900: var(--color-aqua-950);
 
-  --color-ink-900: #0c2a45;
+  /* Celeste ya no existe en V2: aliases de la escala Azul Clínico */
+  --color-celeste-100: var(--color-azul-100);
+  --color-celeste-200: var(--color-azul-200);
+  --color-celeste-300: var(--color-azul-300);
+  --color-celeste-400: var(--color-azul-400);
+  --color-celeste-500: var(--color-azul-500);
+  --color-celeste-600: var(--color-azul-600);
+  --color-celeste-700: var(--color-azul-700);
+
+  /* Neutrales de interfaz */
+  --color-ink-900: var(--color-azul-950);
   --color-ink-600: #475b6e;
   --color-ink-400: #7a8a99;
   --color-line: #d6e6f0;
 
 
   /* Brandbook surfaces are flat: shadows only hint at separation */
-  --shadow-soft: 0 1px 2px rgb(2 68 116 / 0.06);
-  --shadow-lift: 0 1px 2px rgb(2 68 116 / 0.06), 0 8px 20px -14px rgb(2 68 116 / 0.25);
+  --shadow-soft: 0 1px 2px color-mix(in srgb, var(--color-azul-950) 6%, transparent);
+  --shadow-lift: 0 1px 2px color-mix(in srgb, var(--color-azul-950) 6%, transparent), 0 8px 20px -14px color-mix(in srgb, var(--color-azul-950) 25%, transparent);
 
   /* Brandbook panels and cards: moderate radius */
   --radius-card: 1rem;
@@ -171,11 +199,11 @@ select {
   }
   .btn::before {
     z-index: -1;
-    background: var(--fill, rgb(2 68 116 / 0.1));
+    background: var(--fill, color-mix(in srgb, var(--color-azul-950) 10%, transparent));
   }
   .btn::after {
     z-index: -2;
-    background: var(--fill-soft, rgb(42 200 225 / 0.2));
+    background: var(--fill-soft, color-mix(in srgb, var(--color-aqua-400) 20%, transparent));
   }
   /* Entering: a slow, even rise; the front layer trails the lighter one for depth */
   .btn:hover::before,
@@ -208,13 +236,13 @@ select {
   }
   @keyframes cta-pulse {
     0% {
-      box-shadow: 0 10px 24px -10px rgb(2 68 116 / 0.55), 0 0 0 0 rgb(42 200 225 / 0.5);
+      box-shadow: 0 10px 24px -10px color-mix(in srgb, var(--color-azul-950) 55%, transparent), 0 0 0 0 color-mix(in srgb, var(--color-aqua-400) 50%, transparent);
     }
     70% {
-      box-shadow: 0 10px 24px -10px rgb(2 68 116 / 0.55), 0 0 0 14px rgb(42 200 225 / 0);
+      box-shadow: 0 10px 24px -10px color-mix(in srgb, var(--color-azul-950) 55%, transparent), 0 0 0 14px color-mix(in srgb, var(--color-aqua-400) 0%, transparent);
     }
     100% {
-      box-shadow: 0 10px 24px -10px rgb(2 68 116 / 0.55), 0 0 0 0 rgb(42 200 225 / 0);
+      box-shadow: 0 10px 24px -10px color-mix(in srgb, var(--color-azul-950) 55%, transparent), 0 0 0 0 color-mix(in srgb, var(--color-aqua-400) 0%, transparent);
     }
   }
   /*
@@ -260,24 +288,24 @@ select {
   /* Primary CTA (WhatsApp / booking) in Azul profundo — the brand manual has no green */
   .btn-wa,
   .btn-navy {
-    --fill: var(--color-navy-500); /* Azul clínico */
-    --fill-soft: rgb(42 200 225 / 0.55); /* Azul */
+    --fill: var(--color-navy-500); /* Azul 800 */
+    --fill-soft: color-mix(in srgb, var(--color-aqua-400) 55%, transparent); /* Aqua 400 */
     background: var(--color-navy-700);
     color: #fff;
-    box-shadow: 0 10px 24px -10px rgb(2 68 116 / 0.55);
+    box-shadow: 0 10px 24px -10px color-mix(in srgb, var(--color-azul-950) 55%, transparent);
   }
   /* Primary CTA variant for Azul profundo / Azul clínico backgrounds */
   .btn-light {
     --fill: var(--color-sky-100); /* Bruma */
-    --fill-soft: rgb(133 206 223 / 0.6); /* Agua */
+    --fill-soft: color-mix(in srgb, var(--color-aqua-300) 60%, transparent); /* Agua */
     background: #fff;
     color: var(--color-navy-700);
-    box-shadow: 0 10px 24px -10px rgb(1 42 72 / 0.6);
+    box-shadow: 0 10px 24px -10px color-mix(in srgb, var(--color-azul-950) 60%, transparent);
   }
   /* Secondary CTA on dark backgrounds */
   .btn-ghost-light {
     --fill: rgb(255 255 255 / 0.14);
-    --fill-soft: rgb(42 200 225 / 0.25);
+    --fill-soft: color-mix(in srgb, var(--color-aqua-400) 25%, transparent);
     background: transparent;
     color: #fff;
     border: 1.5px solid rgb(255 255 255 / 0.45);
@@ -287,7 +315,7 @@ select {
   }
   .btn-outline {
     --fill: var(--color-sky-100); /* Bruma */
-    --fill-soft: rgb(133 206 223 / 0.5); /* Agua */
+    --fill-soft: color-mix(in srgb, var(--color-aqua-300) 50%, transparent); /* Agua */
     background: #fff;
     color: var(--color-navy-700);
     border: 1.5px solid var(--color-sky-200);
@@ -368,7 +396,7 @@ select {
   .field-input:focus {
     outline: none;
     border-color: var(--color-cyan-500);
-    box-shadow: 0 0 0 4px rgb(42 200 225 / 0.18);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-aqua-400) 18%, transparent);
   }
   .field-input[aria-invalid="true"] {
     border-color: #c2410c;

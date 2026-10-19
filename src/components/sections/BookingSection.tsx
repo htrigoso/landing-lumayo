@@ -38,7 +38,7 @@ export function BookingSection({ number }: { number: string }) {
 
         {/* Narrow, tall booking card with its own brand header */}
         <Reveal delay={0.1} className="mx-auto w-full max-w-md lg:max-w-none">
-          <BookingForm className="text-ink-900 shadow-[0_24px_60px_-28px_rgb(1_42_72/0.55)]" />
+          <BookingForm className="text-ink-900 shadow-[0_24px_60px_-28px_color-mix(in_srgb,var(--color-azul-950)_55%,transparent)]" />
         </Reveal>
       </div>
     </section>

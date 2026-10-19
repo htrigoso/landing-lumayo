@@ -12,11 +12,11 @@ export function PlanFees() {
   return (
     <>
       <dl className="mt-8 grid gap-4 sm:grid-cols-2">
-        <div className="rounded-2xl border border-line bg-white p-5 shadow-[0_12px_30px_-20px_rgb(7_42_76/0.35)]">
+        <div className="rounded-2xl border border-line bg-white p-5 shadow-[0_12px_30px_-20px_color-mix(in_srgb,var(--color-azul-950)_35%,transparent)]">
           <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-600">Costo único anual</dt>
           <dd className="mt-2 font-display text-3xl font-extrabold text-navy-700">{plan.annualFee}</dd>
         </div>
-        <div className="rounded-2xl border border-line bg-white p-5 shadow-[0_12px_30px_-20px_rgb(7_42_76/0.35)]">
+        <div className="rounded-2xl border border-line bg-white p-5 shadow-[0_12px_30px_-20px_color-mix(in_srgb,var(--color-azul-950)_35%,transparent)]">
           <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-600">Re-afiliación</dt>
           <dd className="mt-2 font-display text-3xl font-extrabold text-navy-700">{plan.reaffiliationFee}</dd>
         </div>

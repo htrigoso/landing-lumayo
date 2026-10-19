@@ -212,7 +212,7 @@ export function LumayoKids() {
           <div className="mt-12 grid grid-cols-[minmax(0,1fr)] gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {treatmentItems.map((item, i) => (
               <Reveal key={item.id} className="h-full min-w-0" delay={i * 0.06}>
-                <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-[0_18px_40px_-28px_rgb(7_42_76/0.4)]">
+                <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-[0_18px_40px_-28px_color-mix(in_srgb,var(--color-azul-950)_40%,transparent)]">
                   <div className="relative aspect-[16/10] overflow-hidden bg-sky-100">
                     <Image
                       src={item.image}

@@ -38,25 +38,25 @@ type BackTheme = {
 const frontThemes: Record<CardVariant, FrontTheme> = {
   classic: {
     surface:
-      "bg-[linear-gradient(118deg,var(--color-navy-950)_0%,var(--color-navy-700)_50%,var(--color-navy-500)_100%)] text-white",
+      "bg-azul-700 text-white",
     weight: "font-medium",
-    glow: "bg-[radial-gradient(circle_at_100%_100%,rgb(42_200_225/0.22),transparent_35%)]",
+    glow: "bg-[radial-gradient(circle_at_100%_100%,color-mix(in_srgb,var(--color-aqua-400)_22%,transparent),transparent_35%)]",
     logoSrc: "/brand/lumayo-logo-descriptor-white.svg",
     isotipoSrc: "/brand/lumayo-isotipo-white.svg",
     isotipoClass:
       "pointer-events-none absolute -right-[6cqw] top-1/2 h-auto w-[46cqw] -translate-y-1/2 opacity-[0.22]",
-    accent: "bg-cyan-400",
-    separator: "bg-cyan-400",
-    subtitle: "text-sky-100",
+    accent: "bg-aqua-300",
+    separator: "bg-aqua-300",
+    subtitle: "text-azul-100",
     pill: "border-white/70",
     divider: "bg-white/35",
     arcs: {
       rings: [
-        { stroke: "#fff", strokeOpacity: 0.12 },
-        { stroke: "#2ac8e1", strokeOpacity: 0.35 },
-        { stroke: "#fff", strokeOpacity: 0.1 },
+        { stroke: "var(--color-azul-400)", strokeOpacity: 0.3 },
+        { stroke: "var(--color-aqua-300)", strokeOpacity: 0.3 },
+        { stroke: "var(--color-azul-400)", strokeOpacity: 0.18 },
       ],
-      wedge: { fill: "#2ac8e1", fillOpacity: 0.14 },
+      wedge: { fill: "var(--color-aqua-300)", fillOpacity: 0.16 },
     },
   },
   gold: {
@@ -87,17 +87,17 @@ const frontThemes: Record<CardVariant, FrontTheme> = {
 const backThemes: Record<CardVariant, BackTheme> = {
   classic: {
     surface:
-      "bg-[linear-gradient(115deg,#fff_0%,var(--color-sky-50)_55%,var(--color-teal-100)_100%)] text-navy-900",
-    accent: "bg-cyan-500",
+      "bg-white text-azul-950",
+    accent: "bg-aqua-500",
     qrRing: "ring-sky-200",
-    qrStops: ["#024474", "#02acb5"],
+    qrStops: ["var(--color-azul-700)", "var(--color-aqua-500)"],
     arcs: {
       rings: [
-        { stroke: "#2ac8e1", strokeOpacity: 0.45 },
-        { stroke: "#8ed5e8", strokeOpacity: 0.4 },
-        { stroke: "#2ac8e1", strokeOpacity: 0.25 },
+        { stroke: "var(--color-aqua-400)", strokeOpacity: 0.45 },
+        { stroke: "var(--color-azul-300)", strokeOpacity: 0.4 },
+        { stroke: "var(--color-aqua-400)", strokeOpacity: 0.25 },
       ],
-      wedge: { fill: "#8ed5e8", fillOpacity: 0.22 },
+      wedge: { fill: "var(--color-azul-300)", fillOpacity: 0.22 },
     },
   },
   gold: {
@@ -105,7 +105,7 @@ const backThemes: Record<CardVariant, BackTheme> = {
       "bg-[linear-gradient(115deg,#fffaf0_0%,#f8eed6_55%,#ecd9a8_100%)] text-navy-950",
     accent: "bg-[#b8892b]",
     qrRing: "ring-[#e0c283]",
-    qrStops: ["#012a48", "#b8892b"],
+    qrStops: ["var(--color-azul-950)", "#b8892b"],
     arcs: {
       rings: [
         { stroke: "#c9a03f", strokeOpacity: 0.45 },
@@ -217,12 +217,12 @@ function Arcs({ palette }: { palette: ArcPalette }) {
     >
       <g fill="none" strokeWidth={2}>
         {palette.rings.map((ring, i) => (
-          <circle key={radii[i]} cx="1750" cy="620" r={radii[i]} stroke={ring.stroke} strokeOpacity={ring.strokeOpacity} />
+          <circle key={radii[i]} cx="1750" cy="620" r={radii[i]} style={{ stroke: ring.stroke }} strokeOpacity={ring.strokeOpacity} />
         ))}
       </g>
       <path
         d="M1040 1000C1120 820 1300 720 1586 520V640C1380 780 1270 860 1220 1000Z"
-        fill={palette.wedge.fill}
+        style={{ fill: palette.wedge.fill }}
         fillOpacity={palette.wedge.fillOpacity}
       />
     </svg>

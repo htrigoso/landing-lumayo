@@ -13,7 +13,7 @@ export function PostCard({ post }: PostCardProps) {
 
   return (
     <article
-      className="group relative isolate flex min-w-0 flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-[0_18px_40px_-28px_rgb(7_42_76/0.4)]"
+      className="group relative isolate flex min-w-0 flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-[0_18px_40px_-28px_color-mix(in_srgb,var(--color-azul-950)_40%,transparent)]"
     >
       <div className="relative aspect-[16/10] shrink-0 overflow-hidden bg-sky-100">
         {cover && (

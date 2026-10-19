@@ -28,7 +28,7 @@ function FeatureTile({ post, size, className = "" }: { post: BlogPost; size: "lg
 
   return (
     <article
-      className={`group relative isolate flex min-w-0 items-end overflow-hidden rounded-3xl bg-navy-900 shadow-[0_30px_60px_-30px_rgb(7_42_76/0.45)] ring-1 ring-navy-900/5 ${
+      className={`group relative isolate flex min-w-0 items-end overflow-hidden rounded-3xl bg-navy-900 shadow-[0_30px_60px_-30px_color-mix(in_srgb,var(--color-azul-950)_45%,transparent)] ring-1 ring-navy-900/5 ${
         isLarge ? "min-h-[24rem] sm:min-h-[28rem] lg:h-full lg:min-h-0" : "min-h-[17rem] lg:h-full lg:min-h-0"
       } ${className}`}
     >

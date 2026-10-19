@@ -54,7 +54,7 @@ function ReserveButton({ className = "" }: { className?: string }) {
 export function LumayoNovias() {
   return (
     <>
-      <section aria-labelledby="novias-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
+      <section aria-labelledby="novias-title" className="relative isolate overflow-hidden bg-white pt-12 pb-16 lg:pt-16 lg:pb-20">
         <SectionAtmosphere lines="bl" glow="tr" washTop="mist" isotype="br" />
 
         <div className="container-page grid grid-cols-[minmax(0,1fr)] gap-14 lg:grid-cols-2 lg:items-center lg:gap-20">

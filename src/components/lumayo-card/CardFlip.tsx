@@ -30,7 +30,7 @@ export function CardFlip({ front, back }: { front: ReactNode; back: ReactNode })
               aria-label="Frente de la tarjeta"
               aria-hidden={flipped}
               inert={flipped}
-              className="absolute inset-0 overflow-hidden rounded-[4.4cqw] shadow-[0_2.5cqw_5cqw_-1.5cqw_rgb(7_42_76/0.45),0_0.6cqw_1.4cqw_rgb(7_42_76/0.2)] [backface-visibility:hidden] [-webkit-backface-visibility:hidden] motion-reduce:group-hover:opacity-0 motion-reduce:group-data-[flipped=true]:opacity-0"
+              className="absolute inset-0 overflow-hidden rounded-[4.4cqw] shadow-[0_2.5cqw_5cqw_-1.5cqw_color-mix(in_srgb,var(--color-azul-950)_45%,transparent),0_0.6cqw_1.4cqw_color-mix(in_srgb,var(--color-azul-950)_20%,transparent)] [backface-visibility:hidden] [-webkit-backface-visibility:hidden] motion-reduce:group-hover:opacity-0 motion-reduce:group-data-[flipped=true]:opacity-0"
             >
               {front}
             </div>
@@ -39,7 +39,7 @@ export function CardFlip({ front, back }: { front: ReactNode; back: ReactNode })
               aria-label="Reverso de la tarjeta"
               aria-hidden={!flipped}
               inert={!flipped}
-              className="absolute inset-0 overflow-hidden rounded-[4.4cqw] shadow-[0_2.5cqw_5cqw_-1.5cqw_rgb(7_42_76/0.45),0_0.6cqw_1.4cqw_rgb(7_42_76/0.2)] [backface-visibility:hidden] [-webkit-backface-visibility:hidden] [transform:rotateY(180deg)] motion-reduce:opacity-0 motion-reduce:[transform:none] motion-reduce:group-hover:opacity-100 motion-reduce:group-data-[flipped=true]:opacity-100"
+              className="absolute inset-0 overflow-hidden rounded-[4.4cqw] shadow-[0_2.5cqw_5cqw_-1.5cqw_color-mix(in_srgb,var(--color-azul-950)_45%,transparent),0_0.6cqw_1.4cqw_color-mix(in_srgb,var(--color-azul-950)_20%,transparent)] [backface-visibility:hidden] [-webkit-backface-visibility:hidden] [transform:rotateY(180deg)] motion-reduce:opacity-0 motion-reduce:[transform:none] motion-reduce:group-hover:opacity-100 motion-reduce:group-data-[flipped=true]:opacity-100"
             >
               {back}
             </div>

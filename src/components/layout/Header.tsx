@@ -81,10 +81,10 @@ function MobileDrawer({ open, onClose, returnFocusTo }: { open: boolean; onClose
             animate={{ x: 0 }}
             exit={{ x: "100%", transition: { duration: 0.25, ease: [0.4, 0, 1, 1] } }}
             transition={{ type: "spring", stiffness: 320, damping: 34 }}
-            className="absolute inset-y-0 right-0 flex w-[min(21rem,86vw)] flex-col overflow-y-auto bg-white shadow-[-20px_0_60px_-20px_rgb(7_42_76/0.45)]"
+            className="absolute inset-y-0 right-0 flex w-[min(21rem,86vw)] flex-col overflow-y-auto bg-white shadow-[-20px_0_60px_-20px_color-mix(in_srgb,var(--color-azul-950)_45%,transparent)]"
           >
             <div className="flex items-center justify-between border-b border-line px-5 py-4">
-              <Image src="/brand/lumayo-logo.svg" alt="Lumayo Centro Odontológico" width={997} height={200} unoptimized className="h-6 w-auto" />
+              <Image src="/images/lumayo-logo.svg" alt="Lumayo Centro Odontológico" width={580} height={118} unoptimized className="h-6 w-auto" />
               <button
                 ref={closeRef}
                 type="button"
@@ -203,7 +203,7 @@ function DesktopDropdown({ link, pathname }: { link: NavLink & { children: SubLi
       </button>
       {open && (
         <div className="absolute left-0 top-full z-50 w-64 pt-2">
-          <ul className="rounded-2xl border border-line bg-white p-2 shadow-[0_18px_40px_-16px_rgb(7_42_76/0.35)]">
+          <ul className="rounded-2xl border border-line bg-white p-2 shadow-[0_18px_40px_-16px_color-mix(in_srgb,var(--color-azul-950)_35%,transparent)]">
             {link.children.map((c) => (
               <li key={c.href}>
                 <Link
@@ -242,14 +242,14 @@ export function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-40 border-b bg-white shadow-[0_4px_16px_-8px_rgb(7_42_76/0.2)] md:bg-white/90 md:backdrop-blur-md transition-shadow duration-200 ${
-        scrolled ? "border-line shadow-[0_6px_20px_-12px_rgb(7_42_76/0.25)]" : "border-transparent"
+      className={`sticky top-0 z-40 border-b bg-white shadow-[0_4px_16px_-8px_color-mix(in_srgb,var(--color-azul-950)_20%,transparent)] md:bg-white/90 md:backdrop-blur-md transition-shadow duration-200 ${
+        scrolled ? "border-line shadow-[0_6px_20px_-12px_color-mix(in_srgb,var(--color-azul-950)_25%,transparent)]" : "border-transparent"
       }`}
     >
       <div className="container-page flex h-16 items-center justify-between gap-4 md:h-[4.5rem]">
         <Link href="/" className="shrink-0 rounded-lg" aria-label="Lumayo Centro Odontológico, ir al inicio">
           <Image
-            src="/brand/lumayo-logo.svg"
+            src="/images/lumayo-logo.svg"
             alt="Lumayo Centro Odontológico"
             width={997}
             height={200}

@@ -134,7 +134,7 @@ async function PostContent({ params }: PageProps) {
           </nav>
 
           <Reveal delay={0.1} className="mt-5 min-w-0">
-            <div className="relative isolate flex min-h-[26rem] items-end overflow-hidden rounded-3xl bg-navy-900 shadow-[0_30px_60px_-30px_rgb(7_42_76/0.45)] ring-1 ring-navy-900/5 sm:min-h-[30rem] lg:aspect-[2/1] lg:min-h-0">
+            <div className="relative isolate flex min-h-[26rem] items-end overflow-hidden rounded-3xl bg-navy-900 shadow-[0_30px_60px_-30px_color-mix(in_srgb,var(--color-azul-950)_45%,transparent)] ring-1 ring-navy-900/5 sm:min-h-[30rem] lg:aspect-[2/1] lg:min-h-0">
               {cover && (
                 <Image
                   src={cover}

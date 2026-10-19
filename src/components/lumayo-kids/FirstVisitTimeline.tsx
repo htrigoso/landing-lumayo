@@ -35,7 +35,7 @@ export function FirstVisitTimeline({ steps }: FirstVisitTimelineProps) {
                 <span className="-ml-12 mb-4 grid size-12 place-items-center rounded-full bg-white font-display text-lg font-bold text-navy-700 md:relative md:z-10 md:mx-auto">
                   {index + 1}
                 </span>
-                <article className="group flex h-full flex-col rounded-3xl bg-white p-6 shadow-[0_18px_40px_-28px_rgb(7_42_76/0.5)] transition duration-300 hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:text-center">
+                <article className="group flex h-full flex-col rounded-3xl bg-white p-6 shadow-[0_18px_40px_-28px_color-mix(in_srgb,var(--color-azul-950)_50%,transparent)] transition duration-300 hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:text-center">
                   {step.forParents ? (
                     <span className="mb-3 text-xs font-bold uppercase tracking-[0.14em] text-cyan-700">Para ti</span>
                   ) : null}

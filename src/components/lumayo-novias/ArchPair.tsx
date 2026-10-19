@@ -9,7 +9,7 @@ const secondary = services.find((s) => s.id === "carillas-porcelana");
 const ARCH_SIZES = "(min-width: 1024px) 26rem, 70vw";
 
 const glassCard =
-  "absolute left-4 max-w-44 rounded-2xl border border-white/60 bg-white/75 p-4 shadow-[0_18px_40px_-24px_rgb(7_42_76/0.5)] backdrop-blur-md";
+  "absolute left-4 max-w-44 rounded-2xl border border-white/60 bg-white/75 p-4 shadow-[0_18px_40px_-24px_color-mix(in_srgb,var(--color-azul-950)_50%,transparent)] backdrop-blur-md";
 
 export function ArchPair() {
   return (
@@ -20,7 +20,7 @@ export function ArchPair() {
         {primary && <Image src={primary.image} alt="" fill sizes={ARCH_SIZES} priority className="object-cover" />}
       </div>
 
-      <div className="absolute right-0 bottom-[8%] aspect-[3/4] w-[52%] overflow-hidden rounded-t-[999px] rounded-b-3xl border-4 border-white bg-sky-100 shadow-[0_24px_48px_-28px_rgb(7_42_76/0.6)]">
+      <div className="absolute right-0 bottom-[8%] aspect-[3/4] w-[52%] overflow-hidden rounded-t-[999px] rounded-b-3xl border-4 border-white bg-sky-100 shadow-[0_24px_48px_-28px_color-mix(in_srgb,var(--color-azul-950)_60%,transparent)]">
         {secondary && <Image src={secondary.image} alt="" fill sizes={ARCH_SIZES} className="object-cover" />}
       </div>
 

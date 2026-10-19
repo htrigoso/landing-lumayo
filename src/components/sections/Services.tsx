@@ -5,7 +5,7 @@ import { SectionBackdrop } from "@/components/decor/SectionBackdrop";
 
 export function Services() {
   return (
-    <section id="servicios" aria-labelledby="servicios-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
+    <section id="servicios" aria-labelledby="servicios-title" className="relative isolate overflow-hidden bg-white pt-12 pb-16 lg:pt-16 lg:pb-20">
       <SectionBackdrop lines="bl" glow="tr" />
       <div className="container-page">
         <SectionHeading

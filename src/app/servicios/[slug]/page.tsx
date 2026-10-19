@@ -109,7 +109,7 @@ async function ServiceContent({ params }: PageProps) {
         crumbs={[{ label: "Inicio", href: "/" }, { label: "Servicios", href: "/servicios" }, { label: service.name }]}
       />
 
-      <section aria-label="Resumen del servicio" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
+      <section aria-label="Resumen del servicio" className="relative isolate overflow-hidden bg-white pt-12 pb-16 lg:pt-16 lg:pb-20">
         <SectionAtmosphere washTop="mist" isotype="br" />
 
         <div className="container-page grid grid-cols-[minmax(0,1fr)] gap-12 lg:grid-cols-2 lg:items-center">

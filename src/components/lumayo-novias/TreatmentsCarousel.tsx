@@ -186,7 +186,7 @@ export function TreatmentsCarousel({ items }: TreatmentsCarouselProps) {
           {items.map((item, index) => (
             <article
               key={item.id}
-              className="group grid w-[min(88vw,40rem)] shrink-0 snap-start overflow-hidden rounded-3xl border border-line bg-white shadow-[0_18px_40px_-28px_rgb(7_42_76/0.4)] md:grid-cols-[0.9fr_1.1fr]"
+              className="group grid w-[min(88vw,40rem)] shrink-0 snap-start overflow-hidden rounded-3xl border border-line bg-white shadow-[0_18px_40px_-28px_color-mix(in_srgb,var(--color-azul-950)_40%,transparent)] md:grid-cols-[0.9fr_1.1fr]"
             >
               <div className="relative aspect-[16/10] overflow-hidden bg-sky-100 md:aspect-auto md:min-h-[22rem]">
                 <Image

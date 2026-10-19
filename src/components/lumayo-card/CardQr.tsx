@@ -54,7 +54,7 @@ const BADGE_X = SIZE / 2 - BADGE_SIZE / 2;
 const BADGE_PAD = 1.2;
 const LOGO_SIZE = BADGE_SIZE - BADGE_PAD * 2;
 
-const DEFAULT_STOPS: [string, string] = ["#024474", "#02acb5"];
+const DEFAULT_STOPS: [string, string] = ["var(--color-azul-700)", "var(--color-aqua-500)"];
 
 export function CardQr({ className, stops = DEFAULT_STOPS }: { className?: string; stops?: [string, string] }) {
   // useId output can contain characters that are unsafe inside url(#...); keep only the safe ones.
@@ -70,8 +70,8 @@ export function CardQr({ className, stops = DEFAULT_STOPS }: { className?: strin
     >
       <defs>
         <linearGradient id={gradientId} x1="0" y1="0" x2={SIZE} y2={SIZE} gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor={stops[0]} />
-          <stop offset="1" stopColor={stops[1]} />
+          <stop offset="0" style={{ stopColor: stops[0] }} />
+          <stop offset="1" style={{ stopColor: stops[1] }} />
         </linearGradient>
       </defs>
 
@@ -93,7 +93,7 @@ export function CardQr({ className, stops = DEFAULT_STOPS }: { className?: strin
         height={BADGE_SIZE}
         rx={1.8}
         fill="#fff"
-        stroke="#c3e6f6"
+        style={{ stroke: "var(--color-azul-200)" }}
         strokeWidth={0.1}
       />
       <image

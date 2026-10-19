@@ -18,7 +18,7 @@ const RING_RADIUS = 44;
 const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
 
 const inputClass =
-  "min-h-11 rounded-xl border border-line bg-white text-base text-navy-700 outline-none focus-visible:ring-2 focus-visible:ring-cyan-700";
+  "min-h-11 rounded-xl border border-line bg-white text-base text-azul-700 outline-none focus-visible:ring-2 focus-visible:ring-azul-600";
 
 /** "S/ 125.00" -> 125, "50%" -> 50. Returns 0 when nothing numeric can be read. */
 function parseNumber(value: string): number {
@@ -63,11 +63,10 @@ function SavingsRing({ rate }: { rate: number }) {
           cy="60"
           r={RING_RADIUS}
           fill="none"
-          stroke="#2ac8e1"
           strokeWidth="8"
           strokeLinecap="round"
           strokeDasharray={RING_CIRCUMFERENCE}
-          style={{ strokeDashoffset: dashOffset }}
+          style={{ stroke: "var(--color-aqua-300)", strokeDashoffset: dashOffset }}
           className="transition-[stroke-dashoffset] duration-700 ease-out motion-reduce:transition-none"
         />
       </svg>
@@ -97,20 +96,20 @@ export function SavingsCalculator() {
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr] lg:gap-8">
       {/* Controls */}
-      <div className="rounded-3xl border border-line bg-white p-6 shadow-[0_18px_40px_-28px_rgb(7_42_76/0.4)] sm:p-8">
+      <div className="rounded-3xl border border-line bg-white p-6 shadow-[0_18px_40px_-28px_color-mix(in_srgb,var(--color-azul-950)_40%,transparent)] sm:p-8">
         <div className="flex items-center gap-3">
           <Image src="/brand/lumayo-isotipo.svg" alt="" width={28} height={28} unoptimized className="size-7" />
-          <span className="text-xs font-bold uppercase tracking-[0.16em] text-cyan-700">Simulador</span>
+          <span className="text-xs font-bold uppercase tracking-[0.16em] text-azul-700">Simulador</span>
         </div>
 
         <div className="mt-8 grid gap-3">
-          <label htmlFor={`${id}-amount`} className="text-sm font-semibold text-navy-700">
+          <label htmlFor={`${id}-amount`} className="text-sm font-semibold text-azul-700">
             Monto del tratamiento
           </label>
           <div className="relative">
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 font-display text-xl font-extrabold text-navy-700"
+              className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 font-display text-xl font-extrabold text-azul-700"
             >
               S/
             </span>
@@ -134,7 +133,7 @@ export function SavingsCalculator() {
             value={amount}
             onChange={(e) => setAmountInput(e.target.value)}
             aria-label="Monto del tratamiento en soles"
-            className="mt-2 h-11 w-full cursor-pointer accent-cyan-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-700"
+            className="mt-2 h-11 w-full cursor-pointer accent-azul-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-azul-600"
           />
 
           <div className="flex flex-wrap gap-2">
@@ -146,10 +145,10 @@ export function SavingsCalculator() {
                   type="button"
                   aria-pressed={pressed}
                   onClick={() => setAmountInput(String(value))}
-                  className={`min-h-11 rounded-full border px-4 text-sm font-semibold tabular-nums transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-700 motion-reduce:transition-none ${
+                  className={`min-h-11 rounded-full border px-4 text-sm font-semibold tabular-nums transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-azul-600 motion-reduce:transition-none ${
                     pressed
-                      ? "border-cyan-500 bg-sky-50 text-navy-700"
-                      : "border-line bg-white text-ink-600 hover:border-cyan-500"
+                      ? "border-azul-700 bg-azul-50 text-azul-700"
+                      : "border-line bg-white text-ink-600 hover:border-azul-300"
                   }`}
                 >
                   S/ {value}
@@ -160,15 +159,15 @@ export function SavingsCalculator() {
         </div>
 
         <fieldset className="mt-8 grid gap-3">
-          <legend className="mb-3 text-sm font-semibold text-navy-700">Nivel de descuento</legend>
+          <legend className="mb-3 text-sm font-semibold text-azul-700">Nivel de descuento</legend>
           {lumayoCard.tiers.map((t, i) => {
             const checked = tierIndex === i;
             const Icon = TIER_ICONS[i] ?? ToothIcon;
             return (
               <label
                 key={t.percent}
-                className={`relative flex min-h-11 cursor-pointer flex-col gap-3 rounded-2xl border-2 p-4 transition-colors motion-reduce:transition-none has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-cyan-700 has-[:focus-visible]:ring-offset-2 ${
-                  checked ? "border-cyan-500 bg-sky-50" : "border-line bg-white hover:border-cyan-500/60"
+                className={`relative flex min-h-11 cursor-pointer flex-col gap-3 rounded-2xl border-2 p-4 transition-colors motion-reduce:transition-none has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-azul-600 has-[:focus-visible]:ring-offset-2 ${
+                  checked ? "border-azul-700 bg-azul-50" : "border-line bg-white hover:border-azul-300"
                 }`}
               >
                 <input
@@ -180,15 +179,15 @@ export function SavingsCalculator() {
                   className="sr-only"
                 />
                 <span className="flex items-center gap-4">
-                  <Icon className="size-8 shrink-0 text-navy-700" />
-                  <span className="font-display text-3xl font-extrabold tabular-nums text-navy-700">{t.percent}</span>
+                  <Icon className="size-8 shrink-0 text-azul-700" />
+                  <span className="font-display text-3xl font-extrabold tabular-nums text-azul-700">{t.percent}</span>
                 </span>
-                <span className="text-sm font-semibold text-navy-700">{t.title}</span>
+                <span className="text-sm font-semibold text-azul-700">{t.title}</span>
                 <span className="text-sm text-ink-600">{t.items.slice(0, 2).join(" · ")}</span>
                 {checked && (
                   <span
                     aria-hidden="true"
-                    className="absolute right-4 top-4 inline-flex size-6 items-center justify-center rounded-full bg-cyan-500 text-white"
+                    className="absolute right-4 top-4 inline-flex size-6 items-center justify-center rounded-full bg-azul-700 text-white"
                   >
                     <CheckIcon className="size-3.5" />
                   </span>
@@ -200,10 +199,10 @@ export function SavingsCalculator() {
       </div>
 
       {/* Result */}
-      <div className="relative isolate order-first overflow-hidden rounded-3xl bg-navy-900 p-6 text-white sm:p-8 lg:order-none">
+      <div className="relative isolate order-first overflow-hidden rounded-3xl bg-azul-700 p-6 text-white sm:p-8 lg:order-none">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_10%,rgba(42,200,225,0.35),transparent_60%)]"
+          className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_10%,color-mix(in_srgb,var(--color-aqua-400)_30%,transparent),transparent_60%)]"
         />
         <IsotypeWatermark tone="dark" className="-bottom-16 -right-16 h-64 w-auto" />
         <div
@@ -215,8 +214,8 @@ export function SavingsCalculator() {
           <div className="flex items-center gap-6">
             <SavingsRing rate={rate} />
             <div>
-              <p className="text-sm font-semibold uppercase tracking-wide text-sky-100/85">Ahorras</p>
-              <p className="mt-1 font-display text-4xl font-extrabold tabular-nums text-cyan-300">
+              <p className="text-sm font-semibold uppercase tracking-wide text-azul-100">Ahorras</p>
+              <p className="mt-1 font-display text-4xl font-extrabold tabular-nums text-aqua-300">
                 <span>S/ </span>
                 <AnimatedNumber value={discount} />
               </p>
@@ -226,7 +225,7 @@ export function SavingsCalculator() {
           <div className="grid gap-3 text-sm">
             <div className="grid gap-1.5">
               <div className="flex justify-between tabular-nums">
-                <span className="text-sky-100/85">Sin tarjeta</span>
+                <span className="text-azul-100">Sin tarjeta</span>
                 <span>S/ {amount.toFixed(2)}</span>
               </div>
               <div className="h-3 overflow-hidden rounded-full bg-white/10">
@@ -238,12 +237,12 @@ export function SavingsCalculator() {
             </div>
             <div className="grid gap-1.5">
               <div className="flex justify-between tabular-nums">
-                <span className="text-sky-100/85">Con Lumayo Card</span>
-                <span className="font-semibold text-cyan-300">S/ {paid.toFixed(2)}</span>
+                <span className="text-azul-100">Con Lumayo Card</span>
+                <span className="text-white font-semibold">S/ {paid.toFixed(2)}</span>
               </div>
               <div className="h-3 overflow-hidden rounded-full bg-white/10">
                 <div
-                  className="h-full rounded-full bg-cyan-400 transition-[width] duration-700 ease-out motion-reduce:transition-none"
+                  className="h-full rounded-full bg-aqua-300 transition-[width] duration-700 ease-out motion-reduce:transition-none"
                   style={{ width: `${(1 - rate) * 100}%` }}
                 />
               </div>
@@ -254,7 +253,7 @@ export function SavingsCalculator() {
             <div className="grid gap-3 border-t border-white/15 pt-6">
               <div className="h-2 overflow-hidden rounded-full bg-white/10">
                 <div
-                  className="h-full rounded-full bg-cyan-400 transition-[width] duration-700 ease-out motion-reduce:transition-none"
+                  className="h-full rounded-full bg-aqua-300 transition-[width] duration-700 ease-out motion-reduce:transition-none"
                   style={{ width: `${breakEvenProgress * 100}%` }}
                 />
               </div>
@@ -269,7 +268,7 @@ export function SavingsCalculator() {
                   </>
                 )}
               </p>
-              <p className="text-xs text-sky-100/75">
+              <p className="text-xs text-azul-100/90">
                 Tu tarjeta se paga sola con <span className="tabular-nums">S/ {breakEven.toFixed(2)}</span> en este nivel
               </p>
             </div>

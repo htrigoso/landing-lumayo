@@ -16,9 +16,9 @@ export const site = {
     country: "PE",
   },
   mapsUrl:
-    "https://www.google.com/maps/search/?api=1&query=Jr.+Miraflores+230+La+Banda+de+Shilcayo+Tarapoto",
+    "https://www.google.com/maps/place/Lumayo+Centro+Odontol%C3%B3gico/@-6.4900813,-76.3540512,17z/data=!3m1!4b1!4m6!3m5!1s0x91ba0d8947d09025:0xa21f60bc22074614!8m2!3d-6.4900813!4d-76.3540512",
   mapsEmbedUrl:
-    "https://www.google.com/maps?q=Jr.+Miraflores+230,+La+Banda+de+Shilcayo,+Tarapoto,+Per%C3%BA&output=embed",
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.249363660362!2d-76.3566261230975!3d-6.4900759634570155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91ba0d8947d09025%3A0xa21f60bc22074614!2sLumayo%20Centro%20Odontol%C3%B3gico!5e0!3m2!1ses-419!2spe!4v1792375977932!5m2!1ses-419!2spe",
 } as const;
 
 export const fullAddress = `${site.address.street}, ${site.address.district}, ${site.address.city}`;
@@ -58,7 +58,7 @@ export const lumayoCard = {
   title: "Lumayo Card",
   description: `Es nuestra tarjeta de protección odontológica con descuentos preferenciales para el titular y sus adicionales: hasta ${plans.classic.maxAdditional} en la Clásica y ${plans.gold.maxAdditional} en la Dorada.`,
   // TODO: confirmar cobertura con la clínica
-  heroHighlight: "Hasta 30% de descuento en tus tratamientos",
+  heroHighlight: "Hasta 20% de descuento en tus tratamientos",
   plans,
   card: {
     whatsappDisplay: "975 225 531", // TODO: confirmar (difiere de site.phoneDisplay)
@@ -71,12 +71,12 @@ export const lumayoCard = {
   // TODO: confirmar que descuentos y beneficios sean iguales en ambos planes
   tiers: [
     {
-      percent: "30%",
+      percent: "20%",
       title: "Cuidado esencial",
       items: ["Limpieza dental", "Blanqueamiento dental", "Curaciones simples"],
     },
     {
-      percent: "20%",
+      percent: "15%",
       title: "Cirugía y especialidades",
       items: ["Cirugía de terceras molares", "Endodoncia", "Brackets (ortodoncia)", "Ortopedia"],
     },
@@ -140,7 +140,7 @@ export const lumayoCard = {
     {
       q: "¿Se puede usar en todos los tratamientos?",
       // TODO: confirmar cobertura por tratamiento
-      a: "Sí, con tres niveles de descuento: 30% en limpieza dental, blanqueamiento y curaciones simples; 20% en cirugía de terceras molares, endodoncia, brackets y ortopedia; y 10% en extracciones, carillas de resina, coronas, prótesis removibles y puentes fijos.",
+      a: "Sí, con tres niveles de descuento: 20% en limpieza dental, blanqueamiento y curaciones simples; 15% en cirugía de terceras molares, endodoncia, brackets y ortopedia; y 10% en extracciones, carillas de resina, coronas, prótesis removibles y puentes fijos.",
     },
     {
       q: "¿Cómo la solicito?",

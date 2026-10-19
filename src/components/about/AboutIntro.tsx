@@ -9,7 +9,7 @@ const points = ["Equipo con experiencia", "Servicios completos", "Tecnología mo
 /** "About us" intro, after the reference: photo collage with a brand seal, Titular, copy and four points. */
 export function AboutIntro() {
   return (
-    <section aria-labelledby="about-intro-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
+    <section aria-labelledby="about-intro-title" className="relative isolate overflow-hidden bg-white pt-12 pb-16 lg:pt-16 lg:pb-20">
       <SectionBackdrop lines="bl" glow="tr" />
       <div className="container-page grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
         {/* Collage: large HD photo, the reference's smaller clinic photo overlapping, and the seal */}

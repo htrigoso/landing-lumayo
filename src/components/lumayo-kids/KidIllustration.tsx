@@ -1,10 +1,10 @@
 const palette = {
-  navy: "#024474",
-  deepNavy: "#012a48",
-  turquoise: "#02acb5",
-  water: "#85cedf",
-  celeste: "#dbf1fe",
-  ground: "#c3e6f6",
+  navy: "var(--color-azul-700)",
+  deepNavy: "var(--color-azul-950)",
+  turquoise: "var(--color-aqua-500)",
+  water: "var(--color-aqua-300)",
+  celeste: "var(--color-azul-100)",
+  ground: "var(--color-azul-200)",
   skin: "#f1c9a5",
   skinDeep: "#d9a37c",
   white: "#ffffff",
@@ -37,19 +37,19 @@ function Child({ x, hair, shirt, animated = false, waving = false }: ChildProps)
   return (
     <g transform={`translate(${x} 0)`}>
       <g className={animated ? "kids-bounce" : undefined}>
-        <path d="M-30 210 V168 Q-30 150 0 150 Q30 150 30 168 V210 Z" fill={shirt} />
+        <path d="M-30 210 V168 Q-30 150 0 150 Q30 150 30 168 V210 Z" style={{ fill: shirt }} />
         <rect x={-6} y={140} width={12} height={14} fill={palette.skinDeep} />
         <circle cx={0} cy={118} r={30} fill={palette.skin} />
-        <path d="M-30 116 Q-32 84 0 84 Q32 84 30 116 Q22 100 8 98 Q-6 98 -30 116 Z" fill={hair} />
-        <circle cx={-11} cy={120} r={3} fill={palette.deepNavy} />
-        <circle cx={11} cy={120} r={3} fill={palette.deepNavy} />
+        <path d="M-30 116 Q-32 84 0 84 Q32 84 30 116 Q22 100 8 98 Q-6 98 -30 116 Z" style={{ fill: hair }} />
+        <circle cx={-11} cy={120} r={3} style={{ fill: palette.deepNavy }} />
+        <circle cx={11} cy={120} r={3} style={{ fill: palette.deepNavy }} />
         <circle cx={-18} cy={130} r={4} fill={palette.skinDeep} opacity={0.5} />
         <circle cx={18} cy={130} r={4} fill={palette.skinDeep} opacity={0.5} />
-        <path d="M-12 128 Q0 142 12 128 Z" fill={palette.white} stroke={palette.deepNavy} strokeWidth={1.5} strokeLinejoin="round" />
+        <path d="M-12 128 Q0 142 12 128 Z" fill={palette.white} style={{ stroke: palette.deepNavy }} strokeWidth={1.5} strokeLinejoin="round" />
         {waving && (
           <g transform="translate(28 176)">
             <g className="kids-wave">
-              <path d="M0 0 L24 -26" stroke={shirt} strokeWidth={12} strokeLinecap="round" />
+              <path d="M0 0 L24 -26" style={{ stroke: shirt }} strokeWidth={12} strokeLinecap="round" />
               <circle cx={26} cy={-30} r={7} fill={palette.skin} />
             </g>
           </g>
@@ -65,30 +65,30 @@ export function KidIllustration() {
     <svg viewBox="0 0 400 320" role="img" aria-label="Ilustración de niños sonriendo en el consultorio dental" className="h-auto w-full max-w-sm">
       <style>{ANIMATION_CSS}</style>
 
-      <ellipse cx={200} cy={290} rx={170} ry={14} fill={palette.ground} />
-      <circle cx={200} cy={150} r={130} fill={palette.celeste} />
+      <ellipse cx={200} cy={290} rx={170} ry={14} style={{ fill: palette.ground }} />
+      <circle cx={200} cy={150} r={130} style={{ fill: palette.celeste }} />
 
       <Child x={130} hair={palette.navy} shirt={palette.turquoise} waving />
       <Child x={270} hair={palette.deepNavy} shirt={palette.water} animated />
 
       <g transform="translate(200 40)">
         <g className="kids-float">
-          <path d={TOOTH_PATH} fill={palette.white} stroke={palette.navy} strokeWidth={2} strokeLinejoin="round" />
-          <path d="M-8 -2 Q-4 -6 0 -2" fill="none" stroke={palette.water} strokeWidth={2} strokeLinecap="round" />
+          <path d={TOOTH_PATH} fill={palette.white} style={{ stroke: palette.navy }} strokeWidth={2} strokeLinejoin="round" />
+          <path d="M-8 -2 Q-4 -6 0 -2" fill="none" style={{ stroke: palette.water }} strokeWidth={2} strokeLinecap="round" />
         </g>
       </g>
 
       <g className="kids-float">
-        <path d={SPARKLE_PATH} transform="translate(72 70) scale(1.2)" fill={palette.water} />
+        <path d={SPARKLE_PATH} transform="translate(72 70) scale(1.2)" style={{ fill: palette.water }} />
       </g>
       <g className="kids-float">
-        <path d={SPARKLE_PATH} transform="translate(330 60) scale(1)" fill={palette.turquoise} />
+        <path d={SPARKLE_PATH} transform="translate(330 60) scale(1)" style={{ fill: palette.turquoise }} />
       </g>
       <g className="kids-float">
-        <path d={SPARKLE_PATH} transform="translate(340 200) scale(0.8)" fill={palette.water} />
+        <path d={SPARKLE_PATH} transform="translate(340 200) scale(0.8)" style={{ fill: palette.water }} />
       </g>
-      <circle cx={60} cy={200} r={3} fill={palette.turquoise} />
-      <circle cx={345} cy={250} r={3} fill={palette.navy} opacity={0.7} />
+      <circle cx={60} cy={200} r={3} style={{ fill: palette.turquoise }} />
+      <circle cx={345} cy={250} r={3} style={{ fill: palette.navy }} opacity={0.7} />
     </svg>
   );
 }

@@ -5,7 +5,7 @@ export function SealBadge({ className = "" }: { className?: string }) {
   return (
     <div
       aria-hidden="true"
-      className={`relative grid size-28 place-items-center rounded-full border border-navy-700 bg-white shadow-[0_18px_36px_-20px_rgb(7_42_76/0.55)] ${className}`}
+      className={`relative grid size-28 place-items-center rounded-full border border-navy-700 bg-white shadow-[0_18px_36px_-20px_color-mix(in_srgb,var(--color-azul-950)_55%,transparent)] ${className}`}
     >
       <svg viewBox="0 0 120 120" className="absolute inset-0 size-full animate-[spin_40s_linear_infinite] motion-reduce:animate-none">
         <defs>

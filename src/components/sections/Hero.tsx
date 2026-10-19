@@ -162,7 +162,7 @@ export function Hero() {
       </div>
 
       {/* Info bar under the stage, as in the reference: phone, opening hours and the booking CTA */}
-      <div className="bg-teal-700 text-white">
+      <div className="bg-azul-700 text-white">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -171,18 +171,18 @@ export function Hero() {
         >
           <ul aria-label="Contacto" className="grid grid-cols-1 gap-5 min-[420px]:grid-cols-2 md:flex md:gap-0">
             {infoItems.map(({ icon: Icon, title, text, href }, i) => (
-              <li key={title} className={`flex items-center gap-3 ${i > 0 ? "md:ml-8 md:border-l md:border-white/15 md:pl-8" : ""}`}>
+              <li key={title} className={`flex items-center gap-3 ${i > 0 ? "md:ml-8 md:border-l md:border-white/25 md:pl-8" : ""}`}>
                 <span className="grid size-11 shrink-0 place-items-center rounded-full text-white ring-1 ring-white/50">
                   <Icon className="size-5" />
                 </span>
                 <span className="leading-tight">
                   <strong className="block text-[0.95rem] font-semibold">{title}</strong>
                   {href ? (
-                    <a href={href} className="text-sm text-white/85 underline-offset-4 hover:text-white hover:underline">
+                    <a href={href} className="text-sm text-white/90 underline-offset-4 hover:text-white hover:underline">
                       {text}
                     </a>
                   ) : (
-                    <span className="text-sm text-white/85">{text}</span>
+                    <span className="text-sm text-white/90">{text}</span>
                   )}
                 </span>
               </li>
@@ -190,7 +190,7 @@ export function Hero() {
           </ul>
           <a href="#reservar" className="btn btn-light w-full shrink-0 gap-3 !py-1.5 pl-5 pr-1.5 text-sm sm:w-fit sm:self-center md:self-auto">
             Reservar cita
-            <span className="btn-arrow grid size-8 place-items-center rounded-full bg-navy-700 text-white">
+            <span className="btn-arrow grid size-8 place-items-center rounded-full bg-azul-700 text-white">
               <ArrowRightIcon className="size-3.5 -rotate-45" />
             </span>
           </a>
