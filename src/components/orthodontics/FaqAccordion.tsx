@@ -1,13 +1,17 @@
 "use client";
 
 import { useId, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 
 type Faq = { q: string; a: string };
 
 const ease = [0.65, 0, 0.35, 1] as const;
 
-/** FAQ list whose answers glide open (height + fade) instead of snapping like native <details>. */
+/**
+ * FAQ list whose answers glide open (height + fade) instead of snapping like native <details>.
+ * Answers are always rendered in the HTML (closed panels are hidden with inert/aria-hidden),
+ * so crawlers that do not run JavaScript can still read them.
+ */
 export function FaqAccordion({ items }: { items: Faq[] }) {
   const [open, setOpen] = useState<number | null>(null);
   const reduceMotion = useReducedMotion();
@@ -45,34 +49,30 @@ export function FaqAccordion({ items }: { items: Faq[] }) {
                 </motion.span>
               </button>
             </h3>
-            <AnimatePresence initial={false}>
-              {isOpen && (
-                <motion.div
-                  id={panelId}
-                  role="region"
-                  aria-labelledby={buttonId}
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={
-                    reduceMotion
-                      ? { duration: 0 }
-                      : { height: { duration: 0.55, ease }, opacity: { duration: 0.4, ease: "easeOut" } }
-                  }
-                  className="overflow-hidden"
-                >
-                  <motion.p
-                    initial={{ y: -6 }}
-                    animate={{ y: 0 }}
-                    exit={{ y: -6 }}
-                    transition={reduceMotion ? { duration: 0 } : { duration: 0.55, ease }}
-                    className="pb-4 pr-10 leading-relaxed text-ink-600"
-                  >
-                    {f.a}
-                  </motion.p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <motion.div
+              id={panelId}
+              role="region"
+              aria-labelledby={buttonId}
+              initial={false}
+              animate={isOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
+              transition={
+                reduceMotion
+                  ? { duration: 0 }
+                  : { height: { duration: 0.55, ease }, opacity: { duration: 0.4, ease: "easeOut" } }
+              }
+              inert={!isOpen}
+              aria-hidden={!isOpen}
+              className="overflow-hidden"
+            >
+              <motion.p
+                initial={false}
+                animate={{ y: isOpen ? 0 : -6 }}
+                transition={reduceMotion ? { duration: 0 } : { duration: 0.55, ease }}
+                className="pb-4 pr-10 leading-relaxed text-ink-600"
+              >
+                {f.a}
+              </motion.p>
+            </motion.div>
           </div>
         );
       })}
