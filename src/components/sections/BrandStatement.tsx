@@ -22,9 +22,9 @@ const fadeUp: Variants = {
  */
 export function BrandStatement() {
   return (
-    <section aria-labelledby="statement-title" className="relative isolate overflow-hidden bg-white pb-16 text-heading lg:pb-20">
-      <SectionBackdrop lines="tl" glow="bl" />
-      <IsotypeWatermark className="-bottom-24 -right-20 -z-10 w-[26rem] !opacity-[0.05] sm:w-[34rem] lg:-bottom-32 lg:-right-16 lg:w-[44rem]" />
+    <section aria-labelledby="statement-title" className="relative isolate overflow-hidden bg-surface-inverse pt-16 pb-16 text-text-inverse lg:pt-20 lg:pb-20">
+      <SectionBackdrop surface="deep" lines="tl" glow="bl" />
+      <IsotypeWatermark tone="dark" className="-bottom-24 -right-20 -z-10 w-[26rem] !opacity-[0.1] sm:w-[34rem] lg:-bottom-32 lg:-right-16 lg:w-[44rem]" />
 
       <motion.div
         variants={stagger}
@@ -35,7 +35,7 @@ export function BrandStatement() {
       >
         <div>
           {/* Brandbook "Etiqueta": Medium, uppercase, +12% */}
-          <motion.p variants={fadeUp} className="text-xs font-medium uppercase tracking-[0.12em] text-primary-hover sm:text-sm">
+          <motion.p variants={fadeUp} className="text-xs font-medium uppercase tracking-[0.12em] text-text-inverse-muted sm:text-sm">
             Centro odontológico · Tarapoto
           </motion.p>
           <motion.h2
@@ -53,18 +53,18 @@ export function BrandStatement() {
           <motion.p variants={fadeUp} className="text-pretty text-xl font-medium leading-snug sm:text-2xl">
             Tu sonrisa nos inspira a dar el primer paso.
           </motion.p>
-          <motion.p variants={fadeUp} className="mt-3 max-w-md text-pretty leading-[1.54] text-text">
+          <motion.p variants={fadeUp} className="mt-3 max-w-md text-pretty leading-[1.54] text-text-inverse-muted">
             Agenda tu evaluación y descubre el tratamiento ideal para ti, con un equipo que te explica cada paso.
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-3">
-            <a href={whatsappUrl(defaultWhatsappMessage)} target="_blank" rel="noopener" className="btn btn-wa shrink-0 whitespace-nowrap px-7 text-base sm:min-h-14">
+            <a href={whatsappUrl(defaultWhatsappMessage)} target="_blank" rel="noopener" className="btn btn-light shrink-0 whitespace-nowrap px-7 text-base sm:min-h-14">
               <WhatsappIcon />
               Escríbenos por WhatsApp
             </a>
             <a
               href="#reservar"
-              className="group inline-flex min-h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap font-semibold text-heading underline decoration-primary/30 decoration-2 underline-offset-[6px] transition-colors hover:decoration-primary"
+              className="group inline-flex min-h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap font-semibold text-text-inverse underline decoration-accent/60 decoration-2 underline-offset-[6px] transition-colors hover:decoration-accent"
             >
               Reservar cita
               <ArrowRightIcon className="size-4 transition-transform duration-300 group-hover:translate-x-1" />

@@ -27,7 +27,7 @@ const steps = [
 
 export function Orthodontics() {
   return (
-    <section id="ortodoncia" aria-labelledby="ortodoncia-title" className="relative isolate overflow-hidden bg-[linear-gradient(to_bottom,var(--color-bg)_0%,var(--color-surface)_16%,var(--color-surface)_84%,var(--color-bg)_100%)] pb-16 lg:pb-20">
+    <section id="ortodoncia" aria-labelledby="ortodoncia-title" className="relative isolate overflow-hidden bg-[linear-gradient(to_bottom,var(--color-bg)_0%,var(--color-surface)_16%,var(--color-surface)_84%,var(--color-bg)_100%)] pt-16 pb-16 lg:pt-20 lg:pb-20">
       <SectionBackdrop lines="br" glow="tl" surface="mist" />
       <div className="container-page">
         <SectionHeading
