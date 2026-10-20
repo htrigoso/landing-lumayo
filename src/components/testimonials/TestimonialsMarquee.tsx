@@ -20,7 +20,7 @@ function Stars({ rating }: { rating: number }) {
 
 function PlayBadge() {
   return (
-    <span className="grid size-16 place-items-center rounded-full bg-navy-700/70 text-white ring-1 ring-white/60 transition-transform duration-300 group-hover/card:scale-110">
+    <span className="grid size-16 place-items-center rounded-full bg-primary/70 text-text-inverse ring-1 ring-white/60 transition-transform duration-300 group-hover/card:scale-110">
       <svg viewBox="0 0 24 24" className="ml-1 size-7" fill="currentColor" aria-hidden="true">
         <path d="M8 5.5v13l11-6.5-11-6.5Z" />
       </svg>
@@ -41,9 +41,9 @@ function ReelCard({ t, onPlay }: { t: Testimonial; onPlay: (t: Testimonial) => v
           className="object-cover transition-transform duration-700 ease-out group-hover/card:scale-105"
         />
       ) : (
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-br from-cyan-400 to-navy-700" />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-br from-accent to-primary" />
       )}
-      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-900/35 to-transparent" />
+      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-azul-950/95 via-surface-deep/35 to-transparent" />
 
       {t.treatment && (
         <span className="pill pill-outline absolute left-3 top-3 !px-3 !py-1 text-[0.62rem]">
@@ -59,18 +59,18 @@ function ReelCard({ t, onPlay }: { t: Testimonial; onPlay: (t: Testimonial) => v
 
       <div className="absolute inset-x-0 bottom-0 p-4 text-left">
         {t.rating ? <Stars rating={t.rating} /> : null}
-        <blockquote className="mt-2 line-clamp-4 text-sm leading-relaxed text-white/95">“{t.quote}”</blockquote>
-        <p className="mt-3 flex items-center gap-2 text-sm font-semibold text-white">
-          <span aria-hidden="true" className="h-px w-5 bg-cyan-500" />
+        <blockquote className="mt-2 line-clamp-4 text-sm leading-relaxed text-text-inverse/95">“{t.quote}”</blockquote>
+        <p className="mt-3 flex items-center gap-2 text-sm font-semibold text-text-inverse">
+          <span aria-hidden="true" className="h-px w-5 bg-accent" />
           {t.name}
-          {t.source && <span className="font-normal text-white/70">· Vía {t.source}</span>}
+          {t.source && <span className="font-normal text-text-inverse/70">· Vía {t.source}</span>}
         </p>
       </div>
     </>
   );
 
   const shell =
-    "group/card relative block aspect-[9/16] w-[15rem] shrink-0 overflow-hidden rounded-2xl bg-navy-900 sm:w-[17rem]";
+    "group/card relative block aspect-[9/16] w-[15rem] shrink-0 overflow-hidden rounded-2xl bg-surface-deep sm:w-[17rem]";
 
   return t.video ? (
     <button type="button" onClick={() => onPlay(t)} aria-label={`Ver el testimonio en video de ${t.name}`} className={`${shell} cursor-pointer`}>
@@ -104,7 +104,7 @@ function VideoLightbox({ item, onClose }: { item: Testimonial | null; onClose: (
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 z-[70] grid place-items-center bg-navy-950/85 p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-[70] grid place-items-center bg-azul-950/85 p-4 backdrop-blur-sm"
         >
           <motion.div
             initial={{ scale: 0.92, y: 20 }}
@@ -163,7 +163,7 @@ export function TestimonialsMarquee({ items }: { items: Testimonial[] }) {
   return (
     <div className="relative">
       <div
-        className="group/marquee relative overflow-hidden py-4 [mask-image:linear-gradient(90deg,transparent,#000_6%,#000_94%,transparent)]"
+        className="group/marquee relative overflow-hidden py-4 [mask-image:linear-gradient(90deg,transparent,black_6%,black_94%,transparent)]"
         onPointerDown={() => setPaused(true)}
       >
         <ul
@@ -185,7 +185,7 @@ export function TestimonialsMarquee({ items }: { items: Testimonial[] }) {
           type="button"
           onClick={() => setPaused((p) => !p)}
           aria-pressed={paused}
-          className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-sky-200 bg-white px-4 text-sm font-semibold text-navy-700 transition hover:border-navy-500"
+          className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-border-input bg-bg px-4 text-sm font-semibold text-primary transition hover:border-primary"
         >
           {paused ? (
             <svg viewBox="0 0 24 24" className="size-4" fill="currentColor" aria-hidden="true">

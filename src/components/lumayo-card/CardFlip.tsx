@@ -20,7 +20,7 @@ export function CardFlip({ front, back }: { front: ReactNode; back: ReactNode })
           aria-pressed={flipped}
           aria-label="Voltear la Lumayo Card"
           onClick={() => setFlipped((value) => !value)}
-          className="absolute inset-0 z-10 cursor-pointer rounded-[4.4cqw] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-cyan-500"
+          className="absolute inset-0 z-10 cursor-pointer rounded-[4.4cqw] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-focus"
         />
 
         <div className="absolute inset-0 [perspective:220cqw]">
@@ -47,7 +47,7 @@ export function CardFlip({ front, back }: { front: ReactNode; back: ReactNode })
         </div>
       </div>
 
-      <p aria-hidden="true" className="mt-4 h-5 text-center text-sm text-ink-600">
+      <p aria-hidden="true" className="mt-4 h-5 text-center text-sm text-text">
         <span className="hidden [@media(hover:hover)]:inline">Pasa el cursor o haz clic para ver el reverso</span>
         <span className="[@media(hover:hover)]:hidden">
           Toca la tarjeta para ver el {flipped ? "frente" : "reverso"}

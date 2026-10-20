@@ -27,13 +27,13 @@ export function ArchPair() {
       <div className={`${glassCard} top-8`}>
         <SmileIcon className="size-6 text-aqua-600" />
         <p className="mt-2 text-sm font-semibold text-azul-700">Plan a tu medida</p>
-        <p className="mt-1 text-xs leading-relaxed text-ink-600">Diseñado según tu rostro y tu cronograma.</p>
+        <p className="mt-1 text-xs leading-relaxed text-text">Diseñado según tu rostro y tu cronograma.</p>
       </div>
 
       <div className={`${glassCard} top-[42%]`}>
         <CalendarIcon className="size-6 text-aqua-600" />
         <p className="mt-2 text-sm font-semibold text-azul-700">Listo para tu gran día</p>
-        <p className="mt-1 text-xs leading-relaxed text-ink-600">Empezamos según la fecha de tu boda.</p>
+        <p className="mt-1 text-xs leading-relaxed text-text">Empezamos según la fecha de tu boda.</p>
       </div>
 
       <SealBadge className="absolute -bottom-6 -left-6" />

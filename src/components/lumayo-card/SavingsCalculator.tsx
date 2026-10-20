@@ -18,7 +18,7 @@ const RING_RADIUS = 44;
 const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
 
 const inputClass =
-  "min-h-11 rounded-xl border border-line bg-white text-base text-azul-700 outline-none focus-visible:ring-2 focus-visible:ring-azul-600";
+  "min-h-11 rounded-xl border border-border bg-white text-base text-azul-700 outline-none focus-visible:ring-2 focus-visible:ring-azul-600";
 
 /** "S/ 125.00" -> 125, "50%" -> 50. Returns 0 when nothing numeric can be read. */
 function parseNumber(value: string): number {
@@ -57,7 +57,7 @@ function SavingsRing({ rate }: { rate: number }) {
   return (
     <div className="relative size-32 shrink-0">
       <svg viewBox="0 0 120 120" className="size-full -rotate-90" aria-hidden="true">
-        <circle cx="60" cy="60" r={RING_RADIUS} fill="none" stroke="rgba(255,255,255,.15)" strokeWidth="8" />
+        <circle cx="60" cy="60" r={RING_RADIUS} fill="none" style={{ stroke: "color-mix(in srgb, var(--color-bg) 15%, transparent)" }} strokeWidth="8" />
         <circle
           cx="60"
           cy="60"
@@ -96,7 +96,7 @@ export function SavingsCalculator() {
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr] lg:gap-8">
       {/* Controls */}
-      <div className="rounded-3xl border border-line bg-white p-6 shadow-[0_18px_40px_-28px_color-mix(in_srgb,var(--color-azul-950)_40%,transparent)] sm:p-8">
+      <div className="rounded-3xl border border-border bg-white p-6 shadow-[0_18px_40px_-28px_color-mix(in_srgb,var(--color-azul-950)_40%,transparent)] sm:p-8">
         <div className="flex items-center gap-3">
           <Image src="/brand/lumayo-isotipo.svg" alt="" width={28} height={28} unoptimized className="size-7" />
           <span className="text-xs font-bold uppercase tracking-[0.16em] text-azul-700">Simulador</span>
@@ -148,7 +148,7 @@ export function SavingsCalculator() {
                   className={`min-h-11 rounded-full border px-4 text-sm font-semibold tabular-nums transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-azul-600 motion-reduce:transition-none ${
                     pressed
                       ? "border-azul-700 bg-azul-50 text-azul-700"
-                      : "border-line bg-white text-ink-600 hover:border-azul-300"
+                      : "border-border bg-white text-text hover:border-azul-300"
                   }`}
                 >
                   S/ {value}
@@ -167,7 +167,7 @@ export function SavingsCalculator() {
               <label
                 key={t.percent}
                 className={`relative flex min-h-11 cursor-pointer flex-col gap-3 rounded-2xl border-2 p-4 transition-colors motion-reduce:transition-none has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-azul-600 has-[:focus-visible]:ring-offset-2 ${
-                  checked ? "border-azul-700 bg-azul-50" : "border-line bg-white hover:border-azul-300"
+                  checked ? "border-azul-700 bg-azul-50" : "border-border bg-white hover:border-azul-300"
                 }`}
               >
                 <input
@@ -183,7 +183,7 @@ export function SavingsCalculator() {
                   <span className="font-display text-3xl font-extrabold tabular-nums text-azul-700">{t.percent}</span>
                 </span>
                 <span className="text-sm font-semibold text-azul-700">{t.title}</span>
-                <span className="text-sm text-ink-600">{t.items.slice(0, 2).join(" · ")}</span>
+                <span className="text-sm text-text">{t.items.slice(0, 2).join(" · ")}</span>
                 {checked && (
                   <span
                     aria-hidden="true"

@@ -72,7 +72,7 @@ export default function ServicePage({ params }: PageProps) {
     <>
       <a
         href="#main"
-        className="sr-only z-[60] rounded-full bg-navy-700 px-4 py-2 font-semibold text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        className="sr-only z-[60] rounded-full bg-primary px-4 py-2 font-semibold text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
       >
         Saltar al contenido
       </a>
@@ -80,9 +80,9 @@ export default function ServicePage({ params }: PageProps) {
       <main id="main">
         <ServiceContent params={params} />
 
-        <WaveDivider from="bg-sky-50" to="var(--color-navy-500)" />
+        <WaveDivider from="bg-surface" to="var(--color-surface-inverse)" />
         <BookingSection number="01" />
-        <WaveDivider from="bg-navy-500" to="var(--color-navy-900)" flip />
+        <WaveDivider from="bg-surface-inverse" to="var(--color-surface-deep)" flip />
       </main>
       <Footer />
       <MobileCtaBar />
@@ -134,9 +134,9 @@ async function ServiceContent({ params }: PageProps) {
             <Link href={categoryPath(category)} className="pill w-fit">
               {category.label}
             </Link>
-            <p className="mt-6 text-pretty text-lg leading-relaxed text-ink-600 sm:text-xl">{service.details.summary}</p>
-            <p className="mt-5 text-pretty leading-relaxed text-ink-900">
-              <span className="font-semibold text-navy-700">Ideal para: </span>
+            <p className="mt-6 text-pretty text-lg leading-relaxed text-text sm:text-xl">{service.details.summary}</p>
+            <p className="mt-5 text-pretty leading-relaxed text-text">
+              <span className="font-semibold text-primary">Ideal para: </span>
               {service.details.idealFor}
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -152,7 +152,7 @@ async function ServiceContent({ params }: PageProps) {
           </Reveal>
 
           <Reveal delay={0.1} className="relative min-w-0">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-sky-100">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-surface-soft">
               <Image
                 src={service.image}
                 alt={service.name}
@@ -163,7 +163,7 @@ async function ServiceContent({ params }: PageProps) {
             </div>
             <span
               aria-hidden="true"
-              className="absolute -bottom-6 -left-4 grid size-16 place-items-center rounded-full bg-navy-700 text-white ring-4 ring-white"
+              className="absolute -bottom-6 -left-4 grid size-16 place-items-center rounded-full bg-primary text-white ring-4 ring-bg"
             >
               <Icon className="size-8" />
             </span>
@@ -183,23 +183,23 @@ async function ServiceContent({ params }: PageProps) {
             title={<>¿Cuándo <strong>te ayuda?</strong></>}
           />
           <div className="mt-12 grid grid-cols-[minmax(0,1fr)] gap-6 md:grid-cols-2">
-            <Reveal className="min-w-0 rounded-3xl border border-line bg-white p-6 sm:p-8">
-              <h3 className="font-display text-xl font-bold text-navy-700">Cuándo te ayuda</h3>
+            <Reveal className="min-w-0 rounded-3xl border border-border bg-white p-6 sm:p-8">
+              <h3 className="font-display text-xl font-bold text-heading">Cuándo te ayuda</h3>
               <ul className="mt-6 grid gap-4">
                 {content.whenItHelps.map((item) => (
-                  <li key={item} className="flex min-w-0 gap-3 leading-relaxed text-ink-600">
-                    <CheckIcon className="mt-1 size-5 shrink-0 text-cyan-700" />
+                  <li key={item} className="flex min-w-0 gap-3 leading-relaxed text-text">
+                    <CheckIcon className="mt-1 size-5 shrink-0 text-accent-text" />
                     {item}
                   </li>
                 ))}
               </ul>
             </Reveal>
-            <Reveal delay={0.08} className="min-w-0 rounded-3xl border border-line bg-white p-6 sm:p-8">
-              <h3 className="font-display text-xl font-bold text-navy-700">Qué incluye</h3>
+            <Reveal delay={0.08} className="min-w-0 rounded-3xl border border-border bg-white p-6 sm:p-8">
+              <h3 className="font-display text-xl font-bold text-heading">Qué incluye</h3>
               <ul className="mt-6 grid gap-4">
                 {service.details.includes.map((item) => (
-                  <li key={item} className="flex min-w-0 gap-3 leading-relaxed text-ink-600">
-                    <CheckIcon className="mt-1 size-5 shrink-0 text-cyan-700" />
+                  <li key={item} className="flex min-w-0 gap-3 leading-relaxed text-text">
+                    <CheckIcon className="mt-1 size-5 shrink-0 text-accent-text" />
                     {item}
                   </li>
                 ))}
@@ -220,14 +220,14 @@ async function ServiceContent({ params }: PageProps) {
             layout="stack"
             title={<>Cómo <strong>funciona</strong></>}
           />
-          <ol className="mt-12 grid grid-cols-[minmax(0,1fr)] gap-6 border-l border-navy-700/20 pl-6 md:grid-cols-2 md:border-l-0 md:pl-0 lg:grid-cols-3">
+          <ol className="mt-12 grid grid-cols-[minmax(0,1fr)] gap-6 border-l border-primary/20 pl-6 md:grid-cols-2 md:border-l-0 md:pl-0 lg:grid-cols-3">
             {content.howItWorks.map((step, i) => (
               <li key={step} className="min-w-0">
-                <Reveal delay={i * 0.06} className="flex h-full gap-5 rounded-3xl border border-line bg-white p-6 md:flex-col">
-                  <span className="-ml-12 grid size-12 shrink-0 place-items-center rounded-full bg-navy-700 font-display text-lg font-bold text-white md:ml-0">
+                <Reveal delay={i * 0.06} className="flex h-full gap-5 rounded-3xl border border-border bg-white p-6 md:flex-col">
+                  <span className="-ml-12 grid size-12 shrink-0 place-items-center rounded-full bg-primary font-display text-lg font-bold text-white md:ml-0">
                     {i + 1}
                   </span>
-                  <p className="leading-relaxed text-ink-900">{step}</p>
+                  <p className="leading-relaxed text-text">{step}</p>
                 </Reveal>
               </li>
             ))}
@@ -247,23 +247,23 @@ async function ServiceContent({ params }: PageProps) {
             title={<>Lo que <strong>debes saber</strong></>}
           />
           <div className="mt-12 grid grid-cols-[minmax(0,1fr)] gap-6 md:grid-cols-2">
-            <Reveal className="min-w-0 rounded-3xl border border-line bg-white p-6 sm:p-8">
-              <h3 className="font-display text-xl font-bold text-navy-700">Beneficios</h3>
+            <Reveal className="min-w-0 rounded-3xl border border-border bg-white p-6 sm:p-8">
+              <h3 className="font-display text-xl font-bold text-heading">Beneficios</h3>
               <ul className="mt-6 grid gap-4">
                 {content.benefits.map((item) => (
-                  <li key={item} className="flex min-w-0 gap-3 leading-relaxed text-ink-600">
-                    <CheckIcon className="mt-1 size-5 shrink-0 text-cyan-700" />
+                  <li key={item} className="flex min-w-0 gap-3 leading-relaxed text-text">
+                    <CheckIcon className="mt-1 size-5 shrink-0 text-accent-text" />
                     {item}
                   </li>
                 ))}
               </ul>
             </Reveal>
-            <Reveal delay={0.08} className="min-w-0 rounded-3xl border border-line bg-white p-6 sm:p-8">
-              <h3 className="font-display text-xl font-bold text-navy-700">A considerar</h3>
+            <Reveal delay={0.08} className="min-w-0 rounded-3xl border border-border bg-white p-6 sm:p-8">
+              <h3 className="font-display text-xl font-bold text-heading">A considerar</h3>
               <ul className="mt-6 grid gap-4">
                 {content.consider.map((item) => (
-                  <li key={item} className="flex min-w-0 gap-3 leading-relaxed text-ink-600">
-                    <span aria-hidden="true" className="mt-2.5 size-1.5 shrink-0 rounded-full bg-navy-700/60" />
+                  <li key={item} className="flex min-w-0 gap-3 leading-relaxed text-text">
+                    <span aria-hidden="true" className="mt-2.5 size-1.5 shrink-0 rounded-full bg-primary/60" />
                     {item}
                   </li>
                 ))}
@@ -285,12 +285,12 @@ async function ServiceContent({ params }: PageProps) {
             title={<>Cuidados <strong>después</strong></>}
           />
           <Reveal className="mt-12">
-            <div className="rounded-[2rem] border border-navy-700/20 p-2">
-              <div className="rounded-[1.5rem] border border-navy-700/10 bg-white p-6 sm:p-10">
+            <div className="rounded-[2rem] border border-primary/20 p-2">
+              <div className="rounded-[1.5rem] border border-primary/10 bg-white p-6 sm:p-10">
                 <ul className="grid grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-2">
                   {content.aftercare.map((item) => (
-                    <li key={item} className="flex min-w-0 gap-3 text-base leading-relaxed text-ink-600">
-                      <CheckIcon className="mt-1 size-5 shrink-0 text-cyan-700" />
+                    <li key={item} className="flex min-w-0 gap-3 text-base leading-relaxed text-text">
+                      <CheckIcon className="mt-1 size-5 shrink-0 text-accent-text" />
                       {item}
                     </li>
                   ))}
@@ -312,10 +312,10 @@ async function ServiceContent({ params }: PageProps) {
             layout="stack"
             title={<>Preguntas <strong>frecuentes</strong></>}
           />
-          <Reveal className="mt-8 rounded-3xl border border-line bg-white p-6 sm:p-10">
+          <Reveal className="mt-8 rounded-3xl border border-border bg-white p-6 sm:p-10">
             <FaqAccordion items={content.faqs} />
           </Reveal>
-          <p className="mt-6 text-sm text-ink-600">
+          <p className="mt-6 text-sm text-text">
             Información orientativa. El plan final y el costo se definen en tu evaluación, según tu caso.
           </p>
         </div>
@@ -327,13 +327,13 @@ async function ServiceContent({ params }: PageProps) {
 
           <div className="container-page">
             <Reveal>
-              <div className="relative isolate overflow-hidden rounded-3xl bg-azul-700 p-8 text-white sm:p-12">
+              <div className="relative isolate overflow-hidden rounded-3xl bg-surface-inverse p-8 text-text-inverse sm:p-12">
                 <IsotypeWatermark tone="dark" className="-bottom-20 -right-16 w-80" />
                 <div className="relative flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
                   <div className="max-w-2xl">
-                    <p className="text-sm font-medium uppercase tracking-[0.12em] text-azul-100">Parte de un programa</p>
-                    <h2 className="mt-3 font-display text-2xl font-extrabold leading-tight text-white sm:text-3xl">{program.label}</h2>
-                    <p className="mt-3 text-pretty leading-relaxed text-azul-100">{program.text}</p>
+                    <p className="text-sm font-medium uppercase tracking-[0.12em] text-text-inverse-muted">Parte de un programa</p>
+                    <h2 className="mt-3 font-display text-2xl font-extrabold leading-tight text-text-inverse sm:text-3xl">{program.label}</h2>
+                    <p className="mt-3 text-pretty leading-relaxed text-text-inverse-muted">{program.text}</p>
                   </div>
                   <Link href={program.href} className="btn btn-light shrink-0 text-base">
                     Conocer el programa
@@ -363,12 +363,12 @@ async function ServiceContent({ params }: PageProps) {
                 <Reveal key={related.id} delay={i * 0.06} className="min-w-0">
                   <Link
                     href={servicePath(related)}
-                    className="group flex h-full flex-col rounded-3xl border border-line bg-white p-6 transition hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+                    className="group flex h-full flex-col rounded-3xl border border-border bg-white p-6 transition hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                   >
-                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-cyan-700">
+                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-accent-text">
                       {categoryOf(related).label}
                     </span>
-                    <span className="mt-3 flex flex-1 items-start justify-between gap-4 font-display text-lg font-bold leading-snug text-navy-700">
+                    <span className="mt-3 flex flex-1 items-start justify-between gap-4 font-display text-lg font-bold leading-snug text-heading">
                       {related.name}
                       <ArrowRightIcon className="mt-1 size-5 shrink-0 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none" />
                     </span>
@@ -378,12 +378,12 @@ async function ServiceContent({ params }: PageProps) {
             </div>
           )}
 
-          <details className="mt-12 text-sm text-ink-600">
-            <summary className="cursor-pointer font-semibold text-navy-700">Referencias</summary>
+          <details className="mt-12 text-sm text-text">
+            <summary className="cursor-pointer font-semibold text-primary">Referencias</summary>
             <ul className="mt-3 grid gap-2">
               {content.sources.map((source) => (
                 <li key={source.url} className="min-w-0 break-words">
-                  <a href={source.url} target="_blank" rel="noopener" className="underline underline-offset-4 hover:text-navy-700">
+                  <a href={source.url} target="_blank" rel="noopener" className="underline underline-offset-4 hover:text-primary">
                     {source.label}
                   </a>
                 </li>

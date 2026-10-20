@@ -10,7 +10,7 @@ type InfoCard = {
   body: ReactNode;
 };
 
-const linkClass = "font-semibold text-navy-700 underline decoration-cyan-400 decoration-2 underline-offset-4 hover:text-navy-500";
+const linkClass = "font-semibold text-primary underline decoration-accent decoration-2 underline-offset-4 hover:text-primary-hover";
 
 const cards: InfoCard[] = [
   {
@@ -71,20 +71,20 @@ export function ContactInfo() {
         <Reveal delay={0.1}>
           <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {cards.map(({ icon: Icon, title, body }) => (
-              <li key={title} className="flex flex-col gap-4 rounded-2xl border border-sky-200 bg-white p-6">
-                <span className="grid size-12 place-items-center rounded-full bg-navy-700 text-white">
+              <li key={title} className="flex flex-col gap-4 rounded-2xl border border-border bg-white p-6">
+                <span className="grid size-12 place-items-center rounded-full bg-primary text-white">
                   <Icon className="size-6" />
                 </span>
                 <div>
-                  <h3 className="font-display text-lg font-bold text-navy-700">{title}</h3>
-                  <div className="mt-1.5 text-pretty leading-relaxed text-ink-600">{body}</div>
+                  <h3 className="font-display text-lg font-bold text-heading">{title}</h3>
+                  <div className="mt-1.5 text-pretty leading-relaxed text-text">{body}</div>
                 </div>
               </li>
             ))}
           </ul>
         </Reveal>
 
-        <Reveal delay={0.15} className="mt-6 overflow-hidden rounded-2xl border border-line">
+        <Reveal delay={0.15} className="mt-6 overflow-hidden rounded-2xl border border-border">
           <iframe
             title={`Mapa de Lumayo: ${fullAddress}`}
             src={site.mapsEmbedUrl}

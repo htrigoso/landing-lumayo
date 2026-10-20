@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useId, useRef, useState, type FormEvent } from "react";
 import { IsotypeWatermark } from "@/components/brand/IsotypeWatermark";
 import { CheckIcon, WhatsappIcon } from "@/components/icons";
+import { BrandDatePicker } from "@/components/ui/BrandDatePicker";
 import { bookingServiceOptions, whatsappUrl } from "@/lib/site";
 
 type Shift = "Mañana" | "Tarde";
@@ -19,12 +20,6 @@ type BookingFormProps = {
   headingId?: string;
   className?: string;
 };
-
-function todayISO() {
-  const d = new Date();
-  d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
-  return d.toISOString().slice(0, 10);
-}
 
 function formatDate(iso: string) {
   const [y, m, d] = iso.split("-").map(Number);
@@ -101,15 +96,15 @@ export function BookingForm({
       noValidate
       onSubmit={onSubmit}
       aria-labelledby={headingId ?? ids.title}
-      className={`overflow-hidden rounded-2xl bg-white ${headingId ? "p-5 sm:p-6" : ""} ${className}`}
+      className={`overflow-hidden rounded-2xl bg-bg ${headingId ? "p-5 sm:p-6" : ""} ${className}`}
     >
       {!headingId && <FormHeader titleId={ids.title} title={title} emphasis={titleEmphasis} subtitle={subtitle} />}
 
       <div className={`space-y-3 ${headingId ? "" : "px-6 pb-6 pt-0 sm:px-7"}`}>
         <div>
-          <label htmlFor={ids.name} className="mb-1 block text-sm font-semibold text-navy-700">
+          <label htmlFor={ids.name} className="mb-1 block text-sm font-semibold text-primary">
             Nombre{" "}
-            <span className="text-cyan-700" aria-hidden="true">
+            <span className="text-accent-text" aria-hidden="true">
               *
             </span>
           </label>
@@ -136,9 +131,9 @@ export function BookingForm({
         </div>
 
         <div>
-          <label htmlFor={ids.service} className="mb-1 block text-sm font-semibold text-navy-700">
+          <label htmlFor={ids.service} className="mb-1 block text-sm font-semibold text-primary">
             Servicio{" "}
-            <span className="text-cyan-700" aria-hidden="true">
+            <span className="text-accent-text" aria-hidden="true">
               *
             </span>
           </label>
@@ -169,7 +164,7 @@ export function BookingForm({
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="pointer-events-none absolute right-4 top-1/2 size-4 -translate-y-1/2 text-navy-700"
+              className="pointer-events-none absolute right-4 top-1/2 size-4 -translate-y-1/2 text-primary"
             >
               <path d="m6 9 6 6 6-6" />
             </svg>
@@ -182,28 +177,28 @@ export function BookingForm({
         </div>
 
         <div>
-          <label htmlFor={ids.date} className="mb-1 block text-sm font-semibold text-navy-700">
-            Fecha preferida <span className="font-normal text-ink-600">(opcional)</span>
+          <label htmlFor={ids.date} id={`${ids.date}-label`} className="mb-1 block text-sm font-semibold text-primary">
+            Fecha preferida <span className="font-normal text-text">(opcional)</span>
           </label>
-          <input
+          <BrandDatePicker
             id={ids.date}
             name="date"
-            type="date"
-            onFocus={(e) => (e.currentTarget.min = todayISO())}
+            labelId={`${ids.date}-label`}
             value={date}
-            onChange={(e) => setDate(e.target.value)}
-            className="field-input !min-h-11 !py-2"
+            onChange={setDate}
+            disablePast
+            className="w-full"
           />
         </div>
 
         <fieldset>
-          <legend className="mb-1 block text-sm font-semibold text-navy-700">Turno</legend>
+          <legend className="mb-1 block text-sm font-semibold text-primary">Turno</legend>
           {/* Pill toggle, like the brandbook's pill controls */}
-          <div className="grid grid-cols-2 gap-1 rounded-full bg-sky-50 p-1">
+          <div className="grid grid-cols-2 gap-1 rounded-full bg-surface p-1">
             {(["Mañana", "Tarde"] as const).map((s) => (
               <label
                 key={s}
-                className="relative flex min-h-9 cursor-pointer items-center justify-center rounded-full px-4 text-sm font-semibold text-ink-600 transition-colors has-[:checked]:text-white has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-cyan-500"
+                className="relative flex min-h-9 cursor-pointer items-center justify-center rounded-full px-4 text-sm font-semibold text-text transition-colors has-[:checked]:text-text-inverse has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-focus"
               >
                 <input
                   type="radio"
@@ -216,7 +211,7 @@ export function BookingForm({
                 {shift === s && (
                   <motion.span
                     layoutId={`${uid}-shift-pill`}
-                    className="absolute inset-0 rounded-full bg-navy-700"
+                    className="absolute inset-0 rounded-full bg-primary"
                     transition={{ type: "spring", stiffness: 500, damping: 38 }}
                   />
                 )}
@@ -238,9 +233,9 @@ export function BookingForm({
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="flex items-start gap-2 rounded-xl bg-sky-50 px-3 py-2 text-sm text-navy-700"
+                className="flex items-start gap-2 rounded-xl bg-surface px-3 py-2 text-sm text-primary"
               >
-                <CheckIcon className="mt-0.5 size-4 shrink-0 text-cyan-500" />
+                <CheckIcon className="mt-0.5 size-4 shrink-0 text-accent-text" />
                 Abrimos WhatsApp con tu solicitud. Solo presiona enviar y te responderemos pronto.
               </motion.p>
             )}
@@ -264,26 +259,26 @@ const headerCurves = [0, 1, 2].map(
  */
 function FormHeader({ titleId, title, emphasis, subtitle }: { titleId: string; title: string; emphasis: string; subtitle: string }) {
   return (
-    <div className="relative isolate overflow-hidden bg-navy-700 px-6 pb-11 pt-6 text-white sm:px-7">
+    <div className="relative isolate overflow-hidden bg-primary px-6 pb-11 pt-6 text-text-inverse sm:px-7">
       <IsotypeWatermark tone="dark" className="-right-12 -top-8 -z-10 w-52 !opacity-[0.16]" />
-      <svg aria-hidden="true" viewBox="0 0 400 160" preserveAspectRatio="none" fill="none" className="absolute inset-0 -z-10 size-full">
+      <svg aria-hidden="true" viewBox="0 0 400 160" preserveAspectRatio="none" fill="none" className="absolute inset-0 -z-10 size-full text-text-inverse">
         {headerCurves.map((d, i) => (
-          <path key={d} d={d} stroke="#fff" strokeOpacity={0.22 - i * 0.05} strokeWidth={1.25} vectorEffect="non-scaling-stroke" />
+          <path key={d} d={d} stroke="currentColor" strokeOpacity={0.22 - i * 0.05} strokeWidth={1.25} vectorEffect="non-scaling-stroke" />
         ))}
       </svg>
 
-      <p className="text-xs font-medium uppercase tracking-[0.12em] text-sky-100/85">Reserva en línea</p>
+      <p className="text-xs font-medium uppercase tracking-[0.12em] text-text-inverse-muted/85">Reserva en línea</p>
       <h3 id={titleId} className="mt-2 font-display text-3xl font-normal leading-[0.98] tracking-[-0.045em]">
         {title} <strong className="font-extrabold">{emphasis}</strong>
       </h3>
-      <p className="mt-2 max-w-xs text-pretty text-sm leading-[1.5] text-sky-100/90">{subtitle}</p>
+      <p className="mt-2 max-w-xs text-pretty text-sm leading-[1.5] text-text-inverse-muted/90">{subtitle}</p>
 
       {/* Crown edge: the white body's top follows the tooth's two cusps */}
       <svg
         aria-hidden="true"
         viewBox="0 0 100 20"
         preserveAspectRatio="none"
-        className="absolute inset-x-0 -bottom-px h-7 w-full text-white"
+        className="absolute inset-x-0 -bottom-px h-7 w-full text-text-inverse"
       >
         <path d="M0 20 V15 C 5 5, 18 2, 30 6 C 38 9, 44 12, 50 12 C 56 12, 62 9, 70 6 C 82 2, 95 5, 100 15 V20 Z" fill="currentColor" />
       </svg>

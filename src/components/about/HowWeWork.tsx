@@ -22,16 +22,16 @@ const steps = [
 ];
 
 // Brandbook highlight avatars: soft palette tints behind the two-tone icons
-const avatarTones = ["bg-sky-100", "bg-celeste-100", "bg-teal-100"];
+const avatarTones = ["bg-surface-soft", "bg-surface-soft", "bg-surface-mint"];
 
 /** "How it works", after the reference: HD photo on the left, three illustrated steps on the right. */
 export function HowWeWork() {
   return (
-    <section aria-labelledby="how-title" className="relative isolate overflow-hidden bg-[linear-gradient(to_bottom,#ffffff_0%,var(--color-sky-50)_16%,var(--color-sky-50)_84%,#ffffff_100%)] pb-16 lg:pb-20">
+    <section aria-labelledby="how-title" className="relative isolate overflow-hidden bg-[linear-gradient(to_bottom,var(--color-bg)_0%,var(--color-surface)_16%,var(--color-surface)_84%,var(--color-bg)_100%)] pb-16 lg:pb-20">
       <SectionBackdrop lines="tr" glow="bl" surface="mist" />
       <div className="container-page grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
         <Reveal className="relative mx-auto w-full max-w-lg lg:max-w-none">
-          <div className="relative isolate aspect-[5/6] overflow-hidden rounded-2xl bg-navy-700">
+          <div className="relative isolate aspect-[5/6] overflow-hidden rounded-2xl bg-primary">
             {/* Unsplash License */}
             <Image
               src="https://images.unsplash.com/photo-1681939282781-341ac4f61996?w=1400&q=85&fm=jpg"
@@ -54,17 +54,17 @@ export function HowWeWork() {
           </p>
           <ol className="mt-10 space-y-6">
             {steps.map((s, i) => (
-              <li key={s.title} className="flex gap-5 rounded-2xl border border-sky-200 bg-white p-5">
+              <li key={s.title} className="flex gap-5 rounded-2xl border border-border bg-white p-5">
                 <span className={`grid size-14 shrink-0 place-items-center rounded-full ${avatarTones[i]}`}>
                   {/* eslint-disable-next-line @next/next/no-img-element -- small decorative SVG icon */}
                   <img src={s.icon} alt="" aria-hidden="true" width={30} height={30} className="size-[1.875rem]" />
                 </span>
                 <div>
-                  <h3 className="font-display text-lg font-bold leading-snug text-navy-700">
-                    <span className="mr-2 tabular-nums text-cyan-700">{String(i + 1).padStart(2, "0")}.</span>
+                  <h3 className="font-display text-lg font-bold leading-snug text-heading">
+                    <span className="mr-2 tabular-nums text-accent-text">{String(i + 1).padStart(2, "0")}.</span>
                     {s.title}
                   </h3>
-                  <p className="mt-1 text-pretty leading-relaxed text-ink-600">{s.text}</p>
+                  <p className="mt-1 text-pretty leading-relaxed text-text">{s.text}</p>
                 </div>
               </li>
             ))}

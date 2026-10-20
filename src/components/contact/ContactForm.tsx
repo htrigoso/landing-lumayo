@@ -55,14 +55,14 @@ export function ContactForm() {
   };
 
   const showError = (field: keyof Errors) => touched[field] && errors[field];
-  const labelClass = "mb-1 block text-sm font-semibold text-navy-700";
+  const labelClass = "mb-1 block text-sm font-semibold text-primary";
 
   return (
     <form noValidate onSubmit={onSubmit} aria-label="Formulario de contacto" className="space-y-4">
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor={ids.name} className={labelClass}>
-            Nombre <span className="text-cyan-700" aria-hidden="true">*</span>
+            Nombre <span className="text-accent-text" aria-hidden="true">*</span>
           </label>
           <input
             ref={nameRef}
@@ -80,14 +80,14 @@ export function ContactForm() {
             placeholder="Tu nombre y apellido"
           />
           {showError("name") && (
-            <p id={`${ids.name}-err`} role="alert" className="mt-1.5 text-sm font-medium text-orange-700">
+            <p id={`${ids.name}-err`} role="alert" className="mt-1.5 text-sm font-medium text-error">
               {errors.name}
             </p>
           )}
         </div>
         <div>
           <label htmlFor={ids.phone} className={labelClass}>
-            Teléfono <span className="font-normal text-ink-600">(opcional)</span>
+            Teléfono <span className="font-normal text-text">(opcional)</span>
           </label>
           <input
             id={ids.phone}
@@ -128,7 +128,7 @@ export function ContactForm() {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="pointer-events-none absolute right-4 top-1/2 size-4 -translate-y-1/2 text-navy-700"
+            className="pointer-events-none absolute right-4 top-1/2 size-4 -translate-y-1/2 text-primary"
           >
             <path d="m6 9 6 6 6-6" />
           </svg>
@@ -137,7 +137,7 @@ export function ContactForm() {
 
       <div>
         <label htmlFor={ids.message} className={labelClass}>
-          Mensaje <span className="text-cyan-700" aria-hidden="true">*</span>
+          Mensaje <span className="text-accent-text" aria-hidden="true">*</span>
         </label>
         <textarea
           ref={messageRef}
@@ -154,7 +154,7 @@ export function ContactForm() {
           placeholder="Cuéntanos en qué podemos ayudarte"
         />
         {showError("message") && (
-          <p id={`${ids.message}-err`} role="alert" className="mt-1.5 text-sm font-medium text-orange-700">
+          <p id={`${ids.message}-err`} role="alert" className="mt-1.5 text-sm font-medium text-error">
             {errors.message}
           </p>
         )}
@@ -172,9 +172,9 @@ export function ContactForm() {
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              className="flex items-start gap-2 rounded-xl bg-sky-50 px-3 py-2 text-sm text-navy-700"
+              className="flex items-start gap-2 rounded-xl bg-surface px-3 py-2 text-sm text-primary"
             >
-              <CheckIcon className="mt-0.5 size-4 shrink-0 text-cyan-500" />
+              <CheckIcon className="mt-0.5 size-4 shrink-0 text-accent-text" />
               Abrimos WhatsApp con tu mensaje. Solo presiona enviar y te responderemos pronto.
             </motion.p>
           )}

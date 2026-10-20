@@ -92,8 +92,7 @@ export function CardQr({ className, stops = DEFAULT_STOPS }: { className?: strin
         width={BADGE_SIZE}
         height={BADGE_SIZE}
         rx={1.8}
-        fill="#fff"
-        style={{ stroke: "var(--color-azul-200)" }}
+        style={{ fill: "var(--color-bg)", stroke: "var(--color-azul-200)" }}
         strokeWidth={0.1}
       />
       <image

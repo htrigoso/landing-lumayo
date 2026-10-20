@@ -19,23 +19,19 @@ type SectionAtmosphereProps = {
   washBottom?: Tone;
 };
 
-type Colour = { css: string; rgba: [number, number, number, number] | null };
+type Colour = string;
 
 const edge: Record<Tone, Colour> = {
-  white: { css: "#ffffff", rgba: [255, 255, 255, 1] },
-  mist: { css: "var(--color-sky-50)", rgba: null },
+  white: "var(--color-bg)",
+  mist: "var(--color-surface)",
 };
 
-const tintWhite: Colour = { css: "rgb(243 248 252 / 0.45)", rgba: [243, 248, 252, 0.45] };
+// Light veil used behind the flowing lines on white sections
+const tintWhite: Colour = "color-mix(in srgb, var(--color-surface) 45%, transparent)";
 
-/** Halfway colour between two stops: rgb average when both are literal, otherwise color-mix. */
+/** Halfway colour between two stops, as a colour-mix of the two tokens. */
 function midpoint(a: Colour, b: Colour): string {
-  if (a.rgba && b.rgba) {
-    const [ar, ag, ab, aa] = a.rgba;
-    const [br, bg, bb, ba] = b.rgba;
-    return `rgb(${(ar + br) / 2} ${(ag + bg) / 2} ${(ab + bb) / 2} / ${(aa + ba) / 2})`;
-  }
-  return `color-mix(in srgb, ${a.css} 50%, ${b.css})`;
+  return `color-mix(in srgb, ${a} 50%, ${b})`;
 }
 
 const isotypePlacement: Record<"bl" | "br", string> = {
@@ -66,7 +62,7 @@ export function SectionAtmosphere({
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-20"
         style={{
-          background: `linear-gradient(to bottom, ${top.css} 0%, ${midpoint(top, tint)} 12%, ${tint.css} 38%, ${tint.css} 62%, ${midpoint(tint, bottom)} 88%, ${bottom.css} 100%)`,
+          background: `linear-gradient(to bottom, ${top} 0%, ${midpoint(top, tint)} 12%, ${tint} 38%, ${tint} 62%, ${midpoint(tint, bottom)} 88%, ${bottom} 100%)`,
         }}
       />
       <div aria-hidden="true" className="absolute inset-0 -z-10 opacity-60">

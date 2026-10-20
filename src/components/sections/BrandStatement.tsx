@@ -22,7 +22,7 @@ const fadeUp: Variants = {
  */
 export function BrandStatement() {
   return (
-    <section aria-labelledby="statement-title" className="relative isolate overflow-hidden bg-white pb-16 text-navy-700 lg:pb-20">
+    <section aria-labelledby="statement-title" className="relative isolate overflow-hidden bg-white pb-16 text-heading lg:pb-20">
       <SectionBackdrop lines="tl" glow="bl" />
       <IsotypeWatermark className="-bottom-24 -right-20 -z-10 w-[26rem] !opacity-[0.05] sm:w-[34rem] lg:-bottom-32 lg:-right-16 lg:w-[44rem]" />
 
@@ -35,7 +35,7 @@ export function BrandStatement() {
       >
         <div>
           {/* Brandbook "Etiqueta": Medium, uppercase, +12% */}
-          <motion.p variants={fadeUp} className="text-xs font-medium uppercase tracking-[0.12em] text-navy-500 sm:text-sm">
+          <motion.p variants={fadeUp} className="text-xs font-medium uppercase tracking-[0.12em] text-primary-hover sm:text-sm">
             Centro odontológico · Tarapoto
           </motion.p>
           <motion.h2
@@ -53,7 +53,7 @@ export function BrandStatement() {
           <motion.p variants={fadeUp} className="text-pretty text-xl font-medium leading-snug sm:text-2xl">
             Tu sonrisa nos inspira a dar el primer paso.
           </motion.p>
-          <motion.p variants={fadeUp} className="mt-3 max-w-md text-pretty leading-[1.54] text-ink-600">
+          <motion.p variants={fadeUp} className="mt-3 max-w-md text-pretty leading-[1.54] text-text">
             Agenda tu evaluación y descubre el tratamiento ideal para ti, con un equipo que te explica cada paso.
           </motion.p>
 
@@ -64,7 +64,7 @@ export function BrandStatement() {
             </a>
             <a
               href="#reservar"
-              className="group inline-flex min-h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap font-semibold text-navy-700 underline decoration-navy-700/30 decoration-2 underline-offset-[6px] transition-colors hover:decoration-navy-700"
+              className="group inline-flex min-h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap font-semibold text-heading underline decoration-primary/30 decoration-2 underline-offset-[6px] transition-colors hover:decoration-primary"
             >
               Reservar cita
               <ArrowRightIcon className="size-4 transition-transform duration-300 group-hover:translate-x-1" />

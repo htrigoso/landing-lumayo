@@ -78,11 +78,11 @@ export function BlogList({
               href={f.href}
               aria-current={f.active ? "page" : undefined}
               className={`flex min-h-11 cursor-pointer items-center gap-2 whitespace-nowrap rounded-full border px-4 text-sm font-semibold transition-colors duration-300 motion-reduce:transition-none ${
-                f.active ? "border-navy-700 bg-navy-700 text-white" : "border-sky-200 bg-white text-navy-700 hover:border-cyan-500"
+                f.active ? "border-primary bg-primary text-text-inverse" : "border-border bg-white text-primary hover:border-accent-strong"
               }`}
             >
               {f.label}
-              <span className={`text-xs tabular-nums ${f.active ? "text-sky-100/80" : "text-ink-400"}`}>{f.count}</span>
+              <span className={`text-xs tabular-nums ${f.active ? "text-text-inverse-muted" : "text-text-muted"}`}>{f.count}</span>
             </Link>
           ))}
         </nav>

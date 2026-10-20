@@ -38,7 +38,7 @@ export function PersonaCards({ personas }: { personas: readonly Persona[] }) {
           <article className="relative h-full rounded-[2rem] border border-azul-700/20 p-2">
             <div className="flex h-full flex-col rounded-[1.5rem] border border-azul-700/10 bg-white p-7 shadow-[0_18px_40px_-28px_color-mix(in_srgb,var(--color-azul-950)_40%,transparent)]">
               <h3 className="font-display text-2xl font-extrabold text-azul-700">{persona.title}</h3>
-              <p className="mt-3 text-base leading-relaxed text-ink-600">{persona.description}</p>
+              <p className="mt-3 text-base leading-relaxed text-text">{persona.description}</p>
               <ul className="mt-6 grid gap-3">
                 {persona.treatments.map((key) => (
                   <li key={key} className="flex gap-3 text-sm font-semibold text-azul-700">

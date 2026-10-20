@@ -186,7 +186,7 @@ export function TreatmentsCarousel({ items }: TreatmentsCarouselProps) {
           {items.map((item, index) => (
             <article
               key={item.id}
-              className="group grid w-[min(88vw,40rem)] shrink-0 snap-start overflow-hidden rounded-3xl border border-line bg-white shadow-[0_18px_40px_-28px_color-mix(in_srgb,var(--color-azul-950)_40%,transparent)] md:grid-cols-[0.9fr_1.1fr]"
+              className="group grid w-[min(88vw,40rem)] shrink-0 snap-start overflow-hidden rounded-3xl border border-border bg-white shadow-[0_18px_40px_-28px_color-mix(in_srgb,var(--color-azul-950)_40%,transparent)] md:grid-cols-[0.9fr_1.1fr]"
             >
               <div className="relative aspect-[16/10] overflow-hidden bg-azul-100 md:aspect-auto md:min-h-[22rem]">
                 <Image
@@ -209,10 +209,10 @@ export function TreatmentsCarousel({ items }: TreatmentsCarouselProps) {
                 </span>
                 <h3 className="mt-2 text-2xl font-extrabold text-azul-700">{item.name}</h3>
                 <p className="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-aqua-700">{item.when}</p>
-                <p className="mt-4 text-base leading-relaxed text-ink-600">
+                <p className="mt-4 text-base leading-relaxed text-text">
                   <span className="font-semibold text-azul-700">Qué logra:</span> {item.achieves}
                 </p>
-                <p className="mt-4 border-t border-line pt-4 text-sm leading-relaxed text-ink-600">
+                <p className="mt-4 border-t border-border pt-4 text-sm leading-relaxed text-text">
                   <span className="font-semibold text-azul-700">Ideal para:</span> {item.idealFor}
                 </p>
               </div>

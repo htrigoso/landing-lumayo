@@ -45,19 +45,19 @@ const right: Reason[] = [
 
 /** One reason. On large screens the left column mirrors (text right-aligned, icon on the inside edge). */
 // Brandbook highlight avatars: soft palette tints behind the two-tone icons
-const avatarTones = ["bg-sky-100", "bg-celeste-100", "bg-teal-100"];
+const avatarTones = ["bg-surface-soft", "bg-surface-soft", "bg-surface-mint"];
 
 function ReasonItem({ reason, side, index }: { reason: Reason; side: "left" | "right"; index: number }) {
   const mirrored = side === "left";
   return (
     <li className={`flex items-start gap-4 ${mirrored ? "lg:flex-row-reverse lg:text-right" : ""}`}>
-      <span className={`grid size-14 shrink-0 place-items-center rounded-full ring-1 ring-navy-700/10 ${avatarTones[index % avatarTones.length]}`}>
+      <span className={`grid size-14 shrink-0 place-items-center rounded-full ring-1 ring-primary/10 ${avatarTones[index % avatarTones.length]}`}>
         {/* eslint-disable-next-line @next/next/no-img-element -- small decorative SVG icon */}
         <img src={reason.icon} alt="" aria-hidden="true" width={30} height={30} className="size-[1.875rem]" />
       </span>
       <div>
-        <h3 className="font-display text-lg font-bold leading-snug text-navy-700">{reason.title}</h3>
-        <p className="mt-1 text-pretty leading-relaxed text-ink-600">{reason.text}</p>
+        <h3 className="font-display text-lg font-bold leading-snug text-heading">{reason.title}</h3>
+        <p className="mt-1 text-pretty leading-relaxed text-text">{reason.text}</p>
       </div>
     </li>
   );
@@ -68,8 +68,8 @@ function ReasonItem({ reason, side, index }: { reason: Reason; side: "left" | "r
 export function WhyChooseUs({ flatBottom = false }: { flatBottom?: boolean } = {}) {
   const reduceMotion = useReducedMotion();
   const skyBackground = flatBottom
-    ? "bg-[linear-gradient(to_bottom,#ffffff_0%,var(--color-sky-50)_16%,var(--color-sky-50)_100%)]"
-    : "bg-[linear-gradient(to_bottom,#ffffff_0%,var(--color-sky-50)_16%,var(--color-sky-50)_84%,#ffffff_100%)]";
+    ? "bg-[linear-gradient(to_bottom,var(--color-bg)_0%,var(--color-surface)_16%,var(--color-surface)_100%)]"
+    : "bg-[linear-gradient(to_bottom,var(--color-bg)_0%,var(--color-surface)_16%,var(--color-surface)_84%,var(--color-bg)_100%)]";
 
   return (
     <section id="por-que-elegirnos" aria-labelledby="por-que-title" className={`relative isolate overflow-hidden pb-16 lg:pb-20 ${skyBackground}`}>

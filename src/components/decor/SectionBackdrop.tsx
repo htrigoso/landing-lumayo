@@ -41,8 +41,8 @@ const curves = [0, 1, 2].map(
  */
 export function SectionBackdrop({ lines, glow, surface = "white" }: SectionBackdropProps) {
   const glowColor =
-    surface === "white" ? "var(--color-sky-100)" : surface === "mist" ? "var(--color-celeste-100)" : "var(--color-navy-700)";
-  const lineColor = surface === "deep" ? "#fff" : "var(--color-navy-700)";
+    surface === "white" ? "var(--color-surface-soft)" : surface === "mist" ? "var(--color-surface-soft)" : "var(--color-primary)";
+  const lineColor = surface === "deep" ? "var(--color-text-inverse)" : "var(--color-primary)";
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
       {glow && (

@@ -50,7 +50,7 @@ export function HomeCarePanel({ homeCare }: HomeCarePanelProps) {
           return (
             <li key={tip.title} className="min-w-0">
               <Reveal className="h-full" delay={index * 0.06}>
-                <article className="group flex h-full gap-5 rounded-3xl border border-line bg-white p-6 transition duration-300 hover:-translate-y-1 hover:border-azul-300 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
+                <article className="group flex h-full gap-5 rounded-3xl border border-border bg-white p-6 transition duration-300 hover:-translate-y-1 hover:border-azul-300 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
                   <span
                     aria-hidden="true"
                     className="grid size-14 shrink-0 place-items-center rounded-2xl bg-azul-100 text-azul-700 transition group-hover:bg-azul-700 group-hover:text-white motion-reduce:transition-none"
@@ -62,7 +62,7 @@ export function HomeCarePanel({ homeCare }: HomeCarePanelProps) {
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <h4 className="mt-1 text-lg font-bold text-azul-700">{tip.title}</h4>
-                    <p className="mt-2 text-base leading-relaxed text-ink-600">{tip.text}</p>
+                    <p className="mt-2 text-base leading-relaxed text-text">{tip.text}</p>
                   </div>
                 </article>
               </Reveal>

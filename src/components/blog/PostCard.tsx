@@ -15,9 +15,9 @@ export function PostCard({ post }: PostCardProps) {
 
   return (
     <article
-      className="group relative isolate flex min-w-0 flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-[0_18px_40px_-28px_color-mix(in_srgb,var(--color-azul-950)_40%,transparent)]"
+      className="group relative isolate flex min-w-0 flex-col overflow-hidden rounded-3xl border border-border bg-white transition-[border-color,box-shadow] duration-300 hover:border-azul-200 hover:shadow-lift motion-reduce:transition-none shadow-[0_18px_40px_-28px_color-mix(in_srgb,var(--color-azul-950)_40%,transparent)]"
     >
-      <div className="relative aspect-[16/10] shrink-0 overflow-hidden bg-sky-100">
+      <div className="relative aspect-[16/10] shrink-0 overflow-hidden bg-surface-soft">
         {cover && (
           <Image
             src={cover}
@@ -30,13 +30,13 @@ export function PostCard({ post }: PostCardProps) {
       </div>
 
       <div className="flex flex-1 flex-col p-6 sm:p-8">
-        <div className="flex flex-wrap items-center gap-3 text-sm text-ink-600">
-          <Link href={blogCategoryPath(category)} className="pill relative z-10 w-fit">
+        <div className="flex flex-wrap items-center gap-3 text-sm text-text">
+          <Link href={blogCategoryPath(category)} className="pill pill-solid relative z-10 w-fit">
             {post.category}
           </Link>
           <span>{post.readingMinutes} min de lectura</span>
         </div>
-        <h3 className="mt-4 font-display text-xl font-bold leading-snug text-navy-700 sm:text-2xl">
+        <h3 className="mt-4 font-display text-xl font-bold leading-snug text-heading sm:text-2xl">
           <Link
             href={postPath(post)}
             className="rounded-md after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
@@ -44,7 +44,7 @@ export function PostCard({ post }: PostCardProps) {
             {post.title}
           </Link>
         </h3>
-        <p className="mt-3 flex-1 text-pretty leading-relaxed text-ink-600">{post.excerpt}</p>
+        <p className="mt-3 flex-1 text-pretty leading-relaxed text-text">{post.excerpt}</p>
       </div>
     </article>
   );

@@ -25,12 +25,12 @@ export function CardShowcase({ classic, gold }: { classic: Faces; gold: Faces })
       <div
         aria-hidden="true"
         className={`pointer-events-none absolute inset-x-[10%] -bottom-2 -z-10 h-1/3 rounded-full blur-2xl transition-colors duration-500 motion-reduce:transition-none ${
-          isGold ? "bg-amber-300/30" : "bg-cyan-400/20"
+          isGold ? "bg-card-gold-accent/30" : "bg-accent/20"
         }`}
       />
 
       <div role="group" aria-label="Versión de la tarjeta" className="mb-6 flex justify-center">
-        <div className="inline-flex rounded-full border border-line bg-white p-1 shadow-[0_12px_30px_-20px_color-mix(in_srgb,var(--color-azul-950)_35%,transparent)]">
+        <div className="inline-flex rounded-full border border-border bg-white p-1 shadow-[0_12px_30px_-20px_color-mix(in_srgb,var(--color-azul-950)_35%,transparent)]">
           {variants.map((option) => {
             const active = variant === option.value;
             return (
@@ -39,14 +39,14 @@ export function CardShowcase({ classic, gold }: { classic: Faces; gold: Faces })
                 type="button"
                 aria-pressed={active}
                 onClick={() => setVariant(option.value)}
-                className={`relative min-h-11 rounded-full px-5 text-sm font-semibold transition-colors duration-300 motion-reduce:transition-none focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-cyan-500 ${
-                  active ? "text-white" : "text-navy-700 hover:bg-cyan-100/70"
+                className={`relative min-h-11 rounded-full px-5 text-sm font-semibold transition-colors duration-300 motion-reduce:transition-none focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-focus ${
+                  active ? "text-white" : "text-primary hover:bg-surface-mint/70"
                 }`}
               >
                 {active && (
                   <motion.span
                     layoutId={`${uid}-variant-pill`}
-                    className="absolute inset-0 rounded-full bg-navy-700"
+                    className="absolute inset-0 rounded-full bg-primary"
                     transition={{ type: "spring", stiffness: 500, damping: 38 }}
                   />
                 )}

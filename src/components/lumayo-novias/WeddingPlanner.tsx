@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useId, useState, useSyncExternalStore } from "react";
+import { useEffect, useId, useState } from "react";
 import { CalendarIcon, WhatsappIcon } from "@/components/icons";
 import { HappyCoupleIllustration } from "@/components/lumayo-novias/HappyCoupleIllustration";
+import { BrandDatePicker } from "@/components/ui/BrandDatePicker";
 import {
   NOVIAS_PRESET_EVENT,
   formatPlanDate,
@@ -31,14 +32,11 @@ const bucketOptions: { value: TimeBucket; label: string }[] = [
 
 const statusPill: Record<PlanStatus, { label: string; className: string }> = {
   ok: { label: "Hay tiempo", className: "bg-aqua-100 text-azul-800" },
-  tight: { label: "Justo a tiempo", className: "border border-line bg-azul-100 text-azul-800" },
+  tight: { label: "Justo a tiempo", className: "border border-border bg-azul-100 text-azul-800" },
   short: { label: "Poco tiempo", className: "bg-azul-700 text-white" },
 };
 
 const DEFAULT_SELECTED: TreatmentKey[] = ["limpieza", "blanqueamiento"];
-
-const inputBase =
-  "min-h-11 rounded-xl border border-line bg-white px-4 text-base text-azul-700 outline-none focus-visible:ring-2 focus-visible:ring-azul-600";
 
 /** Parses a `YYYY-MM-DD` value as a local date, avoiding the UTC shift of `new Date(string)`. */
 function parseDateValue(value: string): Date | null {
@@ -46,16 +44,6 @@ function parseDateValue(value: string): Date | null {
   if (!match) return null;
   return new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
 }
-
-function toDateValue(d: Date): string {
-  const pad = (n: number) => String(n).padStart(2, "0");
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
-}
-
-// min is undefined on the server and during hydration, then today on the client.
-const noopSubscribe = () => () => {};
-const todayValue = () => toDateValue(new Date());
-const noServerDate = () => undefined;
 
 type WeddingPlannerProps = {
   defaultFor?: WhoOption;
@@ -68,8 +56,6 @@ export function WeddingPlanner({ defaultFor = "Ambos", defaultSelected = DEFAULT
   const [bucket, setBucket] = useState<TimeBucket | null>(null);
   const [who, setWho] = useState<WhoOption>(defaultFor);
   const [selected, setSelected] = useState<TreatmentKey[]>(defaultSelected);
-
-  const minDate = useSyncExternalStore(noopSubscribe, todayValue, noServerDate);
 
   useEffect(() => {
     function handlePreset(event: Event) {
@@ -113,16 +99,17 @@ export function WeddingPlanner({ defaultFor = "Ambos", defaultSelected = DEFAULT
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="grid content-start gap-8">
             <div className="grid gap-2">
-              <label htmlFor={`${id}-date`} className="text-sm font-semibold text-azul-700">
+              <label htmlFor={`${id}-date`} id={`${id}-date-label`} className="text-sm font-semibold text-azul-700">
                 Fecha de tu boda
               </label>
-              <input
+              <BrandDatePicker
                 id={`${id}-date`}
-                type="date"
-                min={minDate}
+                name="weddingDate"
+                labelId={`${id}-date-label`}
                 value={dateValue}
-                onChange={(e) => handleDateChange(e.target.value)}
-                className={`${inputBase} w-full max-w-xs tabular-nums`}
+                onChange={handleDateChange}
+                disablePast
+                className="w-full max-w-xs"
               />
             </div>
 
@@ -135,7 +122,7 @@ export function WeddingPlanner({ defaultFor = "Ambos", defaultSelected = DEFAULT
                     <label
                       key={option.value}
                       className={`inline-flex min-h-11 cursor-pointer items-center rounded-full border px-4 text-sm font-semibold text-azul-700 transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-azul-600 ${
-                        checked ? "border-aqua-400 bg-aqua-50" : "border-line bg-white"
+                        checked ? "border-aqua-400 bg-aqua-50" : "border-border bg-white"
                       }`}
                     >
                       <input
@@ -162,7 +149,7 @@ export function WeddingPlanner({ defaultFor = "Ambos", defaultSelected = DEFAULT
                     <label
                       key={option}
                       className={`inline-flex min-h-11 cursor-pointer items-center gap-3 rounded-full border px-5 text-sm font-semibold text-azul-700 transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-azul-600 ${
-                        checked ? "border-aqua-400 bg-aqua-50" : "border-line bg-white"
+                        checked ? "border-aqua-400 bg-aqua-50" : "border-border bg-white"
                       }`}
                     >
                       <input
@@ -188,7 +175,7 @@ export function WeddingPlanner({ defaultFor = "Ambos", defaultSelected = DEFAULT
                   <label
                     key={key}
                     className={`flex min-h-11 cursor-pointer items-center gap-4 rounded-2xl border p-3 text-base text-azul-700 transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-azul-600 ${
-                      checked ? "border-aqua-400 bg-aqua-50" : "border-line bg-white"
+                      checked ? "border-aqua-400 bg-aqua-50" : "border-border bg-white"
                     }`}
                   >
                     <input
@@ -211,7 +198,7 @@ export function WeddingPlanner({ defaultFor = "Ambos", defaultSelected = DEFAULT
                 <HappyCoupleIllustration />
                 <div className="grid gap-2">
                   <h4 className="font-display text-xl font-extrabold text-azul-700">Tu cronograma aparecerá aquí</h4>
-                  <p className="text-pretty text-base text-ink-600">
+                  <p className="text-pretty text-base text-text">
                     Elige la fecha de tu boda y tus tratamientos para ver tu cronograma.
                   </p>
                 </div>
@@ -219,7 +206,7 @@ export function WeddingPlanner({ defaultFor = "Ambos", defaultSelected = DEFAULT
                   {["Fecha de boda", "Tratamientos", "Tu cronograma"].map((label, index) => (
                     <li
                       key={label}
-                      className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-3 py-1.5 text-sm font-semibold text-azul-700"
+                      className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-3 py-1.5 text-sm font-semibold text-azul-700"
                     >
                       <span className="grid size-6 place-items-center rounded-full bg-azul-700 text-xs font-extrabold text-white">
                         {index + 1}
@@ -232,7 +219,7 @@ export function WeddingPlanner({ defaultFor = "Ambos", defaultSelected = DEFAULT
             )}
 
             {plan?.isPast && (
-              <p className="rounded-2xl bg-azul-50 p-6 text-pretty text-base text-ink-600">
+              <p className="rounded-2xl bg-azul-50 p-6 text-pretty text-base text-text">
                 Esa fecha ya pasó. Elige una fecha futura.
               </p>
             )}
@@ -260,7 +247,7 @@ export function WeddingPlanner({ defaultFor = "Ambos", defaultSelected = DEFAULT
                         {!step.startDate && step.status === "tight" && (
                           <p className="text-sm font-semibold text-aqua-700">Empieza lo antes posible</p>
                         )}
-                        <p className="text-sm leading-relaxed text-ink-600">{step.note}</p>
+                        <p className="text-sm leading-relaxed text-text">{step.note}</p>
                       </div>
                     </li>
                   );
@@ -272,7 +259,7 @@ export function WeddingPlanner({ defaultFor = "Ambos", defaultSelected = DEFAULT
                   </span>
                   <div className="grid gap-1">
                     <p className="text-base font-semibold text-azul-700">Tu boda</p>
-                    {dateText && <p className="text-sm text-ink-600">{dateText}</p>}
+                    {dateText && <p className="text-sm text-text">{dateText}</p>}
                   </div>
                 </li>
 
@@ -285,7 +272,7 @@ export function WeddingPlanner({ defaultFor = "Ambos", defaultSelected = DEFAULT
                       <p className="text-base font-semibold text-azul-700">
                         Retoque · {formatPlanDate(plan.touchUpDate)}
                       </p>
-                      <p className="text-sm leading-relaxed text-ink-600">{plan.touchUpNote}</p>
+                      <p className="text-sm leading-relaxed text-text">{plan.touchUpNote}</p>
                     </div>
                   </li>
                 )}
@@ -294,8 +281,8 @@ export function WeddingPlanner({ defaultFor = "Ambos", defaultSelected = DEFAULT
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col gap-4 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-pretty text-sm text-ink-600">
+        <div className="mt-10 flex flex-col gap-4 border-t border-border pt-8 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-pretty text-sm text-text">
             Tu cronograma es una guía. El especialista confirma los tiempos en tu evaluación.
           </p>
           <a

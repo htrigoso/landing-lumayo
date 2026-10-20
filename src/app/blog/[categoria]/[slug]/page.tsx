@@ -57,7 +57,7 @@ export default function BlogPostPage({ params }: PageProps) {
     <>
       <a
         href="#main"
-        className="sr-only z-[60] rounded-full bg-navy-700 px-4 py-2 font-semibold text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        className="sr-only z-[60] rounded-full bg-primary px-4 py-2 font-semibold text-text-inverse focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
       >
         Saltar al contenido
       </a>
@@ -65,9 +65,9 @@ export default function BlogPostPage({ params }: PageProps) {
       <main id="main">
         <PostContent params={params} />
 
-        <WaveDivider from="bg-sky-50" to="var(--color-navy-500)" />
+        <WaveDivider from="bg-surface" to="var(--color-surface-inverse)" />
         <BookingSection number="01" />
-        <WaveDivider from="bg-navy-500" to="var(--color-navy-900)" flip />
+        <WaveDivider from="bg-surface-inverse" to="var(--color-surface-deep)" flip />
       </main>
       <Footer />
       <MobileCtaBar />
@@ -96,36 +96,36 @@ async function PostContent({ params }: PageProps) {
 
         <div className="container-page">
           <nav aria-label="Ruta">
-            <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-medium text-ink-600">
+            <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-medium text-text">
               <li>
-                <Link href="/" className="rounded-sm underline-offset-4 hover:text-navy-700 hover:underline motion-reduce:transition-none">
+                <Link href="/" className="rounded-sm underline-offset-4 hover:text-heading hover:underline motion-reduce:transition-none">
                   Inicio
                 </Link>
               </li>
-              <li aria-hidden="true" className="text-navy-700/30">
+              <li aria-hidden="true" className="text-heading/30">
                 /
               </li>
               <li>
-                <Link href="/blog" className="rounded-sm underline-offset-4 hover:text-navy-700 hover:underline motion-reduce:transition-none">
+                <Link href="/blog" className="rounded-sm underline-offset-4 hover:text-heading hover:underline motion-reduce:transition-none">
                   Blog
                 </Link>
               </li>
-              <li aria-hidden="true" className="text-navy-700/30">
+              <li aria-hidden="true" className="text-heading/30">
                 /
               </li>
               <li>
                 <Link
                   href={blogCategoryPath(category)}
-                  className="rounded-sm underline-offset-4 hover:text-navy-700 hover:underline motion-reduce:transition-none"
+                  className="rounded-sm underline-offset-4 hover:text-heading hover:underline motion-reduce:transition-none"
                 >
                   {category.label}
                 </Link>
               </li>
-              <li aria-hidden="true" className="text-navy-700/30">
+              <li aria-hidden="true" className="text-heading/30">
                 /
               </li>
               <li className="min-w-0 max-w-full truncate">
-                <span aria-current="page" className="text-navy-700">
+                <span aria-current="page" className="text-heading">
                   {post.title}
                 </span>
               </li>
@@ -133,7 +133,7 @@ async function PostContent({ params }: PageProps) {
           </nav>
 
           <Reveal delay={0.1} className="mt-5 min-w-0">
-            <div className="relative isolate flex min-h-[26rem] items-end overflow-hidden rounded-3xl bg-navy-900 shadow-[0_30px_60px_-30px_color-mix(in_srgb,var(--color-azul-950)_45%,transparent)] ring-1 ring-navy-900/5 sm:min-h-[30rem] lg:aspect-[2/1] lg:min-h-0">
+            <div className="relative isolate flex min-h-[26rem] items-end overflow-hidden rounded-3xl bg-gradient-to-br from-surface-deep to-primary shadow-[0_30px_60px_-30px_color-mix(in_srgb,var(--color-azul-950)_45%,transparent)] ring-1 ring-surface-deep/5 sm:min-h-[30rem] lg:aspect-[2/1] lg:min-h-0">
               {cover && (
                 <Image
                   src={cover}
@@ -144,31 +144,31 @@ async function PostContent({ params }: PageProps) {
                   className="object-cover object-[50%_35%]"
                 />
               )}
-              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/70 to-navy-900/10" />
-              <div aria-hidden="true" className="absolute inset-0 bg-navy-900/25 lg:hidden" />
+              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-surface-deep via-surface-deep/70 to-surface-deep/10" />
+              <div aria-hidden="true" className="absolute inset-0 bg-surface-deep/25 lg:hidden" />
 
               <div className="relative z-10 w-full min-w-0 p-5 sm:p-8 lg:max-w-3xl lg:p-12">
                 <div className="flex flex-wrap items-center gap-2">
-                  <Link href={blogCategoryPath(category)} className="pill !bg-white !text-navy-700">
+                  <Link href={blogCategoryPath(category)} className="pill pill-outline">
                     {post.category}
                   </Link>
                   <span className="pill pill-outline">{post.readingMinutes} min de lectura</span>
                 </div>
-                <h1 id="post-title" className="mt-4 font-display text-3xl font-extrabold leading-[1.05] tracking-[-0.03em] text-white text-balance sm:text-4xl lg:text-5xl">
+                <h1 id="post-title" className="mt-4 font-display text-3xl font-extrabold leading-[1.05] tracking-[-0.03em] text-text-inverse text-balance sm:text-4xl lg:text-5xl">
                   {post.title}
                 </h1>
-                <p className="mt-4 max-w-2xl text-pretty text-base leading-relaxed text-sky-100/90 sm:text-lg">{post.excerpt}</p>
+                <p className="mt-4 max-w-2xl text-pretty text-base leading-relaxed text-text-inverse-muted sm:text-lg">{post.excerpt}</p>
               </div>
             </div>
           </Reveal>
 
-          <div className="mt-5 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-b border-line pb-5">
-            <p className="text-sm text-ink-600">
-              Por <strong className="font-semibold text-navy-700">Equipo Lumayo</strong> · Actualizado{" "}
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-b border-border pb-5">
+            <p className="text-sm text-text">
+              Por <strong className="font-semibold text-heading">Equipo Lumayo</strong> · Actualizado{" "}
               <time dateTime={post.updatedAt}>{formatDate(post.updatedAt)}</time>
               {REVIEWER ? (
                 <>
-                  {" "}· Revisado por <strong className="font-semibold text-navy-700">{REVIEWER}</strong>
+                  {" "}· Revisado por <strong className="font-semibold text-heading">{REVIEWER}</strong>
                 </>
               ) : null}
             </p>
@@ -194,8 +194,8 @@ async function PostContent({ params }: PageProps) {
               <PostBody sections={post.sections} />
             </div>
 
-            <section aria-labelledby="faq-title" className="mt-12 lg:mt-16 rounded-3xl border border-line bg-white p-6 sm:p-10">
-              <h2 id="faq-title" className="font-display text-2xl font-extrabold text-navy-700 sm:text-3xl">
+            <section aria-labelledby="faq-title" className="mt-12 lg:mt-16 rounded-3xl border border-border bg-white p-6 sm:p-10">
+              <h2 id="faq-title" className="font-display text-2xl font-extrabold text-heading sm:text-3xl">
                 Preguntas frecuentes
               </h2>
               <FaqAccordion items={post.faqs} />
@@ -218,10 +218,10 @@ async function PostContent({ params }: PageProps) {
                   <li key={item.href} className="min-w-0">
                     <Link
                       href={item.href}
-                      className="group flex h-full items-center justify-between gap-4 rounded-3xl border border-line bg-white p-6 font-display text-lg font-bold leading-snug text-navy-700 transition hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+                      className="group flex h-full items-center justify-between gap-4 rounded-3xl border border-border bg-white p-6 font-display text-lg font-bold leading-snug text-heading transition hover:-translate-y-1 hover:border-azul-200 hover:shadow-lift motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                     >
                       {item.label}
-                      <ArrowRightIcon className="size-5 shrink-0 text-cyan-700 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none" />
+                      <ArrowRightIcon className="size-5 shrink-0 text-accent-text transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none" />
                     </Link>
                   </li>
                 ))}
@@ -229,16 +229,16 @@ async function PostContent({ params }: PageProps) {
             </>
           )}
 
-          <p className="mt-8 text-sm text-ink-600">
+          <p className="mt-8 text-sm text-text">
             Este contenido es informativo y no reemplaza una consulta con tu odontólogo.
           </p>
 
-          <details className="mt-4 text-sm text-ink-600">
-            <summary className="cursor-pointer font-semibold text-navy-700">Referencias</summary>
+          <details className="mt-4 text-sm text-text">
+            <summary className="cursor-pointer font-semibold text-heading">Referencias</summary>
             <ul className="mt-3 grid gap-2">
               {post.sources.map((source) => (
                 <li key={source.url} className="min-w-0 break-words">
-                  <a href={source.url} target="_blank" rel="noopener" className="underline underline-offset-4 hover:text-navy-700">
+                  <a href={source.url} target="_blank" rel="noopener" className="underline underline-offset-4 hover:text-heading">
                     {source.label}
                   </a>
                 </li>
@@ -270,13 +270,13 @@ async function PostContent({ params }: PageProps) {
 
         <div className="container-page">
           <Reveal>
-            <div className="relative isolate overflow-hidden rounded-3xl bg-azul-700 p-8 text-white sm:p-12">
+            <div className="relative isolate overflow-hidden rounded-3xl bg-surface-inverse p-8 text-text-inverse sm:p-12">
               <IsotypeWatermark tone="dark" className="-bottom-20 -right-16 w-80" />
               <div className="relative max-w-2xl">
-                <h2 id="cta-blog-title" className="section-title !text-white">
+                <h2 id="cta-blog-title" className="section-title !text-text-inverse">
                   ¿Tienes dudas sobre tu sonrisa?
                 </h2>
-                <p className="mt-5 text-pretty text-base leading-relaxed text-azul-100 sm:text-lg">
+                <p className="mt-5 text-pretty text-base leading-relaxed text-text-inverse-muted sm:text-lg">
                   Escríbenos por WhatsApp y coordinamos una evaluación según tu caso.
                 </p>
                 <a href={consult} target="_blank" rel="noopener" className="btn btn-light mt-8 text-base">

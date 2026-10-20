@@ -23,17 +23,17 @@ export function SectionHeading({ number, label, id, title, description, tone = "
       className={`grid gap-5 ${layout === "split" ? "lg:grid-cols-[1.25fr_1fr] lg:items-end lg:gap-16" : ""} ${className}`}
     >
       <div>
-        <p className={`flex items-center gap-3 text-sm font-medium tabular-nums ${dark ? "text-sky-100/80" : "text-navy-700"}`}>
+        <p className={`flex items-center gap-3 text-sm font-medium tabular-nums ${dark ? "text-text-inverse-muted" : "text-primary"}`}>
           {number}
-          <span aria-hidden="true" className={`h-px w-8 ${dark ? "bg-sky-100/50" : "bg-navy-700/40"}`} />
+          <span aria-hidden="true" className={`h-px w-8 ${dark ? "bg-text-inverse-muted/50" : "bg-primary"}`} />
           {label}
         </p>
-        <h2 id={id} className={`section-title mt-4 ${dark ? "!text-white" : ""}`}>
+        <h2 id={id} className={`section-title mt-4 ${dark ? "!text-text-inverse" : ""}`}>
           {title}
         </h2>
       </div>
       {description && (
-        <p className={`max-w-md text-pretty text-base leading-relaxed sm:text-lg ${dark ? "text-sky-100/85" : "text-ink-600"} ${layout === "split" ? "lg:justify-self-end lg:pb-1" : ""}`}>
+        <p className={`max-w-md text-pretty text-base leading-relaxed sm:text-lg ${dark ? "text-text-inverse-muted" : "text-text"} ${layout === "split" ? "lg:justify-self-end lg:pb-1" : ""}`}>
           {description}
         </p>
       )}

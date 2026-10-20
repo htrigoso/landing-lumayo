@@ -29,7 +29,7 @@ export function HeroBackdrop() {
   const showVideo = !coarse && !reduceMotion && !saveData;
 
   return (
-    <div aria-hidden="true" className="absolute inset-0 -z-10 overflow-hidden bg-navy-900">
+    <div aria-hidden="true" className="absolute inset-0 -z-10 overflow-hidden bg-surface-deep">
       <Image src={media.poster} alt="" fill preload unoptimized sizes="100vw" className="object-cover object-[60%_center]" />
       {showVideo && (
         <video
@@ -54,8 +54,8 @@ export function HeroBackdrop() {
         </video>
       )}
       {/* Brand overlay (Azul profundo) keeps white copy at AA contrast over any frame */}
-      <div className="absolute inset-0 bg-navy-900/75" />
-      <div className="absolute inset-0 bg-gradient-to-t from-navy-950/60 via-transparent to-navy-950/30" />
+      <div className="absolute inset-0 bg-gradient-to-br from-azul-950/80 to-azul-700/70" />
+      <div className="absolute inset-0 bg-gradient-to-t from-azul-950/60 via-transparent to-azul-950/30" />
     </div>
   );
 }

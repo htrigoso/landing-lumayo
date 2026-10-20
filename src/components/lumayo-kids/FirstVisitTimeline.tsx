@@ -32,21 +32,21 @@ export function FirstVisitTimeline({ steps }: FirstVisitTimelineProps) {
           return (
             <li key={step.title} className="min-w-0">
               <Reveal className="flex h-full flex-col" delay={index * 0.08}>
-                <span className="-ml-12 mb-4 grid size-12 place-items-center rounded-full bg-white font-display text-lg font-bold text-navy-700 md:relative md:z-10 md:mx-auto">
+                <span className="-ml-12 mb-4 grid size-12 place-items-center rounded-full bg-white font-display text-lg font-bold text-primary md:relative md:z-10 md:mx-auto">
                   {index + 1}
                 </span>
                 <article className="group flex h-full flex-col rounded-3xl bg-white p-6 shadow-[0_18px_40px_-28px_color-mix(in_srgb,var(--color-azul-950)_50%,transparent)] transition duration-300 hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:text-center">
                   {step.forParents ? (
-                    <span className="mb-3 text-xs font-bold uppercase tracking-[0.14em] text-cyan-700">Para ti</span>
+                    <span className="mb-3 text-xs font-bold uppercase tracking-[0.14em] text-accent-text">Para ti</span>
                   ) : null}
                   <span
                     aria-hidden="true"
-                    className="mx-0 grid size-14 place-items-center rounded-2xl bg-sky-100 text-navy-700 md:mx-auto"
+                    className="mx-0 grid size-14 place-items-center rounded-2xl bg-surface-soft text-primary md:mx-auto"
                   >
                     <Icon className="size-7" />
                   </span>
-                  <h3 className="mt-5 text-lg font-bold text-navy-700">{step.title}</h3>
-                  <p className="mt-2 text-base leading-relaxed text-ink-600">{step.description}</p>
+                  <h3 className="mt-5 text-lg font-bold text-primary">{step.title}</h3>
+                  <p className="mt-2 text-base leading-relaxed text-text">{step.description}</p>
                 </article>
               </Reveal>
             </li>

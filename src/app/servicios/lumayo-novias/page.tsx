@@ -40,9 +40,9 @@ export default function LumayoNoviasPage() {
         />
         <LumayoNovias />
         <WhyChooseUs flatBottom />
-        <WaveDivider from="bg-azul-50" to="var(--color-azul-800)" />
+        <WaveDivider from="bg-azul-50" to="var(--color-surface-inverse)" />
         <BookingSection number="01" />
-        <WaveDivider from="bg-azul-800" to="var(--color-azul-900)" flip />
+        <WaveDivider from="bg-surface-inverse" to="var(--color-surface-deep)" flip />
       </main>
       <Footer />
       <MobileCtaBar />

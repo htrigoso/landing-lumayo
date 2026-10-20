@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Montserrat } from "next/font/google";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { clinicJsonLd, websiteJsonLd } from "@/lib/seo/jsonld";
@@ -47,7 +48,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {/* Site-wide entities: the clinic (declared once, referenced by @id) and the website. */}
         <JsonLd data={clinicJsonLd()} />
         <JsonLd data={websiteJsonLd()} />
-        <MotionProvider>{children}</MotionProvider>
+        <AppRouterCacheProvider>
+          <MotionProvider>{children}</MotionProvider>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

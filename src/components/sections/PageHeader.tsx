@@ -22,29 +22,29 @@ export function PageHeader({ title, emphasis, description, crumbs }: PageHeaderP
   return (
     <>
       <JsonLd data={breadcrumbJsonLd(crumbs)} />
-      <section aria-labelledby="page-title" className="relative isolate overflow-hidden bg-[linear-gradient(to_bottom,#ffffff_0%,var(--color-sky-50)_16%,var(--color-sky-50)_84%,#ffffff_100%)] pt-12 pb-16 lg:pt-16 lg:pb-20">
+      <section aria-labelledby="page-title" className="relative isolate overflow-hidden bg-[linear-gradient(to_bottom,var(--color-bg)_0%,var(--color-surface)_16%,var(--color-surface)_84%,var(--color-bg)_100%)] pt-12 pb-16 lg:pt-16 lg:pb-20">
         <SectionBackdrop lines="tr" glow="bl" surface="mist" />
         {/* Crown stays whole; only the roots run off the bottom edge */}
         <IsotypeWatermark className="-bottom-36 -left-10 -z-10 w-72 !opacity-[0.06] sm:w-96 lg:-bottom-40 lg:left-[6%] lg:w-[22rem]" />
 
         <Reveal className="container-page text-center">
           <nav aria-label="Ruta">
-            <ol className="flex flex-wrap items-center justify-center gap-2 text-xs font-medium uppercase tracking-[0.12em] text-ink-600">
+            <ol className="flex flex-wrap items-center justify-center gap-2 text-xs font-medium uppercase tracking-[0.12em] text-text">
               {crumbs.map((c, i) => {
                 const last = i === crumbs.length - 1;
                 return (
                   <li key={c.label} className="flex items-center gap-2">
                     {last || !c.href ? (
-                      <span aria-current={last ? "page" : undefined} className={last ? "text-navy-700" : undefined}>
+                      <span aria-current={last ? "page" : undefined} className={last ? "text-primary" : undefined}>
                         {c.label}
                       </span>
                     ) : (
-                      <Link href={c.href} className="rounded-sm underline-offset-4 transition-colors hover:text-navy-700 hover:underline">
+                      <Link href={c.href} className="rounded-sm underline-offset-4 transition-colors hover:text-primary hover:underline">
                         {c.label}
                       </Link>
                     )}
                     {!last && (
-                      <span aria-hidden="true" className="text-navy-700/30">
+                      <span aria-hidden="true" className="text-primary/30">
                         /
                       </span>
                     )}
@@ -56,7 +56,7 @@ export function PageHeader({ title, emphasis, description, crumbs }: PageHeaderP
 
           <h1
             id="page-title"
-            className="mx-auto mt-4 max-w-3xl font-display text-[2.75rem] font-normal leading-[0.98] tracking-[-0.045em] text-navy-700 sm:text-6xl lg:text-[3.5rem]"
+            className="mx-auto mt-4 max-w-3xl font-display text-[2.75rem] font-normal leading-[0.98] tracking-[-0.045em] text-heading sm:text-6xl lg:text-[3.5rem]"
           >
             {title}
             {emphasis ? <> <strong className="font-extrabold">{emphasis}</strong></> : null}

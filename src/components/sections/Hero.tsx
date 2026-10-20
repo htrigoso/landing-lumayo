@@ -55,7 +55,7 @@ export function Hero() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section id="top" aria-labelledby="hero-title" className="relative isolate overflow-hidden bg-white">
+    <section id="top" aria-labelledby="hero-title" className="relative isolate overflow-hidden bg-bg">
       {/* Full-bleed video stage: with the info bar below, it fills the first screen under the header */}
       <div className="relative isolate flex min-h-[82svh] items-center py-20 sm:py-24 md:min-h-[calc(100svh-4.5rem-6rem)] lg:min-h-[max(44rem,calc(100svh-4.5rem-6rem))]">
         <HeroBackdrop />
@@ -77,7 +77,7 @@ export function Hero() {
             variants={letters}
             initial={reduceMotion ? "show" : "hidden"}
             animate="show"
-            className="mx-auto mt-6 max-w-4xl font-display text-[2.6rem] font-normal leading-[0.98] tracking-[-0.045em] text-white sm:text-6xl lg:text-7xl"
+            className="mx-auto mt-6 max-w-4xl font-display text-[2.6rem] font-normal leading-[0.98] tracking-[-0.045em] text-text-inverse sm:text-6xl lg:text-7xl"
           >
             <span className="block">
               <SplitText text="Tu sonrisa," />
@@ -88,7 +88,7 @@ export function Hero() {
                 aria-hidden="true"
                 viewBox="0 0 300 30"
                 preserveAspectRatio="none"
-                className="absolute -bottom-3 left-0 h-4 w-full text-cyan-400 sm:-bottom-4 sm:h-5"
+                className="absolute -bottom-3 left-0 h-4 w-full text-accent sm:-bottom-4 sm:h-5"
               >
                 <motion.path
                   d="M4 8 C 80 30, 220 30, 296 6"
@@ -122,7 +122,7 @@ export function Hero() {
           </motion.h1>
 
           <motion.div variants={container} initial="hidden" animate="show">
-            <motion.p variants={item} className="mx-auto mt-8 max-w-xl text-pretty text-base leading-relaxed text-sky-100 sm:text-lg">
+            <motion.p variants={item} className="mx-auto mt-8 max-w-xl text-pretty text-base leading-relaxed text-text-inverse-muted sm:text-lg">
               Atención cercana, tecnología actual y un equipo que te explica cada paso del tratamiento. Agenda tu
               evaluación en Tarapoto.
             </motion.p>
@@ -136,14 +136,14 @@ export function Hero() {
               >
                 <WhatsappIcon />
                 Quiero mis brackets
-                <span className="btn-arrow grid size-10 place-items-center rounded-full bg-navy-700 text-white">
+                <span className="btn-arrow grid size-10 place-items-center rounded-full bg-primary text-text-inverse">
                   <ArrowRightIcon className="size-4 -rotate-45" />
                 </span>
               </a>
             </motion.div>
 
-            <motion.p variants={item} className="mt-5 text-sm text-sky-100">
-              <a href="#reservar" className="font-semibold text-white underline decoration-cyan-400 decoration-2 underline-offset-4">
+            <motion.p variants={item} className="mt-5 text-sm text-text-inverse-muted">
+              <a href="#reservar" className="font-semibold text-text-inverse underline decoration-accent decoration-2 underline-offset-4">
                 Reserva tu cita
               </a>
               <span aria-hidden="true" className="mx-2 text-white/40">
@@ -152,7 +152,7 @@ export function Hero() {
               ¿Prefieres llamar?{" "}
               <a
                 href={`tel:${site.phoneE164}`}
-                className="font-semibold text-white underline decoration-cyan-400 decoration-2 underline-offset-4"
+                className="font-semibold text-text-inverse underline decoration-accent decoration-2 underline-offset-4"
               >
                 {site.phoneDisplay}
               </a>
@@ -162,7 +162,7 @@ export function Hero() {
       </div>
 
       {/* Info bar under the stage, as in the reference: phone, opening hours and the booking CTA */}
-      <div className="bg-azul-700 text-white">
+      <div className="bg-surface-inverse text-text-inverse">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -172,17 +172,17 @@ export function Hero() {
           <ul aria-label="Contacto" className="grid grid-cols-1 gap-5 min-[420px]:grid-cols-2 md:flex md:gap-0">
             {infoItems.map(({ icon: Icon, title, text, href }, i) => (
               <li key={title} className={`flex items-center gap-3 ${i > 0 ? "md:ml-8 md:border-l md:border-white/25 md:pl-8" : ""}`}>
-                <span className="grid size-11 shrink-0 place-items-center rounded-full text-white ring-1 ring-white/50">
+                <span className="grid size-11 shrink-0 place-items-center rounded-full text-text-inverse ring-1 ring-white/50">
                   <Icon className="size-5" />
                 </span>
                 <span className="leading-tight">
                   <strong className="block text-[0.95rem] font-semibold">{title}</strong>
                   {href ? (
-                    <a href={href} className="text-sm text-white/90 underline-offset-4 hover:text-white hover:underline">
+                    <a href={href} className="text-sm text-text-inverse/90 underline-offset-4 hover:text-text-inverse hover:underline">
                       {text}
                     </a>
                   ) : (
-                    <span className="text-sm text-white/90">{text}</span>
+                    <span className="text-sm text-text-inverse/90">{text}</span>
                   )}
                 </span>
               </li>
@@ -190,7 +190,7 @@ export function Hero() {
           </ul>
           <a href="#reservar" className="btn btn-light w-full shrink-0 gap-3 !py-1.5 pl-5 pr-1.5 text-sm sm:w-fit sm:self-center md:self-auto">
             Reservar cita
-            <span className="btn-arrow grid size-8 place-items-center rounded-full bg-azul-700 text-white">
+            <span className="btn-arrow grid size-8 place-items-center rounded-full bg-primary text-text-inverse">
               <ArrowRightIcon className="size-3.5 -rotate-45" />
             </span>
           </a>

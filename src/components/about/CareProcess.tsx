@@ -45,7 +45,7 @@ export function CareProcess() {
             {careProcessSteps.map((s, i) => (
               <li
                 key={s.title}
-                className="group relative isolate flex h-full flex-col overflow-hidden rounded-2xl border border-sky-200 bg-white transition-colors duration-500 hover:border-navy-500/50"
+                className="group relative isolate flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white transition-colors duration-500 hover:border-primary-hover/50 hover:shadow-lift"
               >
                 <IsotypeWatermark animated className="-bottom-8 -right-10 -z-10 w-40 !opacity-0 group-hover:!opacity-[0.12]" />
                 <div className="relative aspect-square overflow-hidden">
@@ -56,13 +56,13 @@ export function CareProcess() {
                     height={302}
                     className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
-                  <span className="absolute left-4 top-4 grid size-11 place-items-center rounded-full bg-navy-700 font-display text-sm font-bold tabular-nums text-white ring-4 ring-white">
+                  <span className="absolute left-4 top-4 grid size-11 place-items-center rounded-full bg-primary font-display text-sm font-bold tabular-nums text-white ring-4 ring-bg">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
                 <div className="flex flex-1 flex-col p-5">
-                  <h3 className="font-display text-lg font-bold leading-snug text-navy-700">{s.title}</h3>
-                  <p className="mt-2 text-pretty text-[0.93rem] leading-relaxed text-ink-600">{s.text}</p>
+                  <h3 className="font-display text-lg font-bold leading-snug text-heading">{s.title}</h3>
+                  <p className="mt-2 text-pretty text-[0.93rem] leading-relaxed text-text">{s.text}</p>
                 </div>
               </li>
             ))}

@@ -16,18 +16,18 @@ export function BrandSeal({ className = "" }: { className?: string }) {
 
   // Position comes from the caller (e.g. "absolute ..."), so there is no base positioning here
   return (
-    <div className={`grid aspect-square place-items-center rounded-full bg-navy-700 ring-[6px] ring-white ${className}`}>
+    <div className={`grid aspect-square place-items-center rounded-full bg-primary ring-[6px] ring-bg ${className}`}>
       <motion.svg
         aria-hidden="true"
         viewBox="0 0 200 200"
-        className="absolute inset-0 size-full"
+        className="absolute inset-0 size-full text-text-inverse"
         animate={reduceMotion ? undefined : { rotate: 360 }}
         transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
       >
         <defs>
           <path id={pathId} d={`M 100 ${100 - RADIUS} a ${RADIUS} ${RADIUS} 0 1 1 0 ${RADIUS * 2} a ${RADIUS} ${RADIUS} 0 1 1 0 ${-RADIUS * 2}`} />
         </defs>
-        <text fill="#fff" fontSize="12.5" fontWeight="500" letterSpacing="1.5">
+        <text fill="currentColor" fontSize="12.5" fontWeight="500" letterSpacing="1.5">
           {/* textLength makes the phrase close the circle exactly */}
           <textPath href={`#${pathId}`} textLength={2 * Math.PI * RADIUS - 2} lengthAdjust="spacing">
             {SEAL_TEXT}

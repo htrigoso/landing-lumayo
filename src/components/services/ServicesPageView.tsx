@@ -36,7 +36,7 @@ export function ServicesPageView({ title, emphasis, description, crumbs, activeC
     <>
       <a
         href="#main"
-        className="sr-only z-[60] rounded-full bg-navy-700 px-4 py-2 font-semibold text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        className="sr-only z-[60] rounded-full bg-primary px-4 py-2 font-semibold text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
       >
         Saltar al contenido
       </a>
@@ -54,9 +54,9 @@ export function ServicesPageView({ title, emphasis, description, crumbs, activeC
         <WhyChooseUs />
         <BrandStatement />
         <Testimonials number="01" flatBottom />
-        <WaveDivider from={hasTestimonials ? "bg-sky-50" : "bg-white"} to="var(--color-navy-500)" />
+        <WaveDivider from={hasTestimonials ? "bg-surface" : "bg-white"} to="var(--color-surface-inverse)" />
         <BookingSection number={hasTestimonials ? "02" : "01"} />
-        <WaveDivider from="bg-navy-500" to="var(--color-navy-900)" flip />
+        <WaveDivider from="bg-surface-inverse" to="var(--color-surface-deep)" flip />
       </main>
       <Footer />
       <MobileCtaBar />

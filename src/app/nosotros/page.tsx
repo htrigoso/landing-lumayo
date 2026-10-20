@@ -31,13 +31,13 @@ export default function NosotrosPage() {
   // Keep backgrounds alternating: testimonials go white when they follow "Why us" (mist) directly
   const testimonialsSurface = hasTeam ? "mist" : "white";
   // The wave into the booking band takes the colour of whichever section ends up above it
-  const lastBg = hasTestimonials ? (testimonialsSurface === "mist" ? "bg-sky-50" : "bg-white") : hasTeam ? "bg-white" : "bg-sky-50";
+  const lastBg = hasTestimonials ? (testimonialsSurface === "mist" ? "bg-surface" : "bg-white") : hasTeam ? "bg-white" : "bg-surface";
 
   return (
     <>
       <a
         href="#main"
-        className="sr-only z-[60] rounded-full bg-navy-700 px-4 py-2 font-semibold text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        className="sr-only z-[60] rounded-full bg-primary px-4 py-2 font-semibold text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
       >
         Saltar al contenido
       </a>
@@ -65,9 +65,9 @@ export default function NosotrosPage() {
         <WhyChooseUs />
         <TeamSection />
         <Testimonials number="01" surface={testimonialsSurface} flatBottom />
-        <WaveDivider from={lastBg} to="var(--color-navy-500)" />
+        <WaveDivider from={lastBg} to="var(--color-surface-inverse)" />
         <BookingSection number={hasTestimonials ? "02" : "01"} />
-        <WaveDivider from="bg-navy-500" to="var(--color-navy-900)" flip />
+        <WaveDivider from="bg-surface-inverse" to="var(--color-surface-deep)" flip />
       </main>
       <Footer />
       <MobileCtaBar />

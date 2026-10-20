@@ -30,7 +30,7 @@ function FeatureTile({ post, size, className = "" }: { post: BlogPost; size: "lg
 
   return (
     <article
-      className={`group relative isolate flex min-w-0 items-end overflow-hidden rounded-3xl bg-navy-900 shadow-[0_30px_60px_-30px_color-mix(in_srgb,var(--color-azul-950)_45%,transparent)] ring-1 ring-navy-900/5 ${
+      className={`group relative isolate flex min-w-0 items-end overflow-hidden rounded-3xl bg-surface-deep shadow-[0_30px_60px_-30px_color-mix(in_srgb,var(--color-azul-950)_45%,transparent)] ring-1 ring-surface-deep/5 ${
         isLarge ? "min-h-[24rem] sm:min-h-[28rem] lg:h-full lg:min-h-0" : "min-h-[17rem] lg:h-full lg:min-h-0"
       } ${className}`}
     >
@@ -44,33 +44,33 @@ function FeatureTile({ post, size, className = "" }: { post: BlogPost; size: "lg
           className="object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
         />
       )}
-      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/60 to-navy-900/0" />
+      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-surface-deep via-surface-deep/60 to-surface-deep/0" />
 
       <div className={`relative z-10 w-full min-w-0 p-6 sm:p-8 ${isLarge ? "lg:p-10" : ""}`}>
         <div className="flex flex-wrap items-center gap-3">
-          <Link href={blogCategoryPath(category)} className="pill relative z-10 !bg-white !text-navy-700">
+          <Link href={blogCategoryPath(category)} className="pill relative z-10 pill-outline">
             {post.category}
           </Link>
-          <span className="text-sm text-sky-100/90">{post.readingMinutes} min de lectura</span>
+          <span className="text-sm text-text-inverse-muted">{post.readingMinutes} min de lectura</span>
         </div>
         <h3
           className={
             isLarge
-              ? "mt-4 font-display text-2xl font-extrabold leading-tight text-white text-balance sm:text-3xl lg:text-4xl"
-              : "mt-3 font-display text-xl font-bold leading-snug text-white text-balance"
+              ? "mt-4 font-display text-2xl font-extrabold leading-tight text-text-inverse text-balance sm:text-3xl lg:text-4xl"
+              : "mt-3 font-display text-xl font-bold leading-snug text-text-inverse text-balance"
           }
         >
           <Link
             href={postPath(post)}
-            className="rounded-md after:absolute after:inset-0 after:content-[''] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            className="rounded-md after:absolute after:inset-0 after:content-[''] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-inverse"
           >
             {post.title}
           </Link>
         </h3>
         {isLarge && (
           <>
-            <p className="mt-3 max-w-2xl text-pretty text-sky-100/90 sm:text-lg">{post.excerpt}</p>
-            <span aria-hidden="true" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white">
+            <p className="mt-3 max-w-2xl text-pretty text-text-inverse-muted sm:text-lg">{post.excerpt}</p>
+            <span aria-hidden="true" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-text-inverse">
               Leer artículo
               <ArrowRightIcon className="size-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none" />
             </span>

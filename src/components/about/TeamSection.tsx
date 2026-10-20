@@ -24,10 +24,10 @@ export function TeamSection() {
             {team.map((m) => (
               <li
                 key={m.name}
-                className="group relative isolate h-full overflow-hidden rounded-2xl border border-sky-200 bg-white transition-colors duration-500 hover:border-navy-500/50"
+                className="group relative isolate h-full overflow-hidden rounded-2xl border border-border bg-white transition-colors duration-500 hover:border-primary-hover/50 hover:shadow-lift"
               >
                 <IsotypeWatermark animated className="-bottom-8 -right-10 -z-10 w-40 !opacity-0 group-hover:!opacity-[0.12]" />
-                <div className="relative aspect-[600/616] overflow-hidden bg-sky-50">
+                <div className="relative aspect-[600/616] overflow-hidden bg-surface">
                   <Image
                     src={m.photo}
                     alt={`${m.name}, ${m.role}`}
@@ -37,8 +37,8 @@ export function TeamSection() {
                   />
                 </div>
                 <div className="p-5 text-center">
-                  <h3 className="font-display text-lg font-bold text-navy-700">{m.name}</h3>
-                  <p className="mt-1 text-sm font-medium uppercase tracking-[0.12em] text-cyan-700">{m.role}</p>
+                  <h3 className="font-display text-lg font-bold text-heading">{m.name}</h3>
+                  <p className="mt-1 text-sm font-medium uppercase tracking-[0.12em] text-accent-text">{m.role}</p>
                 </div>
               </li>
             ))}

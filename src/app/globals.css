@@ -32,50 +32,79 @@
   --color-aqua-100: #d7f6f5;
   --color-aqua-50: #effcfb;
 
-  /* Azul Clínico — primary (aliases de la escala V2; los nombres navy-* se mantienen) */
-  --color-navy-950: var(--color-azul-950);
-  --color-navy-900: var(--color-azul-900);
-  --color-navy-700: var(--color-azul-700);
-  --color-navy-500: var(--color-azul-800);
+  /*
+   * Tokens semánticos (Manual de marca Lumayo 2026). Usa el token según el papel del color;
+   * azul-* y aqua-* son solo la base de la que salen.
+   *
+   * Qué usar para qué:
+   *  - Fondos: bg (blanco), surface (azul-50), surface-soft (Bruma, azul-100),
+   *    surface-mint (aqua-100, paneles suaves), surface-inverse (azul-700),
+   *    surface-deep (azul-900, bandas oscuras y pie de página).
+   *  - Acción principal: primary (azul-700), primary-hover (azul-800), primary-active (azul-900).
+   *  - Acento decorativo sin texto: accent (aqua-300). Fondo con texto blanco grande: accent-strong (aqua-600).
+   *    Texto o iconos de acento sobre claro: accent-text (aqua-700).
+   *  - Títulos: heading (azul-800). Cuerpo: text (#4A5264). Metadatos y ayudas: text-muted.
+   *  - Texto sobre oscuro: text-inverse (blanco); secundario: text-inverse-muted (azul-100).
+   *  - Bordes: border (azul-100). Bordes de campos: border-input (azul-600). Foco: focus (azul-700).
+   *  - Error: error (#C2410C). Éxito: success (aqua-700).
+   *
+   * Combinaciones válidas (lámina 12): aqua-300 con aqua-900 o azul-900; azul-900 con blanco o azul-100;
+   * azul-100 con azul-900; aqua-600 con blanco solo en texto grande; blanco con azul-900; azul-700 con blanco.
+   *
+   * PROHIBIDO:
+   *  - Texto blanco sobre aqua-300.
+   *  - Texto normal blanco sobre aqua-600 (4,04:1). Solo texto grande o elementos no textuales.
+   *  - aqua-300 como color de texto sobre blanco.
+   *
+   * Contraste de text-muted (#6A7182), calculado con luminancia relativa WCAG:
+   *  - sobre blanco: 4,89:1; sobre azul-50 (#F0F8FE): 4,55:1. Pasa 4,5:1 en ambos.
+   *  - el gris del manual #9BA0B0 da solo 2,61:1 sobre blanco: no sirve para texto.
+   *
+   * Excepciones fuera del manual (documentadas): --illus-* (tonos de piel, pelo y rubor de las ilustraciones).
+   */
+  --color-bg: #ffffff;
+  --color-surface: var(--color-azul-50);
+  --color-surface-soft: var(--color-azul-100);
+  --color-surface-mint: var(--color-aqua-100);
+  --color-surface-inverse: var(--color-azul-700);
+  --color-surface-deep: var(--color-azul-900);
 
-  /* Aqua Vital — accent (aliases de la escala V2) */
-  --color-cyan-100: var(--color-aqua-100);
-  --color-cyan-300: var(--color-aqua-300);
-  --color-cyan-400: var(--color-aqua-400);
-  --color-cyan-500: var(--color-aqua-500);
-  --color-cyan-600: var(--color-aqua-600);
-  --color-cyan-700: var(--color-aqua-700);
+  --color-primary: var(--color-azul-700);
+  --color-primary-hover: var(--color-azul-800);
+  --color-primary-active: var(--color-azul-900);
+  --color-accent: var(--color-aqua-300);
+  --color-accent-strong: var(--color-aqua-600);
+  --color-accent-text: var(--color-aqua-700);
+  --color-heading: var(--color-azul-800);
+  --color-text: #4a5264;
+  --color-text-muted: #6a7182;
+  --color-text-inverse: #ffffff;
+  --color-text-inverse-muted: var(--color-azul-100);
+  --color-border: var(--color-azul-100);
+  --color-border-input: var(--color-azul-600);
+  --color-focus: var(--color-azul-700);
+  --color-success: var(--color-aqua-700);
+  --color-error: #c2410c;
 
-  /* Bruma Azul y superficies */
-  --color-sky-50: var(--color-azul-50);
-  --color-sky-100: var(--color-azul-100);
-  --color-sky-200: var(--color-azul-200);
+  /*
+   * Excepciones de producto (fuera del manual, documentadas): dorado de la Lumayo Card Gold.
+   * Solo para la Card dorada (CardFaces.tsx), no son tokens de tema.
+   */
+  --color-card-gold-light: #dcc070;
+  --color-card-gold-mid: #c39c48;
+  --color-card-gold-warm: #d4b25c;
+  --color-card-gold-soft: #d2ae55;
+  --color-card-gold-edge: #c09744;
+  --color-card-gold-deep: #b8892b;
+  --color-card-gold-accent: #f3dc9a;
+  --color-card-gold-stroke: #c9a03f;
+  --color-card-gold-stroke-2: #d9b45a;
+  --color-card-gold-ring: #e0c283;
+  --color-card-gold-paper: #fffaf0;
+  --color-card-gold-cream: #f8eed6;
+  --color-card-gold-sand: #ecd9a8;
+  --color-card-gold-shade: rgb(60 40 5 / 0.55);
 
-  /* Aqua Vital — teal scale (aliases de la escala V2) */
-  --color-teal-100: var(--color-aqua-100);
-  --color-teal-200: var(--color-aqua-200);
-  --color-teal-300: var(--color-aqua-300);
-  --color-teal-400: var(--color-aqua-400);
-  --color-teal-500: var(--color-aqua-500);
-  --color-teal-600: var(--color-aqua-600);
-  --color-teal-700: var(--color-aqua-700);
-  --color-teal-800: var(--color-aqua-800);
-  --color-teal-900: var(--color-aqua-950);
-
-  /* Celeste ya no existe en V2: aliases de la escala Azul Clínico */
-  --color-celeste-100: var(--color-azul-100);
-  --color-celeste-200: var(--color-azul-200);
-  --color-celeste-300: var(--color-azul-300);
-  --color-celeste-400: var(--color-azul-400);
-  --color-celeste-500: var(--color-azul-500);
-  --color-celeste-600: var(--color-azul-600);
-  --color-celeste-700: var(--color-azul-700);
-
-  /* Neutrales de interfaz */
-  --color-ink-900: var(--color-azul-950);
-  --color-ink-600: #475b6e;
-  --color-ink-400: #7a8a99;
-  --color-line: #d6e6f0;
 
 
   /* Brandbook surfaces are flat: shadows only hint at separation */
@@ -91,12 +120,13 @@
 :root {
   color-scheme: light;
 
-  /* Ilustración de novias: tonos de piel, pelo y rubor (no son tokens de tema) */
+  /* Excepción documentada: tonos de piel, pelo y rubor de las ilustraciones de novias (no son tokens de tema) */
   --illus-skin-bride: #f1c9a5;
   --illus-skin-groom: #d9a37c;
   --illus-hair-bride: #2b2330;
   --illus-hair-groom: #3a2a24;
   --illus-blush: #f6c4b3;
+  --illus-hair-silver: #e8edf2;
 }
 
 html {
@@ -109,8 +139,8 @@ body {
   /* Decorative elements may bleed past the edges; never let them cause sideways scrolling.
      `clip` (unlike `hidden`) keeps position: sticky working. */
   overflow-x: clip;
-  background: #ffffff;
-  color: var(--color-ink-900);
+  background: var(--color-bg);
+  color: var(--color-azul-950);
   font-family: var(--font-sans), system-ui, sans-serif;
   text-rendering: optimizeLegibility;
 }
@@ -130,7 +160,7 @@ select {
 }
 
 :focus-visible {
-  outline: 3px solid var(--color-cyan-500);
+  outline: 3px solid var(--color-focus);
   outline-offset: 3px;
   border-radius: 0.5rem;
 }
@@ -295,18 +325,18 @@ select {
   /* Primary CTA (WhatsApp / booking) in Azul profundo — the brand manual has no green */
   .btn-wa,
   .btn-navy {
-    --fill: var(--color-navy-500); /* Azul 800 */
+    --fill: var(--color-primary-hover); /* Azul 800 */
     --fill-soft: color-mix(in srgb, var(--color-aqua-400) 55%, transparent); /* Aqua 400 */
-    background: var(--color-navy-700);
-    color: #fff;
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
     box-shadow: 0 10px 24px -10px color-mix(in srgb, var(--color-azul-950) 55%, transparent);
   }
   /* Primary CTA variant for Azul profundo / Azul clínico backgrounds */
   .btn-light {
-    --fill: var(--color-sky-100); /* Bruma */
+    --fill: var(--color-surface-soft); /* Bruma */
     --fill-soft: color-mix(in srgb, var(--color-aqua-300) 60%, transparent); /* Agua */
-    background: #fff;
-    color: var(--color-navy-700);
+    background: var(--color-bg);
+    color: var(--color-primary);
     box-shadow: 0 10px 24px -10px color-mix(in srgb, var(--color-azul-950) 60%, transparent);
   }
   /* Secondary CTA on dark backgrounds */
@@ -314,21 +344,21 @@ select {
     --fill: rgb(255 255 255 / 0.14);
     --fill-soft: color-mix(in srgb, var(--color-aqua-400) 25%, transparent);
     background: transparent;
-    color: #fff;
+    color: var(--color-text-inverse);
     border: 1.5px solid rgb(255 255 255 / 0.45);
   }
   .btn-ghost-light:hover {
-    border-color: #fff;
+    border-color: var(--color-text-inverse);
   }
   .btn-outline {
-    --fill: var(--color-sky-100); /* Bruma */
+    --fill: var(--color-surface-soft); /* Bruma */
     --fill-soft: color-mix(in srgb, var(--color-aqua-300) 50%, transparent); /* Agua */
-    background: #fff;
-    color: var(--color-navy-700);
-    border: 1.5px solid var(--color-sky-200);
+    background: var(--color-bg);
+    color: var(--color-primary);
+    border: 1.5px solid var(--color-azul-200);
   }
   .btn-outline:hover {
-    border-color: var(--color-cyan-500);
+    border-color: var(--color-focus);
   }
 
   /* Brandbook "Etiqueta": Montserrat Medium, uppercase, +12% tracking */
@@ -338,8 +368,8 @@ select {
     gap: 0.45rem;
     padding: 0.4rem 0.85rem;
     border-radius: 999px;
-    background: var(--color-sky-100);
-    color: var(--color-navy-700);
+    background: var(--color-surface-soft);
+    color: var(--color-primary);
     font-size: 0.72rem;
     font-weight: 500;
     letter-spacing: 0.12em;
@@ -348,13 +378,13 @@ select {
   /* Brandbook tag on colour or photo: thin light outline, no fill ("Centro odontológico") */
   .pill-outline {
     background: transparent;
-    color: #fff;
+    color: var(--color-text-inverse);
     box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.6);
   }
   /* Brandbook tag on light surfaces: solid Azul profundo ("Consejo Lumayo") */
   .pill-solid {
-    background: var(--color-navy-700);
-    color: #fff;
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
   }
   .pill svg {
     width: 0.9rem;
@@ -365,7 +395,7 @@ select {
   .section-title {
     font-family: var(--font-display), sans-serif;
     font-weight: 400;
-    color: var(--color-navy-700);
+    color: var(--color-heading);
     font-size: clamp(1.85rem, 1.25rem + 2.5vw, 2.75rem);
     line-height: 0.98;
     letter-spacing: -0.045em;
@@ -374,13 +404,13 @@ select {
     font-weight: 800;
   }
   .section-sub {
-    color: var(--color-ink-600);
+    color: var(--color-text);
     font-size: 1.0625rem;
     line-height: 1.54; /* Brandbook "Texto" 26/40 */
   }
   /* Brandbook panel: flat light surface, moderate radius, no shadow */
   .card-panel {
-    background: var(--color-sky-50);
+    background: var(--color-surface);
     border-radius: var(--radius-card);
   }
 
@@ -389,24 +419,24 @@ select {
     min-height: 3rem;
     padding: 0.7rem 0.95rem;
     border-radius: 0.875rem;
-    border: 1.5px solid var(--color-line);
-    background: #fff;
-    color: var(--color-ink-900);
+    border: 1.5px solid var(--color-border-input);
+    background: var(--color-bg);
+    color: var(--color-azul-950);
     font-size: 1rem;
     transition:
       border-color 160ms ease,
       box-shadow 160ms ease;
   }
   .field-input:hover {
-    border-color: var(--color-sky-200);
+    border-color: var(--color-azul-200);
   }
   .field-input:focus {
     outline: none;
-    border-color: var(--color-cyan-500);
+    border-color: var(--color-focus);
     box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-aqua-400) 18%, transparent);
   }
   .field-input[aria-invalid="true"] {
-    border-color: #c2410c;
+    border-color: var(--color-error);
   }
 }
 

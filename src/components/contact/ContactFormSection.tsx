@@ -10,7 +10,7 @@ import { Reveal } from "@/components/motion/Reveal";
  */
 export function ContactFormSection() {
   return (
-    <section id="reservar" aria-labelledby="contact-form-title" className="relative isolate overflow-hidden bg-[linear-gradient(to_bottom,#ffffff_0%,var(--color-sky-50)_16%,var(--color-sky-50)_100%)] pb-16 lg:pb-20">
+    <section id="reservar" aria-labelledby="contact-form-title" className="relative isolate overflow-hidden bg-[linear-gradient(to_bottom,var(--color-bg)_0%,var(--color-surface)_16%,var(--color-surface)_100%)] pb-16 lg:pb-20">
       <SectionBackdrop lines="tr" glow="bl" surface="mist" />
       <div className="container-page grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         <Reveal className="relative mx-auto w-full max-w-md lg:max-w-none">
@@ -34,7 +34,7 @@ export function ContactFormSection() {
           <p className="section-sub mt-4 max-w-lg text-pretty">
             Completa el formulario y se abrirá WhatsApp con tu mensaje listo para enviar. Te respondemos lo antes posible.
           </p>
-          <div className="mt-8 rounded-2xl border border-sky-200 bg-white p-6 sm:p-8">
+          <div className="mt-8 rounded-2xl border border-border bg-white p-6 sm:p-8">
             <ContactForm />
           </div>
         </Reveal>

@@ -61,25 +61,25 @@ const frontThemes: Record<CardVariant, FrontTheme> = {
   },
   gold: {
     surface:
-      "bg-[linear-gradient(118deg,#c39c48_0%,#d4b25c_30%,#dcc070_52%,#d2ae55_76%,#c09744_100%)] text-white [text-shadow:0_0.15cqw_0.35cqw_rgb(60_40_5/0.55)]",
+      "bg-[linear-gradient(118deg,var(--color-card-gold-mid)_0%,var(--color-card-gold-warm)_30%,var(--color-card-gold-light)_52%,var(--color-card-gold-soft)_76%,var(--color-card-gold-edge)_100%)] text-white [text-shadow:0_0.15cqw_0.35cqw_var(--color-card-gold-shade)]",
     weight: "font-semibold",
-    glow: "bg-[linear-gradient(105deg,transparent_35%,rgb(255_255_255/0.07)_50%,transparent_65%)]",
+    glow: "bg-[linear-gradient(105deg,transparent_35%,color-mix(in_srgb,var(--color-bg)_7%,transparent)_50%,transparent_65%)]",
     logoSrc: "/lumayo+centro-white.svg",
     isotipoSrc: "/brand/lumayo-isotipo-white.svg",
     isotipoClass:
       "pointer-events-none absolute -right-[6cqw] top-1/2 h-auto w-[46cqw] -translate-y-1/2 opacity-[0.10]",
-    accent: "bg-[#f3dc9a]",
-    separator: "bg-[#f3dc9a]",
+    accent: "bg-card-gold-accent",
+    separator: "bg-card-gold-accent",
     subtitle: "text-white",
     pill: "border-white/70",
     divider: "bg-white/40",
     arcs: {
       rings: [
-        { stroke: "#f3dc9a", strokeOpacity: 0.25 },
-        { stroke: "#f3dc9a", strokeOpacity: 0.35 },
-        { stroke: "#f3dc9a", strokeOpacity: 0.2 },
+        { stroke: "var(--color-card-gold-accent)", strokeOpacity: 0.25 },
+        { stroke: "var(--color-card-gold-accent)", strokeOpacity: 0.35 },
+        { stroke: "var(--color-card-gold-accent)", strokeOpacity: 0.2 },
       ],
-      wedge: { fill: "#f3dc9a", fillOpacity: 0.12 },
+      wedge: { fill: "var(--color-card-gold-accent)", fillOpacity: 0.12 },
     },
   },
 };
@@ -89,7 +89,7 @@ const backThemes: Record<CardVariant, BackTheme> = {
     surface:
       "bg-white text-azul-950",
     accent: "bg-aqua-500",
-    qrRing: "ring-sky-200",
+    qrRing: "ring-border",
     qrStops: ["var(--color-azul-700)", "var(--color-aqua-500)"],
     arcs: {
       rings: [
@@ -102,17 +102,17 @@ const backThemes: Record<CardVariant, BackTheme> = {
   },
   gold: {
     surface:
-      "bg-[linear-gradient(115deg,#fffaf0_0%,#f8eed6_55%,#ecd9a8_100%)] text-navy-950",
-    accent: "bg-[#b8892b]",
-    qrRing: "ring-[#e0c283]",
-    qrStops: ["var(--color-azul-950)", "#b8892b"],
+      "bg-[linear-gradient(115deg,var(--color-card-gold-paper)_0%,var(--color-card-gold-cream)_55%,var(--color-card-gold-sand)_100%)] text-azul-950",
+    accent: "bg-card-gold-deep",
+    qrRing: "ring-card-gold-ring",
+    qrStops: ["var(--color-azul-950)", "var(--color-card-gold-deep)"],
     arcs: {
       rings: [
-        { stroke: "#c9a03f", strokeOpacity: 0.45 },
-        { stroke: "#d9b45a", strokeOpacity: 0.4 },
-        { stroke: "#c9a03f", strokeOpacity: 0.25 },
+        { stroke: "var(--color-card-gold-stroke)", strokeOpacity: 0.45 },
+        { stroke: "var(--color-card-gold-stroke-2)", strokeOpacity: 0.4 },
+        { stroke: "var(--color-card-gold-stroke)", strokeOpacity: 0.25 },
       ],
-      wedge: { fill: "#d9b45a", fillOpacity: 0.22 },
+      wedge: { fill: "var(--color-card-gold-stroke-2)", fillOpacity: 0.22 },
     },
   },
 };
@@ -317,9 +317,9 @@ export function CardBack({ variant = "classic" }: { variant?: CardVariant }) {
 
             <dl className="mt-[4cqw] grid gap-y-[3.2cqw]">
               <div className="flex items-start gap-[2.6cqw]">
-                <PinIcon className="mt-[0.4cqw] size-[5.4cqw] shrink-0 text-navy-700" />
+                <PinIcon className="mt-[0.4cqw] size-[5.4cqw] shrink-0 text-primary" />
                 <div className="min-w-0">
-                  <dt className="text-[1.9cqw] font-medium tracking-[0.3em] text-navy-700 uppercase">Visítanos</dt>
+                  <dt className="text-[1.9cqw] font-medium tracking-[0.3em] text-primary uppercase">Visítanos</dt>
                   <dd className="text-[3.2cqw] leading-tight font-extrabold whitespace-nowrap">
                     {site.address.street}
                   </dd>
@@ -330,9 +330,9 @@ export function CardBack({ variant = "classic" }: { variant?: CardVariant }) {
               </div>
 
               <div className="flex items-start gap-[2.6cqw]">
-                <WhatsappIcon className="mt-[0.4cqw] size-[5.4cqw] shrink-0 text-navy-700" />
+                <WhatsappIcon className="mt-[0.4cqw] size-[5.4cqw] shrink-0 text-primary" />
                 <div className="min-w-0">
-                  <dt className="text-[1.9cqw] font-medium tracking-[0.3em] text-navy-700 uppercase">Reserva tu cita</dt>
+                  <dt className="text-[1.9cqw] font-medium tracking-[0.3em] text-primary uppercase">Reserva tu cita</dt>
                   <dd className="text-[3.2cqw] leading-tight font-extrabold whitespace-nowrap">
                     WhatsApp: {lumayoCard.card.whatsappDisplay}
                   </dd>
@@ -351,24 +351,24 @@ export function CardBack({ variant = "classic" }: { variant?: CardVariant }) {
           </div>
         </div>
 
-        <div className="mt-auto h-px bg-navy-700/25" />
+        <div className="mt-auto h-px bg-primary/25" />
 
         <p className="mt-[2.4cqw] text-[1.9cqw] font-medium tracking-[0.3em] uppercase">Síguenos</p>
         <ul className="mt-[1.4cqw] grid grid-cols-4">
           <li className="flex items-center gap-[1.4cqw] text-[2.3cqw] font-medium whitespace-nowrap">
-            <FacebookIcon className="size-[4cqw] shrink-0 text-navy-700" />
+            <FacebookIcon className="size-[4cqw] shrink-0 text-primary" />
             Facebook
           </li>
           <li className="flex items-center gap-[1.4cqw] text-[2.3cqw] font-medium whitespace-nowrap">
-            <TiktokIcon className="size-[4cqw] shrink-0 text-navy-900" />
+            <TiktokIcon className="size-[4cqw] shrink-0 text-surface-deep" />
             TikTok
           </li>
           <li className="flex items-center gap-[1.4cqw] text-[2.3cqw] font-medium whitespace-nowrap">
-            <InstagramIcon className="size-[4cqw] shrink-0 text-navy-900" />
+            <InstagramIcon className="size-[4cqw] shrink-0 text-surface-deep" />
             Instagram
           </li>
           <li className="flex items-center gap-[1.4cqw] text-[2.3cqw] font-medium whitespace-nowrap">
-            <YoutubeIcon className="size-[4cqw] shrink-0 text-navy-900" />
+            <YoutubeIcon className="size-[4cqw] shrink-0 text-surface-deep" />
             YouTube
           </li>
         </ul>

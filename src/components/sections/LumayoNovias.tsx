@@ -66,7 +66,7 @@ export function LumayoNovias() {
             <h2 id="novias-title" className="section-title mt-4">
               {emphasizeLast(lumayoNovias.headline, 3)}
             </h2>
-            <p className="mt-5 max-w-lg text-pretty text-lg leading-relaxed text-ink-600">{lumayoNovias.subheadline}</p>
+            <p className="mt-5 max-w-lg text-pretty text-lg leading-relaxed text-text">{lumayoNovias.subheadline}</p>
             <ul className="mt-6 flex flex-wrap gap-2">
               {lumayoNovias.trustChips.map((chip) => (
                 <li
@@ -109,12 +109,12 @@ export function LumayoNovias() {
           <div className="mt-12 grid grid-cols-[minmax(0,1fr)] gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {lumayoNovias.moments.map((moment, i) => (
               <Reveal key={moment.title} className="h-full" delay={i * 0.06}>
-                <article className="flex h-full flex-col rounded-3xl border border-line bg-white p-7 transition duration-300 hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
+                <article className="flex h-full flex-col rounded-3xl border border-border bg-white p-7 transition duration-300 hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
                   <span aria-hidden="true" className="font-display text-5xl font-extrabold leading-none text-aqua-300">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <h3 className="mt-6 text-lg font-bold text-azul-700">{moment.title}</h3>
-                  <p className="mt-2 text-base leading-relaxed text-ink-600">{moment.description}</p>
+                  <p className="mt-2 text-base leading-relaxed text-text">{moment.description}</p>
                 </article>
               </Reveal>
             ))}
@@ -154,7 +154,7 @@ export function LumayoNovias() {
             <TreatmentsCarousel items={treatmentItems} />
           </Reveal>
           <Reveal className="mt-10">
-            <p className="rounded-3xl bg-azul-50 p-6 text-base leading-relaxed text-ink-600">{lumayoNovias.whiteningNote}</p>
+            <p className="rounded-3xl bg-azul-50 p-6 text-base leading-relaxed text-text">{lumayoNovias.whiteningNote}</p>
           </Reveal>
         </div>
       </section>
@@ -198,7 +198,7 @@ export function LumayoNovias() {
                   </span>
                   <div className="md:text-center">
                     <h3 className="text-lg font-bold text-azul-700">{step.title}</h3>
-                    <p className="mt-2 text-base leading-relaxed text-ink-600">{step.description}</p>
+                    <p className="mt-2 text-base leading-relaxed text-text">{step.description}</p>
                   </div>
                 </li>
               ))}
@@ -224,7 +224,7 @@ export function LumayoNovias() {
                 <h3 className="font-display text-2xl font-extrabold text-azul-700">{lumayoNovias.weekBefore.title}</h3>
                 <ul className="mt-8 grid grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-2">
                   {lumayoNovias.weekBefore.tips.map((tip) => (
-                    <li key={tip} className="flex gap-3 text-base leading-relaxed text-ink-600">
+                    <li key={tip} className="flex gap-3 text-base leading-relaxed text-text">
                       <CheckIcon className="mt-1 size-5 shrink-0 text-aqua-600" />
                       {tip}
                     </li>
@@ -248,7 +248,7 @@ export function LumayoNovias() {
             title={<>¿Cuánto <strong>cuesta?</strong></>}
           />
           <Reveal>
-            <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-ink-600">
+            <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-text">
               Cada sonrisa es distinta. Primero hacemos un diagnóstico y, con él, el especialista te entrega un presupuesto a tu medida.
               Sin compromiso.
             </p>
@@ -268,7 +268,7 @@ export function LumayoNovias() {
             layout="stack"
             title={<>Preguntas <strong>frecuentes</strong></>}
           />
-          <div className="mt-8 rounded-3xl border border-line bg-white p-6 sm:p-10">
+          <div className="mt-8 rounded-3xl border border-border bg-white p-6 sm:p-10">
             <FaqAccordion items={[...lumayoNovias.faqs]} />
           </div>
         </div>

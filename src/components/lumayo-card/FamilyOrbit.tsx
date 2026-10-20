@@ -51,13 +51,13 @@ type Look = {
 };
 
 const LOOKS: Record<Variant, Look> = {
-  holder: { bg: "var(--color-azul-700)", skin: "#d9a37c", hair: "#2b2330", shirt: "var(--color-aqua-500)", hairStyle: "short", scale: 1 },
-  woman: { bg: "var(--color-azul-100)", skin: "#f1c9a5", hair: "#3a2a24", shirt: "var(--color-azul-700)", hairStyle: "long", scale: 1 },
-  man: { bg: "var(--color-aqua-300)", skin: "#d9a37c", hair: "#2b2330", shirt: "var(--color-azul-700)", hairStyle: "short", scale: 1 },
-  senior: { bg: "var(--color-aqua-300)", skin: "#f1c9a5", hair: "#e8edf2", shirt: "var(--color-aqua-500)", hairStyle: "short", scale: 1 },
-  teen: { bg: "var(--color-azul-100)", skin: "#d9a37c", hair: "#2b2330", shirt: "var(--color-aqua-500)", hairStyle: "short", scale: 0.84 },
-  girl: { bg: "var(--color-aqua-500)", skin: "#f1c9a5", hair: "#3a2a24", shirt: "#ffffff", hairStyle: "long", scale: 0.78 },
-  boy: { bg: "var(--color-aqua-300)", skin: "#f1c9a5", hair: "#3a2a24", shirt: "var(--color-azul-700)", hairStyle: "short", scale: 0.78 },
+  holder: { bg: "var(--color-azul-700)", skin: "var(--illus-skin-groom)", hair: "var(--illus-hair-bride)", shirt: "var(--color-aqua-500)", hairStyle: "short", scale: 1 },
+  woman: { bg: "var(--color-azul-100)", skin: "var(--illus-skin-bride)", hair: "var(--illus-hair-groom)", shirt: "var(--color-azul-700)", hairStyle: "long", scale: 1 },
+  man: { bg: "var(--color-aqua-300)", skin: "var(--illus-skin-groom)", hair: "var(--illus-hair-bride)", shirt: "var(--color-azul-700)", hairStyle: "short", scale: 1 },
+  senior: { bg: "var(--color-aqua-300)", skin: "var(--illus-skin-bride)", hair: "var(--illus-hair-silver)", shirt: "var(--color-aqua-500)", hairStyle: "short", scale: 1 },
+  teen: { bg: "var(--color-azul-100)", skin: "var(--illus-skin-groom)", hair: "var(--illus-hair-bride)", shirt: "var(--color-aqua-500)", hairStyle: "short", scale: 0.84 },
+  girl: { bg: "var(--color-aqua-500)", skin: "var(--illus-skin-bride)", hair: "var(--illus-hair-groom)", shirt: "var(--color-bg)", hairStyle: "long", scale: 0.78 },
+  boy: { bg: "var(--color-aqua-300)", skin: "var(--illus-skin-bride)", hair: "var(--illus-hair-groom)", shirt: "var(--color-azul-700)", hairStyle: "short", scale: 0.78 },
 };
 
 function Avatar({ variant, size, className = "" }: { variant: Variant; size: AvatarSize; className?: string }) {
@@ -70,12 +70,12 @@ function Avatar({ variant, size, className = "" }: { variant: Variant; size: Ava
     >
       <svg viewBox="0 0 64 64" className="size-full" aria-hidden="true">
         <g transform={`translate(32 64) scale(${look.scale}) translate(-32 -64)`}>
-          {look.hairStyle === "long" && <path d="M19 30 C17 15 25 11 32 11 C39 11 47 15 45 30 L45 44 L19 44 Z" fill={look.hair} />}
+          {look.hairStyle === "long" && <path d="M19 30 C17 15 25 11 32 11 C39 11 47 15 45 30 L45 44 L19 44 Z" style={{ fill: look.hair }} />}
           <path d="M11 64 C11 48 20 42 32 42 C44 42 53 48 53 64 Z" style={{ fill: look.shirt }} />
-          <circle cx="32" cy="27" r="11" fill={look.skin} />
+          <circle cx="32" cy="27" r="11" style={{ fill: look.skin }} />
           <path
             d={look.hairStyle === "long" ? "M21 26 C21 16 27 13 32 13 C38 13 43 16 43 26 C38 21 27 20 21 26 Z" : "M21 24 C21 14 27 11 32 11 C38 11 43 14 43 24 C39 19 26 19 21 24 Z"}
-            fill={look.hair}
+            style={{ fill: look.hair }}
           />
           <path d="M27.5 31.5 Q32 35.5 36.5 31.5" fill="none" style={{ stroke: "var(--color-azul-700)" }} strokeWidth={2} strokeLinecap="round" />
         </g>
@@ -105,13 +105,13 @@ export function FamilyOrbit({ count = 6 }: { count?: OrbitCount }) {
       </svg>
 
       <div className="absolute left-1/2 top-1/2 flex w-[26%] -translate-x-1/2 -translate-y-1/2 flex-col items-center">
-        <div className="relative rounded-full ring-4 ring-cyan-500/30">
+        <div className="relative rounded-full ring-4 ring-accent-strong/30">
           <Avatar variant="holder" size="lg" />
-          <span className="absolute -right-1 -top-1 grid size-8 place-items-center rounded-full bg-navy-900 ring-2 ring-white">
+          <span className="absolute -right-1 -top-1 grid size-8 place-items-center rounded-full bg-surface-deep ring-2 ring-white">
             <Image src="/brand/lumayo-isotipo-white.svg" alt="" width={230} height={202} unoptimized className="h-4 w-auto" />
           </span>
         </div>
-        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full bg-navy-700 px-3 py-1 text-xs font-semibold text-white">
+        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full bg-primary px-3 py-1 text-xs font-semibold text-white">
           Titular
         </span>
       </div>
@@ -131,7 +131,7 @@ export function FamilyOrbit({ count = 6 }: { count?: OrbitCount }) {
                   <Avatar variant={member.variant} size={member.size} className="ring-2 ring-white" />
                   <span
                     aria-hidden="true"
-                    className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-navy-900 px-2.5 py-1 text-xs font-semibold text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100"
+                    className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-surface-deep px-2.5 py-1 text-xs font-semibold text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100"
                   >
                     Adicional {i + 1}
                   </span>

@@ -83,21 +83,21 @@ export function LumayoKids() {
 
         <div className="container-page grid grid-cols-[minmax(0,1fr)] gap-14 lg:grid-cols-2 lg:items-center lg:gap-20">
           <Reveal className="min-w-0">
-            <p className="flex items-center gap-3 text-sm font-medium text-navy-700">
-              <span aria-hidden="true" className="h-px w-8 bg-navy-700/40" />
+            <p className="flex items-center gap-3 text-sm font-medium text-primary">
+              <span aria-hidden="true" className="h-px w-8 bg-primary/40" />
               Para los más pequeños
             </p>
             <h2 id="kids-title" className="section-title mt-4">
               {emphasizeLast(lumayoKids.headline, 2)}
             </h2>
-            <p className="mt-5 max-w-lg text-pretty text-lg leading-relaxed text-ink-600">{lumayoKids.subheadline}</p>
+            <p className="mt-5 max-w-lg text-pretty text-lg leading-relaxed text-text">{lumayoKids.subheadline}</p>
             <ul className="mt-6 flex flex-wrap gap-2">
               {lumayoKids.trustChips.map((chip) => (
                 <li
                   key={chip}
-                  className="inline-flex items-center gap-2 rounded-full bg-cyan-100/70 px-4 py-2 text-sm font-semibold text-navy-700"
+                  className="inline-flex items-center gap-2 rounded-full bg-surface-mint/70 px-4 py-2 text-sm font-semibold text-primary"
                 >
-                  <CheckIcon className="size-4 text-cyan-700" />
+                  <CheckIcon className="size-4 text-accent-text" />
                   {chip}
                 </li>
               ))}
@@ -133,8 +133,8 @@ export function LumayoKids() {
         </div>
       </section>
 
-      <WaveDivider from="bg-white" to="var(--color-navy-700)" />
-      <section id="primera-visita" aria-labelledby="primera-title" className="relative isolate overflow-hidden bg-navy-700 py-16 text-white lg:py-20">
+      <WaveDivider from="bg-white" to="var(--color-primary)" />
+      <section id="primera-visita" aria-labelledby="primera-title" className="relative isolate overflow-hidden bg-primary py-16 text-white lg:py-20">
         <div aria-hidden="true" className="absolute inset-0 -z-10 opacity-60">
           <SectionBackdrop lines="tr" glow="bl" surface="deep" />
         </div>
@@ -155,22 +155,22 @@ export function LumayoKids() {
           </Reveal>
         </div>
       </section>
-      <WaveDivider from="bg-navy-700" to="#ffffff" flip />
+      <WaveDivider from="bg-primary" to="var(--color-bg)" flip />
 
       <section aria-labelledby="comodidad-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere lines="tr" />
 
         <div className="container-page">
           <Reveal>
-            <div className="rounded-[2rem] border border-navy-700/20 p-2">
-              <div className="rounded-[1.5rem] border border-navy-700/10 bg-white p-6 sm:p-10">
-                <h3 id="comodidad-title" className="font-display text-2xl font-extrabold text-navy-700">
+            <div className="rounded-[2rem] border border-primary/20 p-2">
+              <div className="rounded-[1.5rem] border border-primary/10 bg-white p-6 sm:p-10">
+                <h3 id="comodidad-title" className="font-display text-2xl font-extrabold text-primary">
                   {lumayoKids.comfort.title}
                 </h3>
                 <ul className="mt-8 grid grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-2">
                   {lumayoKids.comfort.points.map((point) => (
-                    <li key={point} className="flex min-w-0 gap-3 text-base leading-relaxed text-ink-600">
-                      <CheckIcon className="mt-1 size-5 shrink-0 text-cyan-700" />
+                    <li key={point} className="flex min-w-0 gap-3 text-base leading-relaxed text-text">
+                      <CheckIcon className="mt-1 size-5 shrink-0 text-accent-text" />
                       {point}
                     </li>
                   ))}
@@ -212,8 +212,8 @@ export function LumayoKids() {
           <div className="mt-12 grid grid-cols-[minmax(0,1fr)] gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {treatmentItems.map((item, i) => (
               <Reveal key={item.id} className="h-full min-w-0" delay={i * 0.06}>
-                <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-[0_18px_40px_-28px_color-mix(in_srgb,var(--color-azul-950)_40%,transparent)]">
-                  <div className="relative aspect-[16/10] overflow-hidden bg-sky-100">
+                <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-white shadow-[0_18px_40px_-28px_color-mix(in_srgb,var(--color-azul-950)_40%,transparent)]">
+                  <div className="relative aspect-[16/10] overflow-hidden bg-surface-soft">
                     <Image
                       src={item.image}
                       alt=""
@@ -222,16 +222,16 @@ export function LumayoKids() {
                       className="object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                     />
                     {item.id === "odontopediatria" ? (
-                      <span className="absolute left-4 top-4 rounded-full bg-navy-700 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-white">
+                      <span className="absolute left-4 top-4 rounded-full bg-primary px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-white">
                         Empieza por aquí
                       </span>
                     ) : null}
                   </div>
                   <div className="flex flex-1 flex-col p-6">
-                    <h3 className="text-lg font-bold text-navy-700">{item.name}</h3>
-                    <p className="mt-2 text-base leading-relaxed text-ink-600">{item.description}</p>
-                    <p className="mt-4 text-sm leading-relaxed text-ink-600">
-                      <span className="font-semibold text-navy-700">Ideal para: </span>
+                    <h3 className="text-lg font-bold text-primary">{item.name}</h3>
+                    <p className="mt-2 text-base leading-relaxed text-text">{item.description}</p>
+                    <p className="mt-4 text-sm leading-relaxed text-text">
+                      <span className="font-semibold text-primary">Ideal para: </span>
                       {item.idealFor}
                     </p>
                   </div>
@@ -254,7 +254,7 @@ export function LumayoKids() {
             title={<>¿Cuánto <strong>cuesta?</strong></>}
           />
           <Reveal>
-            <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-ink-600">
+            <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-text">
               Primero revisamos a tu hijo y luego te entregamos un presupuesto a tu medida. Sin compromiso.
             </p>
             <ReserveButton className="mt-8" />
@@ -273,7 +273,7 @@ export function LumayoKids() {
             layout="stack"
             title={<>Preguntas <strong>frecuentes</strong></>}
           />
-          <div className="mt-8 rounded-3xl border border-line bg-white p-6 sm:p-10">
+          <div className="mt-8 rounded-3xl border border-border bg-white p-6 sm:p-10">
             <FaqAccordion items={[...lumayoKids.faqs]} />
           </div>
         </div>

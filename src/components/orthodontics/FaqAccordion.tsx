@@ -32,7 +32,7 @@ export function FaqAccordion({ items }: { items: Faq[] }) {
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => setOpen(isOpen ? null : i)}
-                className="flex min-h-14 w-full cursor-pointer items-center justify-between gap-4 rounded-lg text-left font-semibold text-navy-700"
+                className="flex min-h-14 w-full cursor-pointer items-center justify-between gap-4 rounded-lg text-left font-semibold text-heading"
               >
                 {f.q}
                 <motion.span
@@ -40,7 +40,7 @@ export function FaqAccordion({ items }: { items: Faq[] }) {
                   animate={{ rotate: isOpen ? 45 : 0 }}
                   transition={reduceMotion ? { duration: 0 } : { duration: 0.5, ease }}
                   className={`grid size-8 shrink-0 place-items-center rounded-full transition-colors duration-500 ${
-                    isOpen ? "bg-navy-700 text-white" : "bg-sky-100 text-navy-700"
+                    isOpen ? "bg-primary text-text-inverse" : "bg-surface-soft text-heading"
                   }`}
                 >
                   <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
@@ -68,7 +68,7 @@ export function FaqAccordion({ items }: { items: Faq[] }) {
                 initial={false}
                 animate={{ y: isOpen ? 0 : -6 }}
                 transition={reduceMotion ? { duration: 0 } : { duration: 0.55, ease }}
-                className="pb-4 pr-10 leading-relaxed text-ink-600"
+                className="pb-4 pr-10 leading-relaxed text-text"
               >
                 {f.a}
               </motion.p>

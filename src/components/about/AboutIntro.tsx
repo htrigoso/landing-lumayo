@@ -24,7 +24,7 @@ export function AboutIntro() {
               className="object-cover object-[60%_center]"
             />
           </div>
-          <div className="absolute bottom-0 right-0 w-[55%] overflow-hidden rounded-2xl ring-[6px] ring-white">
+          <div className="absolute bottom-0 right-0 w-[55%] overflow-hidden rounded-2xl ring-[6px] ring-bg">
             <Image src="/images/about/about-us-img-2.jpg" alt="Sala de atención con sillones dentales" width={384} height={270} className="h-auto w-full" />
           </div>
           <BrandSeal className="absolute -left-2 top-8 w-28 sm:-left-6 sm:w-36" />
@@ -41,8 +41,8 @@ export function AboutIntro() {
           </p>
           <ul className="mt-8 grid gap-x-6 gap-y-4 sm:grid-cols-2">
             {points.map((p) => (
-              <li key={p} className="flex items-center gap-3 font-semibold text-navy-700">
-                <span className="grid size-7 shrink-0 place-items-center rounded-full bg-navy-700 text-white">
+              <li key={p} className="flex items-center gap-3 font-semibold text-primary">
+                <span className="grid size-7 shrink-0 place-items-center rounded-full bg-primary text-white">
                   <CheckIcon className="size-4" />
                 </span>
                 {p}

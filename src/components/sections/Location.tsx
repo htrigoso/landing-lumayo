@@ -5,13 +5,13 @@ import { SectionBackdrop } from "@/components/decor/SectionBackdrop";
 
 export function Location({ number }: { number: string }) {
   return (
-    <section id="ubicacion" aria-labelledby="ubicacion-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
+    <section id="ubicacion" aria-labelledby="ubicacion-title" className="relative isolate overflow-hidden bg-bg pb-16 lg:pb-20">
       <SectionBackdrop lines="bl" glow="tr" />
       <div className="container-page grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-14">
         <Reveal>
-          <p className="flex items-center gap-3 text-sm font-medium tabular-nums text-navy-700">
+          <p className="flex items-center gap-3 text-sm font-medium tabular-nums text-primary">
             {number}
-            <span aria-hidden="true" className="h-px w-8 bg-navy-700/40" />
+            <span aria-hidden="true" className="h-px w-8 bg-primary" />
             Ubicación
           </p>
           <h2 id="ubicacion-title" className="section-title mt-4">
@@ -20,49 +20,49 @@ export function Location({ number }: { number: string }) {
 
           <ul className="mt-8 space-y-6">
             <li className="flex gap-4">
-              <span className="grid size-12 shrink-0 place-items-center rounded-full bg-navy-700 text-white">
+              <span className="grid size-12 shrink-0 place-items-center rounded-full bg-primary text-text-inverse">
                 <PinIcon className="size-6" />
               </span>
               <div>
-                <h3 className="font-semibold text-navy-700">Dirección</h3>
-                <p className="mt-0.5 text-ink-600">{fullAddress}</p>
+                <h3 className="font-semibold text-heading">Dirección</h3>
+                <p className="mt-0.5 text-text">{fullAddress}</p>
                 <a
                   href={site.mapsUrl}
                   target="_blank"
                   rel="noopener"
-                  className="mt-1 inline-flex min-h-11 items-center gap-1.5 font-semibold text-cyan-700 hover:text-navy-700"
+                  className="mt-1 inline-flex min-h-11 items-center gap-1.5 font-semibold text-accent-text hover:text-primary"
                 >
                   Cómo llegar <ArrowRightIcon className="size-4" />
                 </a>
               </div>
             </li>
             <li className="flex gap-4">
-              <span className="grid size-12 shrink-0 place-items-center rounded-full bg-navy-700 text-white">
+              <span className="grid size-12 shrink-0 place-items-center rounded-full bg-primary text-text-inverse">
                 <WhatsappIcon className="size-6" />
               </span>
               <div>
-                <h3 className="font-semibold text-navy-700">WhatsApp y llamadas</h3>
+                <h3 className="font-semibold text-heading">WhatsApp y llamadas</h3>
                 <a
                   href={`tel:${site.phoneE164}`}
-                  className="mt-0.5 inline-flex min-h-11 items-center text-lg font-semibold text-ink-900 hover:text-cyan-700"
+                  className="mt-0.5 inline-flex min-h-11 items-center text-lg font-semibold text-heading hover:text-accent-text"
                 >
                   {site.phoneDisplay}
                 </a>
               </div>
             </li>
             <li className="flex gap-4">
-              <span className="grid size-12 shrink-0 place-items-center rounded-full bg-navy-700 text-white">
+              <span className="grid size-12 shrink-0 place-items-center rounded-full bg-primary text-text-inverse">
                 <CalendarIcon className="size-6" />
               </span>
               <div>
-                <h3 className="font-semibold text-navy-700">Horario de atención</h3>
-                <p className="mt-0.5 text-ink-600">Escríbenos y te indicamos los horarios disponibles de la semana.</p>
+                <h3 className="font-semibold text-heading">Horario de atención</h3>
+                <p className="mt-0.5 text-text">Escríbenos y te indicamos los horarios disponibles de la semana.</p>
               </div>
             </li>
           </ul>
         </Reveal>
 
-        <Reveal delay={0.1} className="overflow-hidden rounded-2xl border border-line">
+        <Reveal delay={0.1} className="overflow-hidden rounded-2xl border border-border">
           <iframe
             title={`Mapa de Lumayo: ${fullAddress}`}
             src={site.mapsEmbedUrl}

@@ -147,7 +147,7 @@ export function AgeStagesCarousel({ items }: AgeStagesCarouselProps) {
   return (
     <div className="relative">
       <div className="flex items-center justify-between gap-4">
-        <p className="font-semibold tabular-nums text-navy-700" aria-hidden="true">
+        <p className="font-semibold tabular-nums text-primary" aria-hidden="true">
           {String(activeIndex + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
         </p>
         <div className="flex items-center gap-3">
@@ -156,7 +156,7 @@ export function AgeStagesCarousel({ items }: AgeStagesCarouselProps) {
             onClick={handlePrev}
             disabled={!canPrev}
             aria-label="Etapa anterior"
-            className="inline-flex size-12 items-center justify-center rounded-full border border-navy-700/20 bg-white text-navy-700 transition hover:bg-sky-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-700 disabled:cursor-not-allowed disabled:opacity-40 motion-reduce:transition-none"
+            className="inline-flex size-12 items-center justify-center rounded-full border border-primary/20 bg-white text-primary transition hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus disabled:cursor-not-allowed disabled:opacity-40 motion-reduce:transition-none"
           >
             <ArrowRightIcon aria-hidden="true" className="size-5 rotate-180" />
           </button>
@@ -165,7 +165,7 @@ export function AgeStagesCarousel({ items }: AgeStagesCarouselProps) {
             onClick={handleNext}
             disabled={!canNext}
             aria-label="Etapa siguiente"
-            className="inline-flex size-12 items-center justify-center rounded-full border border-navy-700/20 bg-white text-navy-700 transition hover:bg-sky-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-700 disabled:cursor-not-allowed disabled:opacity-40 motion-reduce:transition-none"
+            className="inline-flex size-12 items-center justify-center rounded-full border border-primary/20 bg-white text-primary transition hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus disabled:cursor-not-allowed disabled:opacity-40 motion-reduce:transition-none"
           >
             <ArrowRightIcon aria-hidden="true" className="size-5" />
           </button>
@@ -180,14 +180,14 @@ export function AgeStagesCarousel({ items }: AgeStagesCarouselProps) {
           aria-label="Etapas de cuidado según la edad"
           tabIndex={0}
           onKeyDown={handleKeyDown}
-          className="flex snap-x snap-mandatory scroll-smooth gap-6 overflow-x-auto rounded-3xl pb-4 motion-reduce:scroll-auto [scrollbar-width:none] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-700 [&::-webkit-scrollbar]:hidden"
+          className="flex snap-x snap-mandatory scroll-smooth gap-6 overflow-x-auto rounded-3xl pb-4 motion-reduce:scroll-auto [scrollbar-width:none] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus [&::-webkit-scrollbar]:hidden"
         >
           {items.map((item, index) => (
             <article
               key={item.id}
-              className="group grid w-[min(90vw,46rem)] shrink-0 snap-start min-w-0 overflow-hidden rounded-3xl border border-line bg-white shadow-[0_18px_40px_-28px_color-mix(in_srgb,var(--color-azul-950)_40%,transparent)] md:grid-cols-[0.9fr_1.1fr]"
+              className="group grid w-[min(90vw,46rem)] shrink-0 snap-start min-w-0 overflow-hidden rounded-3xl border border-border bg-white shadow-[0_18px_40px_-28px_color-mix(in_srgb,var(--color-azul-950)_40%,transparent)] md:grid-cols-[0.9fr_1.1fr]"
             >
-              <div className="relative aspect-[16/10] overflow-hidden bg-sky-100 md:aspect-auto md:min-h-[22rem]">
+              <div className="relative aspect-[16/10] overflow-hidden bg-surface-soft md:aspect-auto md:min-h-[22rem]">
                 <Image
                   src={item.image}
                   alt=""
@@ -196,24 +196,24 @@ export function AgeStagesCarousel({ items }: AgeStagesCarouselProps) {
                   className="object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                 />
                 {item.badge ? (
-                  <span className="absolute left-4 top-4 rounded-full bg-navy-700 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-white">
+                  <span className="absolute left-4 top-4 rounded-full bg-primary px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-white">
                     {item.badge}
                   </span>
                 ) : null}
-                <span className="absolute bottom-4 left-4 rounded-full bg-white/90 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-navy-700">
+                <span className="absolute bottom-4 left-4 rounded-full bg-white/90 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-primary">
                   {item.age}
                 </span>
               </div>
 
               <div className="flex flex-col justify-center p-6 sm:p-8">
-                <span aria-hidden="true" className="font-display text-5xl font-extrabold text-navy-700/15">
+                <span aria-hidden="true" className="font-display text-5xl font-extrabold text-primary/15">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-2 text-2xl font-extrabold text-navy-700">{item.title}</h3>
+                <h3 className="mt-2 text-2xl font-extrabold text-primary">{item.title}</h3>
                 <ul className="mt-5 grid gap-3">
                   {item.tips.map((tip) => (
-                    <li key={tip} className="flex gap-3 text-base leading-relaxed text-ink-600">
-                      <CheckIcon className="mt-1 size-5 shrink-0 text-cyan-700" />
+                    <li key={tip} className="flex gap-3 text-base leading-relaxed text-text">
+                      <CheckIcon className="mt-1 size-5 shrink-0 text-accent-text" />
                       {tip}
                     </li>
                   ))}
@@ -243,11 +243,11 @@ export function AgeStagesCarousel({ items }: AgeStagesCarouselProps) {
               onClick={() => scrollToIndex(index)}
               aria-label={`Ir a la etapa ${index + 1}: ${item.title}`}
               aria-current={isActive ? "true" : undefined}
-              className="flex size-11 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-700"
+              className="flex size-11 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus"
             >
               <span
                 aria-hidden="true"
-                className={`block h-2 rounded-full transition-all duration-300 motion-reduce:transition-none ${isActive ? "w-8 bg-navy-700" : "w-2 bg-navy-700/25"}`}
+                className={`block h-2 rounded-full transition-all duration-300 motion-reduce:transition-none ${isActive ? "w-8 bg-primary" : "w-2 bg-primary/25"}`}
               />
             </button>
           );
