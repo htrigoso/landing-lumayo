@@ -3,11 +3,12 @@
 import Image from "next/image";
 import { useState, useSyncExternalStore } from "react";
 import { useReducedMotion } from "motion/react";
+import { heroPosterSrc } from "@/lib/hero-media";
 import { useCoarsePointer } from "@/lib/useMediaQuery";
 
 /** Hero media. Swap these to change the background; the poster is a frame of the clip. */
 const media = {
-  poster: "/images/hero-poster.jpg",
+  poster: heroPosterSrc,
   video1080: "/video/hero-1080.mp4",
   video720: "/video/hero-720.mp4",
 };
@@ -30,7 +31,7 @@ export function HeroBackdrop() {
 
   return (
     <div className="absolute inset-0 -z-10 overflow-hidden bg-surface-deep">
-      <Image src={media.poster} alt="Odontóloga mostrando una radiografía dental a un paciente en Lumayo, Tarapoto" fill preload unoptimized sizes="100vw" className="object-cover object-[60%_center]" />
+      <Image src={media.poster} alt="Odontóloga mostrando una radiografía dental a un paciente en Lumayo, Tarapoto" fill fetchPriority="high" loading="eager" unoptimized sizes="100vw" className="object-cover object-[60%_center]" />
       {showVideo && (
         <video
           aria-hidden="true"

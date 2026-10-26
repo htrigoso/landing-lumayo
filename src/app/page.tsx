@@ -15,8 +15,12 @@ import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getDisplayedTestimonials, testimonials } from "@/lib/results";
 import { reviewJsonLd } from "@/lib/seo/jsonld";
+import { heroPosterSrc } from "@/lib/hero-media";
+import { preload } from "react-dom";
 
 export default function Home() {
+  // Server-side hint so the LCP poster is in <head> from the first byte, not after hydration
+  preload(heroPosterSrc, { as: "image", fetchPriority: "high" });
   // Section numbers follow the manual's "01 — Label" style and must stay consecutive in DOM order.
   // Services is 01 and About is 02 (hardcoded). Testimonials is 03 when shown; when hidden
   // (no real reviews yet) it renders nothing, so Location and BookingSection shift down by one.
