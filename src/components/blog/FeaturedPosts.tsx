@@ -37,7 +37,7 @@ function FeatureTile({ post, size, className = "" }: { post: BlogPost; size: "lg
       {cover && (
         <Image
           src={cover}
-          alt=""
+          alt={post.title}
           fill
           priority={isLarge}
           sizes={isLarge ? "(min-width: 1024px) 46rem, 100vw" : "(min-width: 1024px) 23rem, (min-width: 768px) 50vw, 100vw"}

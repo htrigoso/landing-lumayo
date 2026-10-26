@@ -1,5 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types";
-import { serviceHref } from "@/lib/site";
+import { programPaths, serviceHref } from "@/lib/site";
 
 export const post: BlogPost = {
   slug: "primera-visita-dentista-ninos",
@@ -168,7 +168,7 @@ export const post: BlogPost = {
   ],
   related: [
     { label: "Odontopediatría", href: serviceHref("odontopediatria") },
-    { label: "Lumayo Kids", href: "/servicios/lumayo-kids" },
+    { label: "Lumayo Kids", href: programPaths.kids },
     { label: "Flúor barniz", href: serviceHref("fluor-barniz") },
   ],
   coverServiceId: "odontopediatria",

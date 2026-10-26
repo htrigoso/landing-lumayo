@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { SectionBackdrop } from "@/components/decor/SectionBackdrop";
 import { WaveDivider } from "@/components/decor/WaveDivider";
 import { FloatingWhatsapp } from "@/components/layout/FloatingWhatsapp";
@@ -22,13 +23,15 @@ type ServicesPageViewProps = {
   crumbs: Crumb[];
   /** Category landing pages pass their category; the full list leaves it undefined. */
   activeCategory?: ServiceCategoryId;
+  /** Optional block rendered right after the services grid (e.g. the orthodontics comparison). */
+  afterGrid?: ReactNode;
 };
 
 /**
  * Shared layout for /servicios and its category pages: page header, linked category chips and the
  * grid, why us, testimonials, booking.
  */
-export function ServicesPageView({ title, emphasis, description, crumbs, activeCategory }: ServicesPageViewProps) {
+export function ServicesPageView({ title, emphasis, description, crumbs, activeCategory, afterGrid }: ServicesPageViewProps) {
   // Consecutive section numbers even when the testimonials block is hidden (no real reviews yet)
   const hasTestimonials = getDisplayedTestimonials().length > 0;
 
@@ -50,6 +53,8 @@ export function ServicesPageView({ title, emphasis, description, crumbs, activeC
             <ServicesGrid linkMode activeCategory={activeCategory} />
           </div>
         </section>
+
+        {afterGrid}
 
         <WhyChooseUs />
         <BrandStatement />

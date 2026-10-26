@@ -12,13 +12,15 @@ type PageHeaderProps = {
   description?: string;
   /** Breadcrumb trail; the last item is the current page. */
   crumbs: Crumb[];
+  /** Renders a short brand accent bar under the titular. */
+  accent?: boolean;
 };
 
 /**
  * Inner-page header (as on the reference's "Our Services" page): light brand panel with corner
  * lines, the isotype cropped at the bottom edge, a breadcrumb and a centered Titular.
  */
-export function PageHeader({ title, emphasis, description, crumbs }: PageHeaderProps) {
+export function PageHeader({ title, emphasis, description, crumbs, accent = false }: PageHeaderProps) {
   return (
     <>
       <JsonLd data={breadcrumbJsonLd(crumbs)} />
@@ -61,6 +63,7 @@ export function PageHeader({ title, emphasis, description, crumbs }: PageHeaderP
             {title}
             {emphasis ? <> <strong className="font-extrabold">{emphasis}</strong></> : null}
           </h1>
+          {accent && <span aria-hidden="true" className="mx-auto mt-5 block h-1 w-16 rounded-full bg-accent" />}
           {description && <p className="section-sub mx-auto mt-3 max-w-xl text-pretty">{description}</p>}
         </Reveal>
       </section>

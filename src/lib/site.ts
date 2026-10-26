@@ -5,8 +5,18 @@ export const site = {
   tagline: "Centro Odontológico",
   phoneDisplay: "946 788 123",
   phoneE164: "+51946788123",
-  /** Opening hours as shown to visitors. TODO: confirm with the clinic (copied from the design reference). */
-  hoursDisplay: "Lun. a sáb. 9:00 a. m. a 9:00 p. m.",
+  /** Opening hours (Mon–Fri, split shift). Single source for UI, JSON-LD and llms.txt. */
+  hours: {
+    days: "Lunes a viernes",
+    daysShort: "Lun. a vie.",
+    shifts: [
+      { opens: "08:00", closes: "13:00" },
+      { opens: "15:00", closes: "20:00" },
+    ],
+  },
+  hoursDisplay: "Lun. a vie. 8:00 a. m. – 1:00 p. m. y 3:00 – 8:00 p. m.",
+  /** One line per shift for footer and location. */
+  hoursShiftLines: ["8:00 a. m. – 1:00 p. m.", "3:00 p. m. – 8:00 p. m."],
   whatsappNumber: "51946788123",
   address: {
     street: "Jr. Miraflores 230",
@@ -21,7 +31,17 @@ export const site = {
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.249363660362!2d-76.3566261230975!3d-6.4900759634570155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91ba0d8947d09025%3A0xa21f60bc22074614!2sLumayo%20Centro%20Odontol%C3%B3gico!5e0!3m2!1ses-419!2spe!4v1792375977932!5m2!1ses-419!2spe",
 } as const;
 
-export const fullAddress = `${site.address.street}, ${site.address.district}, ${site.address.city}`;
+/** Social proof figures. Leave a field undefined until the clinic provides real data; the strip hides missing ones. */
+// TODO(SEO): fill with real data from the clinic / Google Business Profile
+export const socialProof: {
+  yearsOfExperience?: number;
+  patientsServed?: number;
+  googleRating?: number;
+  googleReviewsCount?: number;
+  googleReviewsUrl?: string;
+} = {};
+
+export const fullAddress =`${site.address.street}, ${site.address.district}, ${site.address.city}`;
 
 /** Canonical origin for metadata, canonical URLs and the sitemap. */
 // TODO(SEO): confirm production domain
@@ -35,11 +55,14 @@ export const defaultWhatsappMessage = "Hola Lumayo, quisiera agendar una cita.";
 export const bracesWhatsappMessage =
   "Hola Lumayo, quisiera información sobre ortodoncia con brackets.";
 export const lumayoCardWhatsappMessage =
-  "Hola Lumayo, quisiera solicitar información sobre la Lumayo Card.";
+  "Hola Lumayo, quisiera solicitar información sobre la Membresía Lumayo.";
 export const noviasWhatsappMessage = "Hola Lumayo, quisiera información sobre el plan Lumayo Novias.";
 export const kidsWhatsappMessage = "Hola Lumayo, quisiera reservar una primera visita para mi hijo o hija.";
 
-/** Fees and limits per Lumayo Card plan. `maxAdditional` counts additional members (titular not included). */
+/** Standalone program pages, outside /servicios. */
+export const programPaths = { card: "/membresia", kids: "/kids", novias: "/novias" } as const;
+
+/** Fees and limits per membership plan. `maxAdditional` counts additional members (titular not included). */
 const plans = {
   classic: {
     label: "Clásica",
@@ -63,8 +86,8 @@ export type CardPlanKey = keyof typeof plans;
 
 // TODO: confirmar cifras, descuentos y beneficios con la clínica antes de publicar.
 export const lumayoCard = {
-  title: "Lumayo Card",
-  description: `Es nuestra tarjeta de protección odontológica con descuentos preferenciales para el titular y sus adicionales: hasta ${plans.classic.maxAdditional} en la Clásica y ${plans.gold.maxAdditional} en la Dorada.`,
+  title: "Membresía Lumayo",
+  description: `Es nuestra membresía de protección odontológica con descuentos preferenciales para el titular y sus adicionales: hasta ${plans.classic.maxAdditional} en la Clásica y ${plans.gold.maxAdditional} en la Dorada.`,
   // TODO: confirmar cobertura con la clínica
   heroHighlight: "Hasta 20% de descuento en tus tratamientos",
   plans,
@@ -109,7 +132,7 @@ export const lumayoCard = {
     // TODO: confirmar cómo se entrega la versión virtual (WhatsApp, correo u otro medio)
     {
       title: "Afíliate y recibe tu tarjeta",
-      description: "Te registramos y recibes tu Lumayo Card en PVC o en versión virtual, con tu código QR único.",
+      description: "Te registramos y recibes tu tarjeta de membresía en PVC o en versión virtual, con tu código QR único.",
     },
     {
       title: "Úsala desde el primer día",
@@ -128,7 +151,7 @@ export const lumayoCard = {
   faqs: [
     {
       q: "¿Quién puede usarla?",
-      a: `El titular y los adicionales registrados en la misma tarjeta: hasta ${plans.classic.maxAdditional} en la Clásica y hasta ${plans.gold.maxAdditional} en la Dorada.`,
+      a: `El titular y los adicionales registrados en la misma membresía: hasta ${plans.classic.maxAdditional} en la Clásica y hasta ${plans.gold.maxAdditional} en la Dorada.`,
     },
     {
       q: "¿La tarjeta lleva mis datos y cómo funciona el código QR?",
@@ -136,7 +159,7 @@ export const lumayoCard = {
       a: "No. La tarjeta no lleva datos personales impresos. Cada cliente recibe un código QR único, ya sea en su tarjeta física de PVC o en su versión virtual.",
     },
     {
-      q: "¿Cuánto dura la tarjeta?",
+      q: "¿Cuánto dura la membresía?",
       // TODO: confirmar vigencia exacta
       a: "Tiene vigencia anual desde su afiliación.",
     },
@@ -160,7 +183,7 @@ export const lumayoCard = {
 // TODO: confirmar tratamientos, tiempos y condiciones del plan con la clínica antes de publicar.
 export const lumayoNovias = {
   /** Must match ids in `services`. */
-  treatmentIds: ["limpieza", "blanqueamiento", "carillas-porcelana", "ortodoncia", "diseno-de-sonrisa"],
+  treatmentIds: ["limpieza", "blanqueamiento", "carillas-porcelana", "brackets-convencionales", "diseno-de-sonrisa"],
   headline: "Sonríe sin pensar en la cámara",
   subheadline:
     "Un plan por etapas, hecho a tu medida, para que llegues a tu boda con la sonrisa que imaginaste.",
@@ -201,7 +224,7 @@ export const lumayoNovias = {
       when: "Empieza 2 a 3 meses antes",
       achieves: "Forma, color y alineación en pocas citas.",
     },
-    ortodoncia: {
+    "brackets-convencionales": {
       when: "Empieza 6 a 12 meses antes o más",
       achieves: "Dientes alineados y una mordida estable.",
     },
@@ -256,6 +279,11 @@ export const lumayoNovias = {
       a: "Lo ideal es consultar entre 6 y 12 meses antes, sobre todo si necesitas ortodoncia. Para blanqueamiento y limpieza bastan unas semanas.",
     },
     {
+      q: "¿Con cuánto tiempo antes de la boda debo hacerme el blanqueamiento?",
+      // TODO: confirmar tiempos con el odontólogo
+      a: "El momento depende de tu tono de partida, del tratamiento que elijas y de tu agenda. Tu dentista lo define en la evaluación, con margen para retocar si hace falta. No podemos prometer un resultado concreto sin revisar tu caso.",
+    },
+    {
       q: "¿El blanqueamiento causa sensibilidad?",
       a: "Puede haber sensibilidad pasajera. Lo realizamos con productos profesionales y bajo control del odontólogo.",
     },
@@ -281,7 +309,7 @@ export const lumayoNovias = {
 // TODO: confirmar contenido de Lumayo Kids con la clínica y el odontopediatra antes de publicar.
 export const lumayoKids = {
   /** Must match ids in `services`. */
-  treatmentIds: ["odontopediatria", "sellantes", "fluor-barniz", "limpieza", "ortodoncia"],
+  treatmentIds: ["odontopediatria", "sellantes", "fluor-barniz", "limpieza", "brackets-convencionales"],
   headline: "Sonrisas que empiezan bien",
   subheadline:
     "Una visita tranquila, con paciencia y juego, para que tu hijo o hija aprenda a cuidar su sonrisa desde bebé hasta la adolescencia.",
@@ -321,7 +349,7 @@ export const lumayoKids = {
     },
     {
       age: "13 a 17 años",
-      serviceId: "ortodoncia",
+      serviceId: "brackets-convencionales",
       title: "Ortodoncia y cuidado en adolescentes",
       tips: [
         "Evalúa con el dentista si conviene iniciar ortodoncia.",
@@ -430,26 +458,35 @@ export type ServiceIcon =
   | "denture"
   | "child";
 
-/**
- * Category landing pages live at /servicios/<slug>. Slugs must not collide with the static
- * folders under src/app/servicios (see `reservedServiceSlugs`).
- */
+/** Category landing pages live at /servicios/<slug>. */
 export const serviceCategories = [
   {
-    id: "estetica",
-    slug: "ortodoncia-y-estetica",
-    label: "Ortodoncia y estética",
+    id: "ortodoncia",
+    slug: "ortodoncia",
+    label: "Ortodoncia",
     // TODO(SEO): confirm title/description/intro
     seo: {
-      title: "Brackets y ortodoncia en Tarapoto",
-      description: "Brackets metálicos, de zafiro, invisibles y cerámicos en Tarapoto, con plan a tu medida. Consulta por WhatsApp.",
-      h1: "Brackets y ortodoncia",
-      intro: "Alinea tus dientes y diseña una sonrisa armónica con un plan de tratamiento hecho a tu medida.",
+      title: "Brackets en Tarapoto: tipos y precios",
+      description: "Brackets convencionales, cerámicos, autoligables, de zafiro, de porcelana, lingual e Invisalign en Tarapoto. Consulta por WhatsApp.",
+      h1: "Ortodoncia y brackets en Tarapoto",
+      intro: "Compara los tipos de brackets e Invisalign y elige el que mejor se adapte a tu caso, tras una evaluación previa.",
+    },
+  },
+  {
+    id: "estetica",
+    slug: "estetica-dental",
+    label: "Estética dental",
+    // TODO(SEO): confirm title/description/intro
+    seo: {
+      title: "Diseño de sonrisa y blanqueamiento dental en Tarapoto",
+      description: "Diseño de sonrisa y blanqueamiento dental en Tarapoto para mejorar el color y la armonía de tus dientes. Consulta por WhatsApp.",
+      h1: "Diseño de sonrisa y blanqueamiento dental",
+      intro: "Planifica una sonrisa en armonía con tu rostro y aclara el tono de tus dientes con tratamientos seguros.",
     },
   },
   {
     id: "carillas",
-    slug: "carillas-dentales",
+    slug: "carillas",
     label: "Carillas",
     // TODO(SEO): confirm title/description/intro
     seo: {
@@ -462,7 +499,7 @@ export const serviceCategories = [
   {
     id: "prevencion",
     slug: "prevencion-dental",
-    label: "Prevención",
+    label: "Prevención dental",
     // TODO(SEO): confirm title/description/intro
     seo: {
       title: "Limpieza dental y profilaxis en Tarapoto",
@@ -473,7 +510,7 @@ export const serviceCategories = [
   },
   {
     id: "restauracion",
-    slug: "restauracion-dental",
+    slug: "restauracion",
     label: "Restauración",
     // TODO(SEO): confirm title/description/intro
     seo: {
@@ -497,7 +534,7 @@ export const serviceCategories = [
   },
   {
     id: "ninos",
-    slug: "odontopediatria",
+    slug: "ninos",
     label: "Niños",
     // TODO(SEO): confirm title/description/intro
     seo: {
@@ -512,8 +549,19 @@ export const serviceCategories = [
 export type ServiceCategory = (typeof serviceCategories)[number];
 export type ServiceCategoryId = ServiceCategory["id"];
 
-/** Static folders under src/app/servicios. No category or service may use these slugs. */
-export const reservedServiceSlugs = ["lumayo-card", "lumayo-kids", "lumayo-novias"] as const;
+/** Public sources behind the market price ranges shown on the orthodontics pages. */
+export const priceSources = {
+  cuantomecuesta: {
+    label: "CuántoMeCuesta (abril 2026)",
+    url: "https://cuantomecuesta.com/pe/ortodoncia-brackets/",
+  },
+  odontologiaperu: {
+    label: "OdontologíaPerú (2026)",
+    url: "https://odontologiaperu.com/en/blog/brackets-in-peru-2026-updated-prices-and-comparison/",
+  },
+} as const;
+
+export type PriceSourceId = keyof typeof priceSources;
 
 export type Service = {
   id: string;
@@ -528,6 +576,22 @@ export type Service = {
   featured?: boolean;
   /** Button label on the featured card. */
   cta?: string;
+  /** Orthodontics comparison data, shown on /servicios/ortodoncia. Only set on bracket and aligner services. */
+  ortho?: {
+    visibility: "Visible" | "Discreto" | "Casi invisible" | "Invisible";
+    /** General range, e.g. "12 a 24 meses"; the actual duration depends on the case. */
+    typicalMonths: string;
+    /** Starting price in PEN. Leave undefined until the clinic confirms it; never invent one. */
+    priceFrom?: number;
+    /** Market reference range in PEN for Peru (not Lumayo's price), with its public source. */
+    marketRange: {
+      min: number;
+      max: number;
+      sourceId: PriceSourceId;
+      /** Optional qualifier, e.g. "en provincia". */
+      note?: string;
+    };
+  };
   /** Extended copy for the service's detail dialog. */
   details: {
     summary: string;
@@ -543,28 +607,225 @@ export type Service = {
 const servicePhoto = (id: string) => `https://images.unsplash.com/${id}?w=1200&h=900&fit=crop&crop=entropy&q=80&auto=format`;
 
 export const services: Service[] = [
+  // TODO(SEO): review copy
   {
-    id: "ortodoncia",
-    slug: "brackets",
-    name: "Brackets",
+    id: "brackets-convencionales",
+    slug: "brackets-convencionales",
+    name: "Brackets convencionales",
     description:
       "Alinea tus dientes y mejora tu mordida con un plan de tratamiento hecho a tu medida.",
     icon: "braces",
-    category: "estetica",
+    category: "ortodoncia",
     image: servicePhoto("photo-1584434081454-2a898b8e33d5"),
+    ortho: {
+      visibility: "Visible",
+      typicalMonths: "12 a 24 meses", // TODO(SEO): confirm with the dentist
+      priceFrom: undefined, // TODO(SEO): confirm price with the clinic
+      // TODO(SEO): replace with Lumayo's price when the clinic confirms
+      marketRange: { min: 2500, max: 4000, sourceId: "cuantomecuesta", note: "en provincia" },
+    },
     details: {
       summary:
-        "Los brackets corrigen la posición de los dientes y la mordida de forma gradual. Antes de empezar evaluamos tu caso y te explicamos el plan, la duración estimada y los controles que necesitarás.",
+        "Los brackets metálicos convencionales corrigen la posición de los dientes y la mordida de forma gradual. Antes de empezar evaluamos tu caso y te explicamos el plan, la duración estimada y los controles que necesitarás.",
       idealFor: "Adolescentes, jóvenes y adultos con dientes apiñados, separados o con problemas de mordida.",
       includes: [
         "Evaluación y diagnóstico de tu caso",
         "Plan de tratamiento personalizado",
-        "Instalación de brackets",
+        "Instalación de brackets metálicos",
         "Controles periódicos de ajuste",
       ],
     },
     featured: true,
-    cta: "Quiero mis brackets",
+    cta: "Quiero mis brackets convencionales",
+  },
+  // TODO(SEO): review copy
+  {
+    id: "brackets-ceramicos",
+    slug: "brackets-ceramicos",
+    name: "Brackets cerámicos",
+    description: "Brackets de color parecido al diente, una alternativa más discreta a los metálicos.",
+    icon: "braces",
+    category: "ortodoncia",
+    image: servicePhoto("photo-1606811841689-23dfddce3e95"),
+    ortho: {
+      visibility: "Discreto",
+      typicalMonths: "12 a 24 meses", // TODO(SEO): confirm with the dentist
+      priceFrom: undefined, // TODO(SEO): confirm price with the clinic
+      // TODO(SEO): replace with Lumayo's price when the clinic confirms
+      marketRange: { min: 3500, max: 6000, sourceId: "odontologiaperu" },
+    },
+    details: {
+      summary:
+        "Los brackets cerámicos están fabricados con un material de color parecido al del diente, por lo que se notan menos durante el tratamiento. Evaluamos tu caso para confirmar si son una buena opción para ti.",
+      idealFor: "Personas que buscan una opción más discreta sin dejar de corregir su mordida.",
+      includes: [
+        "Evaluación y diagnóstico de tu caso",
+        "Elección del bracket cerámico adecuado",
+        "Instalación de brackets cerámicos",
+        "Controles periódicos de ajuste",
+      ],
+    },
+  },
+  // TODO(SEO): review copy
+  {
+    id: "brackets-autoligables",
+    slug: "brackets-autoligables",
+    name: "Brackets autoligables",
+    description: "Brackets con un clip integrado que sujeta el arco sin necesidad de ligaduras elásticas.",
+    icon: "braces",
+    category: "ortodoncia",
+    image: servicePhoto("photo-1609840114035-3c981b782dfe"),
+    ortho: {
+      visibility: "Visible",
+      typicalMonths: "12 a 24 meses", // TODO(SEO): confirm with the dentist
+      priceFrom: undefined, // TODO(SEO): confirm price with the clinic
+      // TODO(SEO): replace with Lumayo's price when the clinic confirms
+      marketRange: { min: 4500, max: 7000, sourceId: "odontologiaperu" },
+    },
+    details: {
+      summary:
+        "Los brackets autoligables sujetan el arco con un mecanismo integrado, en lugar de ligaduras elásticas o metálicas. Esto puede simplificar los controles, según el plan de cada caso.",
+      idealFor: "Personas que prefieren un sistema con menos ligaduras y que se adapte a su plan de tratamiento.",
+      includes: [
+        "Evaluación y diagnóstico de tu caso",
+        "Plan de tratamiento personalizado",
+        "Instalación de brackets autoligables",
+        "Controles periódicos de ajuste",
+      ],
+    },
+  },
+  // TODO(SEO): review copy
+  {
+    id: "brackets-zafiro",
+    slug: "brackets-de-zafiro",
+    name: "Brackets de zafiro",
+    description: "Brackets transparentes de zafiro sintético, casi imperceptibles en tu sonrisa.",
+    icon: "braces",
+    category: "ortodoncia",
+    image: servicePhoto("photo-1629909613654-28e377c37b09"),
+    ortho: {
+      visibility: "Discreto",
+      typicalMonths: "12 a 24 meses", // TODO(SEO): confirm with the dentist
+      priceFrom: undefined, // TODO(SEO): confirm price with the clinic
+      // TODO(SEO): replace with Lumayo's price when the clinic confirms
+      marketRange: { min: 5500, max: 10000, sourceId: "cuantomecuesta" },
+    },
+    details: {
+      summary:
+        "Los brackets de zafiro están hechos de un material cristalino y transparente, por lo que se integran con el color natural del diente. Antes de elegirlos, revisamos tu caso y te explicamos sus ventajas y cuidados.",
+      idealFor: "Personas que buscan un tratamiento discreto y con un acabado estético.",
+      includes: [
+        "Evaluación de tu caso y elección del material",
+        "Plan de tratamiento personalizado",
+        "Instalación de brackets de zafiro",
+        "Controles periódicos y cuidados",
+      ],
+    },
+  },
+  // TODO(SEO): review copy
+  {
+    id: "brackets-porcelana",
+    slug: "brackets-de-porcelana",
+    name: "Brackets de porcelana",
+    description: "Brackets de porcelana con acabado liso y color natural para un tratamiento discreto.",
+    icon: "braces",
+    category: "ortodoncia",
+    image: servicePhoto("photo-1581595220892-b0739db3ba8c"),
+    ortho: {
+      visibility: "Discreto",
+      typicalMonths: "12 a 24 meses", // TODO(SEO): confirm with the dentist
+      priceFrom: undefined, // TODO(SEO): confirm price with the clinic
+      // TODO(SEO): replace with Lumayo's price when the clinic confirms
+      marketRange: { min: 3500, max: 6000, sourceId: "odontologiaperu" },
+    },
+    details: {
+      summary:
+        "Los brackets de porcelana tienen un acabado liso y un color natural, y se usan en pacientes que buscan un aspecto estético durante el tratamiento. Los evaluamos en tu consulta para confirmar si son adecuados para tu caso.",
+      idealFor: "Personas que buscan un acabado estético y discreto durante la ortodoncia.",
+      includes: [
+        "Evaluación y diagnóstico de tu caso",
+        "Plan de tratamiento personalizado",
+        "Instalación de brackets de porcelana",
+        "Controles periódicos de ajuste",
+      ],
+    },
+  },
+  // TODO(SEO): review copy
+  {
+    id: "ortodoncia-lingual",
+    slug: "ortodoncia-lingual",
+    name: "Ortodoncia lingual",
+    description: "Brackets colocados en la cara interna de los dientes, sin que se vean desde afuera.",
+    icon: "braces",
+    category: "ortodoncia",
+    image: servicePhoto("photo-1607613009820-a29f7bb81c04"),
+    ortho: {
+      visibility: "Invisible",
+      typicalMonths: "18 a 30 meses", // TODO(SEO): confirm with the dentist
+      priceFrom: undefined, // TODO(SEO): confirm price with the clinic
+      // TODO(SEO): replace with Lumayo's price when the clinic confirms
+      marketRange: { min: 8000, max: 12000, sourceId: "odontologiaperu" },
+    },
+    details: {
+      summary:
+        "La ortodoncia lingual coloca los brackets en la cara interna de los dientes, por lo que no son visibles al sonreír. Requiere una planificación individual y, en algunos casos, piezas fabricadas a medida.",
+      idealFor: "Personas que quieren corregir su mordida sin que el tratamiento sea visible.",
+      includes: [
+        "Evaluación y planificación individual",
+        "Toma de registros digitales o modelos",
+        "Instalación de brackets en la cara interna",
+        "Controles periódicos de ajuste",
+      ],
+    },
+  },
+  // TODO(SEO): review copy
+  // TODO(SEO): confirm Lumayo is a certified Invisalign provider; otherwise rename to "Alineadores invisibles"
+  {
+    id: "invisalign",
+    slug: "invisalign",
+    name: "Invisalign",
+    description: "Alineadores transparentes y removibles que mueven tus dientes de forma gradual.",
+    icon: "braces",
+    category: "ortodoncia",
+    image: servicePhoto("photo-1677026010083-78ec7f1b84ed"),
+    ortho: {
+      visibility: "Casi invisible",
+      typicalMonths: "12 a 18 meses", // TODO(SEO): confirm with the dentist
+      priceFrom: undefined, // TODO(SEO): confirm price with the clinic
+      // TODO(SEO): replace with Lumayo's price when the clinic confirms
+      marketRange: { min: 8000, max: 15000, sourceId: "odontologiaperu" },
+    },
+    details: {
+      summary:
+        "Los alineadores transparentes son piezas removibles que se cambian cada cierto tiempo para mover los dientes de forma gradual. El plan y la duración se definen en la evaluación de cada caso.",
+      idealFor: "Personas que buscan un tratamiento discreto y removible, con indicación previa.",
+      includes: [
+        "Evaluación digital de tu caso",
+        "Plan de alineadores personalizado",
+        "Entrega de alineadores y calendario de cambio",
+        "Controles periódicos de seguimiento",
+      ],
+    },
+  },
+  {
+    id: "blanqueamiento",
+    slug: "blanqueamiento-dental",
+    name: "Blanqueamiento dental",
+    description: "Aclara el tono de tus dientes de forma segura y luce una sonrisa más luminosa.",
+    icon: "sparkle",
+    category: "estetica",
+    image: servicePhoto("photo-1654373535457-383a0a4d00f9"),
+    details: {
+      summary:
+        "Aclaramos el tono de tus dientes con productos profesionales y bajo control del odontólogo, cuidando la sensibilidad y la salud de tus encías.",
+      idealFor: "Personas con dientes amarillentos o manchados por café, té, vino o tabaco.",
+      includes: [
+        "Evaluación previa",
+        "Registro del tono inicial",
+        "Aplicación del gel blanqueador",
+        "Recomendaciones para mantener el resultado",
+      ],
+    },
   },
   {
     id: "diseno-de-sonrisa",
@@ -685,26 +946,6 @@ export const services: Service[] = [
         "Diseño de las láminas",
         "Colocación sin tallado o con tallado mínimo",
         "Indicaciones de cuidado",
-      ],
-    },
-  },
-  {
-    id: "blanqueamiento",
-    slug: "blanqueamiento-dental",
-    name: "Blanqueamiento dental",
-    description: "Aclara el tono de tus dientes de forma segura y luce una sonrisa más luminosa.",
-    icon: "sparkle",
-    category: "estetica",
-    image: servicePhoto("photo-1654373535457-383a0a4d00f9"),
-    details: {
-      summary:
-        "Aclaramos el tono de tus dientes con productos profesionales y bajo control del odontólogo, cuidando la sensibilidad y la salud de tus encías.",
-      idealFor: "Personas con dientes amarillentos o manchados por café, té, vino o tabaco.",
-      includes: [
-        "Evaluación previa",
-        "Registro del tono inicial",
-        "Aplicación del gel blanqueador",
-        "Recomendaciones para mantener el resultado",
       ],
     },
   },

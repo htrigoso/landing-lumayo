@@ -1,5 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types";
-import { serviceHref } from "@/lib/site";
+import { programPaths, serviceHref } from "@/lib/site";
 
 export const post: BlogPost = {
   slug: "sonrisa-perfecta-para-tu-boda",
@@ -123,7 +123,7 @@ export const post: BlogPost = {
     },
   ],
   related: [
-    { label: "Lumayo Novias", href: "/servicios/lumayo-novias" },
+    { label: "Lumayo Novias", href: programPaths.novias },
     { label: "Blanqueamiento", href: serviceHref("blanqueamiento") },
     { label: "Diseño de sonrisa", href: serviceHref("diseno-de-sonrisa") },
   ],

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { OrthoComparison } from "@/components/services/OrthoComparison";
 import { ServicesPageView } from "@/components/services/ServicesPageView";
 import { serviceCategoryJsonLd } from "@/lib/seo/jsonld";
-import { categoryPath, getCategoryBySlug, serviceCategories } from "@/lib/site";
+import { pageSocial } from "@/lib/seo/metadata";
+import { categoryPath, getCategoryBySlug, serviceCategories, servicesInCategory } from "@/lib/site";
 
 type PageProps = { params: Promise<{ categoria: string }> };
 
@@ -23,11 +25,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   const path = categoryPath(category);
   const title = `${category.seo.title} · Lumayo Centro Odontológico`;
+  // Cover: the category's featured service photo, falling back to its first service.
+  const inCategory = servicesInCategory(category);
+  const cover = inCategory.find((s) => s.featured) ?? inCategory[0];
   return {
     title,
     description: category.seo.description,
     alternates: { canonical: path },
-    openGraph: { type: "website", title, description: category.seo.description, url: path },
+    ...pageSocial({
+      title,
+      description: category.seo.description,
+      path,
+      image: cover ? { url: cover.image, alt: category.label } : undefined,
+    }),
   };
 }
 
@@ -49,6 +59,7 @@ async function CategoryContent({ params }: PageProps) {
         description={category.seo.intro}
         crumbs={[{ label: "Inicio", href: "/" }, { label: "Servicios", href: "/servicios" }, { label: category.label }]}
         activeCategory={category.id}
+        afterGrid={category.id === "ortodoncia" ? <OrthoComparison /> : undefined}
       />
     </>
   );

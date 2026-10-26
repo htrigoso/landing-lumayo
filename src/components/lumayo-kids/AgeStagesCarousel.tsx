@@ -190,7 +190,7 @@ export function AgeStagesCarousel({ items }: AgeStagesCarouselProps) {
               <div className="relative aspect-[16/10] overflow-hidden bg-surface-soft md:aspect-auto md:min-h-[22rem]">
                 <Image
                   src={item.image}
-                  alt=""
+                  alt={item.title}
                   fill
                   sizes="(min-width: 768px) 22rem, 90vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"

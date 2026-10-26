@@ -271,7 +271,7 @@ export const surgeryContent: Record<string, ServiceContent> = {
     ],
   },
   "odontopediatria": {
-    related: ["sellantes", "fluor-barniz", "ortodoncia"],
+    related: ["sellantes", "fluor-barniz", "brackets-convencionales"],
     program: "kids",
     whenItHelps: [
       "Cuando el niño necesita una primera revisión dental.",

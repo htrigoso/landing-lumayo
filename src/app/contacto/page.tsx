@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageSocial } from "@/lib/seo/metadata";
 import { ContactFormSection } from "@/components/contact/ContactFormSection";
 import { ContactInfo } from "@/components/contact/ContactInfo";
 import { WaveDivider } from "@/components/decor/WaveDivider";
@@ -11,9 +12,13 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { contactPageJsonLd } from "@/lib/seo/jsonld";
 import { fullAddress, site } from "@/lib/site";
 
+const title = "Contacto · Lumayo Centro Odontológico";
+const description = `Escríbenos por WhatsApp o llámanos al ${site.phoneDisplay}. Estamos en ${fullAddress}.`;
+
 export const metadata: Metadata = {
-  title: "Contacto · Lumayo Centro Odontológico",
-  description: `Escríbenos por WhatsApp o llámanos al ${site.phoneDisplay}. Estamos en ${fullAddress}.`,
+  title,
+  description,
+  ...pageSocial({ title, description, path: "/contacto" }),
 };
 
 /** Contact page, structured like the reference: page header, contact details with map, photo + form. */

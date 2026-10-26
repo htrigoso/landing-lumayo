@@ -225,7 +225,7 @@ export function SavingsCalculator() {
           <div className="grid gap-3 text-sm">
             <div className="grid gap-1.5">
               <div className="flex justify-between tabular-nums">
-                <span className="text-azul-100">Sin tarjeta</span>
+                <span className="text-azul-100">Sin membresía</span>
                 <span>S/ {amount.toFixed(2)}</span>
               </div>
               <div className="h-3 overflow-hidden rounded-full bg-white/10">
@@ -237,7 +237,7 @@ export function SavingsCalculator() {
             </div>
             <div className="grid gap-1.5">
               <div className="flex justify-between tabular-nums">
-                <span className="text-azul-100">Con Lumayo Card</span>
+                <span className="text-azul-100">Con membresía</span>
                 <span className="text-white font-semibold">S/ {paid.toFixed(2)}</span>
               </div>
               <div className="h-3 overflow-hidden rounded-full bg-white/10">
@@ -260,7 +260,7 @@ export function SavingsCalculator() {
               <p className="text-base leading-relaxed">
                 {paysItself ? (
                   <>
-                    ¡Tu tarjeta ya se pagó sola! Ahorro neto <strong className="tabular-nums">S/ {(discount - annualFee).toFixed(2)}</strong>
+                    ¡Tu membresía ya se pagó sola! Ahorro neto <strong className="tabular-nums">S/ {(discount - annualFee).toFixed(2)}</strong>
                   </>
                 ) : (
                   <>
@@ -269,14 +269,14 @@ export function SavingsCalculator() {
                 )}
               </p>
               <p className="text-xs text-azul-100/90">
-                Tu tarjeta se paga sola con <span className="tabular-nums">S/ {breakEven.toFixed(2)}</span> en este nivel
+                Tu membresía se paga sola con <span className="tabular-nums">S/ {breakEven.toFixed(2)}</span> en este nivel
               </p>
             </div>
           )}
         </div>
 
         <p aria-live="polite" className="sr-only">
-          Pagas S/ {paid.toFixed(2)}. Ahorras S/ {discount.toFixed(2)}. Tu tarjeta se paga sola con S/ {breakEven.toFixed(2)} en este nivel.
+          Pagas S/ {paid.toFixed(2)}. Ahorras S/ {discount.toFixed(2)}. Tu membresía se paga sola con S/ {breakEven.toFixed(2)} en este nivel.
         </p>
       </div>
     </div>

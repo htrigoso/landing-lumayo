@@ -223,7 +223,7 @@ function FeaturedCard({ service: s, flip, reduceMotion, index }: CardProps & { f
       <div className={`relative h-56 overflow-hidden bg-text-inverse/10 sm:h-auto sm:min-h-72 ${flip ? "sm:order-first" : ""}`}>
         <Image
           src={s.image}
-          alt={s.name}
+          alt={`${s.name} en Lumayo, centro odontológico en Tarapoto`}
           fill
           sizes={CARD_SIZES}
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -251,7 +251,7 @@ function ServiceCard({ service: s, showCategory, reduceMotion, index }: CardProp
       <div className="relative h-44 shrink-0 overflow-hidden bg-surface-soft">
         <Image
           src={s.image}
-          alt=""
+          alt={`${s.name} en Lumayo, centro odontológico en Tarapoto`}
           fill
           sizes={CARD_SIZES}
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"

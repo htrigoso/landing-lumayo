@@ -1,11 +1,16 @@
 import type { MetadataRoute } from "next";
 import { blogCategories, blogCategoryPath, postPath, posts } from "@/lib/blog";
-import { categoryPath, serviceCategories, services, servicePath, siteUrl } from "@/lib/site";
-
-const lumayoPrograms = ["/servicios/lumayo-card", "/servicios/lumayo-kids", "/servicios/lumayo-novias"];
+import { categoryPath, programPaths, serviceCategories, services, servicePath, siteUrl } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPaths = ["/", "/servicios", "/nosotros", "/contacto", "/blog", ...lumayoPrograms];
+  const staticPaths = [
+    "/",
+    "/servicios",
+    "/nosotros",
+    "/contacto",
+    "/blog",
+    ...Object.values(programPaths),
+  ];
 
   return [
     ...staticPaths.map((path) => ({ url: `${siteUrl}${path}` })),

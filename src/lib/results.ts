@@ -35,7 +35,7 @@ export const sampleTestimonials: Testimonial[] = [
   {
     name: "Carla M.",
     image: sampleImage("photo-1660160628977-3ad376b8b73b"),
-    treatment: serviceName("ortodoncia"),
+    treatment: serviceName("brackets-convencionales"),
     rating: 5,
     quote: "Llevo seis meses con mis brackets y ya noto el cambio. En cada control me explican qué ajustan y siempre me atienden puntual.",
   },
@@ -77,7 +77,7 @@ export const sampleTestimonials: Testimonial[] = [
   {
     name: "Diego A.",
     image: sampleImage("photo-1611695434369-a8f5d76ceb7b"),
-    treatment: serviceName("ortodoncia"),
+    treatment: serviceName("brackets-convencionales"),
     rating: 5,
     quote: "Reservé por WhatsApp y me respondieron enseguida. Te hacen sentir en confianza desde la primera visita.",
   },

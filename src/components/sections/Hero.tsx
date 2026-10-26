@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion, type Variants } from "motion/react";
 import { HeroBackdrop } from "@/components/hero/HeroBackdrop";
-import { ArrowRightIcon, BracesIcon, ClockIcon, PhoneIcon, WhatsappIcon } from "@/components/icons";
+import { ArrowRightIcon, ClockIcon, PhoneIcon, WhatsappIcon } from "@/components/icons";
 import { bracesWhatsappMessage, site, whatsappUrl } from "@/lib/site";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -61,29 +61,19 @@ export function Hero() {
         <HeroBackdrop />
 
         <div className="container-page text-center">
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease }}
-            className="pill pill-outline mx-auto"
-          >
-            <BracesIcon />
-            Ortodoncia en Tarapoto
-          </motion.p>
-
           <motion.h1
             id="hero-title"
-            aria-label="Tu sonrisa, tu mejor luz"
+            aria-label="Centro Odontológico Tarapoto"
             variants={letters}
             initial={reduceMotion ? "show" : "hidden"}
             animate="show"
             className="mx-auto mt-6 max-w-4xl font-display text-[2.6rem] font-normal leading-[0.98] tracking-[-0.045em] text-text-inverse sm:text-6xl lg:text-7xl"
           >
             <span className="block">
-              <SplitText text="Tu sonrisa," />
+              <SplitText text="Centro Odontológico" />
             </span>
             <span className="relative mx-auto mt-1 block w-fit font-extrabold">
-              <SplitText text="tu mejor luz" />
+              <SplitText text="Tarapoto" />
               <svg
                 aria-hidden="true"
                 viewBox="0 0 300 30"
@@ -122,7 +112,10 @@ export function Hero() {
           </motion.h1>
 
           <motion.div variants={container} initial="hidden" animate="show">
-            <motion.p variants={item} className="mx-auto mt-8 max-w-xl text-pretty text-base leading-relaxed text-text-inverse-muted sm:text-lg">
+            <motion.p variants={item} className="mt-8 font-display text-xl font-medium text-text-inverse sm:text-2xl">
+              Tu sonrisa, tu mejor luz
+            </motion.p>
+            <motion.p variants={item} className="mx-auto mt-4 max-w-xl text-pretty text-base leading-relaxed text-text-inverse-muted sm:text-lg">
               Atención cercana, tecnología actual y un equipo que te explica cada paso del tratamiento. Agenda tu
               evaluación en Tarapoto.
             </motion.p>
@@ -135,28 +128,12 @@ export function Hero() {
                 className="btn btn-light btn-pulse w-full gap-3 !py-2 pl-6 pr-2 text-base sm:min-h-14 sm:w-auto"
               >
                 <WhatsappIcon />
-                Quiero mis brackets
+                Reserva tu cita Ahora
                 <span className="btn-arrow grid size-10 place-items-center rounded-full bg-primary text-text-inverse">
                   <ArrowRightIcon className="size-4 -rotate-45" />
                 </span>
               </a>
             </motion.div>
-
-            <motion.p variants={item} className="mt-5 text-sm text-text-inverse-muted">
-              <a href="#reservar" className="font-semibold text-text-inverse underline decoration-accent decoration-2 underline-offset-4">
-                Reserva tu cita
-              </a>
-              <span aria-hidden="true" className="mx-2 text-white/40">
-                ·
-              </span>
-              ¿Prefieres llamar?{" "}
-              <a
-                href={`tel:${site.phoneE164}`}
-                className="font-semibold text-text-inverse underline decoration-accent decoration-2 underline-offset-4"
-              >
-                {site.phoneDisplay}
-              </a>
-            </motion.p>
           </motion.div>
         </div>
       </div>

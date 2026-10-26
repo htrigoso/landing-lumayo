@@ -23,16 +23,18 @@ import {
   lumayoCard,
   lumayoKids,
   lumayoNovias,
+  programPaths,
   serviceCategories,
   servicePath,
   services,
   servicesInCategory,
   site,
+  socialProof,
   siteUrl,
   type Service as SiteService,
   type ServiceCategory,
 } from "@/lib/site";
-import type { TeamMember } from "@/lib/team";
+import { defaultReviewerId, getTeamMember, type TeamMember } from "@/lib/team";
 import type { Testimonial } from "@/lib/results";
 
 /**
@@ -97,15 +99,22 @@ export function clinicJsonLd(): WithContext<Dentist> {
         },
       })),
     })),
-    // TODO: confirm opening hours with the clinic (see site.hoursDisplay).
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        opens: "09:00",
-        closes: "21:00",
-      },
-    ],
+    openingHoursSpecification: site.hours.shifts.map((shift) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: shift.opens,
+      closes: shift.closes,
+    })),
+    // Only with real Google Business Profile data: both the rating and the review count must exist.
+    ...(socialProof.googleRating !== undefined && socialProof.googleReviewsCount !== undefined
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: socialProof.googleRating,
+            reviewCount: socialProof.googleReviewsCount,
+          },
+        }
+      : {}),
     // TODO: add sameAs (Facebook, Instagram, TikTok) once the clinic provides the profile URLs.
     // TODO: add priceRange once the clinic confirms it.
     // availableService is not in schema-dts' Dentist type (its range is MedicalProcedure, MedicalTest or MedicalTherapy),
@@ -205,7 +214,7 @@ export function serviceHowToJsonLd(service: SiteService, howItWorks: readonly st
 /** Lumayo Card: the "Cómo obtener tu Lumayo Card" steps. */
 export function lumayoCardHowToJsonLd(): WithContext<HowTo> {
   return howToJsonLd(
-    "Cómo obtener tu Lumayo Card",
+    "Cómo obtener tu Membresía Lumayo",
     lumayoCard.steps.map((step) => ({ name: step.title, text: step.description })),
   );
 }
@@ -254,6 +263,13 @@ function serviceJsonLd(input: ServiceInput): WithContext<Service> {
 
 /** Detail page of a single service (the category and service come from src/lib/site.ts). */
 export function serviceDetailJsonLd(service: SiteService): WithContext<Service> {
+  // Offer only for the clinic's own confirmed price. Market reference ranges never become an Offer.
+  const priceFrom = service.ortho?.priceFrom;
+  const offers: Offer[] | undefined =
+    priceFrom === undefined
+      ? undefined
+      : [{ "@type": "Offer", name: service.name, price: priceFrom, priceCurrency: "PEN", url: absoluteUrl(servicePath(service)) }];
+
   return serviceJsonLd({
     name: service.name,
     description: service.details.summary,
@@ -261,6 +277,7 @@ export function serviceDetailJsonLd(service: SiteService): WithContext<Service> 
     serviceType: service.name,
     category: categoryOf(service).label,
     image: imageJsonLd({ src: service.image, name: service.name }),
+    offers,
   });
 }
 
@@ -268,17 +285,17 @@ export function serviceDetailJsonLd(service: SiteService): WithContext<Service> 
 export function lumayoCardJsonLd(): WithContext<Service> {
   const offers: Offer[] = Object.values(lumayoCard.plans).map((plan) => ({
     "@type": "Offer",
-    name: `Lumayo Card ${plan.label}`,
+    name: `Membresía Lumayo ${plan.label}`,
     description: "Cuota anual de afiliación",
     price: plan.annualFeeAmount,
     priceCurrency: "PEN",
-    url: absoluteUrl("/servicios/lumayo-card"),
+    url: absoluteUrl(programPaths.card),
   }));
 
   return serviceJsonLd({
-    name: "Lumayo Card",
+    name: "Membresía Lumayo",
     description: lumayoCard.description,
-    path: "/servicios/lumayo-card",
+    path: programPaths.card,
     serviceType: "Protección odontológica",
     offers,
   });
@@ -289,7 +306,7 @@ export function lumayoKidsJsonLd(): WithContext<Service> {
   return serviceJsonLd({
     name: "Lumayo Kids",
     description: lumayoKids.subheadline,
-    path: "/servicios/lumayo-kids",
+    path: programPaths.kids,
     serviceType: "Odontopediatría",
   });
 }
@@ -299,7 +316,7 @@ export function lumayoNoviasJsonLd(): WithContext<Service> {
   return serviceJsonLd({
     name: "Lumayo Novias",
     description: lumayoNovias.subheadline,
-    path: "/servicios/lumayo-novias",
+    path: programPaths.novias,
     serviceType: "Plan de sonrisa para bodas",
   });
 }
@@ -371,6 +388,7 @@ export function blogCategoryJsonLd(category: BlogCategoryInfo): WithContext<Coll
 export function blogPostJsonLd(post: BlogPost): WithContext<BlogPosting> {
   const url = absoluteUrl(postPath(post));
   const cover = services.find((service) => service.id === post.coverServiceId);
+  const reviewer = getTeamMember(post.reviewer ?? defaultReviewerId);
   return {
     "@context": CONTEXT,
     "@type": "BlogPosting",
@@ -389,8 +407,9 @@ export function blogPostJsonLd(post: BlogPost): WithContext<BlogPosting> {
       url: source.url,
     })),
     about: { "@type": "Thing", name: post.category },
-    // TODO: replace the clinic with the reviewing dentist as a Person once the clinic confirms name and COP.
-    author: clinicRef,
+    // Author is the reviewing dentist when one is set; otherwise the clinic.
+    author: reviewer ? memberPerson(reviewer) : clinicRef,
+    ...(reviewer ? { reviewedBy: memberPerson(reviewer) } : {}),
     publisher: clinicRef,
   } as WithContext<BlogPosting>;
 }
@@ -414,6 +433,18 @@ export function aboutPageJsonLd(processPhotos: readonly ProcessPhoto[]): WithCon
   } as WithContext<AboutPage>;
 }
 
+/** Person without @context, for nesting (author, reviewedBy). Specialty is the jobTitle; COP goes in identifier. */
+function memberPerson(member: TeamMember): Record<string, unknown> {
+  return {
+    "@type": "Person",
+    name: member.name,
+    jobTitle: member.specialty ?? member.role,
+    ...(member.photo ? { image: absoluteUrl(member.photo) } : {}),
+    worksFor: clinicRef,
+    ...(member.cop ? { identifier: `COP ${member.cop}` } : {}),
+  };
+}
+
 /**
  * Person for one member of the team. Only rendered when src/lib/team.ts has entries (the page maps over the list).
  */
@@ -421,10 +452,7 @@ export function personJsonLd(member: TeamMember): WithContext<Person> {
   return {
     "@context": CONTEXT,
     "@type": "Person",
-    name: member.name,
-    jobTitle: member.role,
-    image: absoluteUrl(member.photo),
-    worksFor: clinicRef,
+    ...memberPerson(member),
   } as WithContext<Person>;
 }
 

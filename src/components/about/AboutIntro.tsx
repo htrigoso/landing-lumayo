@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { BrandSeal } from "@/components/about/BrandSeal";
 import { SectionBackdrop } from "@/components/decor/SectionBackdrop";
 import { CalendarIcon, CheckIcon } from "@/components/icons";
 import { Reveal } from "@/components/motion/Reveal";
@@ -27,7 +26,6 @@ export function AboutIntro() {
           <div className="absolute bottom-0 right-0 w-[55%] overflow-hidden rounded-2xl ring-[6px] ring-bg">
             <Image src="/images/about/about-us-img-2.jpg" alt="Sala de atención con sillones dentales" width={384} height={270} className="h-auto w-full" />
           </div>
-          <BrandSeal className="absolute -left-2 top-8 w-28 sm:-left-6 sm:w-36" />
         </Reveal>
 
         <Reveal delay={0.1}>

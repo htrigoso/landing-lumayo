@@ -191,7 +191,7 @@ export function TreatmentsCarousel({ items }: TreatmentsCarouselProps) {
               <div className="relative aspect-[16/10] overflow-hidden bg-azul-100 md:aspect-auto md:min-h-[22rem]">
                 <Image
                   src={item.image}
-                  alt=""
+                  alt={item.name}
                   fill
                   sizes="(min-width: 768px) 18rem, 88vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"

@@ -1,5 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types";
-import { serviceHref } from "@/lib/site";
+import { categoryPath, getCategoryBySlug, serviceHref } from "@/lib/site";
 
 export const post: BlogPost = {
   slug: "ortodoncia-brackets-edad-y-cuidados",
@@ -155,11 +155,13 @@ export const post: BlogPost = {
     },
   ],
   related: [
-    { label: "Brackets", href: serviceHref("ortodoncia") },
+    { label: "Brackets", href: categoryPath(getCategoryBySlug("ortodoncia")!) },
+    { label: "Brackets convencionales", href: serviceHref("brackets-convencionales") },
+    { label: "Brackets autoligables", href: serviceHref("brackets-autoligables") },
     { label: "Odontopediatría", href: serviceHref("odontopediatria") },
     { label: "Limpieza dental", href: serviceHref("limpieza") },
   ],
-  coverServiceId: "ortodoncia",
+  coverServiceId: "brackets-convencionales",
   sources: [
     {
       label: "AAO: cuándo debe acudir un niño al ortodoncista",

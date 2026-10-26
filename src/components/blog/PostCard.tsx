@@ -21,7 +21,7 @@ export function PostCard({ post }: PostCardProps) {
         {cover && (
           <Image
             src={cover}
-            alt=""
+            alt={post.title}
             fill
             sizes="(min-width: 1024px) 24rem, (min-width: 768px) 50vw, 100vw"
             className="object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"

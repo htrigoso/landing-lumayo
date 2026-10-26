@@ -216,7 +216,7 @@ export function LumayoKids() {
                   <div className="relative aspect-[16/10] overflow-hidden bg-surface-soft">
                     <Image
                       src={item.image}
-                      alt=""
+                      alt={item.name}
                       fill
                       sizes="(min-width: 1024px) 26rem, (min-width: 640px) 50vw, 100vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"

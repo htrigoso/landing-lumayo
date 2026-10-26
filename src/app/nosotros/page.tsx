@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageSocial } from "@/lib/seo/metadata";
 import { AboutIntro } from "@/components/about/AboutIntro";
 import { CareProcess } from "@/components/about/CareProcess";
 import { HowWeWork } from "@/components/about/HowWeWork";
@@ -10,6 +11,7 @@ import { Header } from "@/components/layout/Header";
 import { MobileCtaBar } from "@/components/layout/MobileCtaBar";
 import { BookingSection } from "@/components/sections/BookingSection";
 import { PageHeader } from "@/components/sections/PageHeader";
+import { SocialProofStrip } from "@/components/sections/SocialProofStrip";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
 import { careProcessSteps } from "@/components/about/CareProcess";
@@ -18,10 +20,14 @@ import { getDisplayedTestimonials, testimonials } from "@/lib/results";
 import { aboutPageJsonLd, personJsonLd, reviewJsonLd } from "@/lib/seo/jsonld";
 import { team } from "@/lib/team";
 
+const title = "Nosotros · Lumayo Centro Odontológico";
+const description =
+  "Conoce Lumayo, centro odontológico en Tarapoto: atención cercana, tecnología actual y un proceso claro desde la primera consulta.";
+
 export const metadata: Metadata = {
-  title: "Nosotros · Lumayo Centro Odontológico",
-  description:
-    "Conoce Lumayo, centro odontológico en Tarapoto: atención cercana, tecnología actual y un proceso claro desde la primera consulta.",
+  title,
+  description,
+  ...pageSocial({ title, description, path: "/nosotros" }),
 };
 
 /** About page, structured like the reference: intro collage, how we work, care process, why us, team, testimonials, booking. */
@@ -63,6 +69,7 @@ export default function NosotrosPage() {
         <HowWeWork />
         <CareProcess />
         <WhyChooseUs />
+        <SocialProofStrip />
         <TeamSection />
         <Testimonials number="01" surface={testimonialsSurface} flatBottom />
         <WaveDivider from={lastBg} to="var(--color-surface-inverse)" />

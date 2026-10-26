@@ -1,5 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types";
-import { serviceHref } from "@/lib/site";
+import { programPaths, serviceHref } from "@/lib/site";
 
 export const post: BlogPost = {
   slug: "primera-consulta-dental-que-esperar",
@@ -152,7 +152,7 @@ export const post: BlogPost = {
       blocks: [
         {
           type: "p",
-          text: "Las revisiones regulares son más fáciles de mantener cuando cuentas con un plan de apoyo. La Lumayo Card es una forma de acompañar esos controles de manera continuada.",
+          text: "Las revisiones regulares son más fáciles de mantener cuando cuentas con un plan de apoyo. La Membresía Lumayo es una forma de acompañar esos controles de manera continuada.",
         },
         {
           type: "p",
@@ -177,7 +177,7 @@ export const post: BlogPost = {
   ],
   related: [
     { label: "Limpieza dental", href: serviceHref("limpieza") },
-    { label: "Lumayo Card", href: "/servicios/lumayo-card" },
+    { label: "Membresía Lumayo", href: programPaths.card },
     { label: "Operatoria", href: serviceHref("operatoria") },
   ],
   coverServiceId: "limpieza",
@@ -193,7 +193,7 @@ export const post: BlogPost = {
   ],
   todo: [
     "Criterios de frecuencia de revisión según nivel de riesgo: confirmar con el equipo clínico.",
-    "Qué incluye la Lumayo Card y cómo se usa en las revisiones: confirmar con la clínica.",
+    "Qué incluye la Membresía Lumayo y cómo se usa en las revisiones: confirmar con la clínica.",
     "Criterios de uso de radiografías en la primera consulta: confirmar con el dentista.",
   ],
 };

@@ -18,7 +18,7 @@ export function CardFlip({ front, back }: { front: ReactNode; back: ReactNode })
         <button
           type="button"
           aria-pressed={flipped}
-          aria-label="Voltear la Lumayo Card"
+          aria-label="Voltear la tarjeta de membresía"
           onClick={() => setFlipped((value) => !value)}
           className="absolute inset-0 z-10 cursor-pointer rounded-[4.4cqw] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-focus"
         />

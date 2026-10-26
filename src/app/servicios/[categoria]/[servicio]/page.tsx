@@ -14,14 +14,19 @@ import { ArrowRightIcon, CalendarIcon, CheckIcon, serviceIcons, WhatsappIcon } f
 import { Reveal } from "@/components/motion/Reveal";
 import { BookingSection } from "@/components/sections/BookingSection";
 import { PageHeader } from "@/components/sections/PageHeader";
+import { OrthoPriceBlock } from "@/components/services/OrthoPriceBlock";
 import { FaqAccordion } from "@/components/orthodontics/FaqAccordion";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { ReviewedBy } from "@/components/seo/ReviewedBy";
 import { faqJsonLd, serviceDetailJsonLd, serviceHowToJsonLd } from "@/lib/seo/jsonld";
+import { pageSocial } from "@/lib/seo/metadata";
 import { getServiceContent } from "@/lib/service-content";
+import { defaultReviewerId, getTeamMember } from "@/lib/team";
 import {
   categoryOf,
   categoryPath,
   getServiceBySlugs,
+  programPaths,
   servicePath,
   services,
   whatsappUrl,
@@ -32,16 +37,25 @@ type PageProps = { params: Promise<{ categoria: string; servicio: string }> };
 /** Program blocks linked from a service page; mirrors the Kids and Novias landing pages. */
 const programs = {
   kids: {
-    href: "/servicios/lumayo-kids",
+    href: programPaths.kids,
     label: "Programa Lumayo Kids",
     text: "Atención dental para bebés, niños y adolescentes.",
   },
   novias: {
-    href: "/servicios/lumayo-novias",
+    href: programPaths.novias,
     label: "Programa Lumayo Novias",
     text: "Un plan por etapas para llegar a tu boda con la sonrisa que imaginaste.",
   },
 } as const;
+
+/**
+ * Splits a service name into the brandbook's 400 + 800 pairing: the first word stays regular,
+ * the rest is extra bold ("Brackets" + "convencionales"). One-word names get no emphasis.
+ */
+function splitServiceName(name: string) {
+  const [firstWord, ...restWords] = name.split(" ");
+  return { title: firstWord, emphasis: restWords.join(" ") };
+}
 
 // Blocking route: unknown slugs must answer 404, which streaming cannot do after the shell is sent.
 export const instant = false;
@@ -63,7 +77,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description: service.details.summary,
     alternates: { canonical: path },
-    openGraph: { type: "article", title, description: service.details.summary, url: path },
+    ...pageSocial({
+      title,
+      description: service.details.summary,
+      path,
+      image: { url: service.image, alt: service.name },
+      type: "article",
+    }),
   };
 }
 
@@ -108,6 +128,7 @@ async function ServiceContent({ params }: PageProps) {
   });
   const program = content.program ? programs[content.program] : undefined;
   const inquiry = whatsappUrl(`Hola Lumayo, quisiera información sobre ${service.name.toLowerCase()}.`);
+  const heading = splitServiceName(service.name);
 
   return (
     <>
@@ -115,8 +136,9 @@ async function ServiceContent({ params }: PageProps) {
       <JsonLd data={serviceHowToJsonLd(service, content.howItWorks)} />
       {content.faqs.length > 0 && <JsonLd data={faqJsonLd(content.faqs)} />}
       <PageHeader
-        title={service.name}
-        emphasis=""
+        title={heading.title}
+        emphasis={heading.emphasis}
+        accent
         description={service.description}
         crumbs={[
           { label: "Inicio", href: "/" },
@@ -139,6 +161,9 @@ async function ServiceContent({ params }: PageProps) {
               <span className="font-semibold text-primary">Ideal para: </span>
               {service.details.idealFor}
             </p>
+            <div className="mt-6">
+              <ReviewedBy member={getTeamMember(defaultReviewerId)} />
+            </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a href={inquiry} target="_blank" rel="noopener" className="btn btn-wa text-base">
                 <WhatsappIcon />
@@ -300,6 +325,8 @@ async function ServiceContent({ params }: PageProps) {
           </Reveal>
         </div>
       </section>
+
+      {service.ortho && <OrthoPriceBlock service={service} />}
 
       <section aria-labelledby="faq-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
         <SectionAtmosphere tone="mist" lines="tr" />

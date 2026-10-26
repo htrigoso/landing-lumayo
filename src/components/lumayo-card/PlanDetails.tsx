@@ -42,10 +42,10 @@ export function PlanFamilyCopy() {
         id="familia-title"
         layout="stack"
         title={<>Titular y <strong>{plan.maxAdditional} adicionales</strong></>}
-        description="Una sola tarjeta para tu familia: protege a quienes más quieres con un solo plan."
+        description="Una sola membresía para tu familia: protege a quienes más quieres con un solo plan."
       />
       <p className="mt-8 font-display text-6xl font-extrabold leading-none text-primary">1 + {plan.maxAdditional}</p>
-      <p className="mt-2 text-sm font-semibold uppercase tracking-[0.14em] text-accent-text">{people} personas, una sola tarjeta</p>
+      <p className="mt-2 text-sm font-semibold uppercase tracking-[0.14em] text-accent-text">{people} personas, una sola membresía</p>
     </>
   );
 }

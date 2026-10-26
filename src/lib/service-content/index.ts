@@ -1,5 +1,6 @@
 import { aestheticsContent } from "@/lib/service-content/aesthetics";
 import { careContent } from "@/lib/service-content/care";
+import { orthodonticsContent } from "@/lib/service-content/orthodontics";
 import { surgeryContent } from "@/lib/service-content/surgery";
 import type { ServiceContent } from "@/lib/service-content/types";
 
@@ -9,6 +10,7 @@ export type { ServiceContent } from "@/lib/service-content/types";
 export const serviceContent: Record<string, ServiceContent> = {
   ...aestheticsContent,
   ...careContent,
+  ...orthodonticsContent,
   ...surgeryContent,
 };
 

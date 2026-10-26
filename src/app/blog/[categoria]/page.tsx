@@ -12,6 +12,8 @@ import { PageHeader } from "@/components/sections/PageHeader";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { blogCategories, blogCategoryPath, getBlogCategoryBySlug, posts, postsInCategory } from "@/lib/blog";
 import { blogCategoryJsonLd } from "@/lib/seo/jsonld";
+import { pageSocial } from "@/lib/seo/metadata";
+import { services } from "@/lib/site";
 
 type PageProps = { params: Promise<{ categoria: string }> };
 
@@ -33,11 +35,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   const path = blogCategoryPath(category);
   const title = `${category.seo.title} · Lumayo Centro Odontológico`;
+  // Cover of the category's newest post, the same photo its card shows first.
+  const firstPost = postsInCategory(category)[0];
+  const cover = firstPost && services.find((s) => s.id === firstPost.coverServiceId)?.image;
   return {
     title,
     description: category.seo.description,
     alternates: { canonical: path },
-    openGraph: { type: "website", title, description: category.seo.description, url: path },
+    ...pageSocial({
+      title,
+      description: category.seo.description,
+      path,
+      image: cover ? { url: cover, alt: category.label } : undefined,
+    }),
   };
 }
 

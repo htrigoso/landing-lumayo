@@ -17,7 +17,7 @@ const reasons = [
  */
 export function About() {
   return (
-    <section id="nosotros" aria-labelledby="nosotros-title" className="relative isolate overflow-hidden bg-bg pb-16 lg:pb-20">
+    <section id="nosotros" aria-labelledby="nosotros-title" className="relative isolate overflow-hidden bg-bg pt-16 pb-16 lg:pt-20 lg:pb-20">
       <SectionBackdrop glow="br" />
       <div className="container-page relative lg:flex lg:min-h-[36rem] lg:items-center lg:justify-end">
         {/* Blue block with the photo */}
@@ -42,7 +42,7 @@ export function About() {
         >
           <IsotypeWatermark className="-bottom-12 -left-14 w-64" />
           <p className="relative flex items-center gap-3 text-sm font-medium tabular-nums text-primary">
-            03
+            02
             <span aria-hidden="true" className="h-px w-8 bg-primary" />
             Por qué Lumayo
           </p>

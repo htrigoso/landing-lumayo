@@ -56,7 +56,12 @@ export function Location({ number }: { number: string }) {
               </span>
               <div>
                 <h3 className="font-semibold text-heading">Horario de atención</h3>
-                <p className="mt-0.5 text-text">Escríbenos y te indicamos los horarios disponibles de la semana.</p>
+                <p className="mt-0.5 text-text">{site.hours.days}</p>
+                {site.hoursShiftLines.map((line) => (
+                  <p key={line} className="whitespace-nowrap text-text">
+                    {line}
+                  </p>
+                ))}
               </div>
             </li>
           </ul>

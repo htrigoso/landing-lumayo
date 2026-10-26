@@ -13,11 +13,25 @@ import { PageHeader } from "@/components/sections/PageHeader";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { posts } from "@/lib/blog";
 import { blogIndexJsonLd } from "@/lib/seo/jsonld";
+import { pageSocial } from "@/lib/seo/metadata";
+import { services } from "@/lib/site";
+
+const title = "Blog · Lumayo Centro Odontológico";
+const description = "Artículos sobre salud dental, prevención, estética y tratamientos, escritos para pacientes en Tarapoto.";
+
+// Cover of the newest post, the same photo its featured card shows first.
+const firstPost = posts[0];
+const cover = firstPost && services.find((s) => s.id === firstPost.coverServiceId)?.image;
 
 export const metadata: Metadata = {
-  title: "Blog · Lumayo Centro Odontológico",
-  description:
-    "Artículos sobre salud dental, prevención, estética y tratamientos, escritos para pacientes en Tarapoto.",
+  title,
+  description,
+  ...pageSocial({
+    title,
+    description,
+    path: "/blog",
+    image: cover ? { url: cover, alt: firstPost.title } : undefined,
+  }),
 };
 
 export default function BlogPage() {

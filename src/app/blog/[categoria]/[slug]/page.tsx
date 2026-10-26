@@ -18,15 +18,17 @@ import { MobileCtaBar } from "@/components/layout/MobileCtaBar";
 import { BookingSection } from "@/components/sections/BookingSection";
 import { FaqAccordion } from "@/components/orthodontics/FaqAccordion";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { ReviewedBy } from "@/components/seo/ReviewedBy";
 import { blogPostJsonLd, faqJsonLd } from "@/lib/seo/jsonld";
+import { pageSocial } from "@/lib/seo/metadata";
 import { getPost, getRelatedPosts, blogCategoryOf, blogCategoryPath, posts, postPath } from "@/lib/blog";
 import { services, whatsappUrl } from "@/lib/site";
+import { defaultReviewerId, getTeamMember } from "@/lib/team";
 
 type PageProps = { params: Promise<{ categoria: string; slug: string }> };
 
 const dateFormat = new Intl.DateTimeFormat("es-PE", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 const formatDate = (iso: string) => dateFormat.format(new Date(iso));
-const REVIEWER: string | null = null; // TODO: set the dentist's name and COP once confirmed
 
 // Blocking route: unknown slugs must answer 404, which streaming cannot do after the shell is sent.
 export const instant = false;
@@ -44,11 +46,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   const path = postPath(post);
   const title = `${post.title} · Lumayo Centro Odontológico`;
+  // Same cover as the page: the photo of the service set in `coverServiceId`.
+  const cover = services.find((s) => s.id === post.coverServiceId)?.image;
   return {
     title,
     description: post.excerpt,
     alternates: { canonical: path },
-    openGraph: { type: "article", title, description: post.excerpt, url: path },
+    ...pageSocial({
+      title,
+      description: post.excerpt,
+      path,
+      image: cover ? { url: cover, alt: post.title } : undefined,
+      type: "article",
+      article: { published: post.publishedAt, modified: post.updatedAt, section: post.category },
+    }),
   };
 }
 
@@ -86,6 +97,7 @@ async function PostContent({ params }: PageProps) {
   const cover = services.find((s) => s.id === post.coverServiceId)?.image;
   const related = getRelatedPosts(post.slug, 3);
   const consult = whatsappUrl(`Hola Lumayo, leí el artículo "${post.title}" y quisiera una evaluación.`);
+  const reviewer = getTeamMember(post.reviewer ?? defaultReviewerId);
 
   return (
     <>
@@ -137,7 +149,7 @@ async function PostContent({ params }: PageProps) {
               {cover && (
                 <Image
                   src={cover}
-                  alt=""
+                  alt={post.title}
                   fill
                   priority
                   sizes="(min-width: 1200px) 1104px, 100vw"
@@ -163,15 +175,13 @@ async function PostContent({ params }: PageProps) {
           </Reveal>
 
           <div className="mt-5 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-b border-border pb-5">
-            <p className="text-sm text-text">
-              Por <strong className="font-semibold text-heading">Equipo Lumayo</strong> · Actualizado{" "}
-              <time dateTime={post.updatedAt}>{formatDate(post.updatedAt)}</time>
-              {REVIEWER ? (
-                <>
-                  {" "}· Revisado por <strong className="font-semibold text-heading">{REVIEWER}</strong>
-                </>
-              ) : null}
-            </p>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+              <p className="text-sm text-text">
+                Por <strong className="font-semibold text-heading">Equipo Lumayo</strong> · Actualizado{" "}
+                <time dateTime={post.updatedAt}>{formatDate(post.updatedAt)}</time>
+              </p>
+              <ReviewedBy member={reviewer} />
+            </div>
             <a href={consult} target="_blank" rel="noopener" className="btn btn-wa text-sm">
               <WhatsappIcon />
               Consultar por WhatsApp

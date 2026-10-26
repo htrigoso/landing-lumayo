@@ -35,8 +35,9 @@ function ReelCard({ t, onPlay }: { t: Testimonial; onPlay: (t: Testimonial) => v
       {t.image ? (
         <Image
           src={t.image}
-          alt=""
+          alt={`Testimonio de ${t.name}`}
           fill
+          unoptimized
           sizes="(min-width: 640px) 17rem, 15rem"
           className="object-cover transition-transform duration-700 ease-out group-hover/card:scale-105"
         />

@@ -4,64 +4,8 @@ const MOUTHHEALTHY_VENEERS = "https://www.mouthhealthy.org/all-topics-a-z/veneer
 const DOAJ_CERAMICS = "https://doaj.org/article/430e90bc98564c6daace2fe187877d73";
 
 export const aestheticsContent: Record<string, ServiceContent> = {
-  "ortodoncia": {
-    related: ["diseno-de-sonrisa", "blanqueamiento", "limpieza"],
-    program: "novias",
-    whenItHelps: [
-      "Dientes apiñados o con separaciones que se quieren corregir",
-      "Problemas de mordida, como sobremordida, mordida cruzada o mordida invertida",
-      "Alineación previa a otros tratamientos estéticos",
-    ],
-    howItWorks: [
-      "Evaluación inicial con fotografías, radiografías y, si aplica, escaneo digital.",
-      "Plan de tratamiento y elección del tipo de brackets, metálicos o estéticos.",
-      "Colocación de los brackets unidos al diente, con un arco que se ajusta de forma periódica.",
-      "Controles y ajustes periódicos para guiar el movimiento de los dientes.",
-      "Retiro de los brackets y colocación de retenedores para sostener el resultado.",
-    ],
-    benefits: [
-      "Mejora la alineación y la relación entre las piezas dentales",
-      "Puede mejorar la función masticatoria cuando hay problemas de mordida",
-      "Sirve de base para otros tratamientos estéticos o restauradores",
-    ],
-    consider: [
-      "Requiere citas periódicas y constancia en la higiene diaria",
-      "Los brackets retienen placa alrededor de las piezas y exigen una limpieza cuidadosa",
-      "La duración suele variar según cada caso, y casi siempre se necesita una fase de retención posterior",
-    ],
-    aftercare: [
-      "Usar los retenedores según la indicación del dentista para mantener el resultado",
-      "Reforzar la higiene alrededor de los brackets",
-      "Evitar alimentos duros o pegajosos que puedan despegar los brackets",
-      "Acudir a los controles programados y seguir las indicaciones del dentista",
-    ],
-    faqs: [
-      {
-        q: "¿Los brackets duelen?",
-        a: "Es habitual sentir molestia o presión durante los primeros días después de cada ajuste. Suele disminuir con el tiempo, y el dentista puede indicar medidas para aliviarla.",
-      },
-      {
-        q: "¿Se necesita retenedor después del tratamiento?",
-        a: "En general sí. El retenedor ayuda a mantener la posición de los dientes una vez retirados los brackets.",
-      },
-      {
-        q: "¿Existen opciones más discretas?",
-        a: "Existen brackets estéticos fabricados con otros materiales. Cada tipo tiene diferencias en resistencia y mantenimiento, y el dentista puede explicarlas.",
-      },
-    ],
-    todo: [
-      "Tipos de bracket que ofrece la clínica (metálicos, estéticos, de otros materiales)",
-      "Si la clínica utiliza escaneo digital o trabaja principalmente con radiografías y fotografías",
-      "Protocolo de controles y frecuencia de ajustes",
-    ],
-    sources: [
-      { label: "MouthHealthy: brackets (en inglés)", url: "https://www.mouthhealthy.org/all-topics-a-z/braces" },
-      { label: "NHS: ortodoncia (en inglés)", url: "https://www.nhs.uk/conditions/orthodontics/" },
-    ],
-  },
-
   "diseno-de-sonrisa": {
-    related: ["carillas-porcelana", "ortodoncia", "blanqueamiento"],
+    related: ["carillas-porcelana", "brackets-convencionales", "blanqueamiento"],
     program: "novias",
     whenItHelps: [
       "Cuando se quiere planificar un cambio estético antes de decidir qué tratamiento hacer",

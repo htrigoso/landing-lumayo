@@ -44,7 +44,7 @@ export function LumayoCard() {
               Protección odontológica
             </p>
             <h2 id="lumayo-card-title" className="section-title mt-4">
-              Lumayo <strong>Card</strong>
+              Membresía <strong>Lumayo</strong>
             </h2>
             <p className="mt-5 inline-flex rounded-full bg-surface-mint/70 px-4 py-2 text-sm font-semibold text-primary sm:text-base">
               {lumayoCard.heroHighlight}
@@ -133,7 +133,7 @@ export function LumayoCard() {
         <SectionAtmosphere tone="mist" glow="bl" />
 
         <div className="container-page">
-          <SectionHeading number="02" label="Calculadora" id="calculadora-title" layout="stack" title={<>¿Cuánto <strong>ahorras?</strong></>} description="Elige un monto y un nivel y mira cuánto ahorras con tu tarjeta." />
+          <SectionHeading number="02" label="Calculadora" id="calculadora-title" layout="stack" title={<>¿Cuánto <strong>ahorras?</strong></>} description="Elige un monto y un nivel y mira cuánto ahorras con tu membresía." />
           <Reveal className="mt-10">
             <SavingsCalculator />
           </Reveal>
@@ -149,7 +149,7 @@ export function LumayoCard() {
             label="Cómo obtenerla"
             id="como-obtenerla-title"
             layout="stack"
-            title={<>Cómo obtener tu <strong>Lumayo Card</strong></>}
+            title={<>Cómo obtener tu <strong>membresía</strong></>}
           />
           <ol className="relative mt-12 grid grid-cols-[minmax(0,1fr)] gap-10 md:grid-cols-3 md:gap-8">
             <div aria-hidden="true" className="absolute left-[16.67%] right-[16.67%] top-6 hidden h-px bg-primary/25 md:block" />
@@ -224,7 +224,7 @@ export function LumayoCard() {
                   Empieza a ahorrar desde tu <strong>primera visita</strong>
                 </h2>
                 <p className="mt-5 text-pretty text-base leading-relaxed text-azul-100 sm:text-lg">
-                  Escríbenos por WhatsApp y te explicamos cómo afiliarte a tu Lumayo Card.
+                  Escríbenos por WhatsApp y te explicamos cómo afiliarte a la Membresía Lumayo.
                 </p>
                 <a href={whatsappUrl(lumayoCardWhatsappMessage)} target="_blank" rel="noopener" className="btn btn-light mt-8 text-base">
                   <WhatsappIcon />

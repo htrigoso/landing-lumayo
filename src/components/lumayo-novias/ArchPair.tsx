@@ -17,11 +17,11 @@ export function ArchPair() {
       <div aria-hidden="true" className="absolute -inset-3 rounded-t-[999px] border border-azul-700/20" />
 
       <div className="absolute inset-y-0 left-0 w-[72%] overflow-hidden rounded-t-[999px] rounded-b-3xl bg-azul-100">
-        {primary && <Image src={primary.image} alt="" fill sizes={ARCH_SIZES} priority className="object-cover" />}
+        {primary && <Image src={primary.image} alt={primary.name} fill sizes={ARCH_SIZES} priority className="object-cover" />}
       </div>
 
       <div className="absolute right-0 bottom-[8%] aspect-[3/4] w-[52%] overflow-hidden rounded-t-[999px] rounded-b-3xl border-4 border-white bg-azul-100 shadow-[0_24px_48px_-28px_color-mix(in_srgb,var(--color-azul-950)_60%,transparent)]">
-        {secondary && <Image src={secondary.image} alt="" fill sizes={ARCH_SIZES} className="object-cover" />}
+        {secondary && <Image src={secondary.image} alt={secondary.name} fill sizes={ARCH_SIZES} className="object-cover" />}
       </div>
 
       <div className={`${glassCard} top-8`}>

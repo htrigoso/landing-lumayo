@@ -37,6 +37,8 @@ export type BlogPost = {
   related: { label: string; href: string }[];
   /** Id from `services` in `src/lib/site.ts`; its photo is the post cover. */
   coverServiceId: string;
+  /** Id of a `team` member in `src/lib/team.ts` who reviewed the post. Falls back to `defaultReviewerId`. */
+  reviewer?: string;
   sources: { label: string; url: string }[];
   /** Claims the clinic's dentist must confirm before publishing. Not shown on the page. */
   todo: string[];

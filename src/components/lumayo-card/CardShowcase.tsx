@@ -29,7 +29,7 @@ export function CardShowcase({ classic, gold }: { classic: Faces; gold: Faces })
         }`}
       />
 
-      <div role="group" aria-label="Versión de la tarjeta" className="mb-6 flex justify-center">
+      <div role="group" aria-label="Versión de la membresía" className="mb-6 flex justify-center">
         <div className="inline-flex rounded-full border border-border bg-white p-1 shadow-[0_12px_30px_-20px_color-mix(in_srgb,var(--color-azul-950)_35%,transparent)]">
           {variants.map((option) => {
             const active = variant === option.value;

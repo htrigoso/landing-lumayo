@@ -8,18 +8,18 @@ import { BookingSection } from "@/components/sections/BookingSection";
 import { BrandStatement } from "@/components/sections/BrandStatement";
 import { Hero } from "@/components/sections/Hero";
 import { Location } from "@/components/sections/Location";
-import { Orthodontics } from "@/components/sections/Orthodontics";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Services } from "@/components/sections/Services";
+import { SocialProofStrip } from "@/components/sections/SocialProofStrip";
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { orthodonticsFaqs } from "@/lib/orthodontics";
 import { getDisplayedTestimonials, testimonials } from "@/lib/results";
-import { faqJsonLd, reviewJsonLd } from "@/lib/seo/jsonld";
+import { reviewJsonLd } from "@/lib/seo/jsonld";
 
 export default function Home() {
-  // Section numbers follow the manual's "01 — Label" style and must stay consecutive
-  // even when the testimonials block is hidden (no real reviews yet).
+  // Section numbers follow the manual's "01 — Label" style and must stay consecutive in DOM order.
+  // Services is 01 and About is 02 (hardcoded). Testimonials is 03 when shown; when hidden
+  // (no real reviews yet) it renders nothing, so Location and BookingSection shift down by one.
   const hasTestimonials = getDisplayedTestimonials().length > 0;
   const n = (i: number) => String(hasTestimonials ? i : i - 1).padStart(2, "0");
 
@@ -36,19 +36,18 @@ export default function Home() {
         <Hero />
         <Services />
         <WhyChooseUs />
+        <SocialProofStrip />
         <BrandStatement />
-        <Orthodontics />
         <About />
-        <Testimonials />
-        <Location number={n(5)} />
+        <Testimonials number="03" />
+        <Location number={n(4)} />
         <WaveDivider from="bg-bg" to="var(--color-surface-inverse)" />
-        <BookingSection number={n(6)} />
+        <BookingSection number={n(5)} />
         <WaveDivider from="bg-surface-inverse" to="var(--color-surface-deep)" flip />
       </main>
       <Footer />
       <MobileCtaBar />
       <FloatingWhatsapp />
-      <JsonLd data={faqJsonLd(orthodonticsFaqs)} />
       {/* Real testimonials only; renders nothing while src/lib/results.ts `testimonials` is empty. */}
       {testimonials.map((testimonial, index) => (
         <JsonLd key={`${testimonial.name}-${index}`} data={reviewJsonLd(testimonial)} />

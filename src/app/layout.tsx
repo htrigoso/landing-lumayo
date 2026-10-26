@@ -23,10 +23,18 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es_PE",
+    siteName: "Lumayo Centro Odontológico",
     title: "Lumayo · Centro Odontológico en Tarapoto",
     description:
       "Tecnología, confianza y atención cercana para tu sonrisa. Agenda tu cita por WhatsApp.",
     images: [{ url: "/images/hero.webp", width: 980, height: 580 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Lumayo · Centro Odontológico en Tarapoto",
+    description:
+      "Tecnología, confianza y atención cercana para tu sonrisa. Agenda tu cita por WhatsApp.",
+    images: ["/images/hero.webp"],
   },
 };
 

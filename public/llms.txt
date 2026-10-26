@@ -1,6 +1,6 @@
 # Lumayo Centro Odontológico
 
-> Lumayo es un centro odontológico en La Banda de Shilcayo, Tarapoto (San Martín, Perú). Ofrece odontología general, ortodoncia con brackets, estética dental, carillas, cirugía y prótesis, y atención para niños. Tiene tres programas: Lumayo Card (protección odontológica con descuentos), Lumayo Kids (odontopediatría) y Lumayo Novias (plan dental para bodas). Citas por WhatsApp o en el centro.
+> Lumayo es un centro odontológico en La Banda de Shilcayo, Tarapoto (San Martín, Perú). Ofrece odontología general, ortodoncia con brackets, estética dental, carillas, cirugía y prótesis, y atención para niños. Tiene tres programas: Membresía Lumayo (protección odontológica con descuentos), Lumayo Kids (odontopediatría) y Lumayo Novias (plan dental para bodas). Citas por WhatsApp o en el centro.
 
 ## Datos de contacto
 
@@ -8,26 +8,35 @@
 - Dirección: Jr. Miraflores 230, La Banda de Shilcayo, Tarapoto, San Martín, Perú
 - Teléfono: 946 788 123
 - WhatsApp: https://wa.me/51946788123
-- Horario (según se muestra en el sitio): Lun. a sáb. 9:00 a. m. a 9:00 p. m.
+- Horario: lunes a viernes de 8:00 a. m. a 1:00 p. m. y de 3:00 p. m. a 8:00 p. m. Sábados y domingos cerrado.
 - Mapa: https://www.google.com/maps/place/Lumayo+Centro+Odontol%C3%B3gico/@-6.4900813,-76.3540512,17z/data=!3m1!4b1!4m6!3m5!1s0x91ba0d8947d09025:0xa21f60bc22074614!8m2!3d-6.4900813!4d-76.3540512
 
 ## Servicios
 
-### Ortodoncia y estética
+### Ortodoncia
 
-- [Brackets y ortodoncia en Tarapoto](https://lumayo.pe/servicios/ortodoncia-y-estetica): brackets, alineación y diseño de sonrisa
-  - [Brackets](https://lumayo.pe/servicios/ortodoncia-y-estetica/brackets)
-  - [Diseño de sonrisa](https://lumayo.pe/servicios/ortodoncia-y-estetica/diseno-de-sonrisa)
-  - [Blanqueamiento dental](https://lumayo.pe/servicios/ortodoncia-y-estetica/blanqueamiento-dental)
+- [Brackets en Tarapoto: tipos y precios](https://lumayo.pe/servicios/ortodoncia): brackets convencionales, cerámicos, autoligables, de zafiro, de porcelana, lingual e Invisalign
+  - [Brackets convencionales](https://lumayo.pe/servicios/ortodoncia/brackets-convencionales)
+  - [Brackets cerámicos](https://lumayo.pe/servicios/ortodoncia/brackets-ceramicos)
+  - [Brackets autoligables](https://lumayo.pe/servicios/ortodoncia/brackets-autoligables)
+  - [Brackets de zafiro](https://lumayo.pe/servicios/ortodoncia/brackets-de-zafiro)
+  - [Brackets de porcelana](https://lumayo.pe/servicios/ortodoncia/brackets-de-porcelana)
+  - [Ortodoncia lingual](https://lumayo.pe/servicios/ortodoncia/ortodoncia-lingual)
+  - [Invisalign](https://lumayo.pe/servicios/ortodoncia/invisalign)
+
+### Estética dental
+- [Diseño de sonrisa y blanqueamiento dental en Tarapoto](https://lumayo.pe/servicios/estetica-dental): diseño de sonrisa y blanqueamiento
+  - [Diseño de sonrisa](https://lumayo.pe/servicios/estetica-dental/diseno-de-sonrisa)
+  - [Blanqueamiento dental](https://lumayo.pe/servicios/estetica-dental/blanqueamiento-dental)
 
 ### Carillas
 
-- [Carillas dentales: precio y tipos en Tarapoto](https://lumayo.pe/servicios/carillas-dentales): color, forma y alineación
-  - [Carillas de resina](https://lumayo.pe/servicios/carillas-dentales/carillas-de-resina)
-  - [Carillas de porcelana](https://lumayo.pe/servicios/carillas-dentales/carillas-de-porcelana)
-  - [Carillas de zirconio](https://lumayo.pe/servicios/carillas-dentales/carillas-de-zirconio)
-  - [Carillas de disilicato de litio](https://lumayo.pe/servicios/carillas-dentales/carillas-de-disilicato-de-litio)
-  - [Carillas ultrafinas](https://lumayo.pe/servicios/carillas-dentales/carillas-ultrafinas)
+- [Carillas dentales: precio y tipos en Tarapoto](https://lumayo.pe/servicios/carillas): color, forma y alineación
+  - [Carillas de resina](https://lumayo.pe/servicios/carillas/carillas-de-resina)
+  - [Carillas de porcelana](https://lumayo.pe/servicios/carillas/carillas-de-porcelana)
+  - [Carillas de zirconio](https://lumayo.pe/servicios/carillas/carillas-de-zirconio)
+  - [Carillas de disilicato de litio](https://lumayo.pe/servicios/carillas/carillas-de-disilicato-de-litio)
+  - [Carillas ultrafinas](https://lumayo.pe/servicios/carillas/carillas-ultrafinas)
 
 ### Prevención
 
@@ -39,10 +48,10 @@
 
 ### Restauración
 
-- [Endodoncia y curaciones dentales en Tarapoto](https://lumayo.pe/servicios/restauracion-dental): operatoria, curaciones y endodoncia
-  - [Operatoria dental](https://lumayo.pe/servicios/restauracion-dental/operatoria-dental)
-  - [Curaciones dentales](https://lumayo.pe/servicios/restauracion-dental/curaciones-dentales)
-  - [Endodoncia](https://lumayo.pe/servicios/restauracion-dental/endodoncia)
+- [Endodoncia y curaciones dentales en Tarapoto](https://lumayo.pe/servicios/restauracion): operatoria, curaciones y endodoncia
+  - [Operatoria dental](https://lumayo.pe/servicios/restauracion/operatoria-dental)
+  - [Curaciones dentales](https://lumayo.pe/servicios/restauracion/curaciones-dentales)
+  - [Endodoncia](https://lumayo.pe/servicios/restauracion/endodoncia)
 
 ### Cirugía y prótesis
 
@@ -54,14 +63,14 @@
 
 ### Niños
 
-- [Odontopediatras en Tarapoto](https://lumayo.pe/servicios/odontopediatria): atención amable para bebés, niños y adolescentes
-  - [Odontopediatría](https://lumayo.pe/servicios/odontopediatria/odontopediatria)
+- [Odontopediatras en Tarapoto](https://lumayo.pe/servicios/ninos): atención amable para bebés, niños y adolescentes
+  - [Odontopediatría](https://lumayo.pe/servicios/ninos/odontopediatria)
 
 ## Programas
 
-- [Lumayo Card](https://lumayo.pe/servicios/lumayo-card): tarjeta de protección odontológica con descuentos para el titular y sus adicionales. Plan Clásica: cuota anual S/ 125.00, reafiliación S/ 100.00, hasta 3 adicionales. Plan Dorada: cuota anual S/ 150.00, reafiliación S/ 50.00, hasta 6 adicionales.
-- [Lumayo Kids](https://lumayo.pe/servicios/lumayo-kids): primera visita y cuidado dental para niños, desde bebés hasta adolescentes.
-- [Lumayo Novias](https://lumayo.pe/servicios/lumayo-novias): plan dental por etapas para llegar a la boda con una sonrisa cuidada.
+- [Membresía Lumayo](https://lumayo.pe/membresia): membresía de protección odontológica con descuentos para el titular y sus adicionales. Plan Clásica: cuota anual S/ 125.00, reafiliación S/ 100.00, hasta 3 adicionales. Plan Dorada: cuota anual S/ 150.00, reafiliación S/ 50.00, hasta 6 adicionales.
+- [Lumayo Kids](https://lumayo.pe/kids): primera visita y cuidado dental para niños, desde bebés hasta adolescentes.
+- [Lumayo Novias](https://lumayo.pe/novias): plan dental por etapas para llegar a la boda con una sonrisa cuidada.
 
 ## Blog
 

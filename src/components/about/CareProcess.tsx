@@ -51,7 +51,7 @@ export function CareProcess() {
                 <div className="relative aspect-square overflow-hidden">
                   <Image
                     src={s.img}
-                    alt=""
+                    alt={s.title}
                     width={302}
                     height={302}
                     className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
