@@ -35,7 +35,7 @@ import {
   type ServiceCategory,
 } from "@/lib/site";
 import { defaultReviewerId, getTeamMember, type TeamMember } from "@/lib/team";
-import type { Testimonial } from "@/lib/results";
+import type { ReviewTestimonial } from "@/lib/results";
 
 /**
  * schema.org builders for the site. Pure functions: they read the same data the pages render, so the
@@ -458,9 +458,9 @@ export function personJsonLd(member: TeamMember): WithContext<Person> {
 
 /**
  * Review of the clinic from one real testimonial. `reviewRating` is set only when the patient gave a rating.
- * Only rendered for entries in `testimonials` (never the development samples).
+ * Only for testimonials with an author and text (see `reviewTestimonials` in results.ts).
  */
-export function reviewJsonLd(testimonial: Testimonial): WithContext<Review> {
+export function reviewJsonLd(testimonial: ReviewTestimonial): WithContext<Review> {
   return {
     "@context": CONTEXT,
     "@type": "Review",

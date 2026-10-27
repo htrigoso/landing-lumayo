@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { createPortal } from "react-dom";
 import { CloseIcon } from "@/components/icons";
+import { BrandVideo } from "@/components/testimonials/BrandVideo";
 import type { Testimonial } from "@/lib/results";
 
 function Stars({ rating }: { rating: number }) {
@@ -20,13 +22,17 @@ function Stars({ rating }: { rating: number }) {
 
 function PlayBadge() {
   return (
-    <span className="grid size-16 place-items-center rounded-full bg-primary/70 text-text-inverse ring-1 ring-white/60 transition-transform duration-300 group-hover/card:scale-110">
-      <svg viewBox="0 0 24 24" className="ml-1 size-7" fill="currentColor" aria-hidden="true">
-        <path d="M8 5.5v13l11-6.5-11-6.5Z" />
+    // Brandbook: solid Azul clínico disc, white glyph, one Aqua accent ring; flat with no shadow
+    <span className="grid size-16 place-items-center rounded-full bg-primary text-text-inverse ring-2 ring-accent transition duration-500 ease-out group-hover/card:scale-110 group-hover/card:bg-primary-hover motion-reduce:transition-none motion-reduce:group-hover/card:scale-100">
+      {/* Glyph bounding box centred on x=12.5: a touch right of the disc centre, which reads as optically centred */}
+      <svg viewBox="0 0 24 24" className="size-7" fill="currentColor" stroke="currentColor" strokeWidth="1" strokeLinejoin="round" aria-hidden="true">
+        <path d="M8.5 6.5v11l8-5.5-8-5.5Z" />
       </svg>
     </span>
   );
 }
+
+const testimonialAlt = (t: Testimonial) => (t.name ? `Testimonio de ${t.name}` : "Testimonio de un paciente de Lumayo");
 
 /** Vertical 9:16 card styled like a reel: cover image, quote and patient over a gradient. */
 function ReelCard({ t, onPlay }: { t: Testimonial; onPlay: (t: Testimonial) => void }) {
@@ -35,7 +41,7 @@ function ReelCard({ t, onPlay }: { t: Testimonial; onPlay: (t: Testimonial) => v
       {t.image ? (
         <Image
           src={t.image}
-          alt={`Testimonio de ${t.name}`}
+          alt={testimonialAlt(t)}
           fill
           unoptimized
           sizes="(min-width: 640px) 17rem, 15rem"
@@ -58,15 +64,26 @@ function ReelCard({ t, onPlay }: { t: Testimonial; onPlay: (t: Testimonial) => v
         </span>
       )}
 
-      <div className="absolute inset-x-0 bottom-0 p-4 text-left">
-        {t.rating ? <Stars rating={t.rating} /> : null}
-        <blockquote className="mt-2 line-clamp-4 text-sm leading-relaxed text-text-inverse/95">“{t.quote}”</blockquote>
-        <p className="mt-3 flex items-center gap-2 text-sm font-semibold text-text-inverse">
-          <span aria-hidden="true" className="h-px w-5 bg-accent" />
-          {t.name}
-          {t.source && <span className="font-normal text-text-inverse/70">· Vía {t.source}</span>}
-        </p>
-      </div>
+      {t.video && !t.quote && !t.name && (
+        <span className="absolute inset-x-0 bottom-4 flex items-center justify-center gap-2 text-[0.7rem] font-medium uppercase tracking-[0.12em] text-text-inverse">
+          <span aria-hidden="true" className="size-1.5 rounded-full bg-accent" />
+          Ver testimonio
+        </span>
+      )}
+
+      {(t.quote || t.name) && (
+        <div className="absolute inset-x-0 bottom-0 p-4 text-left">
+          {t.rating ? <Stars rating={t.rating} /> : null}
+          {t.quote && <blockquote className="mt-2 line-clamp-4 text-sm leading-relaxed text-text-inverse/95">“{t.quote}”</blockquote>}
+          {t.name && (
+            <p className="mt-3 flex items-center gap-2 text-sm font-semibold text-text-inverse">
+              <span aria-hidden="true" className="h-px w-5 bg-accent" />
+              {t.name}
+              {t.source && <span className="font-normal text-text-inverse/70">· Vía {t.source}</span>}
+            </p>
+          )}
+        </div>
+      )}
     </>
   );
 
@@ -74,7 +91,7 @@ function ReelCard({ t, onPlay }: { t: Testimonial; onPlay: (t: Testimonial) => v
     "group/card relative block aspect-[9/16] w-[15rem] shrink-0 overflow-hidden rounded-2xl bg-surface-deep sm:w-[17rem]";
 
   return t.video ? (
-    <button type="button" onClick={() => onPlay(t)} aria-label={`Ver el testimonio en video de ${t.name}`} className={`${shell} cursor-pointer`}>
+    <button type="button" onClick={() => onPlay(t)} aria-label={t.name ? `Ver el testimonio en video de ${t.name}` : "Ver el testimonio en video"} className={`${shell} cursor-pointer`}>
       {content}
     </button>
   ) : (
@@ -82,9 +99,12 @@ function ReelCard({ t, onPlay }: { t: Testimonial; onPlay: (t: Testimonial) => v
   );
 }
 
+const noopSubscribe = () => () => {};
+
 /** Full-screen player for a vertical testimonial video. */
 function VideoLightbox({ item, onClose }: { item: Testimonial | null; onClose: () => void }) {
   const closeRef = useRef<HTMLButtonElement>(null);
+  const mounted = useSyncExternalStore(noopSubscribe, () => true, () => false);
 
   useEffect(() => {
     if (!item) return;
@@ -94,13 +114,16 @@ function VideoLightbox({ item, onClose }: { item: Testimonial | null; onClose: (
     return () => window.removeEventListener("keydown", onKey);
   }, [item, onClose]);
 
-  return (
+  if (!mounted) return null;
+
+  // Portalled to <body>: transformed ancestors (the Reveal wrapper) would otherwise confine position:fixed.
+  return createPortal(
     <AnimatePresence>
       {item?.video && (
         <motion.div
           role="dialog"
           aria-modal="true"
-          aria-label={`Testimonio de ${item.name}`}
+          aria-label={item.name ? `Testimonio de ${item.name}` : "Testimonio en video"}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -113,9 +136,9 @@ function VideoLightbox({ item, onClose }: { item: Testimonial | null; onClose: (
             exit={{ scale: 0.95, y: 10 }}
             transition={{ type: "spring", stiffness: 260, damping: 26 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative aspect-[9/16] h-[min(85dvh,46rem)] overflow-hidden rounded-2xl bg-black shadow-lift"
+            className="relative aspect-[9/16] w-[min(calc(min(85dvh,46rem)*9/16),calc(100vw-2rem))] overflow-hidden rounded-2xl bg-black shadow-lift"
           >
-            <video src={item.video} poster={item.image} controls autoPlay playsInline className="size-full object-cover" />
+            <BrandVideo src={item.video} poster={item.image} title={item.name ? `Video de ${item.name}` : "Video del testimonio"} />
             <button
               ref={closeRef}
               type="button"
@@ -128,7 +151,8 @@ function VideoLightbox({ item, onClose }: { item: Testimonial | null; onClose: (
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 }
 
@@ -142,12 +166,24 @@ export function TestimonialsMarquee({ items }: { items: Testimonial[] }) {
   const [playing, setPlaying] = useState<Testimonial | null>(null);
   const close = useCallback(() => setPlaying(null), []);
 
+  // A single testimonial is shown centred on its own: a marquee of one card would just scroll it past.
+  if (items.length === 1) {
+    return (
+      <>
+        <div className="flex justify-center px-4 sm:px-6">
+          <ReelCard t={items[0]} onPlay={setPlaying} />
+        </div>
+        <VideoLightbox item={playing} onClose={close} />
+      </>
+    );
+  }
+
   if (reduceMotion) {
     return (
       <>
         <ul className="flex snap-x snap-mandatory gap-5 overflow-x-auto px-4 pb-4 sm:px-6" aria-label="Testimonios de pacientes">
-          {items.map((t) => (
-            <li key={t.name + t.quote.slice(0, 12)} className="snap-start">
+          {items.map((t, i) => (
+            <li key={i} className="snap-start">
               <ReelCard t={t} onPlay={setPlaying} />
             </li>
           ))}

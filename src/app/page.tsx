@@ -13,7 +13,7 @@ import { Services } from "@/components/sections/Services";
 import { SocialProofStrip } from "@/components/sections/SocialProofStrip";
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { getDisplayedTestimonials, testimonials } from "@/lib/results";
+import { getDisplayedTestimonials, reviewTestimonials } from "@/lib/results";
 import { reviewJsonLd } from "@/lib/seo/jsonld";
 import { heroPosterSrc } from "@/lib/hero-media";
 import { preload } from "react-dom";
@@ -56,12 +56,9 @@ export default function Home() {
       <Footer />
       <MobileCtaBar />
       <FloatingWhatsapp />
-      {/* Real testimonials only; renders nothing while src/lib/results.ts `testimonials` is empty. */}
-      {testimonials.map((testimonial, index) => (
-        <JsonLd
-          key={`${testimonial.name}-${index}`}
-          data={reviewJsonLd(testimonial)}
-        />
+      {/* Only testimonials with an author and text are valid schema.org Reviews. */}
+      {reviewTestimonials.map((testimonial) => (
+        <JsonLd key={testimonial.name} data={reviewJsonLd(testimonial)} />
       ))}
     </>
   );

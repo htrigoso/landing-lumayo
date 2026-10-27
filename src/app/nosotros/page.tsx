@@ -16,7 +16,7 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
 import { careProcessSteps } from "@/components/about/CareProcess";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { getDisplayedTestimonials, testimonials } from "@/lib/results";
+import { getDisplayedTestimonials, reviewTestimonials } from "@/lib/results";
 import { aboutPageJsonLd, personJsonLd, reviewJsonLd } from "@/lib/seo/jsonld";
 import { team } from "@/lib/team";
 
@@ -55,8 +55,8 @@ export default function NosotrosPage() {
       {team.map((member) => (
         <JsonLd key={member.name} data={personJsonLd(member)} />
       ))}
-      {testimonials.map((testimonial, index) => (
-        <JsonLd key={`${testimonial.name}-${index}`} data={reviewJsonLd(testimonial)} />
+      {reviewTestimonials.map((testimonial) => (
+        <JsonLd key={testimonial.name} data={reviewJsonLd(testimonial)} />
       ))}
       <main id="main">
         <PageHeader
