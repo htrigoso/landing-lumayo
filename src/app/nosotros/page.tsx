@@ -71,9 +71,9 @@ export default function NosotrosPage() {
         <WhyChooseUs />
         <SocialProofStrip />
         <TeamSection />
-        <Testimonials number="01" surface={testimonialsSurface} flatBottom />
+        <Testimonials surface={testimonialsSurface} flatBottom />
         <WaveDivider from={lastBg} to="var(--color-surface-inverse)" />
-        <BookingSection number={hasTestimonials ? "02" : "01"} />
+        <BookingSection number="01" />
         <WaveDivider from="bg-surface-inverse" to="var(--color-surface-deep)" flip />
       </main>
       <Footer />

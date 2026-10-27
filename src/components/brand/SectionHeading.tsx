@@ -2,8 +2,8 @@ import type { ReactNode } from "react";
 import { Reveal } from "@/components/motion/Reveal";
 
 type SectionHeadingProps = {
-  /** Section number shown as "01 — Label", as in the brand manual. */
-  number: string;
+  /** Section number shown as "01 — Label", as in the brand manual. Omit it when no numbered section precedes this one. */
+  number?: string;
   label: string;
   id: string;
   /** Title using the manual's 400 + 800 pairing: wrap the emphasis in <strong>. */
@@ -24,8 +24,12 @@ export function SectionHeading({ number, label, id, title, description, tone = "
     >
       <div>
         <p className={`flex items-center gap-3 text-sm font-medium tabular-nums ${dark ? "text-text-inverse-muted" : "text-primary"}`}>
-          {number}
-          <span aria-hidden="true" className={`h-px w-8 ${dark ? "bg-text-inverse-muted/50" : "bg-primary"}`} />
+          {number && (
+            <>
+              {number}
+              <span aria-hidden="true" className={`h-px w-8 ${dark ? "bg-text-inverse-muted/50" : "bg-primary"}`} />
+            </>
+          )}
           {label}
         </p>
         <h2 id={id} className={`section-title mt-4 ${dark ? "!text-text-inverse" : ""}`}>

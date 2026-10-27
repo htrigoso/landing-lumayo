@@ -8,7 +8,7 @@ import { SectionBackdrop } from "@/components/decor/SectionBackdrop";
  * `surface` lets a page keep backgrounds alternating when the section above shares its colour.
  * `flatBottom` keeps the sky bottom edge when a wave divider that paints sky follows directly.
  */
-export function Testimonials({ number = "04", surface = "mist", flatBottom = false }: { number?: string; surface?: "mist" | "white"; flatBottom?: boolean }) {
+export function Testimonials({ number, surface = "mist", flatBottom = false }: { number?: string; surface?: "mist" | "white"; flatBottom?: boolean }) {
   const items = getDisplayedTestimonials();
   if (items.length === 0) return null;
 

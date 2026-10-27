@@ -78,7 +78,7 @@ function ReserveButton({ className = "" }: { className?: string }) {
 export function LumayoKids() {
   return (
     <>
-      <section aria-labelledby="kids-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
+      <section aria-labelledby="kids-title" className="relative isolate overflow-hidden bg-white pt-16 pb-16 lg:pt-20 lg:pb-20">
         <SectionAtmosphere lines="bl" glow="tr" washTop="mist" isotype="br" />
 
         <div className="container-page grid grid-cols-[minmax(0,1fr)] gap-14 lg:grid-cols-2 lg:items-center lg:gap-20">
@@ -157,7 +157,7 @@ export function LumayoKids() {
       </section>
       <WaveDivider from="bg-primary" to="var(--color-bg)" flip />
 
-      <section aria-labelledby="comodidad-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
+      <section aria-labelledby="comodidad-title" className="relative isolate overflow-hidden bg-white pt-16 pb-16 lg:pt-20 lg:pb-20">
         <SectionAtmosphere lines="tr" />
 
         <div className="container-page">
