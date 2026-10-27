@@ -3,8 +3,8 @@ import type { TreatmentKey } from "@/lib/novias";
 export const site = {
   name: "Lumayo",
   tagline: "Centro Odontológico",
-  phoneDisplay: "946 788 123",
-  phoneE164: "+51946788123",
+  phoneDisplay: "986 382 607",
+  phoneE164: "+51986382607",
   /** Opening hours (Mon–Fri, split shift). Single source for UI, JSON-LD and llms.txt. */
   hours: {
     days: "Lunes a viernes",
@@ -17,7 +17,7 @@ export const site = {
   hoursDisplay: "Lun. a vie. 8:00 a. m. – 1:00 p. m. y 3:00 – 8:00 p. m.",
   /** One line per shift for footer and location. */
   hoursShiftLines: ["8:00 a. m. – 1:00 p. m.", "3:00 p. m. – 8:00 p. m."],
-  whatsappNumber: "51946788123",
+  whatsappNumber: "51986382607",
   address: {
     street: "Jr. Miraflores 230",
     district: "La Banda de Shilcayo",

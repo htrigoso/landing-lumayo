@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Lumayo · Ortodoncia y centro odontológico en Tarapoto",
   description:
-    "Brackets, blanqueamiento dental, implantes, endodoncia, prótesis y odontopediatría en Tarapoto. Agenda tu cita por WhatsApp al 946 788 123.",
+    "Brackets, blanqueamiento dental, implantes, endodoncia, prótesis y odontopediatría en Tarapoto. Agenda tu cita por WhatsApp al 986 382 607.",
   openGraph: {
     type: "website",
     locale: "es_PE",

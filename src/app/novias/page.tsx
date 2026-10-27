@@ -15,7 +15,7 @@ import { lumayoNovias, programPaths } from "@/lib/site";
 
 const title = "Sonrisa para novias en Tarapoto: blanqueamiento y plan dental | Lumayo";
 const description =
-  "Blanqueamiento para novias y plan dental por etapas en Tarapoto: carillas, ortodoncia y diseño de sonrisa, con evaluación y presupuesto a tu medida. Consulta por WhatsApp al 946 788 123.";
+  "Blanqueamiento para novias y plan dental por etapas en Tarapoto: carillas, ortodoncia y diseño de sonrisa, con evaluación y presupuesto a tu medida. Consulta por WhatsApp al 986 382 607.";
 
 export const metadata: Metadata = {
   title,

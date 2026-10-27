@@ -14,7 +14,7 @@ import { lumayoCard, programPaths } from "@/lib/site";
 
 const title = "Membresía Lumayo · Lumayo Centro Odontológico";
 const description =
-  "Membresía de protección odontológica de Lumayo con descuentos preferenciales para el titular y sus adicionales (hasta 3 en la Clásica y 6 en la Dorada). Consulta por WhatsApp al 946 788 123.";
+  "Membresía de protección odontológica de Lumayo con descuentos preferenciales para el titular y sus adicionales (hasta 3 en la Clásica y 6 en la Dorada). Consulta por WhatsApp al 986 382 607.";
 
 export const metadata: Metadata = {
   title,

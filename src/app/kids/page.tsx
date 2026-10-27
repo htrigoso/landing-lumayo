@@ -15,7 +15,7 @@ import { lumayoKids, programPaths } from "@/lib/site";
 
 const title = "Lumayo Kids · Lumayo Centro Odontológico";
 const description =
-  "Odontopediatría en Tarapoto: primera visita tranquila, prevención y consejos para papás según la edad de tu hijo. Consulta por WhatsApp al 946 788 123.";
+  "Odontopediatría en Tarapoto: primera visita tranquila, prevención y consejos para papás según la edad de tu hijo. Consulta por WhatsApp al 986 382 607.";
 
 export const metadata: Metadata = {
   title,

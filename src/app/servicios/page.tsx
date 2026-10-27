@@ -7,7 +7,7 @@ import { services } from "@/lib/site";
 
 const indexTitle = "Servicios · Lumayo Centro Odontológico";
 const indexDescription =
-  "Brackets, carillas, diseño de sonrisa, limpieza, curaciones dentales, endodoncia, extracción dental, implantes y odontopediatría en Tarapoto. Consulta por WhatsApp al 946 788 123.";
+  "Brackets, carillas, diseño de sonrisa, limpieza, curaciones dentales, endodoncia, extracción dental, implantes y odontopediatría en Tarapoto. Consulta por WhatsApp al 986 382 607.";
 // Cover: the first featured service photo, falling back to the first service.
 const indexCover = services.find((s) => s.featured) ?? services[0];
 
