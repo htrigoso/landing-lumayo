@@ -72,14 +72,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "Servicio no encontrado · Lumayo Centro Odontológico" };
   }
   const path = servicePath(service);
-  const title = `${service.name} · Lumayo Centro Odontológico`;
+  // SEO-lead copy when available (see Service.seo); otherwise fall back to the service's own text.
+  const title = service.seo?.title ?? `${service.name} · Lumayo Centro Odontológico`;
+  const description = service.seo?.description ?? service.details.summary;
   return {
     title,
-    description: service.details.summary,
+    description,
     alternates: { canonical: path },
     ...pageSocial({
       title,
-      description: service.details.summary,
+      description,
       path,
       image: { url: service.image, alt: service.name },
       type: "article",

@@ -47,14 +47,21 @@ export default function Home() {
         <Location number={n(4)} />
         <WaveDivider from="bg-bg" to="var(--color-surface-inverse)" />
         <BookingSection number={n(5)} />
-        <WaveDivider from="bg-surface-inverse" to="var(--color-surface-deep)" flip />
+        <WaveDivider
+          from="bg-surface-inverse"
+          to="var(--color-surface-deep)"
+          flip
+        />
       </main>
       <Footer />
       <MobileCtaBar />
       <FloatingWhatsapp />
       {/* Real testimonials only; renders nothing while src/lib/results.ts `testimonials` is empty. */}
       {testimonials.map((testimonial, index) => (
-        <JsonLd key={`${testimonial.name}-${index}`} data={reviewJsonLd(testimonial)} />
+        <JsonLd
+          key={`${testimonial.name}-${index}`}
+          data={reviewJsonLd(testimonial)}
+        />
       ))}
     </>
   );

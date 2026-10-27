@@ -598,6 +598,11 @@ export type Service = {
     idealFor: string;
     includes: string[];
   };
+  /**
+   * Search metadata from the SEO lead's sheet (docs/seo/metas-descripcion.xlsx, Oct 2026).
+   * Used verbatim as <title> and meta description; keep the sheet as the source of truth.
+   */
+  seo?: { title: string; description: string; keyword: string };
 };
 
 /**
@@ -611,6 +616,11 @@ export const services: Service[] = [
   {
     id: "brackets-convencionales",
     slug: "brackets-convencionales",
+    seo: {
+      title: "Brackets en Tarapoto | Ortodoncia metálica",
+      description: "Corrige la posición de tus dientes con brackets convencionales metálicos. Tratamiento eficaz y accesible con ortodoncistas de Lumayo. ¡Agenda tu evaluación!",
+      keyword: "Brackets",
+    },
     name: "Brackets convencionales",
     description:
       "Alinea tus dientes y mejora tu mordida con un plan de tratamiento hecho a tu medida.",
@@ -642,6 +652,11 @@ export const services: Service[] = [
   {
     id: "brackets-ceramicos",
     slug: "brackets-ceramicos",
+    seo: {
+      title: "Brackets cerámicos | Ortodoncia estética",
+      description: "Brackets cerámicos del color de tus dientes: alinea tu sonrisa de forma discreta y estética. Evalúa tu caso con los especialistas de Lumayo. ¡Agenda hoy!",
+      keyword: "Brackets ceramicos",
+    },
     name: "Brackets cerámicos",
     description: "Brackets de color parecido al diente, una alternativa más discreta a los metálicos.",
     icon: "braces",
@@ -670,6 +685,11 @@ export const services: Service[] = [
   {
     id: "brackets-autoligables",
     slug: "brackets-autoligables",
+    seo: {
+      title: "Brackets autoligables | Menos citas",
+      description: "Brackets autoligables: menor fricción, mayor comodidad y menos visitas de control. Conoce si son para ti con una evaluación en Lumayo. ¡Reserva tu cita!",
+      keyword: "Brackets autoligables",
+    },
     name: "Brackets autoligables",
     description: "Brackets con un clip integrado que sujeta el arco sin necesidad de ligaduras elásticas.",
     icon: "braces",
@@ -698,6 +718,11 @@ export const services: Service[] = [
   {
     id: "brackets-zafiro",
     slug: "brackets-de-zafiro",
+    seo: {
+      title: "Brackets de zafiro | Ortodoncia invisible",
+      description: "Brackets de zafiro transparentes que no se manchan y casi no se notan. Ortodoncia estética con especialistas de Lumayo. ¡Agenda tu evaluación!",
+      keyword: "Brackets de zafiro",
+    },
     name: "Brackets de zafiro",
     description: "Brackets transparentes de zafiro sintético, casi imperceptibles en tu sonrisa.",
     icon: "braces",
@@ -726,6 +751,11 @@ export const services: Service[] = [
   {
     id: "brackets-porcelana",
     slug: "brackets-de-porcelana",
+    seo: {
+      title: "Brackets de porcelana | Estéticos y discretos",
+      description: "Brackets de porcelana que se mimetizan con tu sonrisa. Corrige la mordida sin renunciar a la estética. Evalúa tu tratamiento en Lumayo. ¡Agenda tu cita!",
+      keyword: "Brackets de porcelana",
+    },
     name: "Brackets de porcelana",
     description: "Brackets de porcelana con acabado liso y color natural para un tratamiento discreto.",
     icon: "braces",
@@ -754,6 +784,11 @@ export const services: Service[] = [
   {
     id: "ortodoncia-lingual",
     slug: "ortodoncia-lingual",
+    seo: {
+      title: "Ortodoncia lingual | Brackets invisibles",
+      description: "Ortodoncia lingual: brackets colocados detrás de los dientes, invisibles al sonreír. Tratamiento personalizado en Lumayo. ¡Agenda tu evaluación!",
+      keyword: "Ortodoncia lingual",
+    },
     name: "Ortodoncia lingual",
     description: "Brackets colocados en la cara interna de los dientes, sin que se vean desde afuera.",
     icon: "braces",
@@ -783,6 +818,11 @@ export const services: Service[] = [
   {
     id: "invisalign",
     slug: "invisalign",
+    seo: {
+      title: "Invisalign | Ortodoncia invisible con alineadores",
+      description: "Alinea tus dientes con Invisalign: alineadores transparentes y removibles, sin brackets. Planificación digital en Lumayo. ¡Agenda tu evaluación hoy!",
+      keyword: "Invisalign - ortodoncia invisible",
+    },
     name: "Invisalign",
     description: "Alineadores transparentes y removibles que mueven tus dientes de forma gradual.",
     icon: "braces",
@@ -810,6 +850,11 @@ export const services: Service[] = [
   {
     id: "blanqueamiento",
     slug: "blanqueamiento-dental",
+    seo: {
+      title: "Blanqueamiento dental profesional",
+      description: "Blanqueamiento dental profesional seguro y supervisado. Aclara varios tonos tu sonrisa sin dañar el esmalte. ¡Reserva tu cita en Lumayo!",
+      keyword: "blanqueamiento dental",
+    },
     name: "Blanqueamiento dental",
     description: "Aclara el tono de tus dientes de forma segura y luce una sonrisa más luminosa.",
     icon: "sparkle",
@@ -830,6 +875,11 @@ export const services: Service[] = [
   {
     id: "diseno-de-sonrisa",
     slug: "diseno-de-sonrisa",
+    seo: {
+      title: "Diseño de sonrisa | Estética dental personalizada",
+      description: "Diseño de sonrisa personalizado: forma, color y armonía según tu rostro. Planificación digital y especialistas en estética dental en Lumayo. ¡Agenda tu cita!",
+      keyword: "diseño de sonrisa",
+    },
     name: "Diseño de sonrisa",
     description: "Planificamos la forma, el color y la proporción de tus dientes para una sonrisa en armonía con tu rostro.",
     icon: "smile",
@@ -852,6 +902,11 @@ export const services: Service[] = [
   {
     id: "carillas-resina",
     slug: "carillas-de-resina",
+    seo: {
+      title: "Carillas de Resina | Estética dental",
+      description: "Carillas de resina para corregir color, forma y pequeñas fisuras en pocas sesiones. Opción estética y accesible en Lumayo. ¡Agenda tu evaluación!",
+      keyword: "carillas de resina",
+    },
     name: "Carillas de resina",
     description: "Una opción rápida y accesible para mejorar el color y la forma de tus dientes en pocas sesiones.",
     icon: "veneer",
@@ -872,6 +927,11 @@ export const services: Service[] = [
   {
     id: "carillas-porcelana",
     slug: "carillas-de-porcelana",
+    seo: {
+      title: "Carillas de porcelana | Sonrisa natural",
+      description: "Carillas de porcelana resistentes, que no se manchan y lucen naturales. Transforma tu sonrisa con especialistas de Lumayo. ¡Agenda tu evaluación!",
+      keyword: "carillas de porcelana",
+    },
     name: "Carillas de porcelana",
     description: "Resistentes y de brillo natural, mantienen su color con el paso de los años.",
     icon: "veneer",
@@ -892,6 +952,11 @@ export const services: Service[] = [
   {
     id: "carillas-zirconio",
     slug: "carillas-de-zirconio",
+    seo: {
+      title: "Carillas de zirconio | Alta resistencia",
+      description: "Carillas de zirconio: máxima resistencia y acabado estético duradero. Ideales para corregir color y forma. Evalúa tu caso en Lumayo. ¡Agenda hoy!",
+      keyword: "carillas de zirconio",
+    },
     name: "Carillas de zirconio",
     description: "Gran resistencia para cubrir dientes oscuros, manchados o con desgaste.",
     icon: "veneer",
@@ -912,6 +977,11 @@ export const services: Service[] = [
   {
     id: "carillas-disilicato",
     slug: "carillas-de-disilicato-de-litio",
+    seo: {
+      title: "Carillas de disilicato de litio",
+      description: "Carillas de disilicato de litio: delgadas, resistentes y con translucidez natural. Resultados estéticos de alto nivel en Lumayo. ¡Agenda tu cita!",
+      keyword: "carillas de disilicato de litio",
+    },
     name: "Carillas de disilicato de litio",
     description: "Estética y translucidez muy parecidas al esmalte natural, con excelente durabilidad.",
     icon: "veneer",
@@ -932,6 +1002,11 @@ export const services: Service[] = [
   {
     id: "carillas-ultrafinas",
     slug: "carillas-ultrafinas",
+    seo: {
+      title: "Carillas ultrafinas | Mínimo desgaste",
+      description: "Carillas ultrafinas que mejoran tu sonrisa con mínimo o nulo desgaste dental. Resultado natural y duradero. Evalúa tu caso en Lumayo. ¡Agenda hoy!",
+      keyword: "carillas ultrafinas",
+    },
     name: "Carillas ultrafinas",
     description: "Láminas finas como lentes de contacto que se colocan sin desgastar tus dientes.",
     icon: "veneer",
@@ -952,6 +1027,11 @@ export const services: Service[] = [
   {
     id: "limpieza",
     slug: "limpieza-dental",
+    seo: {
+      title: "Limpieza dental profesional | Profilaxis",
+      description: "Limpieza dental profesional: elimina sarro, placa y manchas para prevenir caries y enfermedad de encías. Cuida tu salud bucal en Lumayo. ¡Agenda tu cita!",
+      keyword: "limpieza dental",
+    },
     name: "Limpieza dental",
     description: "Retiramos el sarro y las manchas para mantener tus encías sanas y tu boca fresca.",
     icon: "clean",
@@ -972,6 +1052,11 @@ export const services: Service[] = [
   {
     id: "fluor-barniz",
     slug: "fluor-barniz",
+    seo: {
+      title: "Flúor barniz | Prevención de caries",
+      description: "Aplicación de flúor barniz para fortalecer el esmalte y prevenir caries en niños y adultos. Procedimiento rápido e indoloro en Lumayo. ¡Reserva tu cita!",
+      keyword: "fluor barniz",
+    },
     name: "Flúor barniz",
     description: "Una capa protectora que fortalece el esmalte y ayuda a prevenir la caries.",
     icon: "drop",
@@ -991,6 +1076,11 @@ export const services: Service[] = [
   {
     id: "fluor-gel",
     slug: "fluor-en-gel",
+    seo: {
+      title: "Flúor en Gel | Protección del esmalte",
+      description: "Aplicación de flúor en gel para remineralizar el esmalte y reducir el riesgo de caries. Tratamiento preventivo rápido en Lumayo. ¡Agenda tu cita!",
+      keyword: "fluor en gel",
+    },
     name: "Flúor en gel",
     description: "Aplicación con cubetas que refuerza el esmalte de niños y adultos.",
     icon: "tray",
@@ -1010,6 +1100,11 @@ export const services: Service[] = [
   {
     id: "sellantes",
     slug: "sellantes-de-fosas-y-fisuras",
+    seo: {
+      title: "Sellantes de fosas y fisuras",
+      description: "Sellantes de fosas y fisuras: protegen molares y premolares de la caries, ideales para niños. Tratamiento rápido e indoloro en Lumayo. ¡Agenda tu cita!",
+      keyword: "sellantes de fosas y fisuras",
+    },
     name: "Sellantes de fosas y fisuras",
     description: "Protegen las muelas sellando los surcos donde suele empezar la caries.",
     icon: "shield",
@@ -1029,6 +1124,11 @@ export const services: Service[] = [
   {
     id: "operatoria",
     slug: "operatoria-dental",
+    seo: {
+      title: "Operatoria dental | Tratamiento de caries",
+      description: "Operatoria dental para tratar caries y restaurar dientes dañados con materiales estéticos y duraderos. Recupera tu salud bucal en Lumayo. ¡Agenda tu cita!",
+      keyword: "operatoria dental",
+    },
     name: "Operatoria dental",
     description: "Restauramos dientes con caries, desgaste o fracturas con resinas del color natural.",
     icon: "tooth",
@@ -1049,6 +1149,11 @@ export const services: Service[] = [
   {
     id: "curaciones",
     slug: "curaciones-dentales",
+    seo: {
+      title: "Curaciones dentales con resina",
+      description: "Curaciones dentales con resina del color de tus dientes. Elimina la caries y restaura tu pieza de forma estética y segura en Lumayo. ¡Agenda tu cita!",
+      keyword: "curaciones dentales",
+    },
     name: "Curaciones dentales",
     description: "Detenemos la caries a tiempo y devolvemos al diente su forma y su función.",
     icon: "filling",
@@ -1069,6 +1174,11 @@ export const services: Service[] = [
   {
     id: "endodoncia",
     slug: "endodoncia",
+    seo: {
+      title: "Endodoncia | Tratamiento de conducto",
+      description: "Endodoncia o tratamiento de conducto para eliminar el dolor y salvar tu diente. Procedimiento con anestesia y especialistas en Lumayo. ¡Agenda tu cita!",
+      keyword: "endodoncia",
+    },
     name: "Endodoncia",
     description: "Tratamiento de conducto para aliviar el dolor y conservar tu diente natural.",
     icon: "root",
@@ -1089,6 +1199,11 @@ export const services: Service[] = [
   {
     id: "extracciones",
     slug: "extraccion-dental",
+    seo: {
+      title: "Extracción dental segura y sin dolor",
+      description: "Extracción dental simple o compleja con anestesia y cuidados postoperatorios. Atención segura con especialistas de Lumayo. ¡Agenda tu evaluación!",
+      keyword: "extraccion dental",
+    },
     name: "Extracción dental",
     description: "Retiramos piezas dañadas de forma segura, con anestesia y cuidado en todo momento.",
     icon: "extract",
@@ -1109,6 +1224,11 @@ export const services: Service[] = [
   {
     id: "muelas-del-juicio",
     slug: "extraccion-de-la-muela-del-juicio",
+    seo: {
+      title: "Extracción de muela del juicio",
+      description: "Extracción de la muela del juicio con evaluación radiográfica y anestesia. Evita dolor, infecciones y apiñamiento. Cirujanos en Lumayo. ¡Agenda tu cita!",
+      keyword: "extraccion de la muela del juicio",
+    },
     name: "Extracción de la muela del juicio",
     description: "Evaluamos y retiramos las muelas del juicio que causan dolor o molestias.",
     icon: "wisdom",
@@ -1129,6 +1249,11 @@ export const services: Service[] = [
   {
     id: "implantes",
     slug: "implantes-dentales",
+    seo: {
+      title: "Implantes dentales | Recupera tus piezas perdidas",
+      description: "Implantes dentales para reemplazar piezas perdidas con resultados naturales y duraderos. Planificación personalizada en Lumayo. ¡Agenda tu evaluación!",
+      keyword: "implantes dentales",
+    },
     name: "Implantes dentales",
     description: "Reemplaza piezas perdidas con una solución fija, firme y de aspecto natural.",
     icon: "implant",
@@ -1149,6 +1274,11 @@ export const services: Service[] = [
   {
     id: "protesis",
     slug: "protesis-dental",
+    seo: {
+      title: "Prótesis dental fija y removible",
+      description: "Prótesis dental fija o removible para recuperar función y estética. Diseño a medida y ajuste cómodo con especialistas de Lumayo. ¡Agenda tu evaluación!",
+      keyword: "protesis dental",
+    },
     name: "Prótesis dental",
     description: "Recupera la función y la estética de tu sonrisa con prótesis cómodas y bien ajustadas.",
     icon: "denture",
@@ -1169,6 +1299,11 @@ export const services: Service[] = [
   {
     id: "odontopediatria",
     slug: "odontopediatria",
+    seo: {
+      title: "Odontopediatría | Dentista para niños",
+      description: "Odontopediatría: atención dental para bebés, niños y adolescentes en un ambiente amigable. Prevención y tratamientos en Lumayo. ¡Agenda la cita de tu hijo!",
+      keyword: "odontopediatria",
+    },
     name: "Odontopediatría",
     description: "Atención amable y paciente para que los más pequeños vivan una visita tranquila.",
     icon: "child",
