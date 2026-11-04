@@ -45,6 +45,7 @@ function ReelCard({ t, onPlay }: { t: Testimonial; onPlay: (t: Testimonial) => v
           fill
           unoptimized
           sizes="(min-width: 640px) 17rem, 15rem"
+          style={t.coverPosition ? { objectPosition: t.coverPosition } : undefined}
           className="object-cover transition-transform duration-700 ease-out group-hover/card:scale-105"
         />
       ) : (
@@ -116,6 +117,8 @@ function VideoLightbox({ item, onClose }: { item: Testimonial | null; onClose: (
 
   if (!mounted) return null;
 
+  const landscape = item?.orientation === "landscape";
+
   // Portalled to <body>: transformed ancestors (the Reveal wrapper) would otherwise confine position:fixed.
   return createPortal(
     <AnimatePresence>
@@ -136,7 +139,11 @@ function VideoLightbox({ item, onClose }: { item: Testimonial | null; onClose: (
             exit={{ scale: 0.95, y: 10 }}
             transition={{ type: "spring", stiffness: 260, damping: 26 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative aspect-[9/16] w-[min(calc(min(85dvh,46rem)*9/16),calc(100vw-2rem))] overflow-hidden rounded-2xl bg-black shadow-lift"
+            className={`relative overflow-hidden rounded-2xl bg-black shadow-lift ${
+              landscape
+                ? "aspect-video w-[min(calc(100vw-2rem),56rem)]"
+                : "aspect-[9/16] w-[min(calc(min(85dvh,46rem)*9/16),calc(100vw-2rem))]"
+            }`}
           >
             <BrandVideo src={item.video} poster={item.image} title={item.name ? `Video de ${item.name}` : "Video del testimonio"} />
             <button
@@ -166,13 +173,17 @@ export function TestimonialsMarquee({ items }: { items: Testimonial[] }) {
   const [playing, setPlaying] = useState<Testimonial | null>(null);
   const close = useCallback(() => setPlaying(null), []);
 
-  // A single testimonial is shown centred on its own: a marquee of one card would just scroll it past.
-  if (items.length === 1) {
+  // Up to three testimonials sit centred side by side: a marquee of so few cards would repeat them.
+  if (items.length <= 3) {
     return (
       <>
-        <div className="flex justify-center px-4 sm:px-6">
-          <ReelCard t={items[0]} onPlay={setPlaying} />
-        </div>
+        <ul className="flex flex-wrap justify-center gap-5 px-4 sm:px-6" aria-label="Testimonios de pacientes">
+          {items.map((t, i) => (
+            <li key={i} className="flex">
+              <ReelCard t={t} onPlay={setPlaying} />
+            </li>
+          ))}
+        </ul>
         <VideoLightbox item={playing} onClose={close} />
       </>
     );
