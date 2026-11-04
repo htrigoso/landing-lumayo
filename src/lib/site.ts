@@ -727,7 +727,7 @@ export const services: Service[] = [
     description: "Brackets transparentes de zafiro sintético, casi imperceptibles en tu sonrisa.",
     icon: "braces",
     category: "ortodoncia",
-    image: servicePhoto("photo-1629909613654-28e377c37b09"),
+    image: "/fotos/brackets-zafiro-hero.webp",
     ortho: {
       visibility: "Discreto",
       typicalMonths: "12 a 24 meses", // TODO(SEO): confirm with the dentist
@@ -793,7 +793,7 @@ export const services: Service[] = [
     description: "Brackets colocados en la cara interna de los dientes, sin que se vean desde afuera.",
     icon: "braces",
     category: "ortodoncia",
-    image: servicePhoto("photo-1607613009820-a29f7bb81c04"),
+    image: "/fotos/ortodoncia-lingual-hero.webp",
     ortho: {
       visibility: "Invisible",
       typicalMonths: "18 a 30 meses", // TODO(SEO): confirm with the dentist
@@ -936,7 +936,7 @@ export const services: Service[] = [
     description: "Resistentes y de brillo natural, mantienen su color con el paso de los años.",
     icon: "veneer",
     category: "carillas",
-    image: servicePhoto("photo-1769559893692-c6d0623bf8e4"),
+    image: "/fotos/carillas-porcelana-hero.webp",
     details: {
       summary:
         "Son láminas de porcelana elaboradas a medida que se adhieren a la cara visible del diente. Ofrecen un acabado muy natural y conservan su color con el tiempo.",
@@ -1061,7 +1061,7 @@ export const services: Service[] = [
     description: "Una capa protectora que fortalece el esmalte y ayuda a prevenir la caries.",
     icon: "drop",
     category: "prevencion",
-    image: servicePhoto("photo-1758205307836-0829c799890b"),
+    image: "/fotos/fluor-barniz-hero.webp",
     details: {
       summary:
         "Aplicamos una fina capa de barniz con flúor sobre los dientes. Es rápida, indolora y ayuda a fortalecer el esmalte frente a la caries.",
@@ -1085,7 +1085,7 @@ export const services: Service[] = [
     description: "Aplicación con cubetas que refuerza el esmalte de niños y adultos.",
     icon: "tray",
     category: "prevencion",
-    image: servicePhoto("photo-1758205308172-fc864545dcf7"),
+    image: "/fotos/fluor-gel-hero-v2.webp",
     details: {
       summary:
         "Colocamos gel con flúor en cubetas que se ajustan a tus dientes durante unos minutos para reforzar el esmalte.",
@@ -1109,7 +1109,7 @@ export const services: Service[] = [
     description: "Protegen las muelas sellando los surcos donde suele empezar la caries.",
     icon: "shield",
     category: "prevencion",
-    image: servicePhoto("photo-1653508310895-62141575a3a9"),
+    image: "/fotos/sellantes-hero.webp",
     details: {
       summary:
         "Las muelas tienen surcos donde se acumulan restos de comida. El sellante es un material fluido que los cubre y deja una superficie lisa y fácil de limpiar.",
@@ -1158,7 +1158,7 @@ export const services: Service[] = [
     description: "Detenemos la caries a tiempo y devolvemos al diente su forma y su función.",
     icon: "filling",
     category: "restauracion",
-    image: servicePhoto("photo-1777793389944-f7165259a05c"),
+    image: "/fotos/curaciones-hero.webp",
     details: {
       summary:
         "Cuando la caries se detecta a tiempo, basta con limpiar la zona afectada y rellenarla. Así evitamos que avance y requiera tratamientos más complejos.",
@@ -1183,7 +1183,7 @@ export const services: Service[] = [
     description: "Tratamiento de conducto para aliviar el dolor y conservar tu diente natural.",
     icon: "root",
     category: "restauracion",
-    image: servicePhoto("photo-1657470179447-0f5aa16daa91"),
+    image: "/fotos/endodoncia-hero.webp",
     details: {
       summary:
         "Cuando la infección llega al nervio del diente, limpiamos y sellamos sus conductos internos. Así eliminamos el dolor y conservamos tu diente natural.",

@@ -319,8 +319,9 @@ export const veneersDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/carillas-porcelana-ia-antes.webp",
-                "after": "/galeria/carillas-porcelana-ia-despues.webp"
+                "before": "/galeria/carillas-porcelana-ia-v13-antes.webp",
+                "during": "/galeria/carillas-porcelana-ia-v13-proceso.webp",
+                "after": "/galeria/carillas-porcelana-ia-v13-despues.webp"
               }
             ],
             "aiGenerated": true

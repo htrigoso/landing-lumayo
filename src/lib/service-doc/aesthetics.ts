@@ -72,8 +72,8 @@ export const aestheticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/diseno-de-sonrisa-ia-antes.webp",
-                "after": "/galeria/diseno-de-sonrisa-ia-despues.webp"
+                "before": "/galeria/diseno-de-sonrisa-ia-v12-antes.webp",
+                "after": "/galeria/diseno-de-sonrisa-ia-v12-despues.webp"
               }
             ],
             "aiGenerated": true

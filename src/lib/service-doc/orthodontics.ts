@@ -869,8 +869,9 @@ export const orthodonticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/brackets-zafiro-ia-antes.webp",
-                "after": "/galeria/brackets-zafiro-ia-despues.webp"
+                "before": "/galeria/brackets-zafiro-ia-v9-antes.webp",
+                "during": "/galeria/brackets-zafiro-ia-v9-proceso.webp",
+                "after": "/galeria/brackets-zafiro-ia-v9-despues.webp"
               }
             ],
             "aiGenerated": true
@@ -1414,8 +1415,9 @@ export const orthodonticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/ortodoncia-lingual-ia-antes.webp",
-                "after": "/galeria/ortodoncia-lingual-ia-despues.webp"
+                "before": "/galeria/ortodoncia-lingual-ia-v10-antes.webp",
+                "during": "/galeria/ortodoncia-lingual-ia-v10-proceso.webp",
+                "after": "/galeria/ortodoncia-lingual-ia-v10-despues.webp"
               }
             ],
             "aiGenerated": true
