@@ -72,10 +72,11 @@ export const restorationDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/fotos/photo-1606811971618-4486d14f3f99.webp",
-                "after": "/fotos/photo-1777793389944-f7165259a05c.webp"
+                "before": "/galeria/operatoria-ia-antes.webp",
+                "after": "/galeria/operatoria-ia-despues.webp"
               }
-            ]
+            ],
+            "aiGenerated": true
           }
         ],
         "subsections": []
@@ -319,10 +320,11 @@ export const restorationDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/fotos/photo-1777793389944-f7165259a05c.webp",
-                "after": "/fotos/photo-1606811971618-4486d14f3f99.webp"
+                "before": "/galeria/curaciones-ia-antes.webp",
+                "after": "/galeria/curaciones-ia-despues.webp"
               }
-            ]
+            ],
+            "aiGenerated": true
           }
         ],
         "subsections": []
@@ -575,10 +577,11 @@ export const restorationDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/fotos/photo-1657470179447-0f5aa16daa91.webp",
-                "after": "/fotos/photo-1606811971618-4486d14f3f99.webp"
+                "before": "/galeria/endodoncia-ia-antes.webp",
+                "after": "/galeria/endodoncia-ia-despues.webp"
               }
-            ]
+            ],
+            "aiGenerated": true
           }
         ],
         "subsections": []

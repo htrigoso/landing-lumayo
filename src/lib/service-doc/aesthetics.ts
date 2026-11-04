@@ -72,10 +72,11 @@ export const aestheticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/diseno-de-sonrisa-antes.webp",
-                "after": "/galeria/diseno-de-sonrisa-despues.webp"
+                "before": "/galeria/diseno-de-sonrisa-ia-antes.webp",
+                "after": "/galeria/diseno-de-sonrisa-ia-despues.webp"
               }
-            ]
+            ],
+            "aiGenerated": true
           }
         ],
         "subsections": []
@@ -323,10 +324,11 @@ export const aestheticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/blanqueamiento-antes.webp",
-                "after": "/galeria/blanqueamiento-despues.webp"
+                "before": "/galeria/blanqueamiento-ia-antes.webp",
+                "after": "/galeria/blanqueamiento-ia-despues.webp"
               }
-            ]
+            ],
+            "aiGenerated": true
           }
         ],
         "subsections": []

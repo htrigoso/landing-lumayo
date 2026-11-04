@@ -15,6 +15,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { BookingSection } from "@/components/sections/BookingSection";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { OrthoPriceBlock } from "@/components/services/OrthoPriceBlock";
+import { ServiceGallery } from "@/components/services/ServiceGallery";
 import { FaqAccordion } from "@/components/orthodontics/FaqAccordion";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ReviewedBy } from "@/components/seo/ReviewedBy";
@@ -63,6 +64,20 @@ function splitServiceName(name: string) {
 /** Section numbers as in the brand manual: "01", "02", ... */
 function sectionNumber(index: number) {
   return String(index + 1).padStart(2, "0");
+}
+
+/** Eyebrow label for a doc section, derived from its H2 title. First matching rule wins. */
+function sectionLabel(title: string): string {
+  if (title.startsWith("¿Qué es") || title.startsWith("¿Qué son")) return "Qué es";
+  if (title.includes("Cuándo")) return "Indicaciones";
+  if (title.startsWith("Antes y después")) return "Antes y después";
+  if (title.includes("paso a paso") || title.startsWith("¿Cómo")) return "Proceso";
+  if (title.startsWith("Ventajas")) return "Ventajas";
+  if (title.includes("Cuánto cuest")) return "Precio";
+  if (title.includes(" vs. ") || title.includes("cuál elegir") || title.includes("diferencia")) return "Comparativa";
+  if (title.startsWith("Cuidados")) return "Cuidados";
+  if (title.startsWith("¿Por qué")) return "Por qué Lumayo";
+  return "Información";
 }
 
 /** Ordered steps of the first "paso a paso" subsection, for HowTo JSON-LD. */
@@ -486,7 +501,7 @@ function DocSections({ doc }: { doc: ServiceDoc }) {
             <div className="container-page">
               <SectionHeading
                 number={sectionNumber(i)}
-                label="Sección"
+                label={sectionLabel(section.title)}
                 id={id}
                 layout="stack"
                 title={section.title}
@@ -595,40 +610,7 @@ function DocBlockView({ block, h1 }: { block: DocBlock; h1: string }) {
     case "note":
       return <p className="text-sm text-text">{block.text}</p>;
 
-    case "gallery": {
-      const alt = block.placeholder
-        ? "Imagen referencial de tratamiento dental"
-        : `Antes y después de ${h1} en Lumayo, Tarapoto`;
-      return (
-        <div className="grid grid-cols-[minmax(0,1fr)] gap-6 sm:grid-cols-2">
-          {block.cases.map((item, i) => (
-            <figure key={i} className="min-w-0">
-              <div className="grid grid-cols-2 gap-3">
-                <CaseImage src={item.before} alt={alt} placeholder={block.placeholder} />
-                <CaseImage src={item.after} alt={alt} placeholder={block.placeholder} />
-              </div>
-              <figcaption className="mt-3 grid grid-cols-2 gap-3 text-sm font-medium text-text">
-                <span>Antes</span>
-                <span>Después</span>
-              </figcaption>
-              {!block.placeholder && (
-                <p className="mt-3 text-sm text-text">Resultado de un caso real. Cada caso es distinto.</p>
-              )}
-            </figure>
-          ))}
-        </div>
-      );
-    }
+    case "gallery":
+      return <ServiceGallery cases={block.cases} placeholder={block.placeholder} aiGenerated={block.aiGenerated} serviceName={h1} />;
   }
-}
-
-function CaseImage({ src, alt, placeholder }: { src: string; alt: string; placeholder: boolean }) {
-  return (
-    <div className="relative aspect-[4/3] min-w-0 overflow-hidden rounded-3xl bg-surface-soft">
-      <Image src={src} alt={alt} fill sizes="(min-width: 640px) 50vw, 100vw" className="object-cover" />
-      {placeholder && (
-        <span className="pill pill-outline absolute left-3 top-3 !px-3 !py-1 text-[0.62rem]">Imagen referencial</span>
-      )}
-    </div>
-  );
 }

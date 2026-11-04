@@ -72,10 +72,11 @@ export const orthodonticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/brackets-convencionales-antes.webp",
-                "after": "/galeria/brackets-convencionales-despues.webp"
+                "before": "/galeria/brackets-convencionales-ia-antes.webp",
+                "after": "/galeria/brackets-convencionales-ia-despues.webp"
               }
-            ]
+            ],
+            "aiGenerated": true
           }
         ],
         "subsections": []
@@ -336,10 +337,11 @@ export const orthodonticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/brackets-ceramicos-antes.webp",
-                "after": "/galeria/brackets-ceramicos-despues.webp"
+                "before": "/galeria/brackets-ceramicos-ia-antes.webp",
+                "after": "/galeria/brackets-ceramicos-ia-despues.webp"
               }
-            ]
+            ],
+            "aiGenerated": true
           }
         ],
         "subsections": []
@@ -602,10 +604,11 @@ export const orthodonticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/brackets-autoligables-antes.webp",
-                "after": "/galeria/brackets-autoligables-despues.webp"
+                "before": "/galeria/brackets-autoligables-ia-antes.webp",
+                "after": "/galeria/brackets-autoligables-ia-despues.webp"
               }
-            ]
+            ],
+            "aiGenerated": true
           }
         ],
         "subsections": []
@@ -863,10 +866,11 @@ export const orthodonticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/brackets-zafiro-antes.webp",
-                "after": "/galeria/brackets-zafiro-despues.webp"
+                "before": "/galeria/brackets-zafiro-ia-antes.webp",
+                "after": "/galeria/brackets-zafiro-ia-despues.webp"
               }
-            ]
+            ],
+            "aiGenerated": true
           }
         ],
         "subsections": []
@@ -1134,10 +1138,11 @@ export const orthodonticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/brackets-porcelana-antes.webp",
-                "after": "/galeria/brackets-porcelana-despues.webp"
+                "before": "/galeria/brackets-porcelana-ia-antes.webp",
+                "after": "/galeria/brackets-porcelana-ia-despues.webp"
               }
-            ]
+            ],
+            "aiGenerated": true
           }
         ],
         "subsections": []
@@ -1405,10 +1410,11 @@ export const orthodonticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/ortodoncia-lingual-antes.webp",
-                "after": "/galeria/ortodoncia-lingual-despues.webp"
+                "before": "/galeria/ortodoncia-lingual-ia-antes.webp",
+                "after": "/galeria/ortodoncia-lingual-ia-despues.webp"
               }
-            ]
+            ],
+            "aiGenerated": true
           }
         ],
         "subsections": []
@@ -1667,10 +1673,11 @@ export const orthodonticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/invisalign-antes.webp",
-                "after": "/galeria/invisalign-despues.webp"
+                "before": "/galeria/invisalign-ia-antes.webp",
+                "after": "/galeria/invisalign-ia-despues.webp"
               }
-            ]
+            ],
+            "aiGenerated": true
           }
         ],
         "subsections": []

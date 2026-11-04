@@ -8,7 +8,13 @@ export type DocBlock =
   | { type: "prices"; items: ({ label: string; value: string } | { label: string; pending: true })[] }
   | { type: "sources"; text: string }
   | { type: "note"; text: string }
-  | { type: "gallery"; placeholder: boolean; cases: { before: string; after: string }[] };
+  | {
+      type: "gallery";
+      placeholder: boolean;
+      /** Temporary AI-generated photos: the page labels them as such until real cases replace them. */
+      aiGenerated?: boolean;
+      cases: { before: string; after: string }[];
+    };
 
 export type DocSubsection = { title: string; blocks: DocBlock[] };
 

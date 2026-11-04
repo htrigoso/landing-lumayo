@@ -72,10 +72,11 @@ export const preventionDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/fotos/photo-1766338390573-ec092d69cdcb.webp",
-                "after": "/fotos/photo-1758205307836-0829c799890b.webp"
+                "before": "/galeria/limpieza-ia-antes.webp",
+                "after": "/galeria/limpieza-ia-despues.webp"
               }
-            ]
+            ],
+            "aiGenerated": true
           }
         ],
         "subsections": []
@@ -808,10 +809,11 @@ export const preventionDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/fotos/photo-1653508310895-62141575a3a9.webp",
-                "after": "/fotos/photo-1766338390573-ec092d69cdcb.webp"
+                "before": "/galeria/sellantes-ia-antes.webp",
+                "after": "/galeria/sellantes-ia-despues.webp"
               }
-            ]
+            ],
+            "aiGenerated": true
           }
         ],
         "subsections": []

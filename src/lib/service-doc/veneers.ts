@@ -68,10 +68,11 @@ export const veneersDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/carillas-resina-antes.webp",
-                "after": "/galeria/carillas-resina-despues.webp"
+                "before": "/galeria/carillas-resina-ia-antes.webp",
+                "after": "/galeria/carillas-resina-ia-despues.webp"
               }
-            ]
+            ],
+            "aiGenerated": true
           }
         ],
         "subsections": []
@@ -318,10 +319,11 @@ export const veneersDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/carillas-porcelana-antes.webp",
-                "after": "/galeria/carillas-porcelana-despues.webp"
+                "before": "/galeria/carillas-porcelana-ia-antes.webp",
+                "after": "/galeria/carillas-porcelana-ia-despues.webp"
               }
-            ]
+            ],
+            "aiGenerated": true
           }
         ],
         "subsections": []
@@ -580,10 +582,11 @@ export const veneersDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/carillas-zirconio-antes.webp",
-                "after": "/galeria/carillas-zirconio-despues.webp"
+                "before": "/galeria/carillas-zirconio-ia-antes.webp",
+                "after": "/galeria/carillas-zirconio-ia-despues.webp"
               }
-            ]
+            ],
+            "aiGenerated": true
           }
         ],
         "subsections": []
@@ -842,10 +845,11 @@ export const veneersDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/carillas-disilicato-antes.webp",
-                "after": "/galeria/carillas-disilicato-despues.webp"
+                "before": "/galeria/carillas-disilicato-ia-antes.webp",
+                "after": "/galeria/carillas-disilicato-ia-despues.webp"
               }
-            ]
+            ],
+            "aiGenerated": true
           }
         ],
         "subsections": []
@@ -1104,10 +1108,11 @@ export const veneersDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/carillas-ultrafinas-antes.webp",
-                "after": "/galeria/carillas-ultrafinas-despues.webp"
+                "before": "/galeria/carillas-ultrafinas-ia-antes.webp",
+                "after": "/galeria/carillas-ultrafinas-ia-despues.webp"
               }
-            ]
+            ],
+            "aiGenerated": true
           }
         ],
         "subsections": []

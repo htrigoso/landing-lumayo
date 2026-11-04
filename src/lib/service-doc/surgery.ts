@@ -581,10 +581,11 @@ export const surgeryDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/fotos/photo-1771442873035-474765b40ac6.webp",
-                "after": "/fotos/photo-1588776814546-daab30f310ce.webp"
+                "before": "/galeria/implantes-ia-antes.webp",
+                "after": "/galeria/implantes-ia-despues.webp"
               }
-            ]
+            ],
+            "aiGenerated": true
           }
         ],
         "subsections": []
@@ -857,10 +858,11 @@ export const surgeryDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/fotos/photo-1612736777093-461fb48101d7.webp",
-                "after": "/fotos/photo-1588776814546-daab30f310ce.webp"
+                "before": "/galeria/protesis-ia-antes.webp",
+                "after": "/galeria/protesis-ia-despues.webp"
               }
-            ]
+            ],
+            "aiGenerated": true
           }
         ],
         "subsections": []
