@@ -72,12 +72,8 @@ export const aestheticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "https://images.unsplash.com/photo-1677026010083-78ec7f1b84ed?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1654373535457-383a0a4d00f9?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
-              },
-              {
-                "before": "https://images.unsplash.com/photo-1584434081454-2a898b8e33d5?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
+                "before": "/galeria/diseno-de-sonrisa-antes.webp",
+                "after": "/galeria/diseno-de-sonrisa-despues.webp"
               }
             ]
           }
@@ -327,12 +323,8 @@ export const aestheticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "https://images.unsplash.com/photo-1654373535457-383a0a4d00f9?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1677026010083-78ec7f1b84ed?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
-              },
-              {
-                "before": "https://images.unsplash.com/photo-1584434081454-2a898b8e33d5?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
+                "before": "/galeria/blanqueamiento-antes.webp",
+                "after": "/galeria/blanqueamiento-despues.webp"
               }
             ]
           }

@@ -34,7 +34,7 @@ export function HowWeWork() {
           <div className="relative isolate aspect-[5/6] overflow-hidden rounded-2xl bg-primary">
             {/* Unsplash License */}
             <Image
-              src="https://images.unsplash.com/photo-1681939282781-341ac4f61996?w=1400&q=85&fm=jpg"
+              src="/fotos/photo-1681939282781-341ac4f61996.webp"
               alt="Odontóloga atendiendo a una paciente"
               fill
               unoptimized

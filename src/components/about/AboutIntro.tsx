@@ -16,7 +16,7 @@ export function AboutIntro() {
           <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
             {/* Unsplash License */}
             <Image
-              src="https://images.unsplash.com/photo-1777331903190-341a3dd0441b?w=1400&q=85&fm=jpg"
+              src="/fotos/photo-1777331903190-341a3dd0441b.webp"
               alt="Odontólogo conversando con una paciente en un consultorio moderno"
               fill
               unoptimized

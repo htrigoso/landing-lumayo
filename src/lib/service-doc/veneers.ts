@@ -68,12 +68,8 @@ export const veneersDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "https://images.unsplash.com/photo-1663182234283-28941e7612da?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1769559893692-c6d0623bf8e4?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
-              },
-              {
-                "before": "https://images.unsplash.com/photo-1670250492416-570b5b7343b1?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1661438818937-437f1aeaf08e?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
+                "before": "/galeria/carillas-resina-antes.webp",
+                "after": "/galeria/carillas-resina-despues.webp"
               }
             ]
           }
@@ -322,12 +318,8 @@ export const veneersDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "https://images.unsplash.com/photo-1769559893692-c6d0623bf8e4?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1663182234283-28941e7612da?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
-              },
-              {
-                "before": "https://images.unsplash.com/photo-1670250492416-570b5b7343b1?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1661438818937-437f1aeaf08e?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
+                "before": "/galeria/carillas-porcelana-antes.webp",
+                "after": "/galeria/carillas-porcelana-despues.webp"
               }
             ]
           }
@@ -588,12 +580,8 @@ export const veneersDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "https://images.unsplash.com/photo-1670250492416-570b5b7343b1?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1663182234283-28941e7612da?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
-              },
-              {
-                "before": "https://images.unsplash.com/photo-1769559893692-c6d0623bf8e4?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1661438818937-437f1aeaf08e?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
+                "before": "/galeria/carillas-zirconio-antes.webp",
+                "after": "/galeria/carillas-zirconio-despues.webp"
               }
             ]
           }
@@ -854,12 +842,8 @@ export const veneersDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "https://images.unsplash.com/photo-1661438818937-437f1aeaf08e?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1663182234283-28941e7612da?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
-              },
-              {
-                "before": "https://images.unsplash.com/photo-1769559893692-c6d0623bf8e4?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1670250492416-570b5b7343b1?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
+                "before": "/galeria/carillas-disilicato-antes.webp",
+                "after": "/galeria/carillas-disilicato-despues.webp"
               }
             ]
           }
@@ -1120,12 +1104,8 @@ export const veneersDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "https://images.unsplash.com/photo-1660300110427-c4a6efdf18b5?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1663182234283-28941e7612da?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
-              },
-              {
-                "before": "https://images.unsplash.com/photo-1769559893692-c6d0623bf8e4?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1670250492416-570b5b7343b1?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
+                "before": "/galeria/carillas-ultrafinas-antes.webp",
+                "after": "/galeria/carillas-ultrafinas-despues.webp"
               }
             ]
           }

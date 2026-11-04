@@ -174,7 +174,8 @@ const UNSPLASH_PREFIX = "https://images.unsplash.com/";
  * Unsplash photos get the credit and license documented in public/images/CREDITS.md; other images get none.
  */
 export function imageJsonLd({ src, name, caption }: { src: string; name: string; caption?: string }): ImageObject {
-  const isUnsplash = src.startsWith(UNSPLASH_PREFIX);
+  // Local copies of Unsplash photos keep the credit: /fotos (site) and /galeria (API downloads)
+  const isUnsplash = src.startsWith(UNSPLASH_PREFIX) || src.startsWith("/fotos/") || src.startsWith("/galeria/");
   return {
     "@type": "ImageObject",
     contentUrl: absoluteUrl(src),

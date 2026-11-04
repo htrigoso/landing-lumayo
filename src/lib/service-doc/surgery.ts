@@ -581,12 +581,8 @@ export const surgeryDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "https://images.unsplash.com/photo-1771442873035-474765b40ac6?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1588776814546-daab30f310ce?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
-              },
-              {
-                "before": "https://images.unsplash.com/photo-1777445374290-eedda5be8e5b?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1612736777093-461fb48101d7?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
+                "before": "/fotos/photo-1771442873035-474765b40ac6.webp",
+                "after": "/fotos/photo-1588776814546-daab30f310ce.webp"
               }
             ]
           }
@@ -861,12 +857,8 @@ export const surgeryDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "https://images.unsplash.com/photo-1612736777093-461fb48101d7?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1588776814546-daab30f310ce?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
-              },
-              {
-                "before": "https://images.unsplash.com/photo-1777445374290-eedda5be8e5b?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1771442873035-474765b40ac6?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
+                "before": "/fotos/photo-1612736777093-461fb48101d7.webp",
+                "after": "/fotos/photo-1588776814546-daab30f310ce.webp"
               }
             ]
           }

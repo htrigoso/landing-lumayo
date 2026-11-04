@@ -26,7 +26,7 @@ export const team: TeamMember[] = [
     // The business card reads "CCD: 55878"; confirm the register code before publishing.
     cop: "55878",
     // TEMPORARY stock photo (Unsplash, Vitaly Gariev). Not her; replace with her real portrait.
-    photo: "https://images.unsplash.com/photo-1758691462651-611d730c5272?w=900&h=924&fit=crop&crop=faces&q=80&auto=format",
+    photo: "/fotos/photo-1758691462651-611d730c5272.webp",
   },
 ];
 

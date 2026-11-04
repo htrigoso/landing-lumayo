@@ -609,7 +609,7 @@ export type Service = {
  * Stock photo from Unsplash (Unsplash License: free for commercial use).
  * Replace with the clinic's own photos when available.
  */
-const servicePhoto = (id: string) => `https://images.unsplash.com/${id}?w=1200&h=900&fit=crop&crop=entropy&q=80&auto=format`;
+const servicePhoto = (id: string) => `/fotos/${id}.webp`;
 
 export const services: Service[] = [
   // TODO(SEO): review copy

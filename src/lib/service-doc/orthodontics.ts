@@ -72,12 +72,8 @@ export const orthodonticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "https://images.unsplash.com/photo-1584434081454-2a898b8e33d5?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
-              },
-              {
-                "before": "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
+                "before": "/galeria/brackets-convencionales-antes.webp",
+                "after": "/galeria/brackets-convencionales-despues.webp"
               }
             ]
           }
@@ -340,12 +336,8 @@ export const orthodonticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1584434081454-2a898b8e33d5?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
-              },
-              {
-                "before": "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
+                "before": "/galeria/brackets-ceramicos-antes.webp",
+                "after": "/galeria/brackets-ceramicos-despues.webp"
               }
             ]
           }
@@ -610,12 +602,8 @@ export const orthodonticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1584434081454-2a898b8e33d5?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
-              },
-              {
-                "before": "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
+                "before": "/galeria/brackets-autoligables-antes.webp",
+                "after": "/galeria/brackets-autoligables-despues.webp"
               }
             ]
           }
@@ -875,12 +863,8 @@ export const orthodonticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1584434081454-2a898b8e33d5?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
-              },
-              {
-                "before": "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
+                "before": "/galeria/brackets-zafiro-antes.webp",
+                "after": "/galeria/brackets-zafiro-despues.webp"
               }
             ]
           }
@@ -1150,12 +1134,8 @@ export const orthodonticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "https://images.unsplash.com/photo-1581595220892-b0739db3ba8c?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1584434081454-2a898b8e33d5?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
-              },
-              {
-                "before": "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
+                "before": "/galeria/brackets-porcelana-antes.webp",
+                "after": "/galeria/brackets-porcelana-despues.webp"
               }
             ]
           }
@@ -1425,12 +1405,8 @@ export const orthodonticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1584434081454-2a898b8e33d5?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
-              },
-              {
-                "before": "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
+                "before": "/galeria/ortodoncia-lingual-antes.webp",
+                "after": "/galeria/ortodoncia-lingual-despues.webp"
               }
             ]
           }
@@ -1691,12 +1667,8 @@ export const orthodonticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "https://images.unsplash.com/photo-1677026010083-78ec7f1b84ed?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1584434081454-2a898b8e33d5?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
-              },
-              {
-                "before": "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format",
-                "after": "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=800&h=600&fit=crop&crop=entropy&q=75&auto=format"
+                "before": "/galeria/invisalign-antes.webp",
+                "after": "/galeria/invisalign-despues.webp"
               }
             ]
           }

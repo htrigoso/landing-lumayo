@@ -25,7 +25,7 @@ export function About() {
           <div className="relative aspect-[4/3] overflow-hidden rounded-lg lg:aspect-auto lg:h-full">
             {/* High-resolution photo (Unsplash License), served as-is without Next image optimization */}
             <Image
-              src="https://images.unsplash.com/photo-1663755489920-5e09f66d011a?w=2400&q=90&fm=jpg"
+              src="/fotos/photo-1663755489920-5e09f66d011a.webp"
               alt="Odontóloga atendiendo a un paciente sonriente"
               fill
               unoptimized
