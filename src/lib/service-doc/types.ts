@@ -13,7 +13,8 @@ export type DocBlock =
       placeholder: boolean;
       /** Temporary AI-generated photos: the page labels them as such until real cases replace them. */
       aiGenerated?: boolean;
-      cases: { before: string; after: string }[];
+      /** Each case: before, optional treatment stage ("during"), after. */
+      cases: { before: string; during?: string; after: string }[];
     };
 
 export type DocSubsection = { title: string; blocks: DocBlock[] };

@@ -604,8 +604,9 @@ export const orthodonticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/brackets-autoligables-ia-antes.webp",
-                "after": "/galeria/brackets-autoligables-ia-despues.webp"
+                "before": "/galeria/brackets-autoligables-ia-v3-antes.webp",
+                "during": "/galeria/brackets-autoligables-ia-v3-proceso.webp",
+                "after": "/galeria/brackets-autoligables-ia-v3-despues.webp"
               }
             ],
             "aiGenerated": true

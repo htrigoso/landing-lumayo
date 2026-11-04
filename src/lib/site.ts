@@ -694,7 +694,7 @@ export const services: Service[] = [
     description: "Brackets con un clip integrado que sujeta el arco sin necesidad de ligaduras elásticas.",
     icon: "braces",
     category: "ortodoncia",
-    image: servicePhoto("photo-1609840114035-3c981b782dfe"),
+    image: "/fotos/brackets-autoligables-hero.webp",
     ortho: {
       visibility: "Visible",
       typicalMonths: "12 a 24 meses", // TODO(SEO): confirm with the dentist
