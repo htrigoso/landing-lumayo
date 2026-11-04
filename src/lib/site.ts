@@ -626,7 +626,7 @@ export const services: Service[] = [
       "Alinea tus dientes y mejora tu mordida con un plan de tratamiento hecho a tu medida.",
     icon: "braces",
     category: "ortodoncia",
-    image: servicePhoto("photo-1584434081454-2a898b8e33d5"),
+    image: "/fotos/brackets-convencionales-hero-v2.webp",
     ortho: {
       visibility: "Visible",
       typicalMonths: "12 a 24 meses", // TODO(SEO): confirm with the dentist
@@ -661,7 +661,7 @@ export const services: Service[] = [
     description: "Brackets de color parecido al diente, una alternativa más discreta a los metálicos.",
     icon: "braces",
     category: "ortodoncia",
-    image: servicePhoto("photo-1606811841689-23dfddce3e95"),
+    image: "/fotos/brackets-ceramicos-hero.webp",
     ortho: {
       visibility: "Discreto",
       typicalMonths: "12 a 24 meses", // TODO(SEO): confirm with the dentist
@@ -760,7 +760,7 @@ export const services: Service[] = [
     description: "Brackets de porcelana con acabado liso y color natural para un tratamiento discreto.",
     icon: "braces",
     category: "ortodoncia",
-    image: servicePhoto("photo-1581595220892-b0739db3ba8c"),
+    image: "/fotos/brackets-porcelana-hero.webp",
     ortho: {
       visibility: "Discreto",
       typicalMonths: "12 a 24 meses", // TODO(SEO): confirm with the dentist
@@ -827,7 +827,7 @@ export const services: Service[] = [
     description: "Alineadores transparentes y removibles que mueven tus dientes de forma gradual.",
     icon: "braces",
     category: "ortodoncia",
-    image: servicePhoto("photo-1677026010083-78ec7f1b84ed"),
+    image: "/fotos/invisalign-hero.webp",
     ortho: {
       visibility: "Casi invisible",
       typicalMonths: "12 a 18 meses", // TODO(SEO): confirm with the dentist

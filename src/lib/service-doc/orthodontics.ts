@@ -72,8 +72,9 @@ export const orthodonticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/brackets-convencionales-ia-antes.webp",
-                "after": "/galeria/brackets-convencionales-ia-despues.webp"
+                "before": "/galeria/brackets-convencionales-ia-v4-antes.webp",
+                "during": "/galeria/brackets-convencionales-ia-v4-proceso.webp",
+                "after": "/galeria/brackets-convencionales-ia-v4-despues.webp"
               }
             ],
             "aiGenerated": true
@@ -337,8 +338,9 @@ export const orthodonticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/brackets-ceramicos-ia-antes.webp",
-                "after": "/galeria/brackets-ceramicos-ia-despues.webp"
+                "before": "/galeria/brackets-ceramicos-ia-v8-antes.webp",
+                "during": "/galeria/brackets-ceramicos-ia-v8-proceso.webp",
+                "after": "/galeria/brackets-ceramicos-ia-v8-despues.webp"
               }
             ],
             "aiGenerated": true
@@ -1139,8 +1141,9 @@ export const orthodonticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/brackets-porcelana-ia-antes.webp",
-                "after": "/galeria/brackets-porcelana-ia-despues.webp"
+                "before": "/galeria/brackets-porcelana-ia-v5-antes.webp",
+                "during": "/galeria/brackets-porcelana-ia-v5-proceso.webp",
+                "after": "/galeria/brackets-porcelana-ia-v5-despues.webp"
               }
             ],
             "aiGenerated": true
@@ -1674,8 +1677,9 @@ export const orthodonticsDocs: Record<string, ServiceDoc> = {
             "placeholder": true,
             "cases": [
               {
-                "before": "/galeria/invisalign-ia-antes.webp",
-                "after": "/galeria/invisalign-ia-despues.webp"
+                "before": "/galeria/invisalign-ia-v7-antes.webp",
+                "during": "/galeria/invisalign-ia-v7-proceso.webp",
+                "after": "/galeria/invisalign-ia-v7-despues.webp"
               }
             ],
             "aiGenerated": true
