@@ -1208,7 +1208,7 @@ export const services: Service[] = [
     description: "Retiramos piezas dañadas de forma segura, con anestesia y cuidado en todo momento.",
     icon: "extract",
     category: "cirugia",
-    image: servicePhoto("photo-1588776814546-daab30f310ce"),
+    image: "/fotos/extraccion-dental-hero.webp",
     details: {
       summary:
         "Retiramos los dientes que ya no pueden recuperarse, con anestesia local y técnicas que cuidan tu comodidad y una buena cicatrización.",
@@ -1233,7 +1233,7 @@ export const services: Service[] = [
     description: "Evaluamos y retiramos las muelas del juicio que causan dolor o molestias.",
     icon: "wisdom",
     category: "cirugia",
-    image: servicePhoto("photo-1777445374290-eedda5be8e5b"),
+    image: "/fotos/muelas-del-juicio-hero.webp",
     details: {
       summary:
         "A veces las muelas del juicio no tienen espacio para salir y causan dolor, inflamación o desplazan otros dientes. Evaluamos su posición y te indicamos si conviene retirarlas.",
