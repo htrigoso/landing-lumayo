@@ -13,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   return [
-    ...staticPaths.map((path) => ({ url: `${siteUrl}${path}` })),
+    ...staticPaths.map((path) => ({ url: path === "/" ? siteUrl : `${siteUrl}${path}` })),
     ...serviceCategories.map((c) => ({ url: `${siteUrl}${categoryPath(c)}` })),
     ...services.map((s) => ({ url: `${siteUrl}${servicePath(s)}` })),
     ...blogCategories.map((c) => ({ url: `${siteUrl}${blogCategoryPath(c)}` })),

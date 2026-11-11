@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { WaveDivider } from "@/components/decor/WaveDivider";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -17,6 +18,11 @@ import { getDisplayedTestimonials, reviewTestimonials } from "@/lib/results";
 import { reviewJsonLd } from "@/lib/seo/jsonld";
 import { heroPosterSrc } from "@/lib/hero-media";
 import { preload } from "react-dom";
+
+// Title and description come from the root layout; only the canonical is set here so child pages don't inherit "/".
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   // Server-side hint so the LCP poster is in <head> from the first byte, not after hydration

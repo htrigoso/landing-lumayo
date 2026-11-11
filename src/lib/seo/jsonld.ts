@@ -52,9 +52,9 @@ const websiteRef = { "@id": websiteId } as const;
 
 const serviceArea = { "@type": "City", name: site.address.city } as const;
 
-/** Absolute URL for an internal path, e.g. absoluteUrl("/servicios") → https://<domain>/servicios. */
+/** Absolute URL for an internal path, e.g. absoluteUrl("/servicios") → https://<domain>/servicios. The home page has no trailing slash. */
 export function absoluteUrl(path: string): string {
-  return new URL(path, siteUrl).toString();
+  return path === "/" ? siteUrl : new URL(path, siteUrl).toString();
 }
 
 /** Root layout: the clinic as a local business. Rendered once per page. */

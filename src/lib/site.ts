@@ -44,8 +44,7 @@ export const socialProof: {
 export const fullAddress =`${site.address.street}, ${site.address.district}, ${site.address.city}`;
 
 /** Canonical origin for metadata, canonical URLs and the sitemap. */
-// TODO(SEO): confirm production domain
-export const siteUrl = "https://lumayo.pe";
+export const siteUrl = "https://www.lumayo.pe";
 
 export function whatsappUrl(message: string): string {
   return `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(message)}`;
@@ -93,7 +92,7 @@ export const lumayoCard = {
   plans,
   card: {
     whatsappDisplay: "975 225 531", // TODO: confirmar (difiere de site.phoneDisplay)
-    domain: "lumayo.pe", // TODO: confirmar dominio
+    domain: "www.lumayo.pe",
   },
   perks: [
     "Una consulta anual sin costo",

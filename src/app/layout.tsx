@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Montserrat } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
+import { GoogleTagManagerNoscript, GoogleTagManagerScripts } from "@/components/analytics/GoogleTagManager";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { clinicJsonLd, websiteJsonLd } from "@/lib/seo/jsonld";
@@ -52,7 +53,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-scroll-behavior="smooth"
       className={`${montserrat.variable} antialiased`}
     >
+      <head>
+        <GoogleTagManagerScripts />
+      </head>
       <body className="min-h-dvh">
+        <GoogleTagManagerNoscript />
         {/* Site-wide entities: the clinic (declared once, referenced by @id) and the website. */}
         <JsonLd data={clinicJsonLd()} />
         <JsonLd data={websiteJsonLd()} />
