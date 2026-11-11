@@ -18,6 +18,8 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   // Resolves relative canonical and og URLs on every page.
   metadataBase: new URL(siteUrl),
+  // Google Search Console meta tag; omitted when the variable is not set.
+  verification: { google: process.env.GOOGLE_SITE_VERIFICATION },
   title: "Lumayo · Ortodoncia y centro odontológico en Tarapoto",
   description:
     "Brackets, blanqueamiento dental, implantes, endodoncia, prótesis y odontopediatría en Tarapoto. Agenda tu cita por WhatsApp al 986 382 607.",
