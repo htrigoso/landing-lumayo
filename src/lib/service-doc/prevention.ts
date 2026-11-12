@@ -398,7 +398,7 @@ export const preventionDocs: Record<string, ServiceDoc> = {
             "items": [
               {
                 "label": "Precio por aplicación",
-                "pending": true
+                "value": "S/ 60 – 80"
               },
               {
                 "label": "Duración",
@@ -636,7 +636,7 @@ export const preventionDocs: Record<string, ServiceDoc> = {
             "items": [
               {
                 "label": "Precio por aplicación",
-                "pending": true
+                "value": "S/ 60 – 80"
               },
               {
                 "label": "Duración",
@@ -886,7 +886,7 @@ export const preventionDocs: Record<string, ServiceDoc> = {
             "items": [
               {
                 "label": "Precio por pieza",
-                "pending": true
+                "value": "S/ 100 – 150"
               },
               {
                 "label": "Duración",

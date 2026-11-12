@@ -142,7 +142,7 @@ export const veneersDocs: Record<string, ServiceDoc> = {
             "items": [
               {
                 "label": "Precio por pieza",
-                "pending": true
+                "value": "S/ 350"
               },
               {
                 "label": "Duración del procedimiento",
@@ -399,7 +399,7 @@ export const veneersDocs: Record<string, ServiceDoc> = {
             "items": [
               {
                 "label": "Precio por pieza",
-                "pending": true
+                "value": "S/ 350 – 450"
               },
               {
                 "label": "Tiempo de tratamiento",
@@ -662,7 +662,7 @@ export const veneersDocs: Record<string, ServiceDoc> = {
             "items": [
               {
                 "label": "Precio por pieza",
-                "pending": true
+                "value": "S/ 800 – 900"
               },
               {
                 "label": "Tiempo de tratamiento",
@@ -925,7 +925,7 @@ export const veneersDocs: Record<string, ServiceDoc> = {
             "items": [
               {
                 "label": "Precio por pieza",
-                "pending": true
+                "value": "S/ 1,000 – 1,300"
               },
               {
                 "label": "Tiempo de tratamiento",
@@ -1184,7 +1184,7 @@ export const veneersDocs: Record<string, ServiceDoc> = {
             "items": [
               {
                 "label": "Precio por pieza",
-                "pending": true
+                "value": "S/ 1,500 – 1,700"
               },
               {
                 "label": "Tiempo de tratamiento",

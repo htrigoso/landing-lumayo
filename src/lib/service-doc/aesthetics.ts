@@ -144,12 +144,8 @@ export const aestheticsDocs: Record<string, ServiceDoc> = {
             "type": "prices",
             "items": [
               {
-                "label": "Planificación del diseño de sonrisa",
-                "pending": true
-              },
-              {
                 "label": "Tratamiento completo",
-                "value": "según los procedimientos elegidos"
+                "value": "S/ 8,000 – 12,000"
               }
             ]
           }

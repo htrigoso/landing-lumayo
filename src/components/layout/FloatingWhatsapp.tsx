@@ -8,7 +8,7 @@ import { defaultWhatsappMessage, whatsappUrl } from "@/lib/site";
 /**
  * Floating WhatsApp button (desktop; phones already have the bottom contact bar).
  * A greeting bubble slides in after a short pause and stays next to the button.
- * Brand colours instead of WhatsApp green: Azul profundo button, white bubble.
+ * WhatsApp green (#25D366) button so it reads as WhatsApp at a glance; white bubble in brand colours.
  */
 export function FloatingWhatsapp() {
   const reduceMotion = useReducedMotion();
@@ -47,13 +47,13 @@ export function FloatingWhatsapp() {
         target="_blank"
         rel="noopener"
         aria-label="Escríbenos por WhatsApp"
-        className="relative grid size-14 shrink-0 place-items-center rounded-full bg-primary text-text-inverse shadow-[0_12px_28px_-10px_color-mix(in_srgb,var(--color-azul-950)_60%,transparent)] transition-colors hover:bg-primary-hover"
+        className="relative grid size-14 shrink-0 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_12px_28px_-10px_rgb(37_211_102/0.6)] transition-colors hover:bg-[#1EBE57]"
       >
         {/* Soft halo that breathes with transform/opacity only (no repaint) */}
         {!reduceMotion && (
           <motion.span
             aria-hidden="true"
-            className="absolute inset-0 rounded-full bg-accent"
+            className="absolute inset-0 rounded-full bg-[#25D366]"
             initial={{ opacity: 0.45, scale: 1 }}
             animate={{ opacity: 0, scale: 1.6 }}
             transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut", repeatDelay: 1.2 }}

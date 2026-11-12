@@ -939,7 +939,11 @@ export const surgeryDocs: Record<string, ServiceDoc> = {
               },
               {
                 "label": "Prótesis removible parcial o total",
-                "pending": true
+                "value": "S/ 800 – 1,000"
+              },
+              {
+                "label": "Prótesis flexible",
+                "value": "S/ 1,000 – 1,200"
               }
             ]
           }

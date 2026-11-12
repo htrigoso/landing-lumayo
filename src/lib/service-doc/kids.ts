@@ -120,12 +120,8 @@ export const kidsDocs: Record<string, ServiceDoc> = {
         ]
       },
       {
-        "title": "¿Cuánto cuesta una consulta con el dentista para niños en",
+        "title": "¿Cuánto cuesta una consulta con el dentista para niños en Tarapoto?",
         "blocks": [
-          {
-            "type": "p",
-            "text": "Tarapoto?"
-          },
           {
             "type": "p",
             "text": "En Perú, una consulta dental de diagnóstico suele costar entre S/ 40 y S/ 120. Los tratamientos preventivos, como el flúor o los sellantes, y las curaciones en dientes de leche se presupuestan aparte según lo que necesite tu hijo."
@@ -143,7 +139,7 @@ export const kidsDocs: Record<string, ServiceDoc> = {
               },
               {
                 "label": "Consulta de odontopediatría en Lumayo",
-                "pending": true
+                "value": "Gratis"
               }
             ]
           }
