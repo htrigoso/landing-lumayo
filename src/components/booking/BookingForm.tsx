@@ -259,7 +259,8 @@ const headerCurves = [0, 1, 2].map(
  */
 function FormHeader({ titleId, title, emphasis, subtitle }: { titleId: string; title: string; emphasis: string; subtitle: string }) {
   return (
-    <div className="relative isolate overflow-hidden bg-primary px-6 pb-11 pt-6 text-text-inverse sm:px-7">
+    // Azul profundo (azul-950), not primary: the booking band behind the card is primary, so the cap would vanish into it.
+    <div className="relative isolate overflow-hidden bg-azul-950 px-6 pb-11 pt-6 text-text-inverse sm:px-7">
       <IsotypeWatermark tone="dark" className="-right-12 -top-8 -z-10 w-52 !opacity-[0.16]" />
       <svg aria-hidden="true" viewBox="0 0 400 160" preserveAspectRatio="none" fill="none" className="absolute inset-0 -z-10 size-full text-text-inverse">
         {headerCurves.map((d, i) => (
