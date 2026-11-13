@@ -29,6 +29,39 @@ export function WhatsappIcon(props: IconProps) {
   );
 }
 
+export function FacebookIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path
+        fill="currentColor"
+        fillRule="evenodd"
+        d="M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20Zm-1.7 20V14.3H8.6V11.5h1.7V9.6c0-2 1.1-3.1 2.9-3.1h2v2.8h-1.2c-.7 0-1 .3-1 1v1.2h2.2l-.4 2.8h-1.8V21h-2.1Z"
+      />
+    </Svg>
+  );
+}
+
+export function TiktokIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path
+        fill="currentColor"
+        d="M16.5 3h-2.9v12.6a2.7 2.7 0 1 1-2.7-2.7c.3 0 .5 0 .8.1V9.9a5.9 5.9 0 0 0-.8-.1 5.9 5.9 0 1 0 5.9 5.9V9.2a7.6 7.6 0 0 0 4.4 1.4V7.7A4.5 4.5 0 0 1 16.5 3Z"
+      />
+    </Svg>
+  );
+}
+
+export function InstagramIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" strokeWidth={2} />
+      <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" strokeWidth={2} />
+      <circle cx="17.4" cy="6.6" r="1.2" fill="currentColor" />
+    </Svg>
+  );
+}
+
 const toothPath =
   "M7.5 3.5c-2.4 0-4 1.9-4 4.6 0 2.3 1 3.6 1.6 5.4.7 2.2.8 7 2.8 7 1.7 0 1.6-4.7 3.1-4.7h2c1.5 0 1.4 4.7 3.1 4.7 2 0 2.1-4.8 2.8-7 .6-1.8 1.6-3.1 1.6-5.4 0-2.7-1.6-4.6-4-4.6-1.8 0-2.6 1-4.5 1s-2.7-1-4.5-1Z";
 

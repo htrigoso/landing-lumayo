@@ -1,7 +1,7 @@
 import Image from "next/image";
 import type { SVGProps } from "react";
 import { CardQr } from "@/components/lumayo-card/CardQr";
-import { PinIcon, WhatsappIcon } from "@/components/icons";
+import { FacebookIcon, InstagramIcon, PinIcon, TiktokIcon, WhatsappIcon } from "@/components/icons";
 import { lumayoCard, site } from "@/lib/site";
 
 type IconProps = { className?: string };
@@ -155,39 +155,6 @@ export function RenewIcon({ className }: IconProps) {
         <path d="M18.6 3.4v3.9h-3.9" />
         <path d="M5.4 20.6v-3.9h3.9" />
       </g>
-    </Glyph>
-  );
-}
-
-export function FacebookIcon({ className }: IconProps) {
-  return (
-    <Glyph className={className}>
-      <path
-        fill="currentColor"
-        fillRule="evenodd"
-        d="M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20Zm-1.7 20V14.3H8.6V11.5h1.7V9.6c0-2 1.1-3.1 2.9-3.1h2v2.8h-1.2c-.7 0-1 .3-1 1v1.2h2.2l-.4 2.8h-1.8V21h-2.1Z"
-      />
-    </Glyph>
-  );
-}
-
-export function TiktokIcon({ className }: IconProps) {
-  return (
-    <Glyph className={className}>
-      <path
-        fill="currentColor"
-        d="M16.5 3h-2.9v12.6a2.7 2.7 0 1 1-2.7-2.7c.3 0 .5 0 .8.1V9.9a5.9 5.9 0 0 0-.8-.1 5.9 5.9 0 1 0 5.9 5.9V9.2a7.6 7.6 0 0 0 4.4 1.4V7.7A4.5 4.5 0 0 1 16.5 3Z"
-      />
-    </Glyph>
-  );
-}
-
-export function InstagramIcon({ className }: IconProps) {
-  return (
-    <Glyph className={className}>
-      <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" strokeWidth={2} />
-      <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" strokeWidth={2} />
-      <circle cx="17.4" cy="6.6" r="1.2" fill="currentColor" />
     </Glyph>
   );
 }

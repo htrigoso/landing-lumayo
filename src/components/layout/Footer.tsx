@@ -1,7 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { IsotypeWatermark } from "@/components/brand/IsotypeWatermark";
-import { ArrowRightIcon, CalendarIcon, PinIcon, WhatsappIcon } from "@/components/icons";
+import {
+  ArrowRightIcon,
+  CalendarIcon,
+  FacebookIcon,
+  InstagramIcon,
+  PinIcon,
+  TiktokIcon,
+  WhatsappIcon,
+} from "@/components/icons";
 import {
   categoryPath,
   defaultWhatsappMessage,
@@ -27,6 +35,13 @@ const footerServices = [
   { label: serviceName("odontopediatria"), href: serviceHref("odontopediatria") },
 ];
 
+/** Official profiles from site.social. Icons come from the shared icon set. */
+const socialLinks = [
+  { label: "Lumayo en Facebook", href: site.social.facebook, Icon: FacebookIcon },
+  { label: "Lumayo en Instagram", href: site.social.instagram, Icon: InstagramIcon },
+  { label: "Lumayo en TikTok", href: site.social.tiktok, Icon: TiktokIcon },
+];
+
 export function Footer() {
   return (
     <footer className="relative isolate overflow-hidden bg-surface-deep pb-28 pt-10 text-text-inverse-muted lg:pb-12">
@@ -37,6 +52,25 @@ export function Footer() {
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-text-inverse-muted/80">
             Tecnología, confianza y atención cercana para tu sonrisa.
           </p>
+
+          <div className="mt-6">
+            <h2 className="text-sm font-bold text-text-inverse">Síguenos</h2>
+            <ul className="mt-3 flex gap-3">
+              {socialLinks.map(({ label, href, Icon }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener"
+                    aria-label={label}
+                    className="inline-flex size-11 items-center justify-center rounded-full border border-white/30 text-text-inverse transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-inverse focus-visible:ring-offset-2 focus-visible:ring-offset-surface-deep motion-reduce:transition-none"
+                  >
+                    <Icon className="size-5" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         <div>
