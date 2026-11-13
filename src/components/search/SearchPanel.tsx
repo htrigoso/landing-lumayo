@@ -1,15 +1,19 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { motion, useReducedMotion } from "motion/react";
-import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef, useState, type KeyboardEvent, type RefObject } from "react";
 import { createPortal } from "react-dom";
-import { CloseIcon, SearchIcon, WhatsappIcon, ArrowRightIcon } from "@/components/icons";
+import { ClockIcon, CloseIcon, SearchIcon, WhatsappIcon } from "@/components/icons";
 import { pushSearchEvent } from "@/components/search/analytics";
+import { SearchCategoryGrid } from "@/components/search/SearchCategoryGrid";
+import { SearchPreview } from "@/components/search/SearchPreview";
+import { SearchResultRow } from "@/components/search/SearchResultRow";
 import { getCachedSearchEntries, loadSearchEntries } from "@/components/search/search-index-client";
-import { SearchResultCard } from "@/components/search/SearchResultCard";
+import { flattenRows, groupResults, type ResultSection, type SearchRow } from "@/lib/search/groups";
+import { entriesForIntent, searchIntents, type SearchIntent } from "@/lib/search/intents";
 import { normalize } from "@/lib/search/normalize";
+import { addRecent, clearRecentSearches, readRecentSearches, writeRecentSearches } from "@/lib/search/recent";
 import { search, similar, suggest } from "@/lib/search/search";
 import { popularSearches } from "@/lib/search/synonyms";
 import type { SearchEntry } from "@/lib/search/types";
@@ -26,16 +30,22 @@ const DEBOUNCE_MS = 150;
 /** A search counts once the visitor pauses this long, so partial words are not sent. */
 const SEARCH_EVENT_DELAY_MS = 1000;
 const ease = [0.22, 1, 0.36, 1] as const;
-const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
+// Options are reached with the arrow keys, so they are skipped by Tab (tabindex -1).
+const FOCUSABLE = 'a[href]:not([tabindex="-1"]), button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 function resultsLabel(count: number): string {
   return `${count} ${count === 1 ? "resultado" : "resultados"}`;
 }
 
+const sectionTitle = "font-display text-base font-bold text-heading";
+
 /** Full-screen search over the prebuilt index. Mounted only after the visitor opens it. */
 export function SearchPanel({ onClose, returnFocusTo }: SearchPanelProps) {
   const reduceMotion = useReducedMotion();
   const pathname = usePathname();
+  const router = useRouter();
+  const baseId = useId();
+  const listboxId = `${baseId}-listbox`;
   const openedPath = useRef(pathname);
   const dialogRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -48,9 +58,15 @@ export function SearchPanel({ onClose, returnFocusTo }: SearchPanelProps) {
   const [term, setTerm] = useState("");
   const [entries, setEntries] = useState<SearchEntry[] | null>(() => getCachedSearchEntries());
   const [loadFailed, setLoadFailed] = useState(false);
+  // A "¿Qué necesitas?" chip whose curated list is shown while the input is empty.
+  const [intentId, setIntentId] = useState<string | null>(null);
+  // Keyboard position across all result rows. -1 means nothing is active yet.
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const [recent, setRecent] = useState<string[]>(() => readRecentSearches());
 
   const trimmed = query.trim();
   const appliedTerm = term.trim();
+  const intent: SearchIntent | null = searchIntents.find((candidate) => candidate.id === intentId) ?? null;
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -63,7 +79,7 @@ export function SearchPanel({ onClose, returnFocusTo }: SearchPanelProps) {
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    const onKey = (event: KeyboardEvent) => {
+    const onKey = (event: globalThis.KeyboardEvent) => {
       if (event.key === "Escape") {
         event.preventDefault();
         onClose();
@@ -99,7 +115,10 @@ export function SearchPanel({ onClose, returnFocusTo }: SearchPanelProps) {
   }, [pathname, onClose]);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setTerm(query), DEBOUNCE_MS);
+    const timer = window.setTimeout(() => {
+      setTerm(query);
+      setActiveIndex(-1);
+    }, DEBOUNCE_MS);
     return () => window.clearTimeout(timer);
   }, [query]);
 
@@ -138,28 +157,108 @@ export function SearchPanel({ onClose, returnFocusTo }: SearchPanelProps) {
     () => (entries && appliedTerm && results.length === 0 ? suggest(entries, appliedTerm) : null),
     [entries, appliedTerm, results.length],
   );
-  const featured = useMemo(() => entries?.filter((entry) => entry.kind === "service" && entry.featured) ?? [], [entries]);
   const topResult = results[0];
   const similarServices = useMemo(
     () => (entries && topResult?.kind === "service" ? similar(entries, topResult) : []),
     [entries, topResult],
   );
-  const serviceResults = results.filter((entry) => entry.kind !== "post");
-  const postResults = results.filter((entry) => entry.kind === "post");
+  const intentEntries = useMemo(() => (entries && intent ? entriesForIntent(entries, intent) : []), [entries, intent]);
+
+  // What the list shows: the grouped query results, or the curated list of the chosen intent.
+  const sections = useMemo<ResultSection[]>(() => {
+    if (appliedTerm) return groupResults(results, similarServices);
+    if (intent) return [{ key: "intent", title: intent.label, entries: intentEntries }];
+    return [];
+  }, [appliedTerm, results, similarServices, intent, intentEntries]);
+  const rows = useMemo(() => flattenRows(sections), [sections]);
+  const safeActive = activeIndex < rows.length ? activeIndex : -1;
+  const activeRow = safeActive >= 0 ? rows[safeActive] : undefined;
+  // The desktop preview follows the active row, or the first one when nothing is active.
+  const previewRow: SearchRow | null = activeRow ?? rows[0] ?? null;
 
   const whatsappMessage = trimmed ? `Hola Lumayo, busco información sobre: ${trimmed}` : defaultWhatsappMessage;
 
-  const handleSelect = (entry: SearchEntry) => {
-    navigatingRef.current = true;
-    pushSearchEvent({ event: "search_result_click", search_term: trimmed, result_id: entry.id });
-    onClose();
+  const optionId = (index: number) => `${baseId}-option-${index}`;
+
+  const selectRow = useCallback(
+    (row: SearchRow) => {
+      navigatingRef.current = true;
+      if (appliedTerm) {
+        const next = addRecent(recent, appliedTerm);
+        setRecent(next);
+        writeRecentSearches(next);
+      }
+      pushSearchEvent({
+        event: "search_result_click",
+        search_term: appliedTerm,
+        result_id: row.entry.id,
+        group: row.group,
+        position: row.position,
+      });
+      onClose();
+    },
+    [appliedTerm, recent, onClose],
+  );
+
+  const moveActive = (next: number) => {
+    setActiveIndex(next);
+    document.getElementById(optionId(next))?.scrollIntoView({ block: "nearest" });
+  };
+
+  const onInputKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.nativeEvent.isComposing) return;
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      if (rows.length === 0) return;
+      event.preventDefault();
+      const last = rows.length - 1;
+      if (event.key === "ArrowDown") moveActive(safeActive < 0 || safeActive >= last ? 0 : safeActive + 1);
+      else moveActive(safeActive <= 0 ? last : safeActive - 1);
+      return;
+    }
+    if (event.key === "Enter") {
+      const row = activeRow ?? rows[0];
+      if (!row) return;
+      event.preventDefault();
+      selectRow(row);
+      router.push(row.entry.href);
+    }
   };
 
   const trackWhatsapp = () => pushSearchEvent({ event: "search_whatsapp_click", search_term: trimmed });
 
   const applyQuery = (next: string) => {
     setQuery(next);
+    setIntentId(null);
     inputRef.current?.focus();
+  };
+
+  const chooseIntent = (next: SearchIntent) => {
+    setQuery("");
+    setIntentId(next.id);
+    setActiveIndex(-1);
+    pushSearchEvent({ event: "search_intent_click", intent: next.id });
+  };
+
+  const clearIntent = () => {
+    setIntentId(null);
+    setActiveIndex(-1);
+    inputRef.current?.focus();
+  };
+
+  const applyRecent = (value: string) => {
+    pushSearchEvent({ event: "search_recent_click", search_term: value });
+    applyQuery(value);
+  };
+
+  const forgetRecent = () => {
+    clearRecentSearches();
+    setRecent([]);
+  };
+
+  const openCategory = (categoryId: string) => {
+    navigatingRef.current = true;
+    pushSearchEvent({ event: "search_category_click", category_id: categoryId });
+    onClose();
   };
 
   let status = "";
@@ -167,10 +266,34 @@ export function SearchPanel({ onClose, returnFocusTo }: SearchPanelProps) {
     if (loadFailed) status = "No pudimos cargar el buscador. Escríbenos por WhatsApp.";
     else if (!entries) status = "Buscando…";
     else status = results.length > 0 ? resultsLabel(results.length) : "Sin resultados";
+  } else if (intent && entries) {
+    status = resultsLabel(intentEntries.length);
   }
 
-  const sectionTitle = "font-display text-sm font-bold tracking-[0.12em] text-text-muted";
-  const gridClass = "mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4";
+  const renderResultList = () => (
+    <div role="listbox" id={listboxId} aria-label="Resultados" className="mt-3 flex flex-col gap-6">
+      {sections.map((section) => (
+        <div key={section.key} role="group" aria-label={section.title}>
+          {section.key !== "intent" && <h3 className={sectionTitle}>{section.title}</h3>}
+          <div className="mt-1 flex flex-col gap-1">
+            {rows
+              .filter((row) => row.group === section.key)
+              .map((row) => (
+                <SearchResultRow
+                  key={`${row.group}-${row.entry.id}`}
+                  id={optionId(row.index)}
+                  entry={row.entry}
+                  query={appliedTerm}
+                  active={safeActive === row.index}
+                  onHover={() => setActiveIndex(row.index)}
+                  onOpen={() => selectRow(row)}
+                />
+              ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 
   return createPortal(
     <motion.div
@@ -184,19 +307,28 @@ export function SearchPanel({ onClose, returnFocusTo }: SearchPanelProps) {
       className="fixed inset-0 z-[90] flex flex-col bg-bg"
     >
       <div className="border-b border-border">
-        <div className="container-page flex items-center gap-3 py-3 sm:py-4">
+        <div className="container-page flex items-center gap-2 py-3 sm:gap-3 sm:py-4">
           <form role="search" onSubmit={(event) => event.preventDefault()} className="relative flex-1">
-            <SearchIcon aria-hidden="true" className="pointer-events-none absolute left-4 top-1/2 size-5 -translate-y-1/2 text-primary" />
+            <SearchIcon aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 size-5 -translate-y-1/2 text-primary sm:left-4" />
             <input
               ref={inputRef}
               type="search"
+              role="combobox"
               value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="¿Qué tratamiento buscas?"
+              onChange={(event) => {
+                setQuery(event.target.value);
+                setIntentId(null);
+              }}
+              onKeyDown={onInputKeyDown}
+              aria-expanded={rows.length > 0}
+              aria-controls={rows.length > 0 ? listboxId : undefined}
+              aria-autocomplete="list"
+              aria-activedescendant={safeActive >= 0 ? optionId(safeActive) : undefined}
+              placeholder="Buscar tratamiento"
               aria-label="Buscar servicios"
               autoComplete="off"
               enterKeyHint="search"
-              className="h-12 w-full rounded-full border border-border-input bg-surface pl-12 pr-12 text-base text-heading placeholder:text-text-muted [&::-webkit-search-cancel-button]:appearance-none sm:h-14 sm:text-lg"
+              className="h-12 w-full rounded-full border border-border-input bg-surface pl-10 pr-10 text-base sm:pl-12 sm:pr-12 text-heading placeholder:text-text-muted [&::-webkit-search-cancel-button]:appearance-none sm:h-14 sm:text-lg"
             />
             {query && (
               <button
@@ -212,7 +344,7 @@ export function SearchPanel({ onClose, returnFocusTo }: SearchPanelProps) {
           <button
             type="button"
             onClick={onClose}
-            className="shrink-0 cursor-pointer rounded-full px-3 py-2 text-sm font-semibold text-primary transition hover:bg-surface sm:text-base"
+            className="shrink-0 cursor-pointer rounded-full px-2 py-2 text-sm font-semibold text-primary transition hover:bg-surface sm:px-3 sm:text-base"
           >
             Cancelar
           </button>
@@ -220,144 +352,164 @@ export function SearchPanel({ onClose, returnFocusTo }: SearchPanelProps) {
       </div>
 
       <div className="flex-1 overflow-y-auto overscroll-contain">
-        <div className="container-page pb-10 pt-5 sm:pt-6">
-          <p role="status" aria-live="polite" className="min-h-5 text-sm text-text-muted">
-            {status}
-          </p>
+        <div className="container-page pb-8 pt-5 sm:pt-6 lg:grid lg:grid-cols-[minmax(0,1fr)_24rem] lg:gap-10 lg:pt-8">
+          <div className="min-w-0">
+            <p role="status" aria-live="polite" className="min-h-5 text-sm text-text-muted">
+              {status}
+            </p>
 
-          {!appliedTerm && (
-            <>
-              <h2 className={sectionTitle}>BÚSQUEDAS FRECUENTES</h2>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {popularSearches.map((label) => (
-                  <button
-                    key={label}
-                    type="button"
-                    onClick={() => applyQuery(label)}
-                    className="inline-flex min-h-11 cursor-pointer items-center rounded-full border border-border-input bg-bg px-4 text-sm font-semibold text-primary transition hover:bg-surface"
-                  >
-                    {label}
-                  </button>
-                ))}
-              </div>
-              {featured.length > 0 && (
-                <section className="mt-10">
-                  <h2 className={sectionTitle}>SERVICIOS DESTACADOS</h2>
-                  <div className={gridClass}>
-                    {featured.map((entry) => (
-                      <SearchResultCard key={entry.id} entry={entry} onSelect={handleSelect} />
-                    ))}
-                  </div>
-                </section>
-              )}
-            </>
-          )}
-
-          {appliedTerm && entries && results.length > 0 && (
-            <>
-              {serviceResults.length > 0 && (
-                <section className="mt-2">
-                  <h2 className={sectionTitle}>SERVICIOS</h2>
-                  <div className={gridClass}>
-                    {serviceResults.map((entry) => (
-                      <SearchResultCard key={entry.id} entry={entry} onSelect={handleSelect} />
-                    ))}
-                  </div>
-                </section>
-              )}
-
-              {similarServices.length > 0 && (
-                <section className="mt-10">
-                  <h2 className={sectionTitle}>SERVICIOS SIMILARES</h2>
-                  <div className={gridClass}>
-                    {similarServices.map((entry) => (
-                      <SearchResultCard key={entry.id} entry={entry} onSelect={handleSelect} />
-                    ))}
-                  </div>
-                </section>
-              )}
-
-              {postResults.length > 0 && (
-                <section className="mt-10">
-                  <h2 className={sectionTitle}>ARTÍCULOS DEL BLOG</h2>
-                  <ul className="mt-2 divide-y divide-border">
-                    {postResults.map((entry) => (
-                      <li key={entry.id}>
-                        <Link
-                          href={entry.href}
-                          onClick={() => handleSelect(entry)}
-                          className="group flex items-center justify-between gap-4 py-4 transition hover:text-primary"
-                        >
-                          <span className="min-w-0">
-                            <span className="block text-xs font-semibold uppercase tracking-wide text-accent-text">{entry.subtitle}</span>
-                            <span className="mt-1 block font-semibold leading-snug text-heading">{entry.title}</span>
-                          </span>
-                          <ArrowRightIcon className="size-4 shrink-0 text-accent-text transition-transform group-hover:translate-x-1" />
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              )}
-            </>
-          )}
-
-          {appliedTerm && entries && results.length === 0 && (
-            <section className="mt-2">
-              <p className="font-display text-xl font-bold text-heading">No encontramos «{appliedTerm}».</p>
-              {suggestion && (
-                <p className="mt-2 text-text">
-                  ¿Quisiste decir{" "}
-                  <button
-                    type="button"
-                    onClick={() => applyQuery(suggestion)}
-                    className="cursor-pointer font-bold text-primary underline decoration-accent-strong underline-offset-4 hover:text-primary-hover"
-                  >
-                    {suggestion}
-                  </button>
-                  ?
-                </p>
-              )}
-              <a
-                href={whatsappUrl(whatsappMessage)}
-                target="_blank"
-                rel="noopener"
-                onClick={trackWhatsapp}
-                className="btn btn-wa mt-5 w-full sm:w-fit"
-              >
-                <WhatsappIcon />
-                Pregúntanos por WhatsApp
-              </a>
-              {featured.length > 0 && (
-                <div className="mt-10">
-                  <h2 className={sectionTitle}>TE PUEDE INTERESAR</h2>
-                  <div className={gridClass}>
-                    {featured.map((entry) => (
-                      <SearchResultCard key={entry.id} entry={entry} onSelect={handleSelect} />
-                    ))}
-                  </div>
+            {!appliedTerm && (
+              <section className="mt-3">
+                <h2 className={sectionTitle}>¿Qué necesitas?</h2>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {searchIntents.map((candidate) => {
+                    const selected = intent?.id === candidate.id;
+                    return (
+                      <button
+                        key={candidate.id}
+                        type="button"
+                        aria-pressed={selected}
+                        onClick={() => chooseIntent(candidate)}
+                        className={`inline-flex min-h-11 cursor-pointer items-center rounded-full border px-4 text-left text-sm font-semibold transition ${
+                          selected ? "border-primary bg-primary text-text-inverse" : "border-border-input bg-bg text-primary hover:bg-surface"
+                        }`}
+                      >
+                        {candidate.label}
+                      </button>
+                    );
+                  })}
                 </div>
-              )}
-            </section>
-          )}
+              </section>
+            )}
 
-          <section className="mt-10 flex flex-col gap-4 rounded-3xl bg-surface p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
-            <div>
-              <h2 className="font-display text-xl font-bold text-heading">¿No encuentras lo que buscas?</h2>
-              <p className="mt-1 text-text">Escríbenos y te orientamos.</p>
+            {!appliedTerm && intent && (
+              <section className="mt-8">
+                <div className="flex items-center justify-between gap-3">
+                  <h2 className={sectionTitle}>{intent.label}</h2>
+                  <button
+                    type="button"
+                    onClick={clearIntent}
+                    className="cursor-pointer rounded-full px-3 py-1.5 text-sm font-semibold text-primary transition hover:bg-surface"
+                  >
+                    Limpiar
+                  </button>
+                </div>
+                {rows.length > 0 && renderResultList()}
+              </section>
+            )}
+
+            {!appliedTerm && !intent && (
+              <>
+                {recent.length > 0 && (
+                  <section className="mt-8">
+                    <div className="flex items-center justify-between gap-3">
+                      <h2 className={sectionTitle}>Búsquedas recientes</h2>
+                      <button
+                        type="button"
+                        onClick={forgetRecent}
+                        className="cursor-pointer rounded-full px-3 py-1.5 text-sm font-semibold text-primary transition hover:bg-surface"
+                      >
+                        Borrar
+                      </button>
+                    </div>
+                    <ul className="mt-2 flex flex-col">
+                      {recent.map((value) => (
+                        <li key={value}>
+                          <button
+                            type="button"
+                            onClick={() => applyRecent(value)}
+                            className="flex min-h-12 w-full cursor-pointer items-center gap-3 rounded-xl px-2 text-left text-text transition hover:bg-surface-soft hover:text-primary"
+                          >
+                            <ClockIcon aria-hidden="true" className="size-4 shrink-0 text-text-muted" />
+                            <span className="truncate">{value}</span>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                )}
+
+                <section className="mt-8">
+                  <h2 className={sectionTitle}>Búsquedas frecuentes</h2>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {popularSearches.map((label) => (
+                      <button
+                        key={label}
+                        type="button"
+                        onClick={() => applyQuery(label)}
+                        className="inline-flex min-h-11 cursor-pointer items-center rounded-full border border-border-input bg-bg px-4 text-sm font-semibold text-primary transition hover:bg-surface"
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                </section>
+
+                <section className="mt-8">
+                  <h2 className={sectionTitle}>Busca por categoría</h2>
+                  <SearchCategoryGrid onSelect={openCategory} />
+                </section>
+              </>
+            )}
+
+            {appliedTerm && entries && results.length > 0 && renderResultList()}
+
+            {appliedTerm && entries && results.length === 0 && (
+              <section className="mt-3">
+                <p className="font-display text-xl font-bold text-heading">No encontramos «{appliedTerm}».</p>
+                {suggestion && (
+                  <p className="mt-2 text-text">
+                    ¿Quisiste decir{" "}
+                    <button
+                      type="button"
+                      onClick={() => applyQuery(suggestion)}
+                      className="cursor-pointer font-bold text-primary underline decoration-accent-strong underline-offset-4 hover:text-primary-hover"
+                    >
+                      {suggestion}
+                    </button>
+                    ?
+                  </p>
+                )}
+                <h2 className={`${sectionTitle} mt-8`}>Busca por categoría</h2>
+                <SearchCategoryGrid onSelect={openCategory} />
+                <a
+                  href={whatsappUrl(whatsappMessage)}
+                  target="_blank"
+                  rel="noopener"
+                  onClick={trackWhatsapp}
+                  className="btn btn-wa mt-6 w-full sm:w-fit"
+                >
+                  <WhatsappIcon />
+                  Pregúntanos por WhatsApp
+                </a>
+              </section>
+            )}
+
+            <section className="mt-10 hidden gap-4 rounded-3xl bg-surface p-6 lg:flex lg:items-center lg:justify-between lg:p-8">
+              <div>
+                <h2 className="font-display text-xl font-bold text-heading">¿No encuentras lo que buscas?</h2>
+                <p className="mt-1 text-text">Escríbenos y te orientamos.</p>
+              </div>
+              <a href={whatsappUrl(whatsappMessage)} target="_blank" rel="noopener" onClick={trackWhatsapp} className="btn btn-wa w-auto">
+                <WhatsappIcon />
+                Escribir por WhatsApp
+              </a>
+            </section>
+          </div>
+
+          <aside className="hidden lg:block">
+            <div className="sticky top-6">
+              <SearchPreview row={previewRow} onOpen={selectRow} onWhatsapp={trackWhatsapp} />
             </div>
-            <a
-              href={whatsappUrl(whatsappMessage)}
-              target="_blank"
-              rel="noopener"
-              onClick={trackWhatsapp}
-              className="btn btn-wa w-full sm:w-auto"
-            >
-              <WhatsappIcon />
-              Escribir por WhatsApp
-            </a>
-          </section>
+          </aside>
         </div>
+      </div>
+
+      <div className="border-t border-border bg-bg px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3 lg:hidden">
+        <a href={whatsappUrl(whatsappMessage)} target="_blank" rel="noopener" onClick={trackWhatsapp} className="btn btn-wa w-full">
+          <WhatsappIcon />
+          Escribir por WhatsApp
+        </a>
       </div>
     </motion.div>,
     document.body,

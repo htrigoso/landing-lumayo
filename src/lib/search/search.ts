@@ -11,7 +11,7 @@ const ALL_TOKENS_BONUS = 5;
 /** Bonus when the whole query is the entry title. */
 const EXACT_TITLE_BONUS = 15;
 
-const STOP_WORDS = new Set([
+export const STOP_WORDS = new Set([
   "a", "al", "con", "de", "del", "el", "en", "es", "hay", "la", "las", "lo", "los", "me", "mi", "no", "o", "para", "por", "que", "se", "su", "sus", "tu", "tus", "un", "una", "y",
 ]);
 
