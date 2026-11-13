@@ -110,7 +110,7 @@ export function ServicesMegaMenu({ label, href, pathname }: { label: string; hre
           href={href}
           onClick={close}
           aria-current={active ? "page" : undefined}
-          className="rounded-full py-2 pl-3 text-[0.95rem] font-semibold text-heading transition-colors hover:text-primary aria-[current=page]:text-primary xl:pl-4"
+          className="rounded-full py-2 pl-2 text-[0.95rem] font-semibold text-heading transition-colors hover:text-primary aria-[current=page]:text-primary"
         >
           {label}
         </Link>

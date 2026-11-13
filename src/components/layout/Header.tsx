@@ -8,6 +8,7 @@ import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import { ArrowRightIcon, CloseIcon, MenuIcon, PhoneIcon, PinIcon, WhatsappIcon } from "@/components/icons";
 import { ServicesMegaMenu, isServicesSectionPath } from "@/components/layout/ServicesMegaMenu";
+import { SearchButton } from "@/components/search/SearchButton";
 import { categoryPath, defaultWhatsappMessage, fullAddress, programPaths, serviceCategories, site, whatsappUrl } from "@/lib/site";
 
 type NavLink = { href: string; label: string; mega?: boolean; badge?: string };
@@ -220,7 +221,7 @@ export function Header() {
                   <Link
                     href={l.href}
                     aria-current={isActivePath(pathname, l.href) ? "page" : undefined}
-                    className="rounded-full px-3 py-2 text-[0.95rem] font-semibold text-heading transition-colors hover:bg-surface hover:text-primary aria-[current=page]:bg-surface-soft aria-[current=page]:text-primary xl:px-4"
+                    className="rounded-full px-2 py-2 text-[0.95rem] font-semibold text-heading transition-colors hover:bg-surface hover:text-primary aria-[current=page]:bg-surface-soft aria-[current=page]:text-primary"
                   >
                     {l.label}
                     {/* Hidden below xl so the nav does not overflow at 1024 px */}
@@ -233,6 +234,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <SearchButton />
           <a
             href={whatsappUrl(defaultWhatsappMessage)}
             target="_blank"

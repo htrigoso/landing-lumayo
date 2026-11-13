@@ -229,6 +229,15 @@ export function MenuIcon(props: IconProps) {
   );
 }
 
+export function SearchIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <circle {...stroke} strokeWidth={2} cx="11" cy="11" r="6.5" />
+      <path {...stroke} strokeWidth={2} d="m20 20-4.2-4.2" />
+    </Svg>
+  );
+}
+
 export function CloseIcon(props: IconProps) {
   return (
     <Svg {...props}>

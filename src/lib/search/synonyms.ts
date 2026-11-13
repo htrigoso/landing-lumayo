@@ -1,0 +1,55 @@
+/**
+ * Patient phrasings → terms that appear in titles, keywords or subtitles of the index.
+ * Keys and targets are written naturally and normalized at match time, so "niño" and "nino" are the same.
+ */
+export const synonyms: Readonly<Record<string, readonly string[]>> = {
+  frenillos: ["brackets"],
+  fierros: ["brackets"],
+  ortodoncia: ["brackets"],
+  "ortodoncia invisible": ["invisalign"],
+  alineadores: ["invisalign"],
+  transparentes: ["invisalign"],
+  "dolor de muela": ["endodoncia", "curaciones", "urgencias"],
+  "me duele la muela": ["endodoncia", "curaciones", "urgencias"],
+  "me duele": ["dolor", "endodoncia", "curaciones"],
+  dolor: ["urgencias", "endodoncia"],
+  caries: ["curaciones", "operatoria"],
+  tapadura: ["curaciones", "operatoria"],
+  obturacion: ["curaciones", "operatoria"],
+  sarro: ["limpieza"],
+  profilaxis: ["limpieza"],
+  destartraje: ["limpieza"],
+  blanquear: ["blanqueamiento"],
+  "dientes amarillos": ["blanqueamiento"],
+  manchas: ["blanqueamiento"],
+  "me falta un diente": ["implantes", "protesis"],
+  "diente perdido": ["implantes", "protesis"],
+  dentadura: ["protesis"],
+  placa: ["protesis"],
+  corona: ["protesis", "endodoncia"],
+  coronas: ["protesis", "endodoncia"],
+  nino: ["odontopediatria", "lumayo kids"],
+  nina: ["odontopediatria", "lumayo kids"],
+  bebe: ["odontopediatria", "lumayo kids"],
+  hijo: ["odontopediatria", "lumayo kids"],
+  infantil: ["odontopediatria", "lumayo kids"],
+  boda: ["lumayo novias", "diseno de sonrisa"],
+  novia: ["lumayo novias", "diseno de sonrisa"],
+  novio: ["lumayo novias", "diseno de sonrisa"],
+  "muela del juicio": ["muela del juicio", "muelas del juicio"],
+  cordal: ["muela del juicio", "muelas del juicio"],
+  "tercera molar": ["muela del juicio", "muelas del juicio"],
+  membresia: ["membresia lumayo"],
+  descuento: ["membresia lumayo"],
+  tarjeta: ["membresia lumayo"],
+};
+
+/** Chips shown on an empty search. Each one, typed as-is, returns results. */
+export const popularSearches: readonly string[] = [
+  "Brackets",
+  "Blanqueamiento",
+  "Carillas",
+  "Limpieza dental",
+  "Implantes",
+  "Niños",
+];
