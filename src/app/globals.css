@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+/*
+ * Tailwind v4 gradients interpolate "in oklab". Browsers without gradient colour interpolation
+ * (Safari < 16.2, i.e. iOS 15 and early iOS 16; Chrome < 111; Firefox < 127) reject the whole
+ * background-image and paint no gradient at all: the hero lost its dark overlay this way.
+ * Same directions without the interpolation keyword. Unlayered, so it wins over the utilities.
+ */
+@supports not (background-image: linear-gradient(in oklab, red, blue)) {
+  .bg-gradient-to-t { --tw-gradient-position: to top; }
+  .bg-gradient-to-b { --tw-gradient-position: to bottom; }
+  .bg-gradient-to-r { --tw-gradient-position: to right; }
+  .bg-gradient-to-l { --tw-gradient-position: to left; }
+  .bg-gradient-to-br { --tw-gradient-position: to bottom right; }
+}
+
 @theme inline {
   /* Brand manual: Montserrat is the only typeface */
   --font-sans: var(--font-montserrat);
