@@ -5,8 +5,8 @@ type SectionBackdropProps = {
   lines?: Corner;
   /** Corner the soft tonal light sits in. */
   glow?: Corner;
-  /** Background the section sits on: white, light mist, or a deep brand blue (white lines, darker light). */
-  surface?: "white" | "mist" | "deep";
+  /** Background the section sits on: white, light mist, a deep brand blue (white lines, darker light), or Aqua Vital (dark lines, white light). */
+  surface?: "white" | "mist" | "deep" | "aqua" | "aqua-soft";
 };
 
 // One corner drawing, anchored flush to the corner and mirrored for the other three
@@ -40,9 +40,11 @@ const curves = [0, 1, 2].map(
  * while scrolling. The section must be `relative isolate overflow-hidden`.
  */
 export function SectionBackdrop({ lines, glow, surface = "white" }: SectionBackdropProps) {
+  // Aqua surfaces get a white light and azul-950 lines, both at low opacity so they stay subtle
   const glowColor =
-    surface === "white" ? "var(--color-surface-soft)" : surface === "mist" ? "var(--color-surface-soft)" : "var(--color-primary)";
-  const lineColor = surface === "deep" ? "var(--color-text-inverse)" : "var(--color-primary)";
+    surface === "white" || surface === "mist" ? "var(--color-surface-soft)" : surface === "deep" ? "var(--color-primary)" : "var(--color-bg)";
+  const lineColor =
+    surface === "deep" ? "var(--color-text-inverse)" : surface === "aqua" || surface === "aqua-soft" ? "var(--color-on-accent)" : "var(--color-primary)";
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
       {glow && (

@@ -44,7 +44,7 @@ export function SearchPreview({ row, onOpen, onWhatsapp }: SearchPreviewProps) {
       <p className="mt-5 text-xs font-semibold uppercase tracking-wide text-accent-text">{entry.subtitle}</p>
       <h2 className="mt-1 font-display text-2xl font-bold leading-tight text-heading">{entry.title}</h2>
       <p className="mt-2 line-clamp-3 text-text">{entry.description}</p>
-      {entry.priceLabel && <p className="mt-3 font-semibold text-primary">{entry.priceLabel}</p>}
+      {entry.priceLabel && <p className="mt-3 font-semibold text-aqua-700">{entry.priceLabel}</p>}
       <div className="mt-5 flex flex-col gap-3">
         <Link href={entry.href} onClick={() => onOpen(row)} className="btn btn-navy w-full">
           {linkLabel[entry.kind]}

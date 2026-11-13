@@ -259,12 +259,12 @@ function ServiceCard({ service: s, showCategory, reduceMotion, index }: CardProp
         {/* Top and bottom shade so the outlined tag reads on any photo */}
         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-azul-950/50 via-transparent to-azul-950/35" />
         {showCategory && (
-          <span className="pill pill-outline absolute left-4 top-4 !px-3 !py-1 text-[0.62rem]">{categoryLabel[s.category]}</span>
+          <span className="pill absolute left-4 top-4 !bg-surface-mint !px-3 !py-1 text-[0.62rem] !text-accent-text">{categoryLabel[s.category]}</span>
         )}
       </div>
 
       {/* Brandbook avatar: white icon in an Azul profundo circle, overlapping the photo edge */}
-      <span aria-hidden="true" className="relative -mt-7 ml-5 grid size-14 place-items-center rounded-full bg-surface-mint text-primary ring-4 ring-bg">
+      <span aria-hidden="true" className="relative -mt-7 ml-5 grid size-14 place-items-center rounded-full bg-surface-mint text-accent-text ring-4 ring-bg">
         <Icon className="size-7" />
       </span>
 

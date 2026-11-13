@@ -117,7 +117,8 @@ export function LumayoKids() {
       </section>
 
       <section aria-labelledby="etapas-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
-        <SectionAtmosphere tone="mist" glow="bl" />
+        {/* washBottom matches the Aqua Vital wave below so the edge blends into it */}
+        <SectionAtmosphere tone="aqua-soft" glow="bl" washBottom="aqua-soft" />
 
         <div className="container-page">
           <SectionHeading
@@ -133,10 +134,10 @@ export function LumayoKids() {
         </div>
       </section>
 
-      <WaveDivider from="bg-white" to="var(--color-primary)" />
-      <section id="primera-visita" aria-labelledby="primera-title" className="relative isolate overflow-hidden bg-primary py-16 text-white lg:py-20">
+      <WaveDivider from="bg-surface-accent-soft" to="var(--color-surface-accent)" />
+      <section id="primera-visita" aria-labelledby="primera-title" className="relative isolate overflow-hidden bg-surface-accent py-16 text-on-accent lg:py-20">
         <div aria-hidden="true" className="absolute inset-0 -z-10 opacity-60">
-          <SectionBackdrop lines="tr" glow="bl" surface="deep" />
+          <SectionBackdrop lines="tr" glow="bl" surface="aqua" />
         </div>
 
         <div className="container-page">
@@ -144,18 +145,18 @@ export function LumayoKids() {
             number="02"
             label="Primera visita"
             id="primera-title"
-            tone="dark"
+            tone="accent"
             layout="stack"
             title={<>Tu primera visita, <strong>paso a paso</strong></>}
           />
-          <FirstVisitTimeline steps={lumayoKids.firstVisit.steps} />
-          <Reveal className="mt-14 flex flex-col items-start gap-5 border-t border-white/15 pt-10 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-lg font-semibold text-white">¿Listo para la primera visita?</p>
+          <FirstVisitTimeline steps={lumayoKids.firstVisit.steps} tone="accent" />
+          <Reveal className="mt-14 flex flex-col items-start gap-5 border-t border-on-accent/20 pt-10 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-lg font-semibold text-on-accent">¿Listo para la primera visita?</p>
             <ReserveButton />
           </Reveal>
         </div>
       </section>
-      <WaveDivider from="bg-primary" to="var(--color-bg)" flip />
+      <WaveDivider from="bg-surface-accent" to="var(--color-bg)" flip />
 
       <section aria-labelledby="comodidad-title" className="relative isolate overflow-hidden bg-white pt-16 pb-16 lg:pt-20 lg:pb-20">
         <SectionAtmosphere lines="tr" />
@@ -182,7 +183,7 @@ export function LumayoKids() {
       </section>
 
       <section aria-labelledby="casa-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
-        <SectionAtmosphere tone="mist" glow="tr" />
+        <SectionAtmosphere tone="aqua-soft" glow="tr" />
 
         <div className="container-page">
           <SectionHeading
@@ -222,7 +223,7 @@ export function LumayoKids() {
                       className="object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                     />
                     {item.id === "odontopediatria" ? (
-                      <span className="absolute left-4 top-4 rounded-full bg-primary px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-white">
+                      <span className="absolute left-4 top-4 rounded-full bg-surface-accent px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-on-accent">
                         Empieza por aquí
                       </span>
                     ) : null}
@@ -263,7 +264,7 @@ export function LumayoKids() {
       </section>
 
       <section aria-labelledby="faq-kids-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
-        <SectionAtmosphere tone="mist" lines="tr" />
+        <SectionAtmosphere tone="aqua-soft" lines="tr" />
 
         <div className="container-page">
           <SectionHeading

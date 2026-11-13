@@ -46,7 +46,7 @@ export function LumayoCard() {
             <h2 id="lumayo-card-title" className="section-title mt-4">
               Membresía <strong>Lumayo</strong>
             </h2>
-            <p className="mt-5 inline-flex rounded-full bg-surface-mint/70 px-4 py-2 text-sm font-semibold text-primary sm:text-base">
+            <p className="mt-5 inline-flex rounded-full bg-surface-accent px-4 py-2 text-sm font-semibold text-on-accent sm:text-base">
               {lumayoCard.heroHighlight}
             </p>
             <p className="mt-5 max-w-lg text-pretty text-lg leading-relaxed text-text">{lumayoCard.description}</p>
@@ -64,7 +64,7 @@ export function LumayoCard() {
 
             <ul className="mt-3 flex flex-wrap gap-3">
               {lumayoCard.perks.map((perk) => (
-                <li key={perk} className="inline-flex items-center gap-2 rounded-full bg-surface-mint/70 px-4 py-2 text-sm font-semibold text-primary">
+                <li key={perk} className="inline-flex items-center gap-2 rounded-full bg-aqua-100 px-4 py-2 text-sm font-semibold text-aqua-800">
                   <CheckIcon className="size-4 text-accent-text" />
                   {perk}
                 </li>
@@ -101,11 +101,11 @@ export function LumayoCard() {
                     }`}
                   >
                     {featured && (
-                      <span className="absolute right-5 top-5 rounded-full bg-surface-mint/70 px-3 py-1 text-xs font-semibold text-primary">
+                      <span className="absolute right-5 top-5 rounded-full bg-surface-accent px-3 py-1 text-xs font-semibold text-on-accent">
                         Mayor ahorro
                       </span>
                     )}
-                    <div className="grid size-12 place-items-center rounded-2xl bg-surface-soft text-primary">
+                    <div className="grid size-12 place-items-center rounded-2xl bg-aqua-100 text-aqua-700">
                       <Icon className="size-6" />
                     </div>
                     <p className="mt-6 font-display text-6xl font-extrabold leading-none tracking-[-0.04em] text-primary">
@@ -183,7 +183,7 @@ export function LumayoCard() {
                 <ul className="mt-6 space-y-3">
                   {lumayoCard.family.perks.map((perk) => (
                     <li key={perk} className="flex items-start gap-3 text-base leading-relaxed text-text">
-                      <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-surface-mint/70">
+                      <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-aqua-100">
                         <CheckIcon className="size-3.5 text-accent-text" />
                       </span>
                       {perk}

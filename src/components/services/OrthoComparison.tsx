@@ -89,7 +89,17 @@ export function OrthoComparison() {
                         <span className="block text-sm text-text">{service.ortho.marketRange.note}</span>
                       )}
                     </td>
-                    {showLumayoColumn && <td className="px-5 py-4">{lumayoPriceLabel(service.ortho.priceFrom)}</td>}
+                    {showLumayoColumn && (
+                      <td className="px-5 py-4">
+                        {service.ortho.priceFrom === undefined ? (
+                          lumayoPriceLabel(undefined)
+                        ) : (
+                          <span className="inline-block rounded-full bg-aqua-100 px-3 py-1 text-aqua-800">
+                            {lumayoPriceLabel(service.ortho.priceFrom)}
+                          </span>
+                        )}
+                      </td>
+                    )}
                   </tr>
                 ))}
               </tbody>

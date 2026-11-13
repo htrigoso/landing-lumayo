@@ -18,6 +18,8 @@ type BookingFormProps = {
   subtitle?: string;
   /** Id of an external heading; when set, the form's own header is not rendered. */
   headingId?: string;
+  /** Cap colour: "navy" (azul-950) on blue bands, "primary" (Azul Clínico) on Aqua Vital bands. */
+  headerTone?: "navy" | "primary";
   className?: string;
 };
 
@@ -43,6 +45,7 @@ export function BookingForm({
   titleEmphasis = "tu cita",
   subtitle = "Completa tus datos y te confirmamos el horario por WhatsApp.",
   headingId,
+  headerTone = "navy",
   className = "",
 }: BookingFormProps) {
   const uid = useId();
@@ -98,7 +101,9 @@ export function BookingForm({
       aria-labelledby={headingId ?? ids.title}
       className={`overflow-hidden rounded-2xl bg-bg ${headingId ? "p-5 sm:p-6" : ""} ${className}`}
     >
-      {!headingId && <FormHeader titleId={ids.title} title={title} emphasis={titleEmphasis} subtitle={subtitle} />}
+      {!headingId && (
+        <FormHeader titleId={ids.title} title={title} emphasis={titleEmphasis} subtitle={subtitle} tone={headerTone} />
+      )}
 
       <div className={`space-y-3 ${headingId ? "" : "px-6 pb-6 pt-0 sm:px-7"}`}>
         <div>
@@ -253,14 +258,29 @@ const headerCurves = [0, 1, 2].map(
 );
 
 /**
- * Card cap in Azul profundo: label, Titular (400 + 800) and a short description over thin
+ * Card cap in Azul Clínico: label, Titular (400 + 800) and a short description over thin
  * isotype lines. Its lower edge is the crown of the Lumayo tooth (two cusps, soft middle dip),
  * so the white form body rises into it like the "muelita".
  */
-function FormHeader({ titleId, title, emphasis, subtitle }: { titleId: string; title: string; emphasis: string; subtitle: string }) {
+function FormHeader({
+  titleId,
+  title,
+  emphasis,
+  subtitle,
+  tone,
+}: {
+  titleId: string;
+  title: string;
+  emphasis: string;
+  subtitle: string;
+  tone: "navy" | "primary";
+}) {
+  // Azul profundo (azul-950) sits on the blue bands; Azul Clínico (primary) stands out on Aqua Vital.
+  // Full class names are written out so Tailwind's scanner generates them.
   return (
-    // Azul profundo (azul-950), not primary: the booking band behind the card is primary, so the cap would vanish into it.
-    <div className="relative isolate overflow-hidden bg-azul-950 px-6 pb-11 pt-6 text-text-inverse sm:px-7">
+    <div
+      className={`relative isolate overflow-hidden px-6 pb-11 pt-6 text-text-inverse sm:px-7 ${tone === "primary" ? "bg-primary" : "bg-azul-950"}`}
+    >
       <IsotypeWatermark tone="dark" className="-right-12 -top-8 -z-10 w-52 !opacity-[0.16]" />
       <svg aria-hidden="true" viewBox="0 0 400 160" preserveAspectRatio="none" fill="none" className="absolute inset-0 -z-10 size-full text-text-inverse">
         {headerCurves.map((d, i) => (
@@ -268,11 +288,11 @@ function FormHeader({ titleId, title, emphasis, subtitle }: { titleId: string; t
         ))}
       </svg>
 
-      <p className="text-xs font-medium uppercase tracking-[0.12em] text-text-inverse-muted/85">Reserva en línea</p>
+      <p className="text-xs font-medium uppercase tracking-[0.12em] text-text-inverse">Reserva en línea</p>
       <h3 id={titleId} className="mt-2 font-display text-3xl font-normal leading-[0.98] tracking-[-0.045em]">
         {title} <strong className="font-extrabold">{emphasis}</strong>
       </h3>
-      <p className="mt-2 max-w-xs text-pretty text-sm leading-[1.5] text-text-inverse-muted/90">{subtitle}</p>
+      <p className="mt-2 max-w-xs text-pretty text-sm leading-[1.5] text-text-inverse">{subtitle}</p>
 
       {/* Crown edge: the white body's top follows the tooth's two cusps */}
       <svg

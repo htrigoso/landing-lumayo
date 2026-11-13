@@ -65,15 +65,25 @@ function ReasonItem({ reason, side, index }: { reason: Reason; side: "left" | "r
 
 /** "Why choose us": six reasons around a floating tooth, as in the clinic's reference design. */
 /** `flatBottom` keeps the sky bottom edge when a wave divider that paints sky follows directly. */
-export function WhyChooseUs({ flatBottom = false }: { flatBottom?: boolean } = {}) {
+/**
+ * `tone="mist"` (default) is the azul-50 sky used on most pages. `tone="aqua-soft"` is the aqua-50
+ * band used on the home page.
+ */
+export function WhyChooseUs({ flatBottom = false, tone = "mist" }: { flatBottom?: boolean; tone?: "mist" | "aqua-soft" } = {}) {
   const reduceMotion = useReducedMotion();
-  const skyBackground = flatBottom
-    ? "bg-[linear-gradient(to_bottom,var(--color-bg)_0%,var(--color-surface)_16%,var(--color-surface)_100%)]"
-    : "bg-[linear-gradient(to_bottom,var(--color-bg)_0%,var(--color-surface)_16%,var(--color-surface)_84%,var(--color-bg)_100%)]";
+  // Full class names are written out so Tailwind's scanner generates them
+  const skyBackground =
+    tone === "aqua-soft"
+      ? flatBottom
+        ? "bg-[linear-gradient(to_bottom,var(--color-bg)_0%,var(--color-surface-accent-soft)_16%,var(--color-surface-accent-soft)_100%)]"
+        : "bg-[linear-gradient(to_bottom,var(--color-bg)_0%,var(--color-surface-accent-soft)_16%,var(--color-surface-accent-soft)_84%,var(--color-bg)_100%)]"
+      : flatBottom
+        ? "bg-[linear-gradient(to_bottom,var(--color-bg)_0%,var(--color-surface)_16%,var(--color-surface)_100%)]"
+        : "bg-[linear-gradient(to_bottom,var(--color-bg)_0%,var(--color-surface)_16%,var(--color-surface)_84%,var(--color-bg)_100%)]";
 
   return (
     <section id="por-que-elegirnos" aria-labelledby="por-que-title" className={`relative isolate overflow-hidden pb-16 lg:pb-20 ${skyBackground}`}>
-      <SectionBackdrop lines="tr" glow="bl" surface="mist" />
+      <SectionBackdrop lines="tr" glow="bl" surface={tone} />
       <div className="container-page">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="pill pill-solid mx-auto">Por qué elegirnos</p>

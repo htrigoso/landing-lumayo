@@ -3,10 +3,15 @@ import { Reveal } from "@/components/motion/Reveal";
 import { fullAddress, site } from "@/lib/site";
 import { SectionBackdrop } from "@/components/decor/SectionBackdrop";
 
-export function Location({ number }: { number: string }) {
+/** `surface="mist"` keeps the sections alternating when Testimonials (white) is not rendered between About and here. */
+export function Location({ number, surface = "white" }: { number: string; surface?: "white" | "mist" }) {
   return (
-    <section id="ubicacion" aria-labelledby="ubicacion-title" className="relative isolate overflow-hidden bg-bg pb-16 lg:pb-20">
-      <SectionBackdrop lines="bl" glow="tr" />
+    <section
+      id="ubicacion"
+      aria-labelledby="ubicacion-title"
+      className={`relative isolate overflow-hidden pb-16 lg:pb-20 ${surface === "mist" ? "bg-surface" : "bg-bg"}`}
+    >
+      <SectionBackdrop lines="bl" glow="tr" surface={surface} />
       <div className="container-page grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-14">
         <Reveal>
           <p className="flex items-center gap-3 text-sm font-medium tabular-nums text-primary">

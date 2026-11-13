@@ -371,7 +371,7 @@ export function SearchPanel({ onClose, returnFocusTo }: SearchPanelProps) {
                         aria-pressed={selected}
                         onClick={() => chooseIntent(candidate)}
                         className={`inline-flex min-h-11 cursor-pointer items-center rounded-full border px-4 text-left text-sm font-semibold transition ${
-                          selected ? "border-primary bg-primary text-text-inverse" : "border-border-input bg-bg text-primary hover:bg-surface"
+                          selected ? "border-primary bg-primary text-text-inverse" : "border-aqua-300 bg-surface-accent-soft text-aqua-800 hover:bg-aqua-100"
                         }`}
                       >
                         {candidate.label}
@@ -437,7 +437,7 @@ export function SearchPanel({ onClose, returnFocusTo }: SearchPanelProps) {
                         key={label}
                         type="button"
                         onClick={() => applyQuery(label)}
-                        className="inline-flex min-h-11 cursor-pointer items-center rounded-full border border-border-input bg-bg px-4 text-sm font-semibold text-primary transition hover:bg-surface"
+                        className="inline-flex min-h-11 cursor-pointer items-center rounded-full border border-aqua-300 bg-surface-accent-soft px-4 text-sm font-semibold text-aqua-800 transition hover:bg-aqua-100"
                       >
                         {label}
                       </button>

@@ -45,16 +45,17 @@ export default function Home() {
       <main id="main">
         <Hero />
         <Services />
-        <WhyChooseUs />
+        <WhyChooseUs tone="aqua-soft" />
         <SocialProofStrip />
         <BrandStatement />
         <About />
         <Testimonials number="03" />
-        <Location number={n(4)} />
-        <WaveDivider from="bg-bg" to="var(--color-surface-inverse)" />
-        <BookingSection number={n(5)} />
+        {/* Testimonials (mist) sits between About and Location when shown; otherwise Location takes the mist tone */}
+        <Location number={n(4)} surface={hasTestimonials ? "white" : "mist"} />
+        <WaveDivider from={hasTestimonials ? "bg-bg" : "bg-surface"} to="var(--color-surface-accent)" />
+        <BookingSection number={n(5)} tone="aqua" />
         <WaveDivider
-          from="bg-surface-inverse"
+          from="bg-surface-accent"
           to="var(--color-surface-deep)"
           flip
         />

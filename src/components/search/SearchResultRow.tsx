@@ -57,7 +57,6 @@ export function EntryThumb({ entry, size }: { entry: SearchEntry; size: "row" | 
 
 /** One result as a compact, full-width link: thumbnail, highlighted title, meta line and chevron. */
 export function SearchResultRow({ id, entry, query, active, onHover, onOpen }: SearchResultRowProps) {
-  const meta = [entry.subtitle, entry.priceLabel].filter(Boolean).join(" · ");
   return (
     <Link
       id={id}
@@ -84,7 +83,11 @@ export function SearchResultRow({ id, entry, query, active, onHover, onOpen }: S
             ),
           )}
         </span>
-        <span className="mt-0.5 block truncate text-sm text-text-muted">{meta}</span>
+        <span className="mt-0.5 block truncate text-sm text-text-muted">
+          {entry.subtitle}
+          {entry.subtitle && entry.priceLabel && " · "}
+          {entry.priceLabel && <span className="font-semibold text-aqua-700">{entry.priceLabel}</span>}
+        </span>
       </span>
       <ArrowRightIcon aria-hidden="true" className="size-4 shrink-0 text-accent-text" />
     </Link>

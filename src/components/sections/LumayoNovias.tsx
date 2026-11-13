@@ -110,7 +110,7 @@ export function LumayoNovias() {
             {lumayoNovias.moments.map((moment, i) => (
               <Reveal key={moment.title} className="h-full" delay={i * 0.06}>
                 <article className="flex h-full flex-col rounded-3xl border border-border bg-white p-7 transition duration-300 hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
-                  <span aria-hidden="true" className="font-display text-5xl font-extrabold leading-none text-aqua-300">
+                  <span aria-hidden="true" className="font-display text-5xl font-extrabold leading-none text-aqua-700">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <h3 className="mt-6 text-lg font-bold text-azul-700">{moment.title}</h3>
@@ -193,7 +193,7 @@ export function LumayoNovias() {
             <ol className="relative grid grid-cols-[minmax(0,1fr)] gap-10 border-l border-azul-300 pl-6 md:grid-cols-4 md:gap-8 md:border-l-0 md:pl-0">
               {lumayoNovias.process.map((step, i) => (
                 <li key={step.title}>
-                  <span className="-ml-12 mb-4 grid size-12 place-items-center rounded-full bg-azul-700 font-display text-lg font-bold text-white md:relative md:z-10 md:mx-auto">
+                  <span className="-ml-12 mb-4 grid size-12 place-items-center rounded-full bg-surface-accent font-display text-lg font-bold text-on-accent md:relative md:z-10 md:mx-auto">
                     {i + 1}
                   </span>
                   <div className="md:text-center">

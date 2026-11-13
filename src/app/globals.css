@@ -82,6 +82,11 @@
   --color-surface-mint: var(--color-aqua-100);
   --color-surface-inverse: var(--color-azul-700);
   --color-surface-deep: var(--color-azul-900);
+  /* Aqua Vital section backgrounds: full accent and its soft tint */
+  --color-surface-accent: var(--color-aqua-300);
+  --color-surface-accent-soft: var(--color-aqua-50);
+  /* Text and icons placed on Aqua Vital surfaces (7.72:1 on aqua-300) */
+  --color-on-accent: var(--color-azul-950);
 
   --color-primary: var(--color-azul-700);
   --color-primary-hover: var(--color-azul-800);
@@ -454,6 +459,11 @@ select {
   }
 }
 
+
+/* MUI fades an empty, blurred date field to 42 % opacity (2.4:1 on white). Keep the placeholder readable. */
+.MuiPickersInputBase-sectionsContainer {
+  opacity: 1 !important;
+}
 
 /* Testimonials marquee: the track holds two copies, so -50% lands exactly on the second */
 @keyframes marquee {

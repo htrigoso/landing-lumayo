@@ -19,14 +19,19 @@ type FirstVisitStep = {
 
 type FirstVisitTimelineProps = {
   steps: ReadonlyArray<FirstVisitStep>;
+  /** "accent": rails in azul-950 for Aqua Vital backgrounds. Step cards stay white in both tones. */
+  tone?: "light" | "accent";
 };
 
 /** Numbered first-visit steps: a vertical timeline on mobile, a four-column track on desktop. */
-export function FirstVisitTimeline({ steps }: FirstVisitTimelineProps) {
+export function FirstVisitTimeline({ steps, tone = "light" }: FirstVisitTimelineProps) {
+  const accent = tone === "accent";
+  const trackColor = accent ? "bg-on-accent/30" : "bg-white/30";
+  const railColor = accent ? "border-on-accent/30" : "border-white/30";
   return (
     <div className="relative mt-12">
-      <div aria-hidden="true" className="absolute left-[12.5%] right-[12.5%] top-6 hidden h-px bg-white/30 md:block" />
-      <ol className="relative grid grid-cols-[minmax(0,1fr)] gap-10 border-l border-white/30 pl-6 md:grid-cols-4 md:gap-8 md:border-l-0 md:pl-0">
+      <div aria-hidden="true" className={`absolute left-[12.5%] right-[12.5%] top-6 hidden h-px md:block ${trackColor}`} />
+      <ol className={`relative grid grid-cols-[minmax(0,1fr)] gap-10 border-l pl-6 md:grid-cols-4 md:gap-8 md:border-l-0 md:pl-0 ${railColor}`}>
         {steps.map((step, index) => {
           const Icon = ICONS[step.icon];
           return (

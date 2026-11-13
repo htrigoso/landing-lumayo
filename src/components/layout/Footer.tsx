@@ -146,7 +146,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="container-page mt-10 border-t border-white/10 pt-6 text-xs text-text-inverse-muted/60">
+      <div className="container-page mt-10 border-t border-white/10 pt-6 text-xs text-text-inverse-muted">
         © Lumayo Centro Odontológico · Tarapoto, Perú
       </div>
     </footer>

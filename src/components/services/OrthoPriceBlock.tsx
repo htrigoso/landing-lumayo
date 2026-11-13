@@ -1,3 +1,4 @@
+import { SectionAtmosphere } from "@/components/decor/SectionAtmosphere";
 import { formatMarketRange, orthoPriceQuestion } from "@/lib/ortho-prices";
 import { priceSources, type Service } from "@/lib/site";
 
@@ -26,9 +27,11 @@ export function OrthoPriceBlock({ service }: { service: Service }) {
   const titleId = `${service.id}-price-title`;
 
   return (
-    <section aria-labelledby={titleId} className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
+    // Mist background: it sits between white and aqua-soft sections on the service page, so it never repeats a neighbour
+    <section aria-labelledby={titleId} className="relative isolate overflow-hidden pb-16 lg:pb-20">
+      <SectionAtmosphere tone="mist" />
       <div className="container-page">
-        <div className="rounded-3xl border border-border bg-surface-soft p-6 sm:p-10">
+        <div className="rounded-3xl border border-border bg-bg p-6 sm:p-10">
           <h2 id={titleId} className="font-display text-xl font-bold text-heading sm:text-2xl">
             {orthoPriceQuestion(service.id)}
           </h2>
@@ -36,7 +39,7 @@ export function OrthoPriceBlock({ service }: { service: Service }) {
             <div>
               <dt className="text-sm text-text">Rango de referencia en Perú</dt>
               <dd className="mt-1 font-display text-2xl font-bold text-heading">
-                {formatMarketRange(marketRange)}
+                <span className="inline-block rounded-2xl bg-surface-accent px-4 py-1 text-on-accent">{formatMarketRange(marketRange)}</span>
                 {marketRange.note && <span className="ml-2 text-base font-normal text-text">{marketRange.note}</span>}
               </dd>
             </div>

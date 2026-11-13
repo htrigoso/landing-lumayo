@@ -197,7 +197,7 @@ export function TreatmentsCarousel({ items }: TreatmentsCarouselProps) {
                   className="object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                 />
                 {item.badge ? (
-                  <span className="absolute left-4 top-4 rounded-full bg-azul-700 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-white">
+                  <span className="absolute left-4 top-4 rounded-full bg-surface-accent px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-on-accent">
                     {item.badge}
                   </span>
                 ) : null}

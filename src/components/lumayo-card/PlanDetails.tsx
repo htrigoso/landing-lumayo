@@ -21,7 +21,7 @@ export function PlanFees() {
           <dd className="mt-2 font-display text-3xl font-extrabold text-primary">{plan.reaffiliationFee}</dd>
         </div>
       </dl>
-      <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-surface-mint/70 px-4 py-2 text-sm font-semibold text-primary">
+      <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-aqua-100 px-4 py-2 text-sm font-semibold text-aqua-800">
         <CheckIcon className="size-4 text-accent-text" />
         Titular + hasta {plan.maxAdditional} adicionales
       </p>

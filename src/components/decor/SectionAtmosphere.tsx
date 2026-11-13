@@ -2,7 +2,7 @@ import { IsotypeWatermark } from "@/components/brand/IsotypeWatermark";
 import { SectionBackdrop } from "./SectionBackdrop";
 
 type Corner = "tl" | "tr" | "bl" | "br";
-type Tone = "white" | "mist";
+type Tone = "white" | "mist" | "aqua" | "aqua-soft";
 
 type SectionAtmosphereProps = {
   /** Corner the flowing lines sweep through. */
@@ -24,6 +24,8 @@ type Colour = string;
 const edge: Record<Tone, Colour> = {
   white: "var(--color-bg)",
   mist: "var(--color-surface)",
+  aqua: "var(--color-surface-accent)",
+  "aqua-soft": "var(--color-surface-accent-soft)",
 };
 
 // Light veil used behind the flowing lines on white sections
@@ -52,7 +54,8 @@ export function SectionAtmosphere({
   washTop = "white",
   washBottom = "white",
 }: SectionAtmosphereProps) {
-  const tint: Colour = tone === "mist" ? edge.mist : tintWhite;
+  // Aqua tones stay flat: the wash and the body share one colour, so only the lines and light show
+  const tint: Colour = tone === "white" ? tintWhite : edge[tone];
   const top = edge[washTop];
   const bottom = edge[washBottom];
   // Staged stops: midpoints between edge and tint let each section boundary ease in and out.
@@ -66,7 +69,7 @@ export function SectionAtmosphere({
         }}
       />
       <div aria-hidden="true" className="absolute inset-0 -z-10 opacity-60">
-        <SectionBackdrop lines={lines} glow={glow} surface={tone === "mist" ? "mist" : "white"} />
+        <SectionBackdrop lines={lines} glow={glow} surface={tone} />
       </div>
       {isotype && <IsotypeWatermark className={isotypePlacement[isotype]} />}
     </>

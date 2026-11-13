@@ -80,6 +80,14 @@ function sectionLabel(title: string): string {
   return "Información";
 }
 
+/**
+ * Tone for a bluish section, alternating between Bruma (mist) and aqua-soft so consecutive
+ * blue sections on the page do not all look the same. Sections in between stay white.
+ */
+function mistTone(index: number): "mist" | "aqua-soft" {
+  return index % 4 === 1 ? "aqua-soft" : "mist";
+}
+
 /** Ordered steps of the first "paso a paso" subsection, for HowTo JSON-LD. */
 function docSteps(doc: ServiceDoc): string[] | undefined {
   for (const section of doc.sections) {
@@ -279,7 +287,8 @@ async function ServiceContent({ params }: PageProps) {
       )}
 
       <section aria-labelledby="relacionados-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
-        <SectionAtmosphere tone="mist" glow="tr" />
+        {/* Last section before the WaveDivider, whose top fill is bg-surface (mist): wash ends on mist too */}
+        <SectionAtmosphere tone="mist" glow="tr" washBottom="mist" />
 
         <div className="container-page">
           <SectionHeading
@@ -397,7 +406,7 @@ function LegacySections({ service, content }: { service: Service; content: Legac
       </section>
 
       <section aria-labelledby="detalles-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
-        <SectionAtmosphere tone="mist" lines="tr" />
+        <SectionAtmosphere tone="aqua-soft" lines="tr" />
 
         <div className="container-page">
           <SectionHeading
@@ -465,7 +474,7 @@ function LegacySections({ service, content }: { service: Service; content: Legac
       {service.ortho && <OrthoPriceBlock service={service} />}
 
       <section aria-labelledby="faq-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
-        <SectionAtmosphere tone="mist" lines="tr" />
+        <SectionAtmosphere tone="aqua-soft" lines="tr" />
 
         <div className="container-page">
           <SectionHeading
@@ -496,7 +505,7 @@ function DocSections({ doc }: { doc: ServiceDoc }) {
         const id = `doc-section-${i + 1}-title`;
         return (
           <section key={id} aria-labelledby={id} className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
-            <SectionAtmosphere tone={i % 2 === 0 ? "white" : "mist"} />
+            <SectionAtmosphere tone={i % 2 === 0 ? "white" : mistTone(i)} />
 
             <div className="container-page">
               <SectionHeading
@@ -527,7 +536,7 @@ function DocSections({ doc }: { doc: ServiceDoc }) {
       })}
 
       <section aria-labelledby="faq-title" className="relative isolate overflow-hidden bg-white pb-16 lg:pb-20">
-        <SectionAtmosphere tone={faqIndex % 2 === 0 ? "white" : "mist"} lines="tr" />
+        <SectionAtmosphere tone={faqIndex % 2 === 0 ? "white" : mistTone(faqIndex)} lines="tr" />
 
         <div className="container-page">
           <SectionHeading
@@ -599,7 +608,11 @@ function DocBlockView({ block, h1 }: { block: DocBlock; h1: string }) {
             >
               <dt className="min-w-0 text-text">{item.label}</dt>
               <dd className="font-display text-lg font-bold text-heading sm:text-right">
-                {"pending" in item ? <span className="pill pill-solid">Precio por validar</span> : item.value}
+                {"pending" in item ? (
+                  <span className="inline-block rounded-full bg-surface-accent px-3 py-1 text-sm font-semibold text-on-accent">Precio por validar</span>
+                ) : (
+                  <span className="inline-block rounded-full bg-aqua-100 px-3 py-1 text-aqua-800">{item.value}</span>
+                )}
               </dd>
             </div>
           ))}

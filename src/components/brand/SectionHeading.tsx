@@ -9,7 +9,8 @@ type SectionHeadingProps = {
   /** Title using the manual's 400 + 800 pairing: wrap the emphasis in <strong>. */
   title: ReactNode;
   description?: ReactNode;
-  tone?: "light" | "dark";
+  /** "accent": text for Aqua Vital backgrounds (azul-950 title, azul-900 label). */
+  tone?: "light" | "dark" | "accent";
   /** "split": title left, description bottom-right (manual layout). "stack": everything left. */
   layout?: "split" | "stack";
   className?: string;
@@ -18,26 +19,35 @@ type SectionHeadingProps = {
 /** Editorial section header modeled on the Lumayo brand manual pages. */
 export function SectionHeading({ number, label, id, title, description, tone = "light", layout = "split", className = "" }: SectionHeadingProps) {
   const dark = tone === "dark";
+  const accent = tone === "accent";
   return (
     <Reveal
       className={`grid gap-5 ${layout === "split" ? "lg:grid-cols-[1.25fr_1fr] lg:items-end lg:gap-16" : ""} ${className}`}
     >
       <div>
-        <p className={`flex items-center gap-3 text-sm font-medium tabular-nums ${dark ? "text-text-inverse-muted" : "text-primary"}`}>
+        <p
+          className={`flex items-center gap-3 text-sm font-medium tabular-nums ${
+            dark ? "text-text-inverse-muted" : accent ? "text-azul-900" : "text-primary"
+          }`}
+        >
           {number && (
             <>
               {number}
-              <span aria-hidden="true" className={`h-px w-8 ${dark ? "bg-text-inverse-muted/50" : "bg-primary"}`} />
+              <span aria-hidden="true" className={`h-px w-8 ${dark ? "bg-text-inverse-muted/50" : accent ? "bg-on-accent" : "bg-primary"}`} />
             </>
           )}
           {label}
         </p>
-        <h2 id={id} className={`section-title mt-4 ${dark ? "!text-text-inverse" : ""}`}>
+        <h2 id={id} className={`section-title mt-4 ${dark ? "!text-text-inverse" : accent ? "!text-on-accent" : ""}`}>
           {title}
         </h2>
       </div>
       {description && (
-        <p className={`max-w-md text-pretty text-base leading-relaxed sm:text-lg ${dark ? "text-text-inverse-muted" : "text-text"} ${layout === "split" ? "lg:justify-self-end lg:pb-1" : ""}`}>
+        <p
+          className={`max-w-md text-pretty text-base leading-relaxed sm:text-lg ${
+            dark ? "text-text-inverse-muted" : accent ? "text-on-accent" : "text-text"
+          } ${layout === "split" ? "lg:justify-self-end lg:pb-1" : ""}`}
+        >
           {description}
         </p>
       )}
