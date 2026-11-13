@@ -18,6 +18,7 @@ const description = `Escríbenos por WhatsApp o llámanos al ${site.phoneDisplay
 export const metadata: Metadata = {
   title,
   description,
+  alternates: { canonical: "/contacto" },
   ...pageSocial({ title, description, path: "/contacto" }),
 };
 

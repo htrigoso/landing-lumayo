@@ -26,6 +26,7 @@ const cover = firstPost && services.find((s) => s.id === firstPost.coverServiceI
 export const metadata: Metadata = {
   title,
   description,
+  alternates: { canonical: "/blog" },
   ...pageSocial({
     title,
     description,

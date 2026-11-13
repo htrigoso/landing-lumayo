@@ -27,6 +27,7 @@ const description =
 export const metadata: Metadata = {
   title,
   description,
+  alternates: { canonical: "/nosotros" },
   ...pageSocial({ title, description, path: "/nosotros" }),
 };
 

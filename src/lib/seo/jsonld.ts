@@ -36,6 +36,7 @@ import {
 } from "@/lib/site";
 import { defaultReviewerId, getTeamMember, type TeamMember } from "@/lib/team";
 import type { ReviewTestimonial } from "@/lib/results";
+import { clinicPriceRange, clinicPricesFor } from "@/lib/clinic-prices";
 
 /**
  * schema.org builders for the site. Pure functions: they read the same data the pages render, so the
@@ -65,10 +66,12 @@ export function clinicJsonLd(): WithContext<Dentist> {
     "@id": clinicId,
     name: "Lumayo Centro Odontológico",
     url: absoluteUrl("/"),
-    // TODO: add a square PNG logo (112 px or more); Google does not use SVG logos for this field.
-    logo: absoluteUrl("/images/lumayo-logo.svg"),
+    // Square PNG (512 px): Google does not use SVG logos for this field.
+    logo: absoluteUrl("/images/lumayo-logo.png"),
     image: absoluteUrl("/images/hero.webp"),
     telephone: site.phoneE164,
+    // Derived from the clinic's confirmed prices only (src/lib/clinic-prices.ts).
+    priceRange: clinicPriceRange(),
     medicalSpecialty: "Dentistry",
     address: {
       "@type": "PostalAddress",
@@ -115,8 +118,8 @@ export function clinicJsonLd(): WithContext<Dentist> {
           },
         }
       : {}),
-    // TODO: add sameAs (Facebook, Instagram, TikTok) once the clinic provides the profile URLs.
-    // TODO: add priceRange once the clinic confirms it.
+    // Official profiles, in the order defined in site.social (Facebook, Instagram, TikTok).
+    sameAs: Object.values(site.social),
     // availableService is not in schema-dts' Dentist type (its range is MedicalProcedure, MedicalTest or MedicalTherapy),
     // so the whole object is asserted; the names still come from the same services list.
   } as WithContext<Dentist>;
@@ -262,14 +265,36 @@ function serviceJsonLd(input: ServiceInput): WithContext<Service> {
   } as WithContext<Service>;
 }
 
+/** One Offer per confirmed clinic price of the service (src/lib/clinic-prices.ts). Free items get price 0. */
+function clinicOffers(service: SiteService): Offer[] {
+  const url = absoluteUrl(servicePath(service));
+  return (clinicPricesFor(service.id) ?? []).map((item): Offer => ({
+    "@type": "Offer",
+    name: `${service.name} – ${item.label}`,
+    priceCurrency: "PEN",
+    url,
+    ..."price" in item
+      ? { price: item.price }
+      : {
+          priceSpecification: {
+            "@type": "PriceSpecification",
+            minPrice: item.minPrice,
+            maxPrice: item.maxPrice,
+            priceCurrency: "PEN",
+          },
+        },
+  }));
+}
+
 /** Detail page of a single service (the category and service come from src/lib/site.ts). */
 export function serviceDetailJsonLd(service: SiteService): WithContext<Service> {
-  // Offer only for the clinic's own confirmed price. Market reference ranges never become an Offer.
+  // Offers only for the clinic's own confirmed prices. Market reference ranges never become an Offer.
   const priceFrom = service.ortho?.priceFrom;
-  const offers: Offer[] | undefined =
+  const orthoOffers: Offer[] =
     priceFrom === undefined
-      ? undefined
+      ? []
       : [{ "@type": "Offer", name: service.name, price: priceFrom, priceCurrency: "PEN", url: absoluteUrl(servicePath(service)) }];
+  const offers = [...orthoOffers, ...clinicOffers(service)];
 
   return serviceJsonLd({
     name: service.name,
@@ -278,7 +303,7 @@ export function serviceDetailJsonLd(service: SiteService): WithContext<Service> 
     serviceType: service.name,
     category: categoryOf(service).label,
     image: imageJsonLd({ src: service.image, name: service.name }),
-    offers,
+    offers: offers.length > 0 ? offers : undefined,
   });
 }
 

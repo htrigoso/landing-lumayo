@@ -15,11 +15,31 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
+// Same staging switch as src/app/robots.ts: NEXT_PUBLIC_ALLOW_INDEXING=false blocks indexing on every page.
+const allowIndexing = process.env.NEXT_PUBLIC_ALLOW_INDEXING !== "false";
+
 export const metadata: Metadata = {
   // Resolves relative canonical and og URLs on every page.
   metadataBase: new URL(siteUrl),
   // Google Search Console meta tag; omitted when the variable is not set.
   verification: { google: process.env.GOOGLE_SITE_VERIFICATION },
+  robots: allowIndexing
+    ? {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          "max-snippet": -1,
+          "max-image-preview": "large",
+          "max-video-preview": -1,
+        },
+      }
+    : {
+        index: false,
+        follow: false,
+        googleBot: { index: false, follow: false },
+      },
   title: "Lumayo · Ortodoncia y centro odontológico en Tarapoto",
   description:
     "Brackets, blanqueamiento dental, implantes, endodoncia, prótesis y odontopediatría en Tarapoto. Agenda tu cita por WhatsApp al 986 382 607.",

@@ -25,6 +25,12 @@ export const site = {
     region: "San Martín",
     country: "PE",
   },
+  /** Official social profiles. Single source for JSON-LD sameAs and llms.txt. */
+  social: {
+    facebook: "https://www.facebook.com/CentroOdontologicoLumayo",
+    instagram: "https://www.instagram.com/lumayo.tarapoto/",
+    tiktok: "https://www.tiktok.com/@lumayo_tarapoto",
+  },
   mapsUrl:
     "https://www.google.com/maps/place/Lumayo+Centro+Odontol%C3%B3gico/@-6.4900813,-76.3540512,17z/data=!3m1!4b1!4m6!3m5!1s0x91ba0d8947d09025:0xa21f60bc22074614!8m2!3d-6.4900813!4d-76.3540512",
   mapsEmbedUrl:
