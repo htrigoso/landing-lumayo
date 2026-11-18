@@ -10,6 +10,7 @@ import type {
   ImageObject,
   Offer,
   Person,
+  PriceSpecification,
   Review,
   Service,
   WebSite,
@@ -24,7 +25,6 @@ import {
   lumayoKids,
   lumayoNovias,
   programPaths,
-  serviceCategories,
   servicePath,
   services,
   servicesInCategory,
@@ -36,7 +36,7 @@ import {
 } from "@/lib/site";
 import { defaultReviewerId, getTeamMember, type TeamMember } from "@/lib/team";
 import type { ReviewTestimonial } from "@/lib/results";
-import { clinicPriceRange, clinicPricesFor } from "@/lib/clinic-prices";
+import { type ClinicPrice, clinicPriceRange, clinicPricesFor } from "@/lib/clinic-prices";
 import { promo } from "@/lib/promo";
 
 /**
@@ -66,6 +66,9 @@ export function clinicJsonLd(): WithContext<Dentist> {
     "@type": "Dentist",
     "@id": clinicId,
     name: "Lumayo Centro Odontológico",
+    legalName: site.legal.name,
+    taxID: site.legal.ruc,
+    email: site.email,
     url: absoluteUrl("/"),
     // Square PNG (512 px): Google does not use SVG logos for this field.
     logo: absoluteUrl("/images/lumayo-logo.png"),
@@ -89,20 +92,13 @@ export function clinicJsonLd(): WithContext<Dentist> {
     hasMap: site.mapsUrl,
     areaServed: serviceArea,
     knowsLanguage: "es",
-    // One catalog per service category, with the same services the /servicios pages list.
     availableService: services.map((service) => ({ "@type": "Service", name: service.name })),
-    hasOfferCatalog: serviceCategories.map((category) => ({
+    // One Offer per service, the same list the /servicios pages show. A price appears only where clinic-prices.ts confirms one.
+    hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: category.label,
-      itemListElement: servicesInCategory(category).map((service) => ({
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: service.name,
-          url: absoluteUrl(servicePath(service)),
-        },
-      })),
-    })),
+      name: "Servicios de Lumayo Centro Odontológico",
+      itemListElement: services.map(catalogOffer),
+    },
     openingHoursSpecification: site.hours.shifts.map((shift) => ({
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -266,6 +262,17 @@ function serviceJsonLd(input: ServiceInput): WithContext<Service> {
   } as WithContext<Service>;
 }
 
+/** PEN PriceSpecification from confirmed prices: the lowest and highest amount (a free item counts as 0). */
+function priceSpecificationOf(items: readonly ClinicPrice[]): PriceSpecification {
+  const amounts = items.flatMap((item) => ("price" in item ? [item.price] : [item.minPrice, item.maxPrice]));
+  return {
+    "@type": "PriceSpecification",
+    minPrice: Math.min(...amounts),
+    maxPrice: Math.max(...amounts),
+    priceCurrency: "PEN",
+  };
+}
+
 /** One Offer per confirmed clinic price of the service (src/lib/clinic-prices.ts). Free items get price 0. */
 function clinicOffers(service: SiteService): Offer[] {
   const url = absoluteUrl(servicePath(service));
@@ -274,17 +281,18 @@ function clinicOffers(service: SiteService): Offer[] {
     name: `${service.name} – ${item.label}`,
     priceCurrency: "PEN",
     url,
-    ..."price" in item
-      ? { price: item.price }
-      : {
-          priceSpecification: {
-            "@type": "PriceSpecification",
-            minPrice: item.minPrice,
-            maxPrice: item.maxPrice,
-            priceCurrency: "PEN",
-          },
-        },
+    ..."price" in item ? { price: item.price } : { priceSpecification: priceSpecificationOf([item]) },
   }));
+}
+
+/** Catalog entry for one service: the service and its URL, plus a PriceSpecification only when a price is confirmed. */
+function catalogOffer(service: SiteService): Offer {
+  const prices = clinicPricesFor(service.id);
+  return {
+    "@type": "Offer",
+    itemOffered: { "@type": "Service", name: service.name, url: absoluteUrl(servicePath(service)) },
+    ...(prices ? { priceCurrency: "PEN", priceSpecification: priceSpecificationOf(prices) } : {}),
+  };
 }
 
 /** Detail page of a single service (the category and service come from src/lib/site.ts). */

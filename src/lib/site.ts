@@ -5,6 +5,10 @@ export const site = {
   tagline: "Centro Odontológico",
   phoneDisplay: "986 382 607",
   phoneE164: "+51986382607",
+  /** Public contact email, confirmed by the clinic. Used in JSON-LD and the AI files. */
+  email: "hola.lumayo@gmail.com",
+  /** Registered legal entity, confirmed by the clinic. Used for JSON-LD legalName/taxID and the AI files. */
+  legal: { name: "CORPORACIÓN ODONTOLÓGICA U & T E.I.R.L.", ruc: "20616685393" },
   /** Opening hours (Mon–Fri, split shift). Single source for UI, JSON-LD and llms.txt. */
   hours: {
     days: "Lunes a viernes",

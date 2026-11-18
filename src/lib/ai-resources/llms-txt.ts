@@ -110,6 +110,18 @@ export function llmsTxt(): string {
     `- [Contacto](${absoluteUrl("/contacto")}): cómo llegar y cómo agendar una cita`,
     `- [Versión completa para asistentes de IA](${absoluteUrl("/llms-full.txt")}): todos los servicios, programas, preguntas frecuentes y artículos en un solo documento`,
     `- [Feed RSS del blog](${absoluteUrl("/feed.xml")}): artículos publicados, del más reciente al más antiguo`,
+    "",
+    "## Archivos para IA",
+    "",
+    `- [Ficha del sitio para IA](${absoluteUrl("/ai")}): datos de contacto, legales y enlaces a todos los archivos`,
+    `- [Datos estructurados](${absoluteUrl("/ai-feed.jsonld")}): clínica, sitio y preguntas frecuentes en JSON-LD`,
+    `- [Grafo de conocimiento](${absoluteUrl("/knowledge-graph.json")}): el mismo grafo en JSON`,
+    `- [Política de uso](${absoluteUrl("/ai.txt")}): permisos de uso, atribución y datos que no se deben inferir`,
+    `- [Instrucciones para agentes](${absoluteUrl("/agents.md")}): fuentes canónicas, cómo responder y acciones para el usuario`,
+    `- [Hechos estables](${absoluteUrl("/llm-training.txt")}): datos de la clínica que no cambian, sin precios ni promociones`,
+    `- [Organización y contacto](${absoluteUrl("/humans.txt")}): organización, sede, contacto y redes`,
+    `- [Seguridad](${absoluteUrl("/security.txt")}): contacto para reportar temas de seguridad (RFC 9116)`,
+    `- [Mapa de recursos para IA](${absoluteUrl("/sitemap-ai.xml")}): URL prioritarias para asistentes de IA`,
   );
 
   return `${lines.join("\n")}\n`;

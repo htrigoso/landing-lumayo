@@ -13,6 +13,7 @@ import {
   site,
   siteUrl,
 } from "@/lib/site";
+import { allFaqs, programFaqs } from "./faqs";
 import { hoursText, pricesNote, priceText } from "./text";
 
 /**
@@ -96,6 +97,13 @@ function blogSection(): string[] {
   return lines;
 }
 
+/** FAQs of services and blog posts, deduped. Program FAQs are already listed under "Programas". */
+function faqsSection(): string[] {
+  const programQuestions = new Set(programFaqs().map((faq) => faq.q.trim()));
+  const faqs = allFaqs().filter((faq) => !programQuestions.has(faq.q.trim()));
+  return ["## Preguntas frecuentes de servicios y blog", "", ...faqLines(faqs)];
+}
+
 export function llmsFullTxt(): string {
   const lines: string[] = [
     "# Lumayo Centro Odontológico",
@@ -114,6 +122,8 @@ export function llmsFullTxt(): string {
     "",
     "## Contacto",
     "",
+    `- Razón social: ${site.legal.name} (RUC ${site.legal.ruc})`,
+    `- Correo: ${site.email}`,
     `- Dirección: ${site.address.street}, ${site.address.district}, ${site.address.city}, ${site.address.region}, Perú`,
     `- Teléfono: ${site.phoneDisplay}`,
     `- WhatsApp: https://wa.me/${site.whatsappNumber}`,
@@ -126,6 +136,8 @@ export function llmsFullTxt(): string {
     ...servicesSection(),
     "",
     ...programsSection(),
+    "",
+    ...faqsSection(),
     "",
     ...blogSection(),
     "",

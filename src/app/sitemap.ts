@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/nosotros",
     "/contacto",
     "/blog",
+    "/ai",
     ...Object.values(programPaths),
   ];
 

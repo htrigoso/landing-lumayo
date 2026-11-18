@@ -2,7 +2,19 @@ import { absoluteUrl } from "@/lib/seo/jsonld";
 import { escapeXml } from "./xml";
 
 /** The AI resources listed in sitemap-ai.xml. Paths only; every URL goes through absoluteUrl. */
-export const aiResourcePaths = ["/", "/llms.txt", "/llms-full.txt", "/feed.xml"] as const;
+export const aiResourcePaths = [
+  "/",
+  "/ai",
+  "/llms.txt",
+  "/llms-full.txt",
+  "/ai-feed.jsonld",
+  "/knowledge-graph.json",
+  "/ai.txt",
+  "/agents.md",
+  "/llm-training.txt",
+  "/humans.txt",
+  "/feed.xml",
+] as const;
 
 /** sitemap-ai.xml: complements sitemap.xml with the files written for AI assistants. `lastmod` is YYYY-MM-DD. */
 export function sitemapAiXml({ lastmod }: { lastmod: string }): string {
