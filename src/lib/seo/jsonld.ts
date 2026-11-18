@@ -37,6 +37,7 @@ import {
 import { defaultReviewerId, getTeamMember, type TeamMember } from "@/lib/team";
 import type { ReviewTestimonial } from "@/lib/results";
 import { clinicPriceRange, clinicPricesFor } from "@/lib/clinic-prices";
+import { promo } from "@/lib/promo";
 
 /**
  * schema.org builders for the site. Pure functions: they read the same data the pages render, so the
@@ -325,6 +326,21 @@ export function lumayoCardJsonLd(): WithContext<Service> {
     serviceType: "Protección odontológica",
     offers,
   });
+}
+
+/** December promotion: a store-style Offer valid from startsAt to endsAt (src/lib/promo.ts). */
+export function promoJsonLd(): WithContext<Offer> {
+  return {
+    "@context": CONTEXT,
+    "@type": "Offer",
+    "@id": `${absoluteUrl(programPaths.promociones)}#offer`,
+    name: `Promoción ${promo.percent}% de descuento en todos los servicios`,
+    description: `${promo.percent}% de descuento en todos los servicios de Lumayo.`,
+    url: absoluteUrl(programPaths.promociones),
+    validFrom: promo.startsAt,
+    validThrough: promo.endsAt,
+    seller: clinicRef,
+  } as WithContext<Offer>;
 }
 
 /** Lumayo Kids program page. */

@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 import { ArrowRightIcon, CloseIcon, MenuIcon, PhoneIcon, PinIcon, WhatsappIcon } from "@/components/icons";
 import { ServicesMegaMenu, isServicesSectionPath } from "@/components/layout/ServicesMegaMenu";
 import { SearchButton } from "@/components/search/SearchButton";
+import { promo } from "@/lib/promo";
 import { categoryPath, defaultWhatsappMessage, fullAddress, programPaths, serviceCategories, site, whatsappUrl } from "@/lib/site";
 
 type NavLink = { href: string; label: string; mega?: boolean; badge?: string };
@@ -24,6 +25,8 @@ const links: NavLink[] = [
   { href: programPaths.card, label: "Membresía", badge: membershipBadge },
   { href: programPaths.kids, label: "Kids" },
   { href: programPaths.novias, label: "Novias" },
+  // Temporary December link: remove it with promo.showInNav in January.
+  ...(promo.showInNav ? [{ href: programPaths.promociones, label: `Promo -${promo.percent}%`, badge: "Diciembre" } satisfies NavLink] : []),
   { href: "/blog", label: "Blog" },
 ];
 

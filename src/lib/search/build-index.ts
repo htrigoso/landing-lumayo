@@ -54,6 +54,15 @@ const programEntries: SearchEntry[] = [
     keywords: ["ninos", "bebes", "hijos", "infantil", "odontopediatria"],
   },
   {
+    id: "program-promociones",
+    kind: "program",
+    title: "Promoción 30% de descuento",
+    subtitle: "Promoción",
+    description: "30% de descuento en todos los servicios, del 1 al 31 de diciembre de 2026.",
+    href: programPaths.promociones,
+    keywords: ["promo", "promocion", "oferta", "30", "diciembre"],
+  },
+  {
     id: "program-novias",
     kind: "program",
     title: "Lumayo Novias",

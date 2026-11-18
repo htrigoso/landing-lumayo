@@ -65,7 +65,7 @@ export const noviasWhatsappMessage = "Hola Lumayo, quisiera información sobre e
 export const kidsWhatsappMessage = "Hola Lumayo, quisiera reservar una primera visita para mi hijo o hija.";
 
 /** Standalone program pages, outside /servicios. */
-export const programPaths = { card: "/membresia", kids: "/kids", novias: "/novias" } as const;
+export const programPaths = { card: "/membresia", kids: "/kids", novias: "/novias", promociones: "/promociones" } as const;
 
 /** Fees and limits per membership plan. `maxAdditional` counts additional members (titular not included). */
 const plans = {

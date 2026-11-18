@@ -36,3 +36,6 @@ All under the [Unsplash License](https://unsplash.com/license): free for commerc
 ## Contact page (/contacto)
 
 - `public/images/contact/contact-us-img.jpg`: from the commercial "Dentaire" HTML template by Awaiken Themes, downloaded at the client's request. **License pending** — confirm before publishing.
+
+## Promociones (public/promociones/)
+- hero.webp, steps.webp, og.jpg: generadas con Figma AI (modelo gpt-image-2.5-flare) para la landing /promociones. Sin personas reales identificables ni logos.

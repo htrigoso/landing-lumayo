@@ -8,6 +8,9 @@
  * When a price changes, update this file and the matching service-doc block together.
  */
 
+/** Date (YYYY-MM-DD) on which the figures below were confirmed with the clinic. Shown on llms.txt and llms-full.txt. */
+export const pricesConfirmedAt = "2026-11-17";
+
 /** A single confirmed price (0 means free), or a range from `minPrice` to `maxPrice`. */
 export type ClinicPrice =
   | { label: string; price: number }

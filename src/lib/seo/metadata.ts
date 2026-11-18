@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 const fallbackImage = { url: "/images/hero.webp", width: 980, height: 580 };
 
 /** Open Graph image: the page's own photo, or the home hero when the page has none. */
-export type SocialImage = { url: string; alt: string };
+export type SocialImage = { url: string; alt: string; width?: number; height?: number };
 
 type PageSocialInput = {
   title: string;
@@ -23,7 +23,7 @@ type PageSocialInput = {
 export function pageSocial({ title, description, path, image, type = "website", article }: PageSocialInput): Pick<Metadata, "openGraph" | "twitter"> {
   const images = [
     image
-      ? { url: image.url, width: 1200, height: 900, alt: image.alt }
+      ? { url: image.url, width: image.width ?? 1200, height: image.height ?? 900, alt: image.alt }
       : { ...fallbackImage, alt: "Lumayo Centro Odontológico en Tarapoto" },
   ];
 

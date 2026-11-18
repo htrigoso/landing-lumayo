@@ -92,6 +92,12 @@ describe("search", () => {
     expect(titles(search(entries, "boda"))).toContain("Lumayo Novias");
   });
 
+  it("finds the December promotion by its own words and keeps descuento on the membership", () => {
+    expect(titles(search(entries, "promo"))).toContain("Promoción 30% de descuento");
+    expect(titles(search(entries, "oferta"))).toContain("Promoción 30% de descuento");
+    expect(search(entries, "descuento")[0]?.id).toBe("program-membresia");
+  });
+
   it("finds implants or dentures for a missing tooth", () => {
     const ids = search(entries, "me falta un diente").map((entry) => entry.id);
     expect(ids.some((id) => id === "implantes" || id === "protesis")).toBe(true);
@@ -145,9 +151,9 @@ describe("similar", () => {
 });
 
 describe("buildSearchIndex", () => {
-  it("contains 26 services, 3 programs and 12 posts with lean fields only", () => {
+  it("contains 26 services, 4 programs and 12 posts with lean fields only", () => {
     expect(entries.filter((entry) => entry.kind === "service")).toHaveLength(26);
-    expect(entries.filter((entry) => entry.kind === "program")).toHaveLength(3);
+    expect(entries.filter((entry) => entry.kind === "program")).toHaveLength(4);
     expect(entries.filter((entry) => entry.kind === "post")).toHaveLength(12);
     for (const post of entries.filter((entry) => entry.kind === "post")) {
       expect(Object.keys(post).sort()).toEqual(["description", "href", "id", "keywords", "kind", "subtitle", "title"]);

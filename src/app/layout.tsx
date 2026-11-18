@@ -77,6 +77,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <GoogleTagManagerScripts />
+        {/* Blog RSS feed on every page. Set here, not in metadata.alternates, because pages that
+            declare their own canonical replace the whole alternates object. */}
+        <link rel="alternate" type="application/rss+xml" title="Blog de Lumayo" href="/feed.xml" />
       </head>
       <body className="min-h-dvh">
         <GoogleTagManagerNoscript />
