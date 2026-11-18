@@ -70,10 +70,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     // data-scroll-behavior: globals.css sets `scroll-behavior: smooth` for in-page anchors; this tells
     // Next.js 16 to turn it off during route changes, otherwise its scroll reset animates and the
     // overlapping smooth scrolls drag the new page down to the footer.
+    // suppressHydrationWarning: Google Tag Assistant (extension or GTM preview mode) adds
+    // data-tag-assistant-* attributes to <html> before hydration. Only affects this element's attributes.
     <html
       lang="es"
       data-scroll-behavior="smooth"
       className={`${montserrat.variable} antialiased`}
+      suppressHydrationWarning
     >
       <head>
         <GoogleTagManagerScripts />
