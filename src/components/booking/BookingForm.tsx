@@ -1,17 +1,23 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { useId, useRef, useState, type FormEvent } from "react";
+import { useCallback, useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { IsotypeWatermark } from "@/components/brand/IsotypeWatermark";
 import { CheckIcon, WhatsappIcon } from "@/components/icons";
 import { BrandDatePicker } from "@/components/ui/BrandDatePicker";
-import { bookingServiceOptions, whatsappUrl } from "@/lib/site";
+import { buildLeadEvent, newEventId, pushLeadEvent } from "@/lib/analytics/lead";
+import { bookingServiceOptions, whatsappUrl, type BookingServiceCode } from "@/lib/site";
 
 type Shift = "Mañana" | "Tarde";
 type Errors = Partial<Record<"name" | "service", string>>;
 
+/** How long the button stays disabled after a submit, in case the WhatsApp tab never takes focus. */
+const SENDING_RESET_MS = 4000;
+/** Same-tab fallback delay when the popup was blocked (window.open returned null). */
+const POPUP_FALLBACK_MS = 2500;
+
 type BookingFormProps = {
-  defaultService?: (typeof bookingServiceOptions)[number];
+  defaultService?: BookingServiceCode;
   /** Title in the brandbook's 400 + 800 pairing: `title` regular, `titleEmphasis` extra bold. */
   title?: string;
   titleEmphasis?: string;
@@ -40,7 +46,7 @@ function validate(name: string, service: string): Errors {
 }
 
 export function BookingForm({
-  defaultService = "Brackets",
+  defaultService = "brackets",
   title = "Reserva",
   titleEmphasis = "tu cita",
   subtitle = "Completa tus datos y te confirmamos el horario por WhatsApp.",
@@ -57,14 +63,37 @@ export function BookingForm({
   };
 
   const [name, setName] = useState("");
-  const [service, setService] = useState<string>(defaultService);
+  const [service, setService] = useState<BookingServiceCode | "">(defaultService);
   const [date, setDate] = useState("");
   const [shift, setShift] = useState<Shift>("Mañana");
   const [errors, setErrors] = useState<Errors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
   const nameRef = useRef<HTMLInputElement>(null);
   const serviceRef = useRef<HTMLSelectElement>(null);
+  // Refs, not state: a fast second click must be rejected before React re-renders.
+  const sendingRef = useRef(false);
+  const navigatedRef = useRef(false);
+  const resetTimerRef = useRef<number | undefined>(undefined);
+
+  const releaseSending = useCallback(() => {
+    window.clearTimeout(resetTimerRef.current);
+    sendingRef.current = false;
+    setSending(false);
+  }, []);
+
+  useEffect(() => {
+    // Returning to the page from the back/forward cache must not leave the button stuck.
+    const onPageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) releaseSending();
+    };
+    window.addEventListener("pageshow", onPageShow);
+    return () => {
+      window.removeEventListener("pageshow", onPageShow);
+      window.clearTimeout(resetTimerRef.current);
+    };
+  }, [releaseSending]);
 
   const onBlur = (field: keyof Errors) => {
     setTouched((t) => ({ ...t, [field]: true }));
@@ -73,22 +102,49 @@ export function BookingForm({
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (sendingRef.current) return;
     const next = validate(name, service);
     setErrors(next);
     setTouched({ name: true, service: true });
     if (next.name) return nameRef.current?.focus();
     if (next.service) return serviceRef.current?.focus();
+    const serviceOption = bookingServiceOptions.find((opt) => opt.code === service);
+    if (!serviceOption) return serviceRef.current?.focus();
+
+    sendingRef.current = true;
+    setSending(true);
+    resetTimerRef.current = window.setTimeout(releaseSending, SENDING_RESET_MS);
 
     const lines = [
       `Hola Lumayo, soy ${name.trim()}.`,
-      `Quisiera agendar una cita para: ${service}.`,
+      `Quisiera agendar una cita para: ${serviceOption.label}.`,
       date ? `Fecha preferida: ${formatDate(date)}, turno ${shift.toLowerCase()}.` : `Turno preferido: ${shift.toLowerCase()}.`,
     ];
     const url = whatsappUrl(lines.join("\n"));
+
+    // Must run synchronously in the click's task, otherwise the browser blocks the popup.
     // "noopener" in the features string makes window.open return null, so detach the opener manually.
     const win = window.open(url, "_blank");
     if (win) win.opener = null;
-    else window.location.href = url;
+
+    // Same-tab navigation only when the popup was blocked, and at most once per submit.
+    navigatedRef.current = false;
+    const continueInSameTab = () => {
+      if (win || navigatedRef.current) return;
+      navigatedRef.current = true;
+      window.location.href = url;
+    };
+
+    pushLeadEvent(
+      buildLeadEvent({
+        serviceCode: serviceOption.code,
+        shift,
+        hasDate: Boolean(date),
+        eventId: newEventId(),
+      }),
+      continueInSameTab,
+    );
+    if (!win) window.setTimeout(continueInSameTab, POPUP_FALLBACK_MS);
     setSent(true);
   };
 
@@ -150,7 +206,7 @@ export function BookingForm({
               name="service"
               required
               value={service}
-              onChange={(e) => setService(e.target.value)}
+              onChange={(e) => setService(e.target.value as BookingServiceCode | "")}
               onBlur={() => onBlur("service")}
               aria-invalid={Boolean(showError("service"))}
               aria-describedby={showError("service") ? `${ids.service}-err` : undefined}
@@ -158,7 +214,9 @@ export function BookingForm({
             >
               <option value="">Selecciona un servicio</option>
               {bookingServiceOptions.map((opt) => (
-                <option key={opt}>{opt}</option>
+                <option key={opt.code} value={opt.code}>
+                  {opt.label}
+                </option>
               ))}
             </select>
             <svg
@@ -226,9 +284,9 @@ export function BookingForm({
           </div>
         </fieldset>
 
-        <button type="submit" className="btn btn-wa !mt-5 w-full text-base">
+        <button type="submit" disabled={sending} aria-busy={sending} className="btn btn-wa !mt-5 w-full text-base">
           <WhatsappIcon />
-          Enviar por WhatsApp
+          {sending ? "Abriendo WhatsApp…" : "Enviar por WhatsApp"}
         </button>
 
         <div aria-live="polite" className="empty:hidden">

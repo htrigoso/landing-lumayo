@@ -1371,19 +1371,22 @@ export function serviceName(serviceId: string): string {
   return service.name;
 }
 
+/** Booking services: `code` is the stable analytics/option value, `label` is the visible text and WhatsApp copy. */
 export const bookingServiceOptions = [
-  "Brackets",
-  "Evaluación general",
-  "Limpieza dental",
-  "Carillas",
-  "Diseño de sonrisa",
-  "Blanqueamiento dental",
-  "Curaciones / operatoria dental",
-  "Endodoncia",
-  "Extracción dental",
-  "Implantes dentales",
-  "Prótesis dental",
-  "Flúor y sellantes",
-  "Odontopediatría",
-  "Otro / no estoy seguro",
+  { code: "brackets", label: "Brackets" },
+  { code: "evaluacion_general", label: "Evaluación general" },
+  { code: "limpieza", label: "Limpieza dental" },
+  { code: "carillas", label: "Carillas" },
+  { code: "diseno_sonrisa", label: "Diseño de sonrisa" },
+  { code: "blanqueamiento", label: "Blanqueamiento dental" },
+  { code: "curaciones", label: "Curaciones / operatoria dental" },
+  { code: "endodoncia", label: "Endodoncia" },
+  { code: "extraccion", label: "Extracción dental" },
+  { code: "implantes", label: "Implantes dentales" },
+  { code: "protesis", label: "Prótesis dental" },
+  { code: "fluor_sellantes", label: "Flúor y sellantes" },
+  { code: "odontopediatria", label: "Odontopediatría" },
+  { code: "otro", label: "Otro / no estoy seguro" },
 ] as const;
+
+export type BookingServiceCode = (typeof bookingServiceOptions)[number]["code"];
